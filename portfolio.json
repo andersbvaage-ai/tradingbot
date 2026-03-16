@@ -1,0 +1,24 @@
+{
+  "kasse": 45.41944122314453,
+  "posisjoner": {
+    "BWO.OL": {
+      "navn": "BW Offshore",
+      "antall": 78277,
+      "snittpris": 51.099998474121094,
+      "kj\u00f8psdato": "2026-03-16"
+    }
+  },
+  "ventende_handler": [],
+  "historikk": [
+    {
+      "dato": "2026-03-16 19:31:41.324189",
+      "handling": "KJ\u00d8P",
+      "ticker": "BWO.OL",
+      "navn": "BW Offshore",
+      "antall": 78277,
+      "kurs": 51.099998474121094,
+      "bel\u00f8p": 3999954.580558777
+    }
+  ],
+  "start_kapital": 4000000
+}

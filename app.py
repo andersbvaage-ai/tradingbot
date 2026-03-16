@@ -355,7 +355,7 @@ if _kjop or _selg:
     st.caption("Gå til **Porteføljestyrer**-tabben for å godkjenne eller avvise.")
     st.divider()
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer"])
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest"])
 
 # ─── TAB 1: BACKTEST ──────────────────────────────────────────────────────────
 with tab1:
@@ -1247,3 +1247,243 @@ with tab7:
             st.session_state.pop("forslag", None)
             st.success("Portefølje nullstilt!")
             st.rerun()
+
+# ─── TAB 8: SCREENER-BACKTEST ─────────────────────────────────────────────────
+with tab8:
+    st.subheader("Screener-backtest")
+    st.caption(
+        "Simulerer hva som ville skjedd om boten kjøpte topp-aksjene hver måned og rebalanserte. "
+        "Tester om screener-logikken faktisk gir meravkastning over tid."
+    )
+
+    col_sb1, col_sb2, col_sb3 = st.columns(3)
+    sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n")
+    sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score")
+    sb_kommisjon = col_sb3.slider("Kurtasje per handel (%)", 0.0, 1.0, 0.2, key="sb_kom") / 100
+
+    if st.button("Kjør screener-backtest", type="primary"):
+        from dateutil.relativedelta import relativedelta
+
+        sb_start = pd.Timestamp(start_dato)
+        sb_slutt = pd.Timestamp(slutt_dato)
+
+        # Last all historisk data på forhånd
+        with st.spinner("Laster historisk data for alle aksjer..."):
+            all_data = {}
+            for navn, ticker in OSLO_BORS.items():
+                d = hent_data(ticker, sb_start - relativedelta(months=3), sb_slutt)
+                if d is not None and len(d) > 60:
+                    all_data[navn] = (ticker, d)
+
+        if not all_data:
+            st.error("Ingen data tilgjengelig.")
+        else:
+            # Generer månedlige rebalanseringsdatoer
+            datoer = []
+            dato   = sb_start
+            while dato <= sb_slutt:
+                datoer.append(dato)
+                dato = dato + relativedelta(months=1)
+
+            portefolje_verdi  = [float(kapital)]
+            osebx_verdi       = [float(kapital)]
+            rebalanse_log     = []
+            nåværende_aksjer  = {}
+            kasse_sb          = float(kapital)
+
+            prog = st.progress(0)
+
+            # Hent OSEBX for benchmark
+            osebx_data = hent_data("^OSEBX", sb_start, sb_slutt)
+
+            for i, dato in enumerate(datoer[:-1]):
+                neste = datoer[i + 1]
+
+                # Score alle aksjer basert på data frem til denne datoen
+                kandidater = []
+                for navn, (ticker, df) in all_data.items():
+                    historisk = df[df.index <= dato]
+                    if len(historisk) < 60:
+                        continue
+                    try:
+                        close  = historisk["Close"]
+                        sma10  = float(close.rolling(10).mean().iloc[-1])
+                        sma50  = float(close.rolling(50).mean().iloc[-1])
+                        delta  = close.diff()
+                        gain   = delta.clip(lower=0).rolling(14).mean()
+                        loss   = (-delta.clip(upper=0)).rolling(14).mean()
+                        rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
+                        ema12  = close.ewm(span=12).mean()
+                        ema26  = close.ewm(span=26).mean()
+                        macd_v = float((ema12 - ema26).iloc[-1])
+                        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+                        mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
+
+                        score = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
+                        if score >= sb_min_score:
+                            kandidater.append({"navn": navn, "ticker": ticker, "score": score, "mom": mom})
+                    except Exception:
+                        continue
+
+                kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
+                topp = {k["navn"]: k for k in kandidater[:sb_topp_n]}
+
+                # Beregn avkastning for inneværende måned
+                total_verdi = kasse_sb
+                for navn, pos in nåværende_aksjer.items():
+                    df = all_data[navn][1]
+                    fremtid = df[(df.index > dato) & (df.index <= neste)]
+                    if not fremtid.empty:
+                        sluttkurs = float(fremtid["Close"].iloc[-1])
+                        total_verdi += pos["antall"] * sluttkurs
+
+                # Rebalanser: selg det som ikke er i topp
+                ny_kasse = kasse_sb
+                for navn in list(nåværende_aksjer.keys()):
+                    if navn not in topp:
+                        df      = all_data[navn][1]
+                        fremtid = df[(df.index > dato) & (df.index <= neste)]
+                        if not fremtid.empty:
+                            kurs    = float(fremtid["Close"].iloc[-1])
+                            inntekt = kurs * nåværende_aksjer[navn]["antall"]
+                            ny_kasse += inntekt * (1 - sb_kommisjon)
+                        del nåværende_aksjer[navn]
+
+                # Kjøp nye
+                allok = ny_kasse / max(len(topp), 1)
+                for navn, k in topp.items():
+                    if navn not in nåværende_aksjer:
+                        df   = all_data[navn][1]
+                        hist = df[df.index <= dato]
+                        if hist.empty:
+                            continue
+                        kurs   = float(hist["Close"].iloc[-1])
+                        antall = int((allok * (1 - sb_kommisjon)) / kurs)
+                        if antall > 0:
+                            kostnad = antall * kurs * (1 + sb_kommisjon)
+                            if kostnad <= ny_kasse:
+                                nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
+                                ny_kasse -= kostnad
+
+                kasse_sb = ny_kasse
+
+                # Beregn porteføljeverdi ved neste dato
+                total_neste = kasse_sb
+                for navn, pos in nåværende_aksjer.items():
+                    df      = all_data[navn][1]
+                    fremtid = df[(df.index > dato) & (df.index <= neste)]
+                    if not fremtid.empty:
+                        total_neste += pos["antall"] * float(fremtid["Close"].iloc[-1])
+
+                portefolje_verdi.append(total_neste)
+
+                # OSEBX benchmark
+                if osebx_data is not None:
+                    osebx_slice = osebx_data[(osebx_data.index > dato) & (osebx_data.index <= neste)]
+                    if not osebx_slice.empty and len(osebx_verdi) > 0:
+                        osebx_ret = float(osebx_slice["Close"].iloc[-1]) / float(
+                            osebx_data[osebx_data.index <= dato]["Close"].iloc[-1]) - 1
+                        osebx_verdi.append(osebx_verdi[-1] * (1 + osebx_ret))
+                    else:
+                        osebx_verdi.append(osebx_verdi[-1])
+
+                rebalanse_log.append({
+                    "Dato":       dato.strftime("%Y-%m"),
+                    "Portefølje": [n for n in nåværende_aksjer.keys()],
+                    "Verdi (kr)": round(total_neste, 0),
+                })
+
+                prog.progress((i + 1) / (len(datoer) - 1))
+
+            # ── Resultater ────────────────────────────────────────────────────
+            port_ret  = (portefolje_verdi[-1] / portefolje_verdi[0] - 1) * 100
+            osebx_ret = (osebx_verdi[-1] / osebx_verdi[0] - 1) * 100 if osebx_verdi else 0
+
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Screener avkastning",  f"{port_ret:.1f}%",  f"{port_ret - osebx_ret:.1f}% vs OSEBX")
+            c2.metric("OSEBX avkastning",     f"{osebx_ret:.1f}%")
+            c3.metric("Rebalanseringer",       len(datoer) - 1)
+            c4.metric("Slutt verdi",          f"{portefolje_verdi[-1]:,.0f} kr")
+
+            # Equity curve
+            fig_sb = go.Figure()
+            fig_sb.add_trace(go.Scatter(
+                x=datoer[:len(portefolje_verdi)], y=portefolje_verdi,
+                name="Screener-portefølje", line=dict(color="#00b4d8", width=2)))
+            if osebx_verdi:
+                fig_sb.add_trace(go.Scatter(
+                    x=datoer[:len(osebx_verdi)], y=osebx_verdi,
+                    name="OSEBX (benchmark)", line=dict(color="#f77f00", dash="dash")))
+            fig_sb.update_layout(
+                template="plotly_dark", height=450,
+                yaxis_title="Kapital (kr)",
+                title="Screener-portefølje vs Oslo Børs (månedlig rebalansering)"
+            )
+            st.plotly_chart(fig_sb, use_container_width=True)
+
+            # Faktor-bidrag
+            st.subheader("Hvilke faktorer ga best treff?")
+            faktor_score = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
+            faktor_count = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
+
+            for navn, (ticker, df) in all_data.items():
+                for dato in datoer[:-1]:
+                    hist = df[df.index <= dato]
+                    if len(hist) < 60:
+                        continue
+                    try:
+                        close  = hist["Close"]
+                        fremtid = df[(df.index > dato) & (df.index <= dato + relativedelta(months=1))]
+                        if fremtid.empty:
+                            continue
+                        ret = float(fremtid["Close"].iloc[-1]) / float(close.iloc[-1]) - 1
+
+                        sma10  = float(close.rolling(10).mean().iloc[-1])
+                        sma50  = float(close.rolling(50).mean().iloc[-1])
+                        delta  = close.diff()
+                        gain   = delta.clip(lower=0).rolling(14).mean()
+                        loss   = (-delta.clip(upper=0)).rolling(14).mean()
+                        rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
+                        ema12  = close.ewm(span=12).mean()
+                        ema26  = close.ewm(span=26).mean()
+                        macd_v = float((ema12 - ema26).iloc[-1])
+                        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+                        mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
+
+                        if sma10 > sma50:
+                            faktor_score["SMA (trend)"] += ret
+                            faktor_count["SMA (trend)"] += 1
+                        if 40 < rsi < 65:
+                            faktor_score["RSI (40-65)"] += ret
+                            faktor_count["RSI (40-65)"] += 1
+                        if macd_v > sig_v:
+                            faktor_score["MACD"] += ret
+                            faktor_count["MACD"] += 1
+                        if mom > 0:
+                            faktor_score["Momentum"] += ret
+                            faktor_count["Momentum"] += 1
+                    except Exception:
+                        continue
+
+            snitt_ret = {
+                k: (faktor_score[k] / faktor_count[k] * 100) if faktor_count[k] > 0 else 0
+                for k in faktor_score
+            }
+            fig_fak = go.Figure(go.Bar(
+                x=list(snitt_ret.keys()),
+                y=list(snitt_ret.values()),
+                marker_color=["#26a69a" if v > 0 else "#ef5350" for v in snitt_ret.values()],
+                text=[f"{v:.2f}%" for v in snitt_ret.values()],
+                textposition="outside",
+            ))
+            fig_fak.update_layout(
+                template="plotly_dark", height=350,
+                yaxis_title="Gjennomsnittlig månedlig avkastning (%)",
+                title="Snittavkastning per faktor (når faktoren er positiv)"
+            )
+            st.plotly_chart(fig_fak, use_container_width=True)
+
+            # Rebalanseringslogg
+            with st.expander("Månedlig rebalanseringslogg"):
+                for r in rebalanse_log:
+                    st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")

@@ -1296,7 +1296,26 @@ with tab8:
             prog = st.progress(0)
 
             # Hent OSEBX for benchmark
-            osebx_data = hent_data("^OSEBX", sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
+            # Prøv flere ticker-alternativer for Oslo Børs benchmark
+            osebx_data = None
+            for bm_ticker in ["^OSEBX", "OSEBX.OL", "^OSEAX"]:
+                osebx_data = hent_data(bm_ticker, sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
+                if osebx_data is not None and len(osebx_data) > 10:
+                    break
+
+            # Fallback: bruk lik-vektet snitt av alle aksjer i universet
+            if osebx_data is None or len(osebx_data) < 10:
+                bm_kurver = [
+                    (df["Close"] / df["Close"].iloc[0])
+                    for _, df in all_data.values()
+                    if len(df) > 60
+                ]
+                if bm_kurver:
+                    felles = bm_kurver[0].index
+                    aligned = [k.reindex(felles, method="ffill") for k in bm_kurver]
+                    bm_snitt = pd.concat(aligned, axis=1).mean(axis=1)
+                    osebx_data = pd.DataFrame({"Close": bm_snitt * float(kapital)})
+                    st.caption("Benchmark: lik-vektet snitt av alle Oslo Børs-aksjer i universet")
 
             for i, dato in enumerate(datoer[:-1]):
                 neste = datoer[i + 1]

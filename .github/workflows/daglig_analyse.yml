@@ -21,10 +21,6 @@ jobs:
         run: pip install yfinance pandas
 
       - name: Kjør analyse
-        env:
-          EPOST_TIL:     ${{ secrets.EPOST_TIL }}
-          EPOST_FRA:     ${{ secrets.EPOST_FRA }}
-          EPOST_PASSORD: ${{ secrets.EPOST_PASSORD }}
         run: python scheduler.py
 
       - name: Lagre oppdatert portefølje

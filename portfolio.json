@@ -8,7 +8,18 @@
       "kj\u00f8psdato": "2026-03-16"
     }
   },
-  "ventende_handler": [],
+  "ventende_handler": [
+    {
+      "handling": "SELG",
+      "navn": "BW Offshore",
+      "ticker": "BWO.OL",
+      "kurs": 51.099998474121094,
+      "antall": 78277,
+      "bel\u00f8p": 3999955.0,
+      "score": 0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    }
+  ],
   "historikk": [
     {
       "dato": "2026-03-16 19:31:41.324189",
@@ -20,5 +31,6 @@
       "bel\u00f8p": 3999954.580558777
     }
   ],
-  "start_kapital": 4000000
+  "start_kapital": 4000000,
+  "sist_analysert": "2026-03-16 19:29:11.648925"
 }

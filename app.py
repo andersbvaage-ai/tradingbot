@@ -1401,11 +1401,11 @@ with tab8:
                 # OSEBX benchmark
                 if osebx_data is not None:
                     osebx_slice = osebx_data[(osebx_data.index > dato) & (osebx_data.index <= neste)]
-                    if not osebx_slice.empty and len(osebx_verdi) > 0:
-                        osebx_ret = float(osebx_slice["Close"].iloc[-1]) / float(
-                            osebx_data[osebx_data.index <= dato]["Close"].iloc[-1]) - 1
+                    osebx_prev  = osebx_data[osebx_data.index <= dato]
+                    if not osebx_slice.empty and not osebx_prev.empty and len(osebx_verdi) > 0:
+                        osebx_ret = float(osebx_slice["Close"].iloc[-1]) / float(osebx_prev["Close"].iloc[-1]) - 1
                         osebx_verdi.append(osebx_verdi[-1] * (1 + osebx_ret))
-                    else:
+                    elif len(osebx_verdi) > 0:
                         osebx_verdi.append(osebx_verdi[-1])
 
                 rebalanse_log.append({

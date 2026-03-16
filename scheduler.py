@@ -84,7 +84,7 @@ def lagre_portefolje(p):
 
 def hent_siste_kurs(ticker):
     try:
-        raw = yf.download(ticker, period="2d", progress=False)
+        raw = yf.download(ticker, period="2d", progress=False, timeout=10)
         if raw.empty:
             return None
         raw.columns = raw.columns.get_level_values(0)
@@ -93,7 +93,7 @@ def hent_siste_kurs(ticker):
         return None
 
 def analyser_aksje(navn, ticker, osebx_ret3m):
-    raw = yf.download(ticker, period="1y", progress=False)
+    raw = yf.download(ticker, period="1y", progress=False, timeout=15)
     if raw.empty or len(raw) < 60:
         return None
     raw.columns = raw.columns.get_level_values(0)
@@ -178,7 +178,7 @@ def kjor_analyse():
     # Hent OSEBX referanseavkastning
     osebx_ret3m = 0.0
     try:
-        osebx = yf.download("^OSEBX", period="6mo", progress=False)
+        osebx = yf.download("^OSEBX", period="6mo", progress=False, timeout=15)
         osebx.columns = osebx.columns.get_level_values(0)
         if len(osebx) >= 63:
             osebx_ret3m = float(osebx["Close"].pct_change(63).iloc[-1] * 100)

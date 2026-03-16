@@ -1,0 +1,36 @@
+name: Daglig børsanalyse
+
+on:
+  schedule:
+    - cron: "15 7 * * 1-5"   # Kl 09:15 norsk tid (UTC+2), mandag–fredag
+  workflow_dispatch:           # Kan også kjøres manuelt fra GitHub
+
+jobs:
+  analyser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hent kode
+        uses: actions/checkout@v4
+
+      - name: Sett opp Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer avhengigheter
+        run: pip install yfinance pandas
+
+      - name: Kjør analyse
+        env:
+          EPOST_TIL:     ${{ secrets.EPOST_TIL }}
+          EPOST_FRA:     ${{ secrets.EPOST_FRA }}
+          EPOST_PASSORD: ${{ secrets.EPOST_PASSORD }}
+        run: python scheduler.py
+
+      - name: Lagre oppdatert portefølje
+        run: |
+          git config user.name  "Trading Bot"
+          git config user.email "bot@tradingbot"
+          git add portfolio.json
+          git diff --staged --quiet || git commit -m "Daglig analyse $(date +'%Y-%m-%d')"
+          git push

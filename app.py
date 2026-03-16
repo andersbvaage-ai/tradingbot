@@ -1122,6 +1122,14 @@ with tab7:
         st.session_state["forslag"] = forslag
 
     # ── Vis og godkjenn forslag ───────────────────────────────────────────────
+    # Last forslag fra portfolio.json hvis session ikke har dem
+    if "forslag" not in st.session_state or not st.session_state["forslag"]:
+        pf_aktuell = les_portefolje()
+        if pf_aktuell.get("ventende_handler"):
+            st.session_state["forslag"] = pf_aktuell["ventende_handler"]
+            if pf_aktuell.get("sist_analysert"):
+                st.caption(f"Sist analysert: {pf_aktuell['sist_analysert'][:16]}")
+
     if "forslag" in st.session_state and st.session_state["forslag"]:
         forslag = st.session_state["forslag"]
 

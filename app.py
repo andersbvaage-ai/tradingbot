@@ -329,6 +329,32 @@ elif strategi_valg == "Momentum":
     sidebar_params["mom_threshold"] = st.sidebar.slider("Min momentum %",  -10,  20,   0)
 
 # ── Tabs ───────────────────────────────────────────────────────────────────────
+# ── Forsidevisning: ventende forslag ──────────────────────────────────────────
+_pf_forside = les_portefolje()
+_forslag    = _pf_forside.get("ventende_handler", [])
+_kjop       = [f for f in _forslag if f["handling"] == "KJØP"]
+_selg       = [f for f in _forslag if f["handling"] == "SELG"]
+
+if _kjop or _selg:
+    sist = _pf_forside.get("sist_analysert", "")[:16]
+    st.markdown(f"### Dagens handelsforslag  <span style='font-size:0.8em;color:gray'>— analysert {sist}</span>", unsafe_allow_html=True)
+    cols = st.columns(len(_kjop + _selg))
+    for i, f in enumerate(_kjop):
+        cols[i].metric(
+            label=f"✅ {f['navn']}",
+            value=f"{f['kurs']:.2f} kr",
+            delta=f"Kjøp {f['antall']} aksjer · {f['beløp']:,.0f} kr"
+        )
+    for i, f in enumerate(_selg):
+        cols[len(_kjop) + i].metric(
+            label=f"🔴 {f['navn']}",
+            value=f"{f['kurs']:.2f} kr",
+            delta=f"Selg {f['antall']} aksjer · {f['beløp']:,.0f} kr",
+            delta_color="inverse"
+        )
+    st.caption("Gå til **Porteføljestyrer**-tabben for å godkjenne eller avvise.")
+    st.divider()
+
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer"])
 
 # ─── TAB 1: BACKTEST ──────────────────────────────────────────────────────────

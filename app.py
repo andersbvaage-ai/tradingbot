@@ -1296,7 +1296,7 @@ with tab8:
             prog = st.progress(0)
 
             # Hent OSEBX for benchmark
-            osebx_data = hent_data("^OSEBX", sb_start, sb_slutt)
+            osebx_data = hent_data("^OSEBX", sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
 
             for i, dato in enumerate(datoer[:-1]):
                 neste = datoer[i + 1]

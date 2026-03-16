@@ -2,6 +2,68 @@
   "kasse": 4000000,
   "start_kapital": 4000000,
   "posisjoner": {},
-  "ventende_handler": [],
-  "historikk": []
+  "ventende_handler": [
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "Equinor",
+      "ticker": "EQNR.OL",
+      "kurs": 348.29998779296875,
+      "antall": 1722,
+      "bel\u00f8p": 599773.0,
+      "score": 3,
+      "begrunnelse": "Score 3/4 \u00b7 mom 48.4% \u00b7 rel.styrke 53.5% \u00b7 vol\u219166%"
+    },
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "DNB Bank",
+      "ticker": "DNB.OL",
+      "kurs": 292.8999938964844,
+      "antall": 2048,
+      "bel\u00f8p": 599859.0,
+      "score": 3,
+      "begrunnelse": "Score 3/4 \u00b7 mom 9.4% \u00b7 rel.styrke 7.8% \u00b7 vol\u21911%"
+    },
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "Telenor",
+      "ticker": "TEL.OL",
+      "kurs": 172.89999389648438,
+      "antall": 3470,
+      "bel\u00f8p": 599963.0,
+      "score": 3,
+      "begrunnelse": "Score 3/4 \u00b7 mom 4.3% \u00b7 rel.styrke 20.7% \u00b7 vol\u2191-13%"
+    },
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "Norsk Hydro",
+      "ticker": "NHY.OL",
+      "kurs": 94.04000091552734,
+      "antall": 6380,
+      "bel\u00f8p": 599975.0,
+      "score": 4,
+      "begrunnelse": "Score 4/4 \u00b7 mom 40.7% \u00b7 rel.styrke 26.0% \u00b7 vol\u219121%"
+    },
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "Orkla",
+      "ticker": "ORK.OL",
+      "kurs": 119.4000015258789,
+      "antall": 5025,
+      "bel\u00f8p": 599985.0,
+      "score": 2,
+      "begrunnelse": "Score 2/4 \u00b7 mom 5.4% \u00b7 rel.styrke 9.5% \u00b7 vol\u21916%"
+    },
+    {
+      "handling": "KJ\u00d8P",
+      "navn": "Yara International",
+      "ticker": "YAR.OL",
+      "kurs": 552.7999877929688,
+      "antall": 1085,
+      "bel\u00f8p": 599788.0,
+      "score": 3,
+      "begrunnelse": "Score 3/4 \u00b7 mom 49.2% \u00b7 rel.styrke 44.0% \u00b7 vol\u219155%"
+    }
+  ],
+  "historikk": [],
+  "sist_analysert": "2026-03-16 20:09:35.984479"
 }

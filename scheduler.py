@@ -12,7 +12,15 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime
 
-PORTFOLIO_FIL = os.path.join(os.path.dirname(__file__), "portfolio.json")
+PORTFOLIO_FIL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "portfolio.json")
+
+DEFAULT_PORTEFOLJE = {
+    "kasse": 100000,
+    "start_kapital": 100000,
+    "posisjoner": {},
+    "ventende_handler": [],
+    "historikk": []
+}
 
 OSLO_BORS = {
     "Equinor":              "EQNR.OL",
@@ -63,6 +71,9 @@ MIN_REL_STYRKE   = 0      # må slå OSEBX siste 3 mnd
 
 
 def les_portefolje():
+    if not os.path.exists(PORTFOLIO_FIL):
+        lagre_portefolje(DEFAULT_PORTEFOLJE)
+        return DEFAULT_PORTEFOLJE.copy()
     with open(PORTFOLIO_FIL, "r") as f:
         return json.load(f)
 

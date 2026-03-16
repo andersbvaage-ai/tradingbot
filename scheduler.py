@@ -67,6 +67,7 @@ OSLO_BORS = {
 
 MAKS_POSISJONER  = 6
 ALLOKERING_PCT   = 0.15   # 15% av kasse per posisjon
+MAKS_ALLOKERING  = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE   = 0      # må slå OSEBX siste 3 mnd
 
 
@@ -204,7 +205,7 @@ def kjor_analyse():
     topp_tickers = {k["ticker"] for k in topp}
 
     for k in topp:
-        beløp  = kasse * ALLOKERING_PCT
+        beløp  = min(kasse * ALLOKERING_PCT, kasse * MAKS_ALLOKERING)
         antall = int(beløp / k["kurs"])
         if antall < 1:
             continue

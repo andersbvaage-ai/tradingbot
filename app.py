@@ -1266,12 +1266,14 @@ with tab8:
 
         sb_start = pd.Timestamp(start_dato)
         sb_slutt = pd.Timestamp(slutt_dato)
+        sb_data_start = (sb_start - relativedelta(months=3)).strftime("%Y-%m-%d")
+        sb_data_slutt = sb_slutt.strftime("%Y-%m-%d")
 
         # Last all historisk data på forhånd
         with st.spinner("Laster historisk data for alle aksjer..."):
             all_data = {}
             for navn, ticker in OSLO_BORS.items():
-                d = hent_data(ticker, sb_start - relativedelta(months=3), sb_slutt)
+                d = hent_data(ticker, sb_data_start, sb_data_slutt)
                 if d is not None and len(d) > 60:
                     all_data[navn] = (ticker, d)
 

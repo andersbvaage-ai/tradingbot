@@ -9,6 +9,7 @@ from plotly.subplots import make_subplots
 import json
 import os
 import base64
+import time
 import requests
 from datetime import datetime
 
@@ -16,24 +17,34 @@ PORTFOLIO_FIL = os.path.join(os.path.dirname(__file__), "portfolio.json")
 GITHUB_REPO   = "andersbvaage-ai/tradingbot"
 GITHUB_PATH   = "portfolio.json"
 
-def _push_portefolje_til_github(innhold: str):
-    """Pusher portfolio.json til GitHub via API. Krever GITHUB_TOKEN i Streamlit secrets."""
+def _push_portefolje_til_github(innhold: str) -> bool:
+    """Pusher portfolio.json til GitHub via API. Returnerer True ved suksess."""
     try:
         token = st.secrets.get("GITHUB_TOKEN")
         if not token:
-            return
+            return False
         url     = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_PATH}"
         headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
-        sha     = requests.get(url, headers=headers).json().get("sha")
-        requests.put(url, headers=headers, json={
+        get_resp = requests.get(url, headers=headers, timeout=10)
+        get_resp.raise_for_status()
+        sha = get_resp.json().get("sha")
+        put_resp = requests.put(url, headers=headers, timeout=10, json={
             "message": f"Porteføljeoppdatering {datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "content": base64.b64encode(innhold.encode()).decode(),
             "sha":     sha,
         })
+        put_resp.raise_for_status()
+        return True
     except Exception:
-        pass  # Feiler stille – lokal lagring er alltid gjort først
+        return False
 
 def les_portefolje():
+    if not os.path.exists(PORTFOLIO_FIL):
+        default = {"kasse": 0, "start_kapital": 0, "posisjoner": {},
+                   "ventende_handler": [], "historikk": []}
+        with open(PORTFOLIO_FIL, "w") as f:
+            json.dump(default, f, indent=2)
+        return default
     with open(PORTFOLIO_FIL, "r") as f:
         return json.load(f)
 
@@ -41,7 +52,12 @@ def lagre_portefolje(p):
     innhold = json.dumps(p, indent=2, default=str)
     with open(PORTFOLIO_FIL, "w") as f:
         f.write(innhold)
-    _push_portefolje_til_github(innhold)
+    ok = _push_portefolje_til_github(innhold)
+    if not ok:
+        try:
+            st.toast("⚠️ Kunne ikke synkronisere med GitHub — sjekk GITHUB_TOKEN", icon="⚠️")
+        except Exception:
+            pass  # Kalles fra scheduler (ikke Streamlit-kontekst)
 
 def hent_siste_kurs(ticker):
     try:
@@ -86,6 +102,42 @@ def BB_lower(values, n=20, k=2):
 
 def Momentum(values, n):
     return pd.Series(values).pct_change(n) * 100
+
+def beregn_indikatorer(close, volume=None, osebx_ret3m=0.0):
+    """Beregner alle tekniske indikatorer for én aksje. Returnerer dict eller None."""
+    if len(close) < 60:
+        return None
+    pris   = float(close.iloc[-1])
+    sma10  = float(close.rolling(10).mean().iloc[-1])
+    sma50  = float(close.rolling(50).mean().iloc[-1])
+    delta  = close.diff()
+    gain   = delta.clip(lower=0).rolling(14).mean()
+    loss   = (-delta.clip(upper=0)).rolling(14).mean()
+    rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
+    ema12  = close.ewm(span=12).mean()
+    ema26  = close.ewm(span=26).mean()
+    macd_v = float((ema12 - ema26).iloc[-1])
+    sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+    mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
+    score  = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
+
+    rel_styrke = vol_økning = nærhet_topp = oppside_score = 0.0
+    if volume is not None:
+        aksje_ret3m  = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
+        rel_styrke   = aksje_ret3m - osebx_ret3m
+        vol10        = float(volume.rolling(10).mean().iloc[-1])
+        vol50        = float(volume.rolling(50).mean().iloc[-1])
+        vol_økning   = (vol10 / vol50 - 1) * 100 if vol50 > 0 else 0
+        høy52        = float(close.rolling(min(252, len(close))).max().iloc[-1])
+        nærhet_topp  = (pris / høy52) * 100 if høy52 > 0 else 100
+        oppside_score = (rel_styrke / 10) + (vol_økning / 50) + (nærhet_topp / 100)
+
+    return {
+        "pris": pris, "sma10": sma10, "sma50": sma50,
+        "rsi": rsi, "macd_v": macd_v, "sig_v": sig_v, "mom": mom,
+        "score": score, "rel_styrke": rel_styrke, "vol_økning": vol_økning,
+        "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
+    }
 
 # ── Strategier ─────────────────────────────────────────────────────────────────
 class SmaRsiStrategy(Strategy):
@@ -428,16 +480,18 @@ def vis_charts(stats, data):
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 st.sidebar.title("Nordic Trading Bot")
 
+_idag = datetime.now().strftime("%Y-%m-%d")
+_iår  = datetime.now().year
 PERIODER = {
-    "Siste 1 år   (2024–nå)":          ("2024-01-01", "2025-03-01"),
-    "Siste 2 år   (2023–nå)":          ("2023-01-01", "2025-03-01"),
-    "Siste 3 år   (2022–nå)":          ("2022-01-01", "2025-03-01"),
-    "Siste 5 år   (2020–nå)":          ("2020-01-01", "2025-03-01"),
+    f"Siste 1 år   ({_iår-1}–nå)":    (f"{_iår-1}-01-01", _idag),
+    f"Siste 2 år   ({_iår-2}–nå)":    (f"{_iår-2}-01-01", _idag),
+    f"Siste 3 år   ({_iår-3}–nå)":    (f"{_iår-3}-01-01", _idag),
+    f"Siste 5 år   ({_iår-5}–nå)":    (f"{_iår-5}-01-01", _idag),
     "Post-covid   (2022–2024)":        ("2022-01-01", "2024-01-01"),
     "Covid-krasj  (2020–2022)":        ("2020-01-01", "2022-01-01"),
     "Bull market  (2019–2021)":        ("2019-01-01", "2021-01-01"),
     "Finanskrise  (2007–2010)":        ("2007-01-01", "2010-01-01"),
-    "Lang periode (2015–nå)":          ("2015-01-01", "2025-03-01"),
+    f"Lang periode (2015–nå)":         ("2015-01-01", _idag),
 }
 
 valgt_periode = st.sidebar.selectbox("Tidsperiode", list(PERIODER.keys()), index=2)
@@ -487,27 +541,32 @@ _start      = _pf_forside.get("start_kapital", _kasse)
 
 if _posisjoner:
     st.markdown("### Nåværende portefølje")
-    _pos_cols = st.columns(len(_posisjoner) + 1)
+    _rader       = []
     _total_verdi = _kasse
-    for i, (ticker, pos) in enumerate(_posisjoner.items()):
+    for ticker, pos in _posisjoner.items():
         kurs = hent_siste_kurs(ticker)
         if kurs:
-            verdi = kurs * pos["antall"]
+            verdi        = kurs * pos["antall"]
+            gevinst      = verdi - pos["antall"] * pos["snittpris"]
+            gevinst_pct  = (kurs / pos["snittpris"] - 1) * 100
             _total_verdi += verdi
-            gevinst_pct = (kurs / pos["snittpris"] - 1) * 100
-            _pos_cols[i].metric(
-                label=pos["navn"],
-                value=f"{verdi:,.0f} kr",
-                delta=f"{gevinst_pct:+.1f}%"
-            )
-    _pos_cols[-1].metric(
-        label="Kasse",
-        value=f"{_kasse:,.0f} kr",
-        delta=f"{(_total_verdi/_start - 1)*100:+.1f}% totalt" if _start else None
-    )
+            _rader.append({
+                "Aksje":       pos["navn"],
+                "Antall":      pos["antall"],
+                "Snittpris":   f"{pos['snittpris']:,.2f} kr",
+                "Nåkurs":      f"{kurs:,.2f} kr",
+                "Verdi":       f"{verdi:,.0f} kr",
+                "Gevinst":     f"{gevinst:+,.0f} kr",
+                "Avkastning":  f"{gevinst_pct:+.1f}%",
+            })
+    if _rader:
+        st.dataframe(pd.DataFrame(_rader), use_container_width=True, hide_index=True)
+    _avk = f"{(_total_verdi / _start - 1)*100:+.1f}%" if _start > 0 else "–"
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Kasse",                f"{_kasse:,.0f} kr")
+    c2.metric("Total porteføljeverdi", f"{_total_verdi:,.0f} kr")
+    c3.metric("Total avkastning",      _avk)
     st.divider()
-elif not _dagens:
-    pass  # Ingen posisjoner og ingen handler i dag — vis ingenting
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest"])
 
@@ -926,64 +985,39 @@ with tab6:
         for i, (navn, ticker) in enumerate(OSLO_BORS.items()):
             try:
                 raw = yf.download(ticker, period="1y", progress=False)
+                time.sleep(0.05)
                 if raw.empty or len(raw) < 60:
                     prog.progress((i + 1) / len(OSLO_BORS))
                     continue
                 raw.columns = raw.columns.get_level_values(0)
-                close = raw["Close"]
+                ind = beregn_indikatorer(raw["Close"])
+                if ind is None:
+                    prog.progress((i + 1) / len(OSLO_BORS))
+                    continue
 
-                # Beregn indikatorer på nåværende data
-                sma10  = float(close.rolling(10).mean().iloc[-1])
-                sma50  = float(close.rolling(50).mean().iloc[-1])
-                pris   = float(close.iloc[-1])
+                sma_signal  = ind["sma10"] > ind["sma50"]
+                rsi_signal  = 40 < ind["rsi"] < 65
+                macd_signal = ind["macd_v"] > ind["sig_v"]
+                mom_signal  = ind["mom"] > 0
 
-                delta  = close.diff()
-                gain   = delta.clip(lower=0).rolling(14).mean()
-                loss   = (-delta.clip(upper=0)).rolling(14).mean()
-                rs     = gain / loss
-                rsi    = float((100 - 100 / (1 + rs)).iloc[-1])
-
-                ema12  = close.ewm(span=12).mean()
-                ema26  = close.ewm(span=26).mean()
-                macd   = ema12 - ema26
-                signal = macd.ewm(span=9).mean()
-                macd_v = float(macd.iloc[-1])
-                sig_v  = float(signal.iloc[-1])
-
-                mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else None
-
-                # Signaler (hver gir 1 poeng)
-                sma_signal  = sma10 > sma50
-                rsi_signal  = 40 < rsi < 65
-                macd_signal = macd_v > sig_v
-                mom_signal  = mom is not None and mom > 0
-
-                score = sum([sma_signal, rsi_signal, macd_signal, mom_signal])
-
-                # Anbefaling
-                if score >= 4:
-                    anbefaling = "Sterkt kjøp"
-                elif score == 3:
-                    anbefaling = "Kjøp"
-                elif score == 2:
-                    anbefaling = "Nøytral"
-                elif score == 1:
-                    anbefaling = "Svak"
-                else:
-                    anbefaling = "Selg / unngå"
+                if ind["score"] >= 4:   anbefaling = "Sterkt kjøp"
+                elif ind["score"] == 3: anbefaling = "Kjøp"
+                elif ind["score"] == 2: anbefaling = "Nøytral"
+                elif ind["score"] == 1: anbefaling = "Svak"
+                else:                   anbefaling = "Selg / unngå"
 
                 rader.append({
                     "Aksje":       navn,
-                    "Kurs":        round(pris, 2),
+                    "Kurs":        round(ind["pris"], 2),
                     "SMA10>50":    "✅" if sma_signal  else "❌",
                     "RSI (40-65)": "✅" if rsi_signal  else "❌",
                     "MACD":        "✅" if macd_signal else "❌",
                     "Momentum":    "✅" if mom_signal  else "❌",
-                    "Score":       score,
-                    "RSI verdi":   round(rsi, 1),
-                    "Mom 6mnd %":  round(mom, 1) if mom else None,
+                    "Score":       ind["score"],
+                    "RSI verdi":   round(ind["rsi"], 1),
+                    "Mom 6mnd %":  round(ind["mom"], 1),
                     "Signal":      anbefaling,
-                    "_score":      score,
+                    "_score":      ind["score"],
                 })
             except Exception:
                 pass
@@ -1138,83 +1172,43 @@ with tab7:
 
     if st.button("Kjør analyse og generer forslag", type="primary"):
         with st.spinner("Scanner Oslo Børs..."):
+            # Hent OSEBX én gang før loopen
+            osebx_ret3m = 0.0
+            try:
+                osebx_raw = yf.download("^OSEBX", period="6mo", progress=False)
+                osebx_raw.columns = osebx_raw.columns.get_level_values(0)
+                if len(osebx_raw) >= 63:
+                    osebx_ret3m = float(osebx_raw["Close"].pct_change(63).iloc[-1] * 100)
+            except Exception:
+                pass
+
             kandidater = []
             for navn, ticker in OSLO_BORS.items():
                 try:
-                    # Markedsverdi-filter
-                    if maks_cap != "Alle størrelser":
-                        info = yf.Ticker(ticker).info
-                        cap  = info.get("marketCap", 0)
-                        grense = 50e9 if "50" in maks_cap else 10e9
-                        if cap > grense:
-                            continue
-
                     raw = yf.download(ticker, period="1y", progress=False)
+                    time.sleep(0.05)
                     if raw.empty or len(raw) < 60:
                         continue
                     raw.columns = raw.columns.get_level_values(0)
-                    close  = raw["Close"]
-                    volume = raw["Volume"]
-                    pris   = float(close.iloc[-1])
-
-                    # Klassiske signaler
-                    sma10  = float(close.rolling(10).mean().iloc[-1])
-                    sma50  = float(close.rolling(50).mean().iloc[-1])
-                    delta  = close.diff()
-                    gain   = delta.clip(lower=0).rolling(14).mean()
-                    loss   = (-delta.clip(upper=0)).rolling(14).mean()
-                    rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-                    ema12  = close.ewm(span=12).mean()
-                    ema26  = close.ewm(span=26).mean()
-                    macd_v = float((ema12 - ema26).iloc[-1])
-                    sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
-                    mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
-
-                    # Relativ styrke vs OSEBX (siste 63 dager ≈ 3 mnd)
-                    osebx_ret = 0.0
-                    try:
-                        osebx = yf.download("^OSEBX", period="6mo", progress=False)
-                        osebx.columns = osebx.columns.get_level_values(0)
-                        if len(osebx) >= 63:
-                            osebx_ret = float(osebx["Close"].pct_change(63).iloc[-1] * 100)
-                    except Exception:
-                        pass
-                    aksje_ret3m = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
-                    rel_styrke  = aksje_ret3m - osebx_ret
-
-                    # Volumøkning (siste 10 dager vs siste 50 dager)
-                    vol10 = float(volume.rolling(10).mean().iloc[-1])
-                    vol50 = float(volume.rolling(50).mean().iloc[-1])
-                    vol_økning = (vol10 / vol50 - 1) * 100 if vol50 > 0 else 0
-
-                    # Nærhet til 52-ukers høy (høyere = sterkere momentum)
-                    høy52 = float(close.rolling(252).max().iloc[-1])
-                    nærhet_topp = (pris / høy52) * 100  # 100 = på topp
-
-                    # Relativ styrke-filter
-                    if rel_styrke < min_rel_styrke:
+                    ind = beregn_indikatorer(raw["Close"], raw["Volume"], osebx_ret3m)
+                    if ind is None or ind["rel_styrke"] < min_rel_styrke:
                         continue
 
-                    # Score (0-4 klassiske + oppsidebonus)
-                    score = sum([
-                        sma10 > sma50,
-                        40 < rsi < 65,
-                        macd_v > sig_v,
-                        mom > 0,
-                    ])
-
-                    # Oppsidebonus: belønner vekstegenskaper
-                    oppside_score = (
-                        (rel_styrke / 10)        +   # relativ styrke
-                        (vol_økning / 50)        +   # volumøkning
-                        (nærhet_topp / 100)          # nærhet til 52-ukers høy
-                    )
+                    # Markedsverdi-filter (kun hvis valgt — unngår treg HTTP-request som standard)
+                    if maks_cap != "Alle størrelser":
+                        try:
+                            cap    = yf.Ticker(ticker).info.get("marketCap", 0)
+                            grense = 50e9 if "50" in maks_cap else 10e9
+                            if cap and cap > grense:
+                                continue
+                        except Exception:
+                            pass
 
                     kandidater.append({
-                        "navn": navn, "ticker": ticker, "kurs": pris,
-                        "score": score, "rsi": rsi, "mom": mom,
-                        "rel_styrke": rel_styrke, "vol_økning": vol_økning,
-                        "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
+                        "navn": navn, "ticker": ticker, "kurs": ind["pris"],
+                        "score": ind["score"], "rsi": ind["rsi"], "mom": ind["mom"],
+                        "rel_styrke": ind["rel_styrke"], "vol_økning": ind["vol_økning"],
+                        "nærhet_topp": ind["nærhet_topp"], "oppside_score": ind["oppside_score"],
                     })
                 except Exception:
                     pass
@@ -1419,22 +1413,12 @@ with tab8:
                     if len(historisk) < 60:
                         continue
                     try:
-                        close  = historisk["Close"]
-                        sma10  = float(close.rolling(10).mean().iloc[-1])
-                        sma50  = float(close.rolling(50).mean().iloc[-1])
-                        delta  = close.diff()
-                        gain   = delta.clip(lower=0).rolling(14).mean()
-                        loss   = (-delta.clip(upper=0)).rolling(14).mean()
-                        rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-                        ema12  = close.ewm(span=12).mean()
-                        ema26  = close.ewm(span=26).mean()
-                        macd_v = float((ema12 - ema26).iloc[-1])
-                        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
-                        mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
-
-                        score = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
-                        if score >= sb_min_score:
-                            kandidater.append({"navn": navn, "ticker": ticker, "score": score, "mom": mom})
+                        ind = beregn_indikatorer(historisk["Close"])
+                        if ind and ind["score"] >= sb_min_score:
+                            kandidater.append({
+                                "navn": navn, "ticker": ticker,
+                                "score": ind["score"], "mom": ind["mom"],
+                            })
                     except Exception:
                         continue
 

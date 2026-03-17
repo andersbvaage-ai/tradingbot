@@ -2,7 +2,7 @@ name: Daglig børsanalyse
 
 on:
   schedule:
-    - cron: "15 7 * * 1-5"   # Kl 09:15 norsk tid (UTC+2), mandag–fredag
+    - cron: "15 8 * * 1-5"   # Kl 09:15 norsk tid (UTC+1 vinter), mandag–fredag
   workflow_dispatch:           # Kan også kjøres manuelt fra GitHub
 
 jobs:

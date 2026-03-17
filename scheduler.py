@@ -193,6 +193,7 @@ MAKS_POSISJONER  = 6
 ALLOKERING_PCT   = 0.15   # 15% av kasse per posisjon
 MAKS_ALLOKERING  = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE   = 0      # må slå OSEBX siste 3 mnd
+MIN_ENSEMBLE     = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
 
 
 def les_portefolje():
@@ -250,14 +251,25 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     if rel_styrke < MIN_REL_STYRKE:
         return None
 
-    score = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
+    # Ensemble: 3 uavhengige strategistemmer
+    sma_vote  = sma10 > sma50
+    macd_vote = macd_v > sig_v
+    mom_vote  = mom > 0
+    rsi_ok    = 30 < rsi < 72
+    ensemble  = sum([sma_vote, macd_vote, mom_vote])
+
+    if ensemble < MIN_ENSEMBLE or not rsi_ok:
+        return None  # Ikke nok strategier enige
+
+    stemmer = " · ".join(s for s, v in [("Trend", sma_vote), ("MACD", macd_vote), ("Mom", mom_vote)] if v)
+    score         = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
     oppside_score = (rel_styrke / 10) + (vol_økning / 50) + (nærhet_topp / 100)
 
     return {
         "navn": navn, "ticker": ticker, "kurs": pris,
-        "score": score, "rsi": rsi, "mom": mom,
-        "rel_styrke": rel_styrke, "vol_økning": vol_økning,
-        "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
+        "score": score, "ensemble": ensemble, "ensemble_tekst": stemmer,
+        "rsi": rsi, "mom": mom, "rel_styrke": rel_styrke,
+        "vol_økning": vol_økning, "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
     }
 
 def send_epost(forslag, epost_til, epost_fra, epost_passord):
@@ -360,8 +372,9 @@ def kjor_analyse():
         if antall < 1 or beløp > pf["kasse"]:
             continue
         kostnad     = round(antall * k["kurs"], 0)
-        begrunnelse = (f"Score {k['score']}/4 · mom {k['mom']:.1f}% · "
-                       f"rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}%")
+        begrunnelse = (f"Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
+                       f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
+                       f"RSI {k['rsi']:.0f}")
         pf["posisjoner"][k["ticker"]] = {
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),

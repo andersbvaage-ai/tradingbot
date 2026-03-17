@@ -119,7 +119,23 @@ def beregn_indikatorer(close, volume=None, osebx_ret3m=0.0):
     macd_v = float((ema12 - ema26).iloc[-1])
     sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
     mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
-    score  = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
+
+    # ── Ensemble: 3 uavhengige strategistemmer ────────────────────────────────
+    # Kjøpssignal krever minimum 2/3 stemmer + RSI-filter
+    sma_vote  = sma10 > sma50       # Strategi 1: Trend (SMA-crossover)
+    macd_vote = macd_v > sig_v      # Strategi 2: MACD-konfirmasjon
+    mom_vote  = mom > 0             # Strategi 3: Positiv 6-mnd momentum
+    rsi_ok    = 30 < rsi < 72       # Kvalitetsfilter: ikke ekstremt overkjøpt/oversolgt
+
+    ensemble  = sum([sma_vote, macd_vote, mom_vote])
+    score     = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])  # for screener
+
+    stemmer = (
+        ("Trend" if sma_vote else None),
+        ("MACD"  if macd_vote else None),
+        ("Mom"   if mom_vote else None),
+    )
+    ensemble_tekst = " · ".join(s for s in stemmer if s) or "Ingen"
 
     rel_styrke = vol_økning = nærhet_topp = oppside_score = 0.0
     if volume is not None:
@@ -135,7 +151,8 @@ def beregn_indikatorer(close, volume=None, osebx_ret3m=0.0):
     return {
         "pris": pris, "sma10": sma10, "sma50": sma50,
         "rsi": rsi, "macd_v": macd_v, "sig_v": sig_v, "mom": mom,
-        "score": score, "rel_styrke": rel_styrke, "vol_økning": vol_økning,
+        "score": score, "ensemble": ensemble, "ensemble_tekst": ensemble_tekst,
+        "rsi_ok": rsi_ok, "rel_styrke": rel_styrke, "vol_økning": vol_økning,
         "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
     }
 
@@ -1218,8 +1235,12 @@ with tab7:
                         continue
                     raw.columns = raw.columns.get_level_values(0)
                     ind = beregn_indikatorer(raw["Close"], raw["Volume"], osebx_ret3m)
-                    if ind is None or ind["rel_styrke"] < min_rel_styrke:
+                    if ind is None:
                         continue
+                    if ind["rel_styrke"] < min_rel_styrke:
+                        continue
+                    if ind["ensemble"] < 2 or not ind["rsi_ok"]:
+                        continue  # Ensemble-krav: minst 2/3 strategier enige + RSI-filter
 
                     # Markedsverdi-filter (kun hvis valgt — unngår treg HTTP-request som standard)
                     if maks_cap != "Alle størrelser":
@@ -1233,7 +1254,9 @@ with tab7:
 
                     kandidater.append({
                         "navn": navn, "ticker": ticker, "kurs": ind["pris"],
-                        "score": ind["score"], "rsi": ind["rsi"], "mom": ind["mom"],
+                        "score": ind["score"], "ensemble": ind["ensemble"],
+                        "ensemble_tekst": ind["ensemble_tekst"],
+                        "rsi": ind["rsi"], "mom": ind["mom"],
                         "rel_styrke": ind["rel_styrke"], "vol_økning": ind["vol_økning"],
                         "nærhet_topp": ind["nærhet_topp"], "oppside_score": ind["oppside_score"],
                     })
@@ -1305,8 +1328,9 @@ with tab7:
             if antall < 1 or beløp > pf["kasse"]:
                 continue
             kostnad     = round(antall * k["kurs"], 0)
-            begrunnelse = (f"Score {k['score']}/4 · mom {k['mom']:.1f}% · "
-                           f"rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}%")
+            begrunnelse = (f"Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
+                           f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
+                           f"RSI {k['rsi']:.0f}")
             pf["posisjoner"][k["ticker"]] = {
                 "navn": k["navn"], "antall": antall,
                 "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),

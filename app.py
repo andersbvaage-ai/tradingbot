@@ -156,6 +156,30 @@ def beregn_indikatorer(close, volume=None, osebx_ret3m=0.0):
         "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
     }
 
+def detect_regime(osebx_close):
+    """Bestem markedsregime basert på OSEBX vs SMA200 og 3-måneders trend.
+    Bull   → OSEBX > SMA200 og 3mnd > +3%   (aggressiv: maks 6 pos, 15% allok)
+    Sideways → mellomting                    (moderat: maks 4 pos, 12% allok)
+    Bear   → OSEBX < SMA200 og 3mnd < −5%   (defensiv: maks 2 pos, 10% allok)
+    """
+    if len(osebx_close) < 200:
+        return "Sideways"
+    sma200 = float(osebx_close.rolling(200).mean().iloc[-1])
+    pris   = float(osebx_close.iloc[-1])
+    ret3m  = float(osebx_close.pct_change(63).iloc[-1] * 100) if len(osebx_close) >= 63 else 0
+    if pris > sma200 and ret3m > 3:
+        return "Bull"
+    elif pris < sma200 and ret3m < -5:
+        return "Bear"
+    else:
+        return "Sideways"
+
+REGIME_CONFIG = {
+    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15, "ikon": "🟢", "farge": "green"},
+    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12, "ikon": "🟡", "farge": "orange"},
+    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10, "ikon": "🔴", "farge": "red"},
+}
+
 # ── Strategier ─────────────────────────────────────────────────────────────────
 class SmaRsiStrategy(Strategy):
     sma_fast   = 10
@@ -571,6 +595,19 @@ if _dagens:
         ikon = "✅" if h["handling"] == "KJØP" else "🔴"
         deler.append(f"{ikon} {h['handling']} {h['navn']} ({h['antall']} aksjer · {h['beløp']:,.0f} kr)")
     st.caption(f"**Dagens handler** ({sist}): " + "  |  ".join(deler))
+
+# Regime-badge
+_regime = _pf_forside.get("regime", "Sideways")
+_rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
+_regime_info = {
+    "Bull":     "OSEBX over SMA200, positiv 3-mnd trend — boten handler aggressivt (maks 6 pos, 15%/pos).",
+    "Sideways": "Blandede signaler — boten er moderat (maks 4 pos, 12%/pos).",
+    "Bear":     "OSEBX under SMA200, negativ trend — boten er defensiv (maks 2 pos, 10%/pos, krever 3/3 ensemble).",
+}
+st.markdown(
+    f"**Markedsregime:** {_rcfg['ikon']} **{_regime}** — {_regime_info[_regime]}",
+    help="Regimet oppdateres daglig av scheduleren basert på OSEBX vs SMA200."
+)
 
 # Nåværende portefølje
 _posisjoner = _pf_forside.get("posisjoner", {})
@@ -1658,6 +1695,33 @@ with tab9:
         "**RSI-filter (ikke en stemme):** RSI må være mellom 30 og 72. "
         "Dette forhindrer kjøp i ekstremt overkjøpte situasjoner (RSI > 72) "
         "og i kraftige nedtrender (RSI < 30)."
+    )
+
+    # ── Regime-deteksjon ─────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🌡️ Regime-deteksjon")
+    st.markdown(
+        "Boten tilpasser seg markedsklima automatisk. Hvert morgen analyseres OSEBX "
+        "mot sin **200-dagers glidende snitt (SMA200)** og 3-måneders trend. "
+        "Dette bestemmer hvor aggressivt boten handler."
+    )
+    regime_tabell = {
+        "Regime":        ["🟢 Bull", "🟡 Sideways", "🔴 Bear"],
+        "Vilkår":        [
+            "OSEBX > SMA200 og 3mnd > +3%",
+            "Mellomting — ikke klart bull eller bear",
+            "OSEBX < SMA200 og 3mnd < −5%",
+        ],
+        "Ensemble-krav": ["2 av 3", "2 av 3", "3 av 3"],
+        "Maks posisjoner": ["6", "4", "2"],
+        "Allokering/pos":  ["15%", "12%", "10%"],
+    }
+    st.dataframe(pd.DataFrame(regime_tabell), use_container_width=True, hide_index=True)
+    st.markdown(
+        "**Hvorfor SMA200?** Det er det mest brukte skilleskillet mellom bull- og bear-markeder "
+        "blant institusjonelle investorer. Enkelt, objektivt og etterprøvbart.\n\n"
+        "**Hvorfor 3 av 3 i Bear?** I bjørnemarked er risikoen for falske signaler høy. "
+        "Kreve full enighet reduserer antall handler og beskytter kapitalen."
     )
 
     # ── Handelsstrategier (backtesting) ──────────────────────────────────────

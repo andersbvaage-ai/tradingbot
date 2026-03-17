@@ -195,6 +195,26 @@ MAKS_ALLOKERING  = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE   = 0      # må slå OSEBX siste 3 mnd
 MIN_ENSEMBLE     = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
 
+REGIME_CONFIG = {
+    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15},
+    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12},
+    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10},
+}
+
+def detect_regime(osebx_close):
+    """Bestem markedsregime basert på OSEBX vs SMA200 og 3-måneders trend."""
+    if len(osebx_close) < 200:
+        return "Sideways"
+    sma200 = float(osebx_close.rolling(200).mean().iloc[-1])
+    pris   = float(osebx_close.iloc[-1])
+    ret3m  = float(osebx_close.pct_change(63).iloc[-1] * 100) if len(osebx_close) >= 63 else 0
+    if pris > sma200 and ret3m > 3:
+        return "Bull"
+    elif pris < sma200 and ret3m < -5:
+        return "Bear"
+    else:
+        return "Sideways"
+
 
 def les_portefolje():
     if not os.path.exists(PORTFOLIO_FIL):
@@ -258,8 +278,8 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     rsi_ok    = 30 < rsi < 72
     ensemble  = sum([sma_vote, macd_vote, mom_vote])
 
-    if ensemble < MIN_ENSEMBLE or not rsi_ok:
-        return None  # Ikke nok strategier enige
+    if not rsi_ok:
+        return None  # RSI utenfor gyldig sone
 
     stemmer = " · ".join(s for s, v in [("Trend", sma_vote), ("MACD", macd_vote), ("Mom", mom_vote)] if v)
     score         = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
@@ -311,29 +331,39 @@ def kjor_analyse():
     pf    = les_portefolje()
     kasse = pf["kasse"]
 
-    # Hent OSEBX referanseavkastning
+    # Hent OSEBX — trenger 1y for SMA200 (regime) og 3mnd-retur
     osebx_ret3m = 0.0
+    regime      = "Sideways"
     try:
-        osebx = yf.download("^OSEBX", period="6mo", progress=False, timeout=15)
+        osebx = yf.download("^OSEBX", period="1y", progress=False, timeout=15)
         osebx.columns = osebx.columns.get_level_values(0)
-        if len(osebx) >= 63:
-            osebx_ret3m = float(osebx["Close"].pct_change(63).iloc[-1] * 100)
+        osebx_close = osebx["Close"]
+        if len(osebx_close) >= 63:
+            osebx_ret3m = float(osebx_close.pct_change(63).iloc[-1] * 100)
+        regime = detect_regime(osebx_close)
     except Exception:
         pass
 
-    # Analyser alle aksjer
+    rcfg         = REGIME_CONFIG[regime]
+    min_ensemble = rcfg["min_ensemble"]
+    maks_pos     = rcfg["maks_pos"]
+    allok        = rcfg["allok"]
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Regime: {regime} "
+          f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos)")
+
+    # Analyser alle aksjer — bruk regime-basert ensemble-krav
     kandidater = []
     for navn, ticker in UNIVERS.items():
         print(f"  Analyserer {navn}...")
         try:
             k = analyser_aksje(navn, ticker, osebx_ret3m)
-            if k:
+            if k and k["ensemble"] >= min_ensemble:
                 kandidater.append(k)
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
 
     kandidater.sort(key=lambda x: x["score"] + x["oppside_score"], reverse=True)
-    topp = kandidater[:MAKS_POSISJONER]
+    topp = kandidater[:maks_pos]
 
     # Utfør handler automatisk
     utforte      = []
@@ -367,12 +397,12 @@ def kjor_analyse():
     for k in topp:
         if k["ticker"] in pf["posisjoner"]:
             continue  # Allerede i portefølje
-        beløp  = min(pf["kasse"] * ALLOKERING_PCT, pf["kasse"] * MAKS_ALLOKERING)
+        beløp  = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
         antall = int(beløp / k["kurs"])
         if antall < 1 or beløp > pf["kasse"]:
             continue
         kostnad     = round(antall * k["kurs"], 0)
-        begrunnelse = (f"Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
+        begrunnelse = (f"[{regime}] Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
                        f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
                        f"RSI {k['rsi']:.0f}")
         pf["posisjoner"][k["ticker"]] = {
@@ -395,6 +425,7 @@ def kjor_analyse():
 
     pf["ventende_handler"] = []
     pf["sist_analysert"]   = str(datetime.now())
+    pf["regime"]           = regime
     lagre_portefolje(pf)
 
     kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])

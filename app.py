@@ -581,69 +581,202 @@ elif strategi_valg == "Momentum":
     sidebar_params["mom_lookback"]  = st.sidebar.slider("Lookback (dager)", 60, 252, 126)
     sidebar_params["mom_threshold"] = st.sidebar.slider("Min momentum %",  -10,  20,   0)
 
-# ── Tabs ───────────────────────────────────────────────────────────────────────
-# ── Forsidevisning ────────────────────────────────────────────────────────────
-_pf_forside = les_portefolje()
-_idag       = str(datetime.now().date())
-_dagens     = [h for h in _pf_forside.get("historikk", []) if str(h.get("dato", ""))[:10] == _idag]
+tab_dash, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Dashboard", "Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest", "ℹ️ Info"])
 
-# Dagens handler — liten tekst øverst
-if _dagens:
-    sist = _pf_forside.get("sist_analysert", "")[:16]
-    deler = []
-    for h in _dagens:
-        ikon = "✅" if h["handling"] == "KJØP" else "🔴"
-        deler.append(f"{ikon} {h['handling']} {h['navn']} ({h['antall']} aksjer · {h['beløp']:,.0f} kr)")
-    st.caption(f"**Dagens handler** ({sist}): " + "  |  ".join(deler))
+# ─── TAB DASHBOARD ────────────────────────────────────────────────────────────
+with tab_dash:
+    _pf  = les_portefolje()
+    _idag = str(datetime.now().date())
 
-# Regime-badge
-_regime = _pf_forside.get("regime", "Sideways")
-_rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
-_regime_info = {
-    "Bull":     "OSEBX over SMA200, positiv 3-mnd trend — boten handler aggressivt (maks 6 pos, 15%/pos).",
-    "Sideways": "Blandede signaler — boten er moderat (maks 4 pos, 12%/pos).",
-    "Bear":     "OSEBX under SMA200, negativ trend — boten er defensiv (maks 2 pos, 10%/pos, krever 3/3 ensemble).",
-}
-st.markdown(
-    f"**Markedsregime:** {_rcfg['ikon']} **{_regime}** — {_regime_info[_regime]}",
-    help="Regimet oppdateres daglig av scheduleren basert på OSEBX vs SMA200."
-)
+    # ── Regime + sist analysert ───────────────────────────────────────────────
+    _regime = _pf.get("regime", "Sideways")
+    _rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
+    _sist   = _pf.get("sist_analysert", "")[:16].replace("T", " ")
+    _regime_info = {
+        "Bull":     "OSEBX over SMA200, positiv 3-mnd trend — boten handler aggressivt.",
+        "Sideways": "Blandede signaler — boten er moderat.",
+        "Bear":     "OSEBX under SMA200, negativ trend — boten er defensiv.",
+    }
+    st.markdown(
+        f"{_rcfg['ikon']} **Markedsregime: {_regime}** — {_regime_info[_regime]}"
+        + (f"  ·  Sist analysert: {_sist}" if _sist else ""),
+        help="Oppdateres daglig av scheduleren basert på OSEBX vs SMA200."
+    )
 
-# Nåværende portefølje
-_posisjoner = _pf_forside.get("posisjoner", {})
-_kasse      = _pf_forside.get("kasse", 0)
-_start      = _pf_forside.get("start_kapital", _kasse)
+    # ── Nøkkeltall ────────────────────────────────────────────────────────────
+    _posisjoner  = _pf.get("posisjoner", {})
+    _kasse       = _pf.get("kasse", 0)
+    _start       = _pf.get("start_kapital", _kasse)
+    _historikk   = _pf.get("historikk", [])
 
-if _posisjoner:
-    st.markdown("### Nåværende portefølje")
-    _rader       = []
     _total_verdi = _kasse
-    for ticker, pos in _posisjoner.items():
-        kurs = hent_siste_kurs(ticker)
-        if kurs:
-            verdi        = kurs * pos["antall"]
-            gevinst      = verdi - pos["antall"] * pos["snittpris"]
-            gevinst_pct  = (kurs / pos["snittpris"] - 1) * 100
-            _total_verdi += verdi
-            _rader.append({
-                "Aksje":       pos["navn"],
-                "Antall":      pos["antall"],
-                "Snittpris":   f"{pos['snittpris']:,.2f} kr",
-                "Nåkurs":      f"{kurs:,.2f} kr",
-                "Verdi":       f"{verdi:,.0f} kr",
-                "Gevinst":     f"{gevinst:+,.0f} kr",
-                "Avkastning":  f"{gevinst_pct:+.1f}%",
+    _pos_rader   = []
+    for _ticker, _pos in _posisjoner.items():
+        _kurs = hent_siste_kurs(_ticker)
+        if _kurs:
+            _verdi       = _kurs * _pos["antall"]
+            _gevinst     = _verdi - _pos["antall"] * _pos["snittpris"]
+            _gevinst_pct = (_kurs / _pos["snittpris"] - 1) * 100
+            _total_verdi += _verdi
+            _pos_rader.append({
+                "Aksje":       _pos["navn"],
+                "Ticker":      _ticker,
+                "Kjøpsdato":   _pos.get("kjøpsdato", "–"),
+                "Antall":      _pos["antall"],
+                "Snittpris":   round(_pos["snittpris"], 2),
+                "Nåkurs":      round(_kurs, 2),
+                "Verdi (kr)":  round(_verdi, 0),
+                "Gevinst (kr)": round(_gevinst, 0),
+                "Avkastning %": round(_gevinst_pct, 1),
             })
-    if _rader:
-        st.dataframe(pd.DataFrame(_rader), use_container_width=True, hide_index=True)
-    _avk = f"{(_total_verdi / _start - 1)*100:+.1f}%" if _start > 0 else "–"
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Kasse",                f"{_kasse:,.0f} kr")
-    c2.metric("Total porteføljeverdi", f"{_total_verdi:,.0f} kr")
-    c3.metric("Total avkastning",      _avk)
+
+    _avk_pct = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
+    _avk_kr  = _total_verdi - _start
+
+    _lukkede = [h for h in _historikk if h.get("handling") == "SELG"]
+    _kjøp    = [h for h in _historikk if h.get("handling") == "KJØP"]
+
+    col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+    col_m1.metric("Porteføljeverdi",  f"{_total_verdi:,.0f} kr",
+                  delta=f"{_avk_kr:+,.0f} kr" if _start > 0 else None)
+    col_m2.metric("Kasse",            f"{_kasse:,.0f} kr")
+    col_m3.metric("Total avkastning", f"{_avk_pct:+.1f}%" if _start > 0 else "–")
+    col_m4.metric("Antall posisjoner", len(_posisjoner))
+
     st.divider()
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest", "ℹ️ Info"])
+    # ── Åpne posisjoner ───────────────────────────────────────────────────────
+    st.markdown("### Åpne posisjoner")
+    if _pos_rader:
+        st.dataframe(
+            pd.DataFrame(_pos_rader),
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Snittpris":    st.column_config.NumberColumn("Snittpris",    format="%.2f kr"),
+                "Nåkurs":       st.column_config.NumberColumn("Nåkurs",       format="%.2f kr"),
+                "Verdi (kr)":   st.column_config.NumberColumn("Verdi",        format="%,.0f kr"),
+                "Gevinst (kr)": st.column_config.NumberColumn("Gevinst",      format="%+,.0f kr"),
+                "Avkastning %": st.column_config.NumberColumn("Avkastning %", format="%+.1f%%"),
+            },
+        )
+    else:
+        st.info("Ingen åpne posisjoner for øyeblikket.")
+
+    st.divider()
+
+    # ── Dagens handler ────────────────────────────────────────────────────────
+    _dagens = [h for h in _historikk if str(h.get("dato", ""))[:10] == _idag]
+    st.markdown("### Dagens handler")
+    if _dagens:
+        for _h in _dagens:
+            _ikon   = "✅" if _h["handling"] == "KJØP" else "🔴"
+            _farge  = "green" if _h["handling"] == "KJØP" else "red"
+            _begrunnelse = _h.get("begrunnelse", "–")
+            with st.container(border=True):
+                _c1, _c2 = st.columns([1, 3])
+                _c1.markdown(
+                    f"**{_ikon} {_h['handling']}**\n\n"
+                    f"**{_h['navn']}**\n\n"
+                    f"{_h['antall']} aksjer\n\n"
+                    f"{_h.get('kurs', 0):,.2f} kr/aksje\n\n"
+                    f"**{_h.get('beløp', 0):,.0f} kr totalt**"
+                )
+                _c2.markdown(f"**Begrunnelse:**\n\n{_begrunnelse}")
+    else:
+        st.info(f"Ingen handler utført i dag ({_idag}).")
+
+    st.divider()
+
+    # ── Handelslogg ───────────────────────────────────────────────────────────
+    st.markdown("### Handelslogg")
+    if _historikk:
+        _col_f1, _col_f2, _col_f3 = st.columns([1, 1, 2])
+        _filter_type = _col_f1.selectbox(
+            "Type", ["Alle", "Kun kjøp", "Kun salg"],
+            key="dash_hist_filter", label_visibility="visible"
+        )
+        _vis_antall = _col_f2.selectbox(
+            "Vis siste", ["30 handler", "100 handler", "Alle"],
+            key="dash_hist_antall", label_visibility="visible"
+        )
+        _filter_text = _col_f3.text_input(
+            "Søk aksjenavn", placeholder="Filtrer på aksjenavn...",
+            key="dash_hist_search", label_visibility="visible"
+        )
+
+        _filtrert = list(reversed(_historikk))
+        if _filter_type == "Kun kjøp":
+            _filtrert = [h for h in _filtrert if h.get("handling") == "KJØP"]
+        elif _filter_type == "Kun salg":
+            _filtrert = [h for h in _filtrert if h.get("handling") == "SELG"]
+        if _filter_text:
+            _filtrert = [h for h in _filtrert if _filter_text.lower() in h.get("navn", "").lower()]
+        if _vis_antall == "30 handler":
+            _filtrert = _filtrert[:30]
+        elif _vis_antall == "100 handler":
+            _filtrert = _filtrert[:100]
+
+        _logg_rader = []
+        for _h in _filtrert:
+            _dato_str = str(_h.get("dato", ""))[:16].replace("T", " ")
+            _logg_rader.append({
+                "Dato":        _dato_str,
+                "Handling":    _h.get("handling", ""),
+                "Aksje":       _h.get("navn", ""),
+                "Antall":      _h.get("antall", ""),
+                "Kurs (kr)":   round(_h["kurs"], 2)  if "kurs"  in _h else None,
+                "Beløp (kr)":  round(_h["beløp"], 0) if "beløp" in _h else None,
+                "Begrunnelse": _h.get("begrunnelse", "–"),
+            })
+
+        st.dataframe(
+            pd.DataFrame(_logg_rader),
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Dato":        st.column_config.TextColumn("Dato",       width="medium"),
+                "Handling":    st.column_config.TextColumn("Handling",   width="small"),
+                "Aksje":       st.column_config.TextColumn("Aksje",      width="medium"),
+                "Antall":      st.column_config.NumberColumn("Antall",   width="small"),
+                "Kurs (kr)":   st.column_config.NumberColumn("Kurs",     format="%.2f kr", width="medium"),
+                "Beløp (kr)":  st.column_config.NumberColumn("Beløp",    format="%,.0f kr", width="medium"),
+                "Begrunnelse": st.column_config.TextColumn("Begrunnelse", width="large"),
+            },
+        )
+        st.caption(f"{len(_filtrert)} handler vises (totalt {len(_historikk)} i loggen).")
+
+        # ── Statistikk over lukkede handler ───────────────────────────────────
+        if _lukkede:
+            st.divider()
+            st.markdown("### Statistikk")
+
+            # Prøv å matche kjøp og salg per ticker for å beregne realisert avkastning
+            _kjøp_map = {}
+            for _h in _historikk:
+                if _h.get("handling") == "KJØP":
+                    _kjøp_map[_h["ticker"]] = _h
+            _realisert = []
+            for _h in _historikk:
+                if _h.get("handling") == "SELG" and _h["ticker"] in _kjøp_map:
+                    _innkjøp = _kjøp_map[_h["ticker"]]
+                    _avk_r   = (_h["kurs"] / _innkjøp["kurs"] - 1) * 100
+                    _realisert.append(_avk_r)
+
+            _ant_kjøp  = len(_kjøp)
+            _ant_salg  = len(_lukkede)
+            _positive  = len([r for r in _realisert if r > 0])
+            _hit_rate  = (_positive / len(_realisert) * 100) if _realisert else None
+            _snitt_avk = sum(_realisert) / len(_realisert) if _realisert else None
+
+            _sc1, _sc2, _sc3, _sc4 = st.columns(4)
+            _sc1.metric("Totalt kjøp",    _ant_kjøp)
+            _sc2.metric("Totalt salg",    _ant_salg)
+            _sc3.metric("Hit rate",       f"{_hit_rate:.0f}%" if _hit_rate is not None else "–",
+                        help="Andel lukkede handler med positiv avkastning")
+            _sc4.metric("Snitt avkastning (lukket)", f"{_snitt_avk:+.1f}%" if _snitt_avk is not None else "–")
+    else:
+        st.info("Ingen handelshistorikk ennå. Boten kjører første gang neste hverdag kl 09:15.")
 
 # ─── TAB 1: BACKTEST ──────────────────────────────────────────────────────────
 with tab1:
@@ -1402,64 +1535,7 @@ with tab7:
                         f"{h['handling']} {h['antall']} aksjer à {h['kurs']:.2f} kr "
                         f"= **{h['beløp']:,.0f} kr**  \n"
                         f"_{h.get('begrunnelse', '')}_")
-
-    # ── Handelslogg ───────────────────────────────────────────────────────────
-    pf = les_portefolje()
-    historikk = pf.get("historikk", [])
-    if historikk:
-        st.markdown("### Handelslogg")
-        st.caption("Alle utførte handler med begrunnelse — nyeste øverst.")
-
-        col_f1, col_f2 = st.columns([1, 3])
-        filter_type = col_f1.selectbox(
-            "Vis", ["Alle", "Kun kjøp", "Kun salg"], key="hist_filter", label_visibility="collapsed"
-        )
-        filter_text = col_f2.text_input(
-            "Søk aksjenavn", placeholder="Filtrer på aksjenavn...", key="hist_search", label_visibility="collapsed"
-        )
-
-        filtrert = list(reversed(historikk))
-        if filter_type == "Kun kjøp":
-            filtrert = [h for h in filtrert if h.get("handling") == "KJØP"]
-        elif filter_type == "Kun salg":
-            filtrert = [h for h in filtrert if h.get("handling") == "SELG"]
-        if filter_text:
-            filtrert = [h for h in filtrert if filter_text.lower() in h.get("navn", "").lower()]
-
-        # Tabell med begrunnelse som egen kolonne
-        tabell_rader = []
-        for h in filtrert:
-            dato_str = str(h.get("dato", ""))[:16].replace("T", " ")
-            handling = h.get("handling", "")
-            ikon     = "✅" if handling == "KJØP" else "🔴"
-            tabell_rader.append({
-                "Dato":        dato_str,
-                "":            ikon,
-                "Handling":    handling,
-                "Aksje":       h.get("navn", ""),
-                "Antall":      h.get("antall", ""),
-                "Kurs (kr)":   f"{h['kurs']:,.2f}"   if "kurs"  in h else "–",
-                "Beløp (kr)":  f"{h['beløp']:,.0f}"  if "beløp" in h else "–",
-                "Begrunnelse": h.get("begrunnelse", "–"),
-            })
-
-        df_logg = pd.DataFrame(tabell_rader)
-        st.dataframe(
-            df_logg,
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "":            st.column_config.TextColumn("",            width="small"),
-                "Dato":        st.column_config.TextColumn("Dato",        width="medium"),
-                "Handling":    st.column_config.TextColumn("Handling",    width="small"),
-                "Aksje":       st.column_config.TextColumn("Aksje",       width="medium"),
-                "Antall":      st.column_config.NumberColumn("Antall",    width="small"),
-                "Kurs (kr)":   st.column_config.TextColumn("Kurs",        width="medium"),
-                "Beløp (kr)":  st.column_config.TextColumn("Beløp",       width="medium"),
-                "Begrunnelse": st.column_config.TextColumn("Begrunnelse", width="large"),
-            },
-        )
-        st.caption(f"{len(filtrert)} handler vises (totalt {len(historikk)} i loggen).")
+    st.caption("Full handelslogg med begrunnelse finner du i **Dashboard**-fanen.")
 
     # ── Nullstill portefølje ──────────────────────────────────────────────────
     with st.expander("Innstillinger"):

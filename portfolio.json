@@ -1,41 +1,41 @@
 {
-  "kasse": 1509431.0,
+  "kasse": 1508331.0,
   "start_kapital": 4000000,
   "posisjoner": {
-    "EQNR.OL": {
-      "navn": "Equinor",
-      "antall": 1710,
-      "snittpris": 350.70001220703125,
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 2344,
+      "snittpris": 255.8000030517578,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "DNB.OL": {
-      "navn": "DNB Bank",
-      "antall": 1749,
-      "snittpris": 291.6000061035156,
+    "AKSO.OL": {
+      "navn": "Aker Solutions",
+      "antall": 12381,
+      "snittpris": 41.18000030517578,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "TEL.OL": {
-      "navn": "Telenor",
-      "antall": 2508,
-      "snittpris": 172.8000030517578,
+    "SCATC.OL": {
+      "navn": "Scatec",
+      "antall": 3742,
+      "snittpris": 115.80000305175781,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "NHY.OL": {
-      "navn": "Norsk Hydro",
-      "antall": 4008,
-      "snittpris": 91.94000244140625,
+    "NOD.OL": {
+      "navn": "Nordic Semiconductor",
+      "antall": 2346,
+      "snittpris": 157.0,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "ORK.OL": {
-      "navn": "Orkla",
-      "antall": 2648,
-      "snittpris": 118.30000305175781,
+    "TGS.OL": {
+      "navn": "TGS",
+      "antall": 2680,
+      "snittpris": 116.80000305175781,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "YAR.OL": {
-      "navn": "Yara International",
-      "antall": 480,
-      "snittpris": 553.5999755859375,
+    "BWO.OL": {
+      "navn": "BW Offshore",
+      "antall": 5250,
+      "snittpris": 50.70000076293945,
       "kj\u00f8psdato": "2026-03-17"
     }
   },
@@ -100,7 +100,127 @@
       "kurs": 553.5999755859375,
       "bel\u00f8p": 265728.0,
       "begrunnelse": "Score 3/4 \u00b7 mom 49.2% \u00b7 rel.styrke 39.4% \u00b7 vol\u219142%"
+    },
+    {
+      "dato": "2026-03-17 11:00:42.448704",
+      "handling": "SELG",
+      "ticker": "EQNR.OL",
+      "navn": "Equinor",
+      "antall": 1710,
+      "kurs": 351.79998779296875,
+      "bel\u00f8p": 601578.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:42.665184",
+      "handling": "SELG",
+      "ticker": "DNB.OL",
+      "navn": "DNB Bank",
+      "antall": 1749,
+      "kurs": 291.0,
+      "bel\u00f8p": 508959.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:42.823443",
+      "handling": "SELG",
+      "ticker": "TEL.OL",
+      "navn": "Telenor",
+      "antall": 2508,
+      "kurs": 172.8000030517578,
+      "bel\u00f8p": 433382.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.011281",
+      "handling": "SELG",
+      "ticker": "NHY.OL",
+      "navn": "Norsk Hydro",
+      "antall": 4008,
+      "kurs": 91.94000244140625,
+      "bel\u00f8p": 368496.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.287869",
+      "handling": "SELG",
+      "ticker": "ORK.OL",
+      "navn": "Orkla",
+      "antall": 2648,
+      "kurs": 117.9000015258789,
+      "bel\u00f8p": 312199.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513359",
+      "handling": "SELG",
+      "ticker": "YAR.OL",
+      "navn": "Yara International",
+      "antall": 480,
+      "kurs": 551.2000122070312,
+      "bel\u00f8p": 264576.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513394",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 2344,
+      "kurs": 255.8000030517578,
+      "bel\u00f8p": 599595.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 31.7% \u00b7 rel.styrke 29.7% \u00b7 vol\u219115%"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513407",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKSO.OL",
+      "navn": "Aker Solutions",
+      "antall": 12381,
+      "kurs": 41.18000030517578,
+      "bel\u00f8p": 509850.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 36.7% \u00b7 rel.styrke 32.1% \u00b7 vol\u2191-26%"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513416",
+      "handling": "KJ\u00d8P",
+      "ticker": "SCATC.OL",
+      "navn": "Scatec",
+      "antall": 3742,
+      "kurs": 115.80000305175781,
+      "bel\u00f8p": 433324.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 12.2% \u00b7 rel.styrke 15.5% \u00b7 vol\u2191-40%"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513426",
+      "handling": "KJ\u00d8P",
+      "ticker": "NOD.OL",
+      "navn": "Nordic Semiconductor",
+      "antall": 2346,
+      "kurs": 157.0,
+      "bel\u00f8p": 368322.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 3.7% \u00b7 rel.styrke 20.7% \u00b7 vol\u2191-3%"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513434",
+      "handling": "KJ\u00d8P",
+      "ticker": "TGS.OL",
+      "navn": "TGS",
+      "antall": 2680,
+      "kurs": 116.80000305175781,
+      "bel\u00f8p": 313024.0,
+      "begrunnelse": "Score 4/4 \u00b7 mom 67.9% \u00b7 rel.styrke 28.6% \u00b7 vol\u2191-14%"
+    },
+    {
+      "dato": "2026-03-17 11:00:43.513442",
+      "handling": "KJ\u00d8P",
+      "ticker": "BWO.OL",
+      "navn": "BW Offshore",
+      "antall": 5250,
+      "kurs": 50.70000076293945,
+      "bel\u00f8p": 266175.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 46.9% \u00b7 rel.styrke 30.1% \u00b7 vol\u2191-38%"
     }
   ],
-  "sist_analysert": "2026-03-17 10:00:06.377019"
+  "sist_analysert": "2026-03-17 11:00:43.513446"
 }

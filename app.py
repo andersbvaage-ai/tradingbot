@@ -1403,12 +1403,63 @@ with tab7:
                         f"= **{h['beløp']:,.0f} kr**  \n"
                         f"_{h.get('begrunnelse', '')}_")
 
-    # ── Handelshistorikk ──────────────────────────────────────────────────────
+    # ── Handelslogg ───────────────────────────────────────────────────────────
     pf = les_portefolje()
-    if pf["historikk"]:
-        with st.expander("Handelshistorikk"):
-            df_hist = pd.DataFrame(pf["historikk"])
-            st.dataframe(df_hist, use_container_width=True, hide_index=True)
+    historikk = pf.get("historikk", [])
+    if historikk:
+        st.markdown("### Handelslogg")
+        st.caption("Alle utførte handler med begrunnelse — nyeste øverst.")
+
+        col_f1, col_f2 = st.columns([1, 3])
+        filter_type = col_f1.selectbox(
+            "Vis", ["Alle", "Kun kjøp", "Kun salg"], key="hist_filter", label_visibility="collapsed"
+        )
+        filter_text = col_f2.text_input(
+            "Søk aksjenavn", placeholder="Filtrer på aksjenavn...", key="hist_search", label_visibility="collapsed"
+        )
+
+        filtrert = list(reversed(historikk))
+        if filter_type == "Kun kjøp":
+            filtrert = [h for h in filtrert if h.get("handling") == "KJØP"]
+        elif filter_type == "Kun salg":
+            filtrert = [h for h in filtrert if h.get("handling") == "SELG"]
+        if filter_text:
+            filtrert = [h for h in filtrert if filter_text.lower() in h.get("navn", "").lower()]
+
+        # Tabell med begrunnelse som egen kolonne
+        tabell_rader = []
+        for h in filtrert:
+            dato_str = str(h.get("dato", ""))[:16].replace("T", " ")
+            handling = h.get("handling", "")
+            ikon     = "✅" if handling == "KJØP" else "🔴"
+            tabell_rader.append({
+                "Dato":        dato_str,
+                "":            ikon,
+                "Handling":    handling,
+                "Aksje":       h.get("navn", ""),
+                "Antall":      h.get("antall", ""),
+                "Kurs (kr)":   f"{h['kurs']:,.2f}"   if "kurs"  in h else "–",
+                "Beløp (kr)":  f"{h['beløp']:,.0f}"  if "beløp" in h else "–",
+                "Begrunnelse": h.get("begrunnelse", "–"),
+            })
+
+        df_logg = pd.DataFrame(tabell_rader)
+        st.dataframe(
+            df_logg,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "":            st.column_config.TextColumn("",            width="small"),
+                "Dato":        st.column_config.TextColumn("Dato",        width="medium"),
+                "Handling":    st.column_config.TextColumn("Handling",    width="small"),
+                "Aksje":       st.column_config.TextColumn("Aksje",       width="medium"),
+                "Antall":      st.column_config.NumberColumn("Antall",    width="small"),
+                "Kurs (kr)":   st.column_config.TextColumn("Kurs",        width="medium"),
+                "Beløp (kr)":  st.column_config.TextColumn("Beløp",       width="medium"),
+                "Begrunnelse": st.column_config.TextColumn("Begrunnelse", width="large"),
+            },
+        )
+        st.caption(f"{len(filtrert)} handler vises (totalt {len(historikk)} i loggen).")
 
     # ── Nullstill portefølje ──────────────────────────────────────────────────
     with st.expander("Innstillinger"):

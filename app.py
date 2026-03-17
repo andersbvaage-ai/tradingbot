@@ -697,27 +697,32 @@ with tab_dash:
         st.markdown("#### Porteføljeverdi over tid")
         _verdi_hist = _pf.get("verdi_historikk", [])
 
-        # Legg til dagens estimerte verdi som siste punkt selv om scheduler ikke har kjørt
+        # Dagens estimerte verdi legges alltid til som siste punkt
         _verdi_i_dag = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
         _plot_data = [s for s in _verdi_hist if s["dato"] != _idag] + [_verdi_i_dag]
+
+        # Hvis vi bare har ett punkt, legg til startkapital som første punkt
+        if len(_plot_data) == 1 and _start > 0:
+            from datetime import timedelta
+            _start_dato = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+            _plot_data = [{"dato": _start_dato, "total_verdi": _start}] + _plot_data
 
         if len(_plot_data) >= 2:
             _df_graf = pd.DataFrame(_plot_data)
             _df_graf["dato"] = pd.to_datetime(_df_graf["dato"])
             _df_graf = _df_graf.sort_values("dato")
 
-            _fig = go.Figure()
-            # Fargefyll under kurven — grønn hvis over startkapital, rød hvis under
             _siste_verdi = float(_df_graf["total_verdi"].iloc[-1])
             _fyll_farge = "rgba(0,200,100,0.15)" if _siste_verdi >= _start else "rgba(220,50,50,0.15)"
 
+            _fig = go.Figure()
             _fig.add_trace(go.Scatter(
                 x=_df_graf["dato"], y=_df_graf["total_verdi"],
-                mode="lines", name="Porteføljeverdi",
+                mode="lines+markers", name="Porteføljeverdi",
                 line=dict(color="#4C8BF5", width=2),
+                marker=dict(size=5),
                 fill="tozeroy", fillcolor=_fyll_farge,
             ))
-            # Startkapital som referanselinje
             _fig.add_hline(
                 y=_start, line_dash="dot", line_color="gray",
                 annotation_text=f"Startkapital {_start:,.0f} kr",
@@ -733,8 +738,7 @@ with tab_dash:
             )
             st.plotly_chart(_fig, use_container_width=True)
         else:
-            st.info("Grafen bygges opp etter hvert som boten kjører daglig. "
-                    "Trykk **Ta snapshot nå** for å legge til dagens verdi med en gang.")
+            st.info("Trykk **📸 Ta snapshot nå** for å starte grafen.")
 
         if st.button("📸 Ta snapshot nå", help="Lagrer dagens porteføljeverdi i grafen"):
             _snap = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}

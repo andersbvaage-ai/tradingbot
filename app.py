@@ -8,17 +8,40 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import json
 import os
+import base64
+import requests
 from datetime import datetime
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(__file__), "portfolio.json")
+GITHUB_REPO   = "andersbvaage-ai/tradingbot"
+GITHUB_PATH   = "portfolio.json"
+
+def _push_portefolje_til_github(innhold: str):
+    """Pusher portfolio.json til GitHub via API. Krever GITHUB_TOKEN i Streamlit secrets."""
+    try:
+        token = st.secrets.get("GITHUB_TOKEN")
+        if not token:
+            return
+        url     = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_PATH}"
+        headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+        sha     = requests.get(url, headers=headers).json().get("sha")
+        requests.put(url, headers=headers, json={
+            "message": f"Porteføljeoppdatering {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            "content": base64.b64encode(innhold.encode()).decode(),
+            "sha":     sha,
+        })
+    except Exception:
+        pass  # Feiler stille – lokal lagring er alltid gjort først
 
 def les_portefolje():
     with open(PORTFOLIO_FIL, "r") as f:
         return json.load(f)
 
 def lagre_portefolje(p):
+    innhold = json.dumps(p, indent=2, default=str)
     with open(PORTFOLIO_FIL, "w") as f:
-        json.dump(p, f, indent=2, default=str)
+        f.write(innhold)
+    _push_portefolje_til_github(innhold)
 
 def hent_siste_kurs(ticker):
     try:

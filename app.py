@@ -12,6 +12,7 @@ import base64
 import time
 import requests
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(__file__), "portfolio.json")
 GITHUB_REPO   = "andersbvaage-ai/tradingbot"
@@ -59,13 +60,33 @@ def lagre_portefolje(p):
         except Exception:
             pass  # Kalles fra scheduler (ikke Streamlit-kontekst)
 
+_OSLO_TZ = ZoneInfo("Europe/Oslo")
+
+def _er_markedstid() -> bool:
+    """Returnerer True hvis Oslo Børs er åpen akkurat nå (man–fre 09:00–17:30)."""
+    nå = datetime.now(_OSLO_TZ)
+    if nå.weekday() >= 5:          # lørdag/søndag
+        return False
+    from datetime import time as _time
+    return _time(9, 0) <= nå.time() <= _time(17, 30)
+
 def hent_siste_kurs(ticker):
+    """Henter siste kurs. I åpningstiden: ~15 min forsinket live-kurs (1m intraday).
+    Utenfor åpningstiden: siste sluttkurs."""
     try:
-        raw = yf.download(ticker, period="2d", progress=False)
-        if raw.empty:
-            return None
-        raw.columns = raw.columns.get_level_values(0)
-        return float(raw["Close"].iloc[-1])
+        if _er_markedstid():
+            raw = yf.download(ticker, period="1d", interval="1m", progress=False)
+            if raw.empty:
+                raise ValueError("tom")
+            raw.columns = raw.columns.get_level_values(0)
+            kurs = float(raw["Close"].dropna().iloc[-1])
+        else:
+            raw = yf.download(ticker, period="2d", progress=False)
+            if raw.empty:
+                raise ValueError("tom")
+            raw.columns = raw.columns.get_level_values(0)
+            kurs = float(raw["Close"].iloc[-1])
+        return kurs
     except Exception:
         return None
 
@@ -587,6 +608,12 @@ tab_dash, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Dashb
 with tab_dash:
     _pf  = les_portefolje()
     _idag = str(datetime.now().date())
+
+    # ── Kurs-modus-indikator ─────────────────────────────────────────────────
+    if _er_markedstid():
+        st.caption("🟢 Markedet er åpent — kurser er ~15 min forsinket live-data (intraday)")
+    else:
+        st.caption("⚫ Markedet er stengt — kurser viser siste sluttkurs")
 
     # ── Regime + sist analysert ───────────────────────────────────────────────
     _regime = _pf.get("regime", "Sideways")

@@ -228,14 +228,22 @@ def lagre_portefolje(p):
         json.dump(p, f, indent=2, default=str)
 
 def hent_siste_kurs(ticker):
+    """Henter siste kurs via 1-minutts intraday (kjøres alltid i åpningstiden fra scheduler)."""
     try:
-        raw = yf.download(ticker, period="2d", progress=False, timeout=10)
+        raw = yf.download(ticker, period="1d", interval="1m", progress=False, timeout=15)
         if raw.empty:
-            return None
+            raise ValueError("tom")
         raw.columns = raw.columns.get_level_values(0)
-        return float(raw["Close"].iloc[-1])
+        return float(raw["Close"].dropna().iloc[-1])
     except Exception:
-        return None
+        try:
+            raw = yf.download(ticker, period="2d", progress=False, timeout=10)
+            if raw.empty:
+                return None
+            raw.columns = raw.columns.get_level_values(0)
+            return float(raw["Close"].iloc[-1])
+        except Exception:
+            return None
 
 def analyser_aksje(navn, ticker, osebx_ret3m):
     raw = yf.download(ticker, period="1y", progress=False, timeout=15)

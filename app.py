@@ -732,10 +732,14 @@ with tab_dash:
                   f"{_snitt_avk:+.1f}%" if _snitt_avk is not None else "–")
         st.metric("Kjøp utført",  _ant_kjøp)
         st.metric("Salg utført",  _ant_salg)
+        _total_kurtasje_stat = sum(_h.get("kurtasje", 0) for _h in _historikk)
+        if _total_kurtasje_stat:
+            st.metric("Total kurtasje", f"{_total_kurtasje_stat:,.0f} kr",
+                      help="Sum av alle kurtasjer betalt hittil")
         if _realisert:
             _beste = max(_realisert)
             _dårligste = min(_realisert)
-            st.metric("Beste handel",    f"{_beste:+.1f}%")
+            st.metric("Beste handel",     f"{_beste:+.1f}%")
             st.metric("Dårligste handel", f"{_dårligste:+.1f}%")
 
     st.divider()
@@ -808,13 +812,14 @@ with tab_dash:
         _logg_rader = []
         for _h in _filtrert:
             _logg_rader.append({
-                "Dato":        str(_h.get("dato", ""))[:16].replace("T", " "),
-                "Handling":    _h.get("handling", ""),
-                "Aksje":       _h.get("navn", ""),
-                "Antall":      _h.get("antall", ""),
-                "Kurs (kr)":   round(_h["kurs"], 2)  if "kurs"  in _h else None,
-                "Beløp (kr)":  round(_h["beløp"], 0) if "beløp" in _h else None,
-                "Begrunnelse": _h.get("begrunnelse", "–"),
+                "Dato":          str(_h.get("dato", ""))[:16].replace("T", " "),
+                "Handling":      _h.get("handling", ""),
+                "Aksje":         _h.get("navn", ""),
+                "Antall":        _h.get("antall", ""),
+                "Kurs (kr)":     round(_h["kurs"], 2)     if "kurs"     in _h else None,
+                "Beløp (kr)":    round(_h["beløp"], 0)    if "beløp"    in _h else None,
+                "Kurtasje (kr)": round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
+                "Begrunnelse":   _h.get("begrunnelse", "–"),
             })
 
         st.dataframe(
@@ -822,16 +827,21 @@ with tab_dash:
             use_container_width=True,
             hide_index=True,
             column_config={
-                "Dato":        st.column_config.TextColumn("Dato",        width="medium"),
-                "Handling":    st.column_config.TextColumn("Handling",    width="small"),
-                "Aksje":       st.column_config.TextColumn("Aksje",       width="medium"),
-                "Antall":      st.column_config.NumberColumn("Antall",    width="small"),
-                "Kurs (kr)":   st.column_config.NumberColumn("Kurs",      format="%.2f kr",  width="medium"),
-                "Beløp (kr)":  st.column_config.NumberColumn("Beløp",     format="%,.0f kr", width="medium"),
-                "Begrunnelse": st.column_config.TextColumn("Begrunnelse", width="large"),
+                "Dato":          st.column_config.TextColumn("Dato",         width="medium"),
+                "Handling":      st.column_config.TextColumn("Handling",     width="small"),
+                "Aksje":         st.column_config.TextColumn("Aksje",        width="medium"),
+                "Antall":        st.column_config.NumberColumn("Antall",     width="small"),
+                "Kurs (kr)":     st.column_config.NumberColumn("Kurs",       format="%.2f kr",  width="medium"),
+                "Beløp (kr)":    st.column_config.NumberColumn("Beløp",      format="%,.0f kr", width="medium"),
+                "Kurtasje (kr)": st.column_config.NumberColumn("Kurtasje",   format="%,.0f kr", width="small"),
+                "Begrunnelse":   st.column_config.TextColumn("Begrunnelse",  width="large"),
             },
         )
-        st.caption(f"{len(_filtrert)} handler vises · totalt {len(_historikk)} i loggen")
+        _total_kurtasje = sum(_h.get("kurtasje", 0) for _h in _historikk)
+        st.caption(
+            f"{len(_filtrert)} handler vises · totalt {len(_historikk)} i loggen"
+            + (f" · total kurtasje betalt: **{_total_kurtasje:,.0f} kr**" if _total_kurtasje else "")
+        )
     else:
         st.info("Ingen handelshistorikk ennå. Boten kjører første gang neste hverdag kl 09:15.")
 
@@ -1604,10 +1614,28 @@ with tab7:
             value=int(pf_inn.get("stop_loss_pct", 0.15) * 100),
             help="Posisjoner selges automatisk hvis de faller mer enn dette fra kjøpspris"
         )
-        if st.button("Lagre stop-loss"):
-            pf_inn["stop_loss_pct"] = ny_sl / 100
+
+        st.markdown("**Kurtasje**")
+        _kurt_col1, _kurt_col2 = st.columns(2)
+        ny_kurt_pct = _kurt_col1.number_input(
+            "Kurtasje % per handel", min_value=0.0, max_value=1.0,
+            value=float(pf_inn.get("kurtasje_pct", 0.001)) * 100,
+            step=0.01, format="%.3f",
+            help="Prosent av handelsbeløp. Nordnet: 0.05–0.1%"
+        )
+        ny_kurt_min = _kurt_col2.number_input(
+            "Minimum kurtasje (kr)", min_value=0, max_value=500,
+            value=int(pf_inn.get("kurtasje_min_kr", 99)),
+            step=1,
+            help="Minste kurtasje per handel. Nordnet: 99 kr"
+        )
+
+        if st.button("Lagre innstillinger"):
+            pf_inn["stop_loss_pct"]  = ny_sl / 100
+            pf_inn["kurtasje_pct"]   = ny_kurt_pct / 100
+            pf_inn["kurtasje_min_kr"] = ny_kurt_min
             lagre_portefolje(pf_inn)
-            st.success(f"Stop-loss satt til {ny_sl}%")
+            st.success(f"Lagret — stop-loss {ny_sl}%, kurtasje {ny_kurt_pct:.3f}% min {ny_kurt_min} kr")
             st.rerun()
 
         st.divider()
@@ -1617,7 +1645,9 @@ with tab7:
             lagre_portefolje({
                 "kasse": ny_kasse, "start_kapital": ny_kasse,
                 "posisjoner": {}, "ventende_handler": [], "historikk": [],
-                "stop_loss_pct": ny_sl / 100,
+                "stop_loss_pct":   ny_sl / 100,
+                "kurtasje_pct":    ny_kurt_pct / 100,
+                "kurtasje_min_kr": ny_kurt_min,
             })
             st.session_state.pop("forslag", None)
             st.success("Portefølje nullstilt!")

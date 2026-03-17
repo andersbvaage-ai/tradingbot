@@ -194,7 +194,14 @@ ALLOKERING_PCT    = 0.15   # 15% av kasse per posisjon
 MAKS_ALLOKERING   = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE    = 0      # må slå OSEBX siste 3 mnd
 MIN_ENSEMBLE      = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
-DEFAULT_STOP_LOSS = 0.15   # selg hvis posisjon er ned >15% fra kjøpspris
+DEFAULT_STOP_LOSS  = 0.15   # selg hvis posisjon er ned >15% fra kjøpspris
+KURTASJE_PCT       = 0.001  # 0.1% av handelsbeløp
+KURTASJE_MIN_KR    = 99     # minimum kurtasje per handel (Nordnet-nivå)
+
+def beregn_kurtasje(beløp, pf):
+    pct = pf.get("kurtasje_pct", KURTASJE_PCT)
+    min_kr = pf.get("kurtasje_min_kr", KURTASJE_MIN_KR)
+    return round(max(beløp * pct, min_kr), 0)
 
 REGIME_CONFIG = {
     "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15},
@@ -386,24 +393,26 @@ def kjor_analyse():
             continue
         tap_pct = (kurs / pos["snittpris"] - 1) * 100
         if tap_pct <= -(stop_loss_pct * 100):
-            inntekt     = round(pos["antall"] * kurs, 0)
+            brutto      = round(pos["antall"] * kurs, 0)
+            kurtasje    = beregn_kurtasje(brutto, pf)
+            inntekt     = brutto - kurtasje
             begrunnelse = f"Stop-loss utløst ({tap_pct:.1f}% fra kjøpspris {pos['snittpris']:.2f} kr)"
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
-            topp_tickers.discard(ticker)   # ikke kjøp igjen samme dag
+            topp_tickers.discard(ticker)
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
-                "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
-                "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             print(f"  STOP-LOSS: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
-                  f"({tap_pct:.1f}%) = {inntekt:,.0f} kr")
+                  f"({tap_pct:.1f}%) = {brutto:,.0f} kr (kurtasje {kurtasje:,.0f} kr)")
 
     # ── Selg posisjoner som ikke lenger er blant topp-kandidater ─────────────
     for ticker, pos in list(pf["posisjoner"].items()):
@@ -411,32 +420,39 @@ def kjor_analyse():
             kurs = hent_siste_kurs(ticker)
             if not kurs:
                 continue
-            inntekt     = round(pos["antall"] * kurs, 0)
+            brutto      = round(pos["antall"] * kurs, 0)
+            kurtasje    = beregn_kurtasje(brutto, pf)
+            inntekt     = brutto - kurtasje
             begrunnelse = "Ikke lenger blant topp-kandidater"
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
-                "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
-                "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
-            print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {inntekt:,.0f} kr")
+            print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr "
+                  f"(kurtasje {kurtasje:,.0f} kr)")
 
-    # Kjøp topp-kandidater vi ikke allerede eier
+    # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
     for k in topp:
         if k["ticker"] in pf["posisjoner"]:
-            continue  # Allerede i portefølje
-        beløp  = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
-        antall = int(beløp / k["kurs"])
+            continue
+        beløp    = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
+        kurtasje = beregn_kurtasje(beløp, pf)
+        antall   = int((beløp - kurtasje) / k["kurs"])
         if antall < 1 or beløp > pf["kasse"]:
             continue
         kostnad     = round(antall * k["kurs"], 0)
+        totalt      = kostnad + kurtasje
+        if totalt > pf["kasse"]:
+            continue
         begrunnelse = (f"[{regime}] Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
                        f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
                        f"RSI {k['rsi']:.0f}")
@@ -444,19 +460,20 @@ def kjor_analyse():
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
         }
-        pf["kasse"] -= kostnad
+        pf["kasse"] -= totalt
         pf["historikk"].append({
             "dato": str(datetime.now()), "handling": "KJØP",
             "ticker": k["ticker"], "navn": k["navn"],
             "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
-            "begrunnelse": begrunnelse,
+            "kurtasje": kurtasje, "begrunnelse": begrunnelse,
         })
         utforte.append({
             "handling": "KJØP", "navn": k["navn"], "ticker": k["ticker"],
             "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
-            "begrunnelse": begrunnelse,
+            "kurtasje": kurtasje, "begrunnelse": begrunnelse,
         })
-        print(f"  KJØPT: {antall} × {k['navn']} à {k['kurs']:.2f} kr = {kostnad:,.0f} kr")
+        print(f"  KJØPT: {antall} × {k['navn']} à {k['kurs']:.2f} kr = {kostnad:,.0f} kr "
+              f"(kurtasje {kurtasje:,.0f} kr)")
 
     pf["ventende_handler"] = []
     pf["sist_analysert"]   = str(datetime.now())

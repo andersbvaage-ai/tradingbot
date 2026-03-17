@@ -759,11 +759,37 @@ with tab_dash:
             _fig = go.Figure()
             _fig.add_trace(go.Scatter(
                 x=_df_graf["dato"], y=_df_graf["total_verdi"],
-                mode="lines+markers", name="Porteføljeverdi",
+                mode="lines+markers", name="Portefølje",
                 line=dict(color="#4C8BF5", width=2),
                 marker=dict(size=5),
                 fill="tozeroy", fillcolor=_fyll_farge,
             ))
+
+            # OSEBX benchmark — normaliser til startkapital ved første snapshot-dato
+            _første_dato = _df_graf["dato"].iloc[0]
+            _siste_dato  = _df_graf["dato"].iloc[-1]
+            _osebx_hist  = None
+            for _bm in ["^OSEBX", "^OSEAX", "OSEBX.OL"]:
+                _raw_bm = hent_aksje_historikk(_bm, "2y")
+                if _raw_bm is not None and not _raw_bm.empty:
+                    _osebx_hist = _raw_bm
+                    break
+            if _osebx_hist is not None:
+                _osebx_close = _osebx_hist["Close"].copy()
+                _osebx_close.index = pd.to_datetime(_osebx_close.index).tz_localize(None)
+                _osebx_close = _osebx_close[
+                    (_osebx_close.index >= _første_dato) &
+                    (_osebx_close.index <= _siste_dato + pd.Timedelta(days=1))
+                ]
+                if len(_osebx_close) >= 2:
+                    _bm_start = float(_osebx_close.iloc[0])
+                    _bm_verdi = (_osebx_close / _bm_start) * _start
+                    _fig.add_trace(go.Scatter(
+                        x=_osebx_close.index, y=_bm_verdi,
+                        mode="lines", name="OSEBX (benchmark)",
+                        line=dict(color="#f77f00", width=1.5, dash="dash"),
+                    ))
+
             _fig.add_hline(
                 y=_start, line_dash="dot", line_color="gray",
                 annotation_text=f"Startkapital {_start:,.0f} kr",
@@ -775,7 +801,8 @@ with tab_dash:
                 margin=dict(l=0, r=0, t=10, b=0),
                 xaxis=dict(showgrid=False),
                 yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
-                showlegend=False,
+                legend=dict(orientation="h", yanchor="bottom", y=1.02,
+                            xanchor="right", x=1),
             )
             st.plotly_chart(_fig, use_container_width=True)
         else:

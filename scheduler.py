@@ -195,6 +195,47 @@ MAKS_ALLOKERING   = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE    = 0      # må slå OSEBX siste 3 mnd
 MIN_ENSEMBLE      = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
 DEFAULT_STOP_LOSS  = 0.15   # selg hvis posisjon er ned >15% fra kjøpspris
+MAKS_PER_SEKTOR    = 2      # maks antall posisjoner fra samme sektor
+
+SEKTORER = {
+    "EQNR.OL":"Energi",    "DNB.OL":"Finans",     "MOWI.OL":"Sjømat",    "TEL.OL":"Telekom",
+    "NHY.OL":"Industri",   "ORK.OL":"Forbruker",  "YAR.OL":"Industri",   "AKERBP.OL":"Energi",
+    "SALM.OL":"Sjømat",    "SUBC.OL":"Energi",    "STB.OL":"Finans",     "GJF.OL":"Finans",
+    "SRBANK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
+    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "KAHOT.OL":"Teknologi","AUTO.OL":"Teknologi",
+    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",     "PGS.OL":"Energi",     "BWO.OL":"Energi",
+    "GOGL.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
+    "AFG.OL":"Industri",   "BOUVET.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
+    "WAWI.OL":"Shipping",  "KIT.OL":"Teknologi",  "TOM.OL":"Industri",   "ELK.OL":"Industri",
+    "VAR.OL":"Energi",     "VEI.OL":"Industri",   "LSG.OL":"Sjømat",     "GSF.OL":"Sjømat",
+    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCHER.OL":"Energi",  "BWE.OL":"Energi",
+    "SDRL.OL":"Energi",    "ODL.OL":"Energi",     "NORECO.OL":"Energi",  "AGAS.OL":"Energi",
+    "EMGS.OL":"Energi",    "REACH.OL":"Energi",   "AMSC.OL":"Shipping",  "ACC.OL":"Fornybar",
+    "AKH.OL":"Industri",   "AKBM.OL":"Sjømat",    "IOX.OL":"Energi",     "PRS.OL":"Energi",
+    "HEX.OL":"Industri",   "DOF.OL":"Energi",     "EIOF.OL":"Energi",    "TECO2.OL":"Fornybar",
+    "FRO.OL":"Shipping",   "BWLPG.OL":"Shipping", "HAUTO.OL":"Shipping", "HAVI.OL":"Shipping",
+    "HUNT.OL":"Shipping",  "SNI.OL":"Shipping",   "SOFF.OL":"Energi",    "SIOFF.OL":"Energi",
+    "2020.OL":"Shipping",  "SOLT.OL":"Shipping",  "WWI.OL":"Shipping",   "WWIB.OL":"Shipping",
+    "OHT.OL":"Shipping",   "NAS.OL":"Transport",  "FJORD.OL":"Transport","BON.OL":"Energi",
+    "MING.OL":"Finans",    "NONG.OL":"Finans",    "SBVG.OL":"Finans",    "SPOL.OL":"Finans",
+    "MORG.OL":"Finans",    "SVEG.OL":"Finans",    "SOR.OL":"Finans",     "PARB.OL":"Finans",
+    "SADG.OL":"Finans",    "PROT.OL":"Finans",    "KOMP.OL":"Finans",    "B2H.OL":"Finans",
+    "ACR.OL":"Finans",     "HELG.OL":"Finans",    "TOTG.OL":"Finans",    "AURG.OL":"Finans",
+    "JAREN.OL":"Finans",   "AUSS.OL":"Sjømat",    "NRS.OL":"Sjømat",     "BAKKA.OL":"Sjømat",
+    "NORDH.OL":"Sjømat",   "PEXIP.OL":"Teknologi","LINK.OL":"Teknologi", "IDEX.OL":"Teknologi",
+    "NEXT.OL":"Teknologi", "INF.OL":"Teknologi",  "SMCRT.OL":"Teknologi","STRONG.OL":"Teknologi",
+    "QFR.OL":"Teknologi",  "TEKNA.OL":"Teknologi","GIG.OL":"Teknologi",  "WSTEP.OL":"Teknologi",
+    "ZAP.OL":"Teknologi",  "THIN.OL":"Teknologi", "KA.OL":"Industri",    "CARA.OL":"Teknologi",
+    "ITERA.OL":"Teknologi","NORBIT.OL":"Teknologi","ENTRA.OL":"Eiendom", "OLT.OL":"Eiendom",
+    "SOLON.OL":"Eiendom",  "NPRO.OL":"Eiendom",   "SBO.OL":"Eiendom",    "XXL.OL":"Forbruker",
+    "KID.OL":"Forbruker",  "EPR.OL":"Forbruker",  "SATS.OL":"Forbruker", "SCHA.OL":"Media",
+    "SCHB.OL":"Media",     "FKRAFT.OL":"Fornybar", "AFK.OL":"Industri",  "MULTI.OL":"Industri",
+    "NOM.OL":"Industri",   "CIRCA.OL":"Industri", "AHG.OL":"Helse",      "AKVA.OL":"Industri",
+    "MPCES.OL":"Fornybar", "CLOUD.OL":"Fornybar", "PHO.OL":"Helse",      "VISTN.OL":"Helse",
+    "MEDI.OL":"Helse",     "NRC.OL":"Industri",   "ULTI.OL":"Helse",     "NNV.OL":"Helse",
+    "HBC.OL":"Industri",   "TRVX.OL":"Helse",     "NUM.OL":"Industri",   "AGLX.OL":"Industri",
+    "SAGA.OL":"Industri",
+}
 KURTASJE_PCT       = 0.001  # 0.1% av handelsbeløp
 KURTASJE_MIN_KR    = 99     # minimum kurtasje per handel (Nordnet-nivå)
 
@@ -367,14 +408,17 @@ def kjor_analyse():
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Regime: {regime} "
           f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos)")
 
-    # Analyser alle aksjer — bruk regime-basert ensemble-krav
-    kandidater = []
+    # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
+    kandidater    = []
+    alle_ensemble = {}   # ticker → ensemble-count for posisjonssjekk
     for navn, ticker in UNIVERS.items():
         print(f"  Analyserer {navn}...")
         try:
             k = analyser_aksje(navn, ticker, osebx_ret3m)
-            if k and k["ensemble"] >= min_ensemble:
-                kandidater.append(k)
+            if k:
+                alle_ensemble[ticker] = k["ensemble"]
+                if k["ensemble"] >= min_ensemble:
+                    kandidater.append(k)
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
 
@@ -414,6 +458,34 @@ def kjor_analyse():
             print(f"  STOP-LOSS: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
                   f"({tap_pct:.1f}%) = {brutto:,.0f} kr (kurtasje {kurtasje:,.0f} kr)")
 
+    # ── Selg posisjoner der alle 3 ensemble-signaler har snudd negativt ──────
+    for ticker, pos in list(pf["posisjoner"].items()):
+        if ticker in topp_tickers:
+            continue   # allerede planlagt å beholde
+        if alle_ensemble.get(ticker, 1) == 0:
+            kurs = hent_siste_kurs(ticker)
+            if not kurs:
+                continue
+            brutto      = round(pos["antall"] * kurs, 0)
+            kurtasje    = beregn_kurtasje(brutto, pf)
+            inntekt     = brutto - kurtasje
+            begrunnelse = "Ensemble snudd (0/3 — Trend, MACD og Momentum alle negative)"
+            del pf["posisjoner"][ticker]
+            pf["kasse"] += inntekt
+            topp_tickers.discard(ticker)
+            pf["historikk"].append({
+                "dato": str(datetime.now()), "handling": "SELG",
+                "ticker": ticker, "navn": pos["navn"],
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+            })
+            utforte.append({
+                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+            })
+            print(f"  ENSEMBLE=0: solgt {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr")
+
     # ── Selg posisjoner som ikke lenger er blant topp-kandidater ─────────────
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker not in topp_tickers:
@@ -441,8 +513,19 @@ def kjor_analyse():
                   f"(kurtasje {kurtasje:,.0f} kr)")
 
     # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
+    # Tell opp nåværende sektoreksponering
+    sektor_teller = {}
+    for ticker in pf["posisjoner"]:
+        s = SEKTORER.get(ticker, "Annet")
+        sektor_teller[s] = sektor_teller.get(s, 0) + 1
+
     for k in topp:
         if k["ticker"] in pf["posisjoner"]:
+            continue
+        # Sektorkap — hopp over hvis sektoren allerede er fullt
+        sektor = SEKTORER.get(k["ticker"], "Annet")
+        if sektor_teller.get(sektor, 0) >= MAKS_PER_SEKTOR:
+            print(f"  SEKTOR-KAP: hopper over {k['navn']} ({sektor} har allerede {sektor_teller[sektor]} pos)")
             continue
         beløp    = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
         kurtasje = beregn_kurtasje(beløp, pf)
@@ -461,6 +544,7 @@ def kjor_analyse():
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
         }
         pf["kasse"] -= totalt
+        sektor_teller[sektor] = sektor_teller.get(sektor, 0) + 1
         pf["historikk"].append({
             "dato": str(datetime.now()), "handling": "KJØP",
             "ticker": k["ticker"], "navn": k["navn"],

@@ -509,6 +509,47 @@ STORE_CAP_TICKERS = {
 
 MID_SMALL_CAP = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
 
+# Sektor per ticker — brukes for spredningsanalyse og sektorkap i bot
+SEKTORER = {
+    "EQNR.OL":"Energi",    "DNB.OL":"Finans",     "MOWI.OL":"Sjømat",    "TEL.OL":"Telekom",
+    "NHY.OL":"Industri",   "ORK.OL":"Forbruker",  "YAR.OL":"Industri",   "AKERBP.OL":"Energi",
+    "SALM.OL":"Sjømat",    "SUBC.OL":"Energi",    "STB.OL":"Finans",     "GJF.OL":"Finans",
+    "SRBANK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
+    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "KAHOT.OL":"Teknologi","AUTO.OL":"Teknologi",
+    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",     "PGS.OL":"Energi",     "BWO.OL":"Energi",
+    "GOGL.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
+    "AFG.OL":"Industri",   "BOUVET.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
+    "WAWI.OL":"Shipping",  "KIT.OL":"Teknologi",  "TOM.OL":"Industri",   "ELK.OL":"Industri",
+    "VAR.OL":"Energi",     "VEI.OL":"Industri",   "LSG.OL":"Sjømat",     "GSF.OL":"Sjømat",
+    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCHER.OL":"Energi",  "BWE.OL":"Energi",
+    "SDRL.OL":"Energi",    "ODL.OL":"Energi",     "NORECO.OL":"Energi",  "AGAS.OL":"Energi",
+    "EMGS.OL":"Energi",    "REACH.OL":"Energi",   "AMSC.OL":"Shipping",  "ACC.OL":"Fornybar",
+    "AKH.OL":"Industri",   "AKBM.OL":"Sjømat",    "IOX.OL":"Energi",     "PRS.OL":"Energi",
+    "HEX.OL":"Industri",   "DOF.OL":"Energi",     "EIOF.OL":"Energi",    "TECO2.OL":"Fornybar",
+    "FRO.OL":"Shipping",   "BWLPG.OL":"Shipping", "HAUTO.OL":"Shipping", "HAVI.OL":"Shipping",
+    "HUNT.OL":"Shipping",  "SNI.OL":"Shipping",   "SOFF.OL":"Energi",    "SIOFF.OL":"Energi",
+    "2020.OL":"Shipping",  "SOLT.OL":"Shipping",  "WWI.OL":"Shipping",   "WWIB.OL":"Shipping",
+    "OHT.OL":"Shipping",   "NAS.OL":"Transport",  "FJORD.OL":"Transport","BON.OL":"Energi",
+    "MING.OL":"Finans",    "NONG.OL":"Finans",    "SBVG.OL":"Finans",    "SPOL.OL":"Finans",
+    "MORG.OL":"Finans",    "SVEG.OL":"Finans",    "SOR.OL":"Finans",     "PARB.OL":"Finans",
+    "SADG.OL":"Finans",    "PROT.OL":"Finans",    "KOMP.OL":"Finans",    "B2H.OL":"Finans",
+    "ACR.OL":"Finans",     "HELG.OL":"Finans",    "TOTG.OL":"Finans",    "AURG.OL":"Finans",
+    "JAREN.OL":"Finans",   "AUSS.OL":"Sjømat",    "NRS.OL":"Sjømat",     "BAKKA.OL":"Sjømat",
+    "NORDH.OL":"Sjømat",   "PEXIP.OL":"Teknologi","LINK.OL":"Teknologi", "IDEX.OL":"Teknologi",
+    "NEXT.OL":"Teknologi", "INF.OL":"Teknologi",  "SMCRT.OL":"Teknologi","STRONG.OL":"Teknologi",
+    "QFR.OL":"Teknologi",  "TEKNA.OL":"Teknologi","GIG.OL":"Teknologi",  "WSTEP.OL":"Teknologi",
+    "ZAP.OL":"Teknologi",  "THIN.OL":"Teknologi", "KA.OL":"Industri",    "CARA.OL":"Teknologi",
+    "ITERA.OL":"Teknologi","NORBIT.OL":"Teknologi","ENTRA.OL":"Eiendom", "OLT.OL":"Eiendom",
+    "SOLON.OL":"Eiendom",  "NPRO.OL":"Eiendom",   "SBO.OL":"Eiendom",    "XXL.OL":"Forbruker",
+    "KID.OL":"Forbruker",  "EPR.OL":"Forbruker",  "SATS.OL":"Forbruker", "SCHA.OL":"Media",
+    "SCHB.OL":"Media",     "FKRAFT.OL":"Fornybar", "AFK.OL":"Industri",  "MULTI.OL":"Industri",
+    "NOM.OL":"Industri",   "CIRCA.OL":"Industri", "AHG.OL":"Helse",      "AKVA.OL":"Industri",
+    "MPCES.OL":"Fornybar", "CLOUD.OL":"Fornybar", "PHO.OL":"Helse",      "VISTN.OL":"Helse",
+    "MEDI.OL":"Helse",     "NRC.OL":"Industri",   "ULTI.OL":"Helse",     "NNV.OL":"Helse",
+    "HBC.OL":"Industri",   "TRVX.OL":"Helse",     "NUM.OL":"Industri",   "AGLX.OL":"Industri",
+    "SAGA.OL":"Industri",
+}
+
 # ── Hjelpefunksjoner ───────────────────────────────────────────────────────────
 @st.cache_data(ttl=3600, show_spinner=False)  # 1 time cache
 def hent_data(ticker, start, slutt):
@@ -768,6 +809,23 @@ with tab_dash:
             st.metric("Beste handel",     f"{_beste:+.1f}%")
             st.metric("Dårligste handel", f"{_dårligste:+.1f}%")
 
+    # ── Risikomål (vises under grafen når nok historikk) ─────────────────────
+    _verdi_hist_sorted = sorted(_pf.get("verdi_historikk", []), key=lambda x: x["dato"])
+    if len(_verdi_hist_sorted) >= 5:
+        _rv = pd.Series([s["total_verdi"] for s in _verdi_hist_sorted])
+        _rets = _rv.pct_change().dropna()
+        _sharpe   = float((_rets.mean() / _rets.std()) * (252 ** 0.5)) if _rets.std() > 0 else 0
+        _vol      = float(_rets.std() * (252 ** 0.5) * 100)
+        _cummax   = _rv.cummax()
+        _max_dd   = float(((_rv - _cummax) / _cummax * 100).min())
+        _rc1, _rc2, _rc3 = st.columns(3)
+        _rc1.metric("Sharpe ratio",   f"{_sharpe:.2f}",
+                    help="Risikojustert avkastning. Over 1.0 er bra, over 2.0 er meget bra.")
+        _rc2.metric("Maks drawdown",  f"{_max_dd:.1f}%",
+                    help="Største fall fra topp til bunn i porteføljeverdien.")
+        _rc3.metric("Volatilitet",    f"{_vol:.1f}%",
+                    help="Annualisert standardavvik for daglig avkastning.")
+
     st.divider()
 
     # ── Åpne posisjoner ───────────────────────────────────────────────────────
@@ -792,6 +850,40 @@ with tab_dash:
         )
     else:
         st.info("Ingen åpne posisjoner for øyeblikket.")
+
+    # ── Sektorspredning ───────────────────────────────────────────────────────
+    if _pos_rader:
+        _sektor_verdi = {}
+        for _ticker, _pos in _posisjoner.items():
+            _sektor = SEKTORER.get(_ticker, "Annet")
+            _kurs_p = next((r["Nåkurs"] for r in _pos_rader if r["Aksje"] == _pos["navn"]), _pos["snittpris"])
+            _sektor_verdi[_sektor] = _sektor_verdi.get(_sektor, 0) + _kurs_p * _pos["antall"]
+
+        _sek_col, _adv_col = st.columns([1, 2])
+        with _sek_col:
+            st.markdown("**Sektorfordeling**")
+            _fig_pie = go.Figure(go.Pie(
+                labels=list(_sektor_verdi.keys()),
+                values=list(_sektor_verdi.values()),
+                hole=0.4,
+                textinfo="label+percent",
+                showlegend=False,
+            ))
+            _fig_pie.update_layout(
+                template="plotly_dark", height=220,
+                margin=dict(l=0, r=0, t=10, b=0),
+            )
+            st.plotly_chart(_fig_pie, use_container_width=True)
+
+        with _adv_col:
+            st.markdown("**Sektorkonsentrasjon**")
+            _sektor_antall = {}
+            for _ticker in _posisjoner:
+                _s = SEKTORER.get(_ticker, "Annet")
+                _sektor_antall[_s] = _sektor_antall.get(_s, 0) + 1
+            for _s, _n in sorted(_sektor_antall.items(), key=lambda x: -x[1]):
+                _advarsel = " ⚠️ Over grense" if _n >= 3 else ""
+                st.caption(f"{_s}: **{_n}** posisjon{'er' if _n > 1 else ''}{_advarsel}")
 
     st.divider()
 

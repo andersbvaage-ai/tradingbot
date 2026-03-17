@@ -1,69 +1,106 @@
 {
-  "kasse": 4000000,
+  "kasse": 1509431.0,
   "start_kapital": 4000000,
-  "posisjoner": {},
-  "ventende_handler": [
-    {
-      "handling": "KJ\u00d8P",
+  "posisjoner": {
+    "EQNR.OL": {
       "navn": "Equinor",
-      "ticker": "EQNR.OL",
-      "kurs": 350.79998779296875,
       "antall": 1710,
-      "bel\u00f8p": 599868.0,
-      "score": 3,
-      "begrunnelse": "Score 3/4 \u00b7 mom 50.1% \u00b7 rel.styrke 53.5% \u00b7 vol\u219148%"
+      "snittpris": 350.70001220703125,
+      "kj\u00f8psdato": "2026-03-17"
     },
-    {
-      "handling": "KJ\u00d8P",
+    "DNB.OL": {
       "navn": "DNB Bank",
-      "ticker": "DNB.OL",
-      "kurs": 290.70001220703125,
-      "antall": 2063,
-      "bel\u00f8p": 599714.0,
-      "score": 2,
-      "begrunnelse": "Score 2/4 \u00b7 mom 7.7% \u00b7 rel.styrke 6.3% \u00b7 vol\u2191-14%"
+      "antall": 1749,
+      "snittpris": 291.6000061035156,
+      "kj\u00f8psdato": "2026-03-17"
     },
-    {
-      "handling": "KJ\u00d8P",
+    "TEL.OL": {
       "navn": "Telenor",
-      "ticker": "TEL.OL",
-      "kurs": 172.6999969482422,
-      "antall": 3474,
-      "bel\u00f8p": 599960.0,
-      "score": 3,
-      "begrunnelse": "Score 3/4 \u00b7 mom 4.2% \u00b7 rel.styrke 20.1% \u00b7 vol\u2191-20%"
+      "antall": 2508,
+      "snittpris": 172.8000030517578,
+      "kj\u00f8psdato": "2026-03-17"
     },
-    {
-      "handling": "KJ\u00d8P",
+    "NHY.OL": {
       "navn": "Norsk Hydro",
-      "ticker": "NHY.OL",
-      "kurs": 92.36000061035156,
-      "antall": 6496,
-      "bel\u00f8p": 599971.0,
-      "score": 4,
-      "begrunnelse": "Score 4/4 \u00b7 mom 36.6% \u00b7 rel.styrke 21.8% \u00b7 vol\u219113%"
+      "antall": 4008,
+      "snittpris": 91.94000244140625,
+      "kj\u00f8psdato": "2026-03-17"
     },
-    {
-      "handling": "KJ\u00d8P",
+    "ORK.OL": {
       "navn": "Orkla",
-      "ticker": "ORK.OL",
-      "kurs": 118.5,
-      "antall": 5063,
-      "bel\u00f8p": 599966.0,
-      "score": 2,
-      "begrunnelse": "Score 2/4 \u00b7 mom 6.5% \u00b7 rel.styrke 7.9% \u00b7 vol\u2191-6%"
+      "antall": 2648,
+      "snittpris": 118.30000305175781,
+      "kj\u00f8psdato": "2026-03-17"
+    },
+    "YAR.OL": {
+      "navn": "Yara International",
+      "antall": 480,
+      "snittpris": 553.5999755859375,
+      "kj\u00f8psdato": "2026-03-17"
+    }
+  },
+  "ventende_handler": [],
+  "historikk": [
+    {
+      "dato": "2026-03-17 10:00:06.376956",
+      "handling": "KJ\u00d8P",
+      "ticker": "EQNR.OL",
+      "navn": "Equinor",
+      "antall": 1710,
+      "kurs": 350.70001220703125,
+      "bel\u00f8p": 599697.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 50.1% \u00b7 rel.styrke 53.4% \u00b7 vol\u219149%"
     },
     {
+      "dato": "2026-03-17 10:00:06.376976",
       "handling": "KJ\u00d8P",
-      "navn": "Yara International",
+      "ticker": "DNB.OL",
+      "navn": "DNB Bank",
+      "antall": 1749,
+      "kurs": 291.6000061035156,
+      "bel\u00f8p": 510008.0,
+      "begrunnelse": "Score 2/4 \u00b7 mom 8.0% \u00b7 rel.styrke 6.6% \u00b7 vol\u2191-14%"
+    },
+    {
+      "dato": "2026-03-17 10:00:06.376985",
+      "handling": "KJ\u00d8P",
+      "ticker": "TEL.OL",
+      "navn": "Telenor",
+      "antall": 2508,
+      "kurs": 172.8000030517578,
+      "bel\u00f8p": 433382.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 4.2% \u00b7 rel.styrke 20.2% \u00b7 vol\u2191-20%"
+    },
+    {
+      "dato": "2026-03-17 10:00:06.376994",
+      "handling": "KJ\u00d8P",
+      "ticker": "NHY.OL",
+      "navn": "Norsk Hydro",
+      "antall": 4008,
+      "kurs": 91.94000244140625,
+      "bel\u00f8p": 368496.0,
+      "begrunnelse": "Score 4/4 \u00b7 mom 36.0% \u00b7 rel.styrke 21.2% \u00b7 vol\u219114%"
+    },
+    {
+      "dato": "2026-03-17 10:00:06.377002",
+      "handling": "KJ\u00d8P",
+      "ticker": "ORK.OL",
+      "navn": "Orkla",
+      "antall": 2648,
+      "kurs": 118.30000305175781,
+      "bel\u00f8p": 313258.0,
+      "begrunnelse": "Score 2/4 \u00b7 mom 6.3% \u00b7 rel.styrke 7.7% \u00b7 vol\u2191-6%"
+    },
+    {
+      "dato": "2026-03-17 10:00:06.377011",
+      "handling": "KJ\u00d8P",
       "ticker": "YAR.OL",
-      "kurs": 551.7999877929688,
-      "antall": 1087,
-      "bel\u00f8p": 599807.0,
-      "score": 3,
-      "begrunnelse": "Score 3/4 \u00b7 mom 48.7% \u00b7 rel.styrke 39.0% \u00b7 vol\u219142%"
+      "navn": "Yara International",
+      "antall": 480,
+      "kurs": 553.5999755859375,
+      "bel\u00f8p": 265728.0,
+      "begrunnelse": "Score 3/4 \u00b7 mom 49.2% \u00b7 rel.styrke 39.4% \u00b7 vol\u219142%"
     }
   ],
-  "historikk": [],
-  "sist_analysert": "2026-03-17 09:10:17.065107"
+  "sist_analysert": "2026-03-17 10:00:06.377019"
 }

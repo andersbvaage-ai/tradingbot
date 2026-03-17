@@ -606,7 +606,7 @@ if _posisjoner:
     c3.metric("Total avkastning",      _avk)
     st.divider()
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest"])
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest", "ℹ️ Info"])
 
 # ─── TAB 1: BACKTEST ──────────────────────────────────────────────────────────
 with tab1:
@@ -1635,3 +1635,156 @@ with tab8:
             with st.expander("Månedlig rebalanseringslogg"):
                 for r in rebalanse_log:
                     st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")
+
+# ─── TAB 9: INFO ──────────────────────────────────────────────────────────────
+with tab9:
+    st.markdown("# Nordic Trading Bot — Strategiguide")
+    st.caption("En oversikt over alle strategier, signaler og beslutningslogikk i boten.")
+
+    # ── Ensemble-systemet ────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🗳️ Ensemble-systemet")
+    st.markdown(
+        "Boten bruker et **ensemble-system** der tre uavhengige strategier stemmer over "
+        "kjøp. Aksjen kjøpes kun dersom **minst 2 av 3 stemmer** er positive — "
+        "i tillegg til at RSI er innenfor et normalt område (30–72).\n\n"
+        "Dette reduserer falske signaler betraktelig sammenlignet med å bruke én indikator alene."
+    )
+    c1, c2, c3 = st.columns(3)
+    c1.info("**Stemme 1 — Trend**\n\nSMA10 > SMA50\n\nKort glidende snitt over langt = aksjen er i opptrendmodus.")
+    c2.info("**Stemme 2 — MACD**\n\nMACD-linje > Signal-linje\n\nMomentum skifter positivt, kjøpstrykk tiltar.")
+    c3.info("**Stemme 3 — Momentum**\n\n6-mnd avkastning > 0 %\n\nAksjen har faktisk steget siste halvår.")
+    st.markdown(
+        "**RSI-filter (ikke en stemme):** RSI må være mellom 30 og 72. "
+        "Dette forhindrer kjøp i ekstremt overkjøpte situasjoner (RSI > 72) "
+        "og i kraftige nedtrender (RSI < 30)."
+    )
+
+    # ── Handelsstrategier (backtesting) ──────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 📈 Handelsstrategier (Backtest-fanen)")
+    st.markdown(
+        "Disse strategiene brukes i **Backtest**, **Sammenlign**, **Optimalisering** og "
+        "**Walk-Forward**. De kjøper og selger basert på tekniske regler, med stop-loss."
+    )
+
+    with st.expander("**SMA + RSI** — Trend med RSI-filter", expanded=True):
+        col1, col2 = st.columns([2, 1])
+        col1.markdown(
+            "**Idé:** Kjøp når den korte glidende gjennomsnittet (SMA10) krysser over det lange (SMA50) "
+            "og RSI er under 60 — altså ikke allerede overkjøpt. Selg når SMA10 krysser under SMA50 "
+            "eller RSI stiger over 70.\n\n"
+            "**Passer for:** Trending markeder med tydelige oppgangs- og nedgangsfaser.\n\n"
+            "**Svakhet:** Gir mange falske signaler i sidelengs markeder."
+        )
+        col2.metric("Parametere", "SMA rask/treg, RSI-periode, Stop-loss")
+
+    with st.expander("**MACD** — Momentumskifte"):
+        col1, col2 = st.columns([2, 1])
+        col1.markdown(
+            "**Idé:** MACD-linjen (EMA12 − EMA26) krysser over signal-linjen (EMA9 av MACD) = kjøp. "
+            "Krysser under = selg. Fanger skifte i momentum tidlig.\n\n"
+            "**Passer for:** Markeder med tydelige trendskifter.\n\n"
+            "**Svakhet:** Etterslep — signalet kommer litt etter toppene og bunnene."
+        )
+        col2.metric("Parametere", "MACD rask/treg, Signal-periode, Stop-loss")
+
+    with st.expander("**Bollinger Bands** — Mean reversion"):
+        col1, col2 = st.columns([2, 1])
+        col1.markdown(
+            "**Idé:** Kjøp når kursen berører det nedre Bollinger-båndet (overskjøtt ned). "
+            "Selg når kursen når det øvre båndet. Basert på at kurs trekkes tilbake mot gjennomsnittet.\n\n"
+            "**Passer for:** Sidelengs markeder og aksjer med stabil handelsrange.\n\n"
+            "**Svakhet:** Dårlig i sterke trending markeder — kan kjøpe midt i en nedtrend."
+        )
+        col2.metric("Parametere", "BB-periode, Standardavvik, Stop-loss")
+
+    with st.expander("**Momentum** — Fortsatt oppgang"):
+        col1, col2 = st.columns([2, 1])
+        col1.markdown(
+            "**Idé:** Kjøp aksjer som allerede har steget mye siste 6 måneder — "
+            "vinnere fortsetter å vinne (momentum-effekten). Hold til momentum snur negativt.\n\n"
+            "**Passer for:** Bull-markeder og aksjer med sterk strukturell vekst.\n\n"
+            "**Svakhet:** Kjøper høyt og kan bli truffet hardt ved brå snuoperasjoner."
+        )
+        col2.metric("Parametere", "Lookback-periode, Min momentum %, Stop-loss")
+
+    # ── Screener-faktorer ─────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🔍 Oslo Børs Screener — Faktorer")
+    st.markdown(
+        "Screener-fanen scanner alle aksjer i universet og gir en score fra 0–4 "
+        "basert på fire klassiske kjøpssignaler."
+    )
+    faktor_data = {
+        "Faktor":       ["SMA10 > SMA50", "RSI 40–65", "MACD > Signal", "Momentum > 0"],
+        "Hva det måler":["Aksjen er i kortsiktig opptrendmodus",
+                         "Ikke overkjøpt eller oversolgt — sunn zone",
+                         "Kjøpstrykk tiltar (MACD krysser signal)",
+                         "Positiv 6-måneders avkastning"],
+        "Signal ved":   ["SMA10 bryter over SMA50",
+                         "RSI mellom 40 og 65",
+                         "MACD-linje over signal-linje",
+                         "6-mnd avkastning > 0 %"],
+    }
+    st.dataframe(pd.DataFrame(faktor_data), use_container_width=True, hide_index=True)
+
+    # ── Oppside-score ─────────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🚀 Oppside-score (Porteføljestyrer)")
+    st.markdown(
+        "I tillegg til den klassiske scoren (0–4) beregnes en **oppside-score** "
+        "som belønner vekstegenskaper. Brukes til å rangere og velge mellom kandidater."
+    )
+    oppside_data = {
+        "Komponent":        ["Relativ styrke vs OSEBX", "Volumøkning", "Nærhet til 52-ukers høy"],
+        "Formel":           ["(aksje 3mnd % − OSEBX 3mnd %) / 10",
+                             "(vol10d / vol50d − 1) × 100 / 50",
+                             "(pris / høy52) / 100"],
+        "Hva det belønner": ["Aksjer som slår indeksen",
+                             "Tiltagende handelsaktivitet",
+                             "Aksjer nær historisk toppnivå — styrke"],
+    }
+    st.dataframe(pd.DataFrame(oppside_data), use_container_width=True, hide_index=True)
+
+    # ── Univers og filtre ─────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🌐 Univers og filtre")
+    col1, col2 = st.columns(2)
+    col1.markdown(
+        "**Handelsunivers — Mid/Small Cap**\n\n"
+        f"Boten handler i **{len(MID_SMALL_CAP)} aksjer** fra Oslo Børs, ekskludert de 15 største "
+        "selskapene (Equinor, DNB, Hydro, Telenor m.fl.). Begrunnelse: store selskaper har lavere "
+        "vekstpotensial og dominerer indeksen — de vil naturlig vinne screener-rangeringen."
+    )
+    col2.markdown(
+        "**Automatisk rebalansering**\n\n"
+        "Boten kjører daglig kl 09:15 (mandag–fredag). Den selger posisjoner som har falt ut av "
+        "topp-listen, og kjøper nye kandidater som oppfyller ensemble-kravet. "
+        "Maks 6 posisjoner, maks 15–20 % av kassen per posisjon."
+    )
+
+    # ── Walk-Forward ─────────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🔄 Walk-Forward Testing")
+    st.markdown(
+        "Walk-Forward er en metode for å teste om en strategi faktisk er robust — "
+        "ikke bare tilpasset historiske data (*overfitting*).\n\n"
+        "**Slik fungerer det:**\n"
+        "1. Del opp historien i overlappende vinduer\n"
+        "2. **Tren** strategien på de første X månedene (in-sample)\n"
+        "3. **Test** på de neste Y månedene du aldri har sett (out-of-sample)\n"
+        "4. Gjenta for hvert vindu fremover i tid\n\n"
+        "Hvis strategien gjør det bra *out-of-sample* over mange vinduer, "
+        "er det et tegn på ekte robusthet. Hvis ikke, er den overfittet."
+    )
+
+    # ── Screener-backtest ─────────────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 📊 Screener-backtest")
+    st.markdown(
+        "Tester screener-strategien historisk: hver måned velges topp N aksjer basert på "
+        "score, porteføljen rebalanseres, og avkastningen sammenlignes mot OSEBX.\n\n"
+        "**Bruksområde:** Finn ut hvilke faktorer (SMA, RSI, MACD, Momentum) som faktisk "
+        "har bidratt til meravkastning historisk, og justér vektingen deretter."
+    )

@@ -461,11 +461,29 @@ def kjor_analyse():
     pf["ventende_handler"] = []
     pf["sist_analysert"]   = str(datetime.now())
     pf["regime"]           = regime
+
+    # ── Daglig snapshot av porteføljeverdi ───────────────────────────────────
+    total_pos_verdi = 0
+    for ticker, pos in pf["posisjoner"].items():
+        kurs = hent_siste_kurs(ticker)
+        if kurs:
+            total_pos_verdi += kurs * pos["antall"]
+    total_verdi = pf["kasse"] + total_pos_verdi
+
+    snapshot = {"dato": str(datetime.now().date()), "total_verdi": round(total_verdi, 0)}
+    historikk_verdi = pf.get("verdi_historikk", [])
+    # Erstatt hvis det allerede finnes en entry for i dag
+    historikk_verdi = [s for s in historikk_verdi if s["dato"] != snapshot["dato"]]
+    historikk_verdi.append(snapshot)
+    historikk_verdi = historikk_verdi[-365:]   # behold maks 1 år
+    pf["verdi_historikk"] = historikk_verdi
+
     lagre_portefolje(pf)
 
     kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])
     selg_antall = len([f for f in utforte if f["handling"] == "SELG"])
-    print(f"Analyse ferdig: {kjop_antall} kjøp utført, {selg_antall} salg utført")
+    print(f"Analyse ferdig: {kjop_antall} kjøp utført, {selg_antall} salg utført "
+          f"— porteføljeverdi {total_verdi:,.0f} kr")
 
     return utforte
 

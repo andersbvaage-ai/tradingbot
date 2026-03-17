@@ -771,17 +771,14 @@ with tab_dash:
     if _dagens:
         for _h in _dagens:
             _ikon = "✅" if _h["handling"] == "KJØP" else "🔴"
-            with st.container(border=True):
-                _c1, _c2 = st.columns([1, 3])
-                _c1.markdown(
-                    f"**{_ikon} {_h['handling']}**\n\n"
-                    f"**{_h['navn']}**\n\n"
-                    f"{_h['antall']} aksjer · {_h.get('kurs', 0):,.2f} kr/aksje\n\n"
-                    f"**Totalt: {_h.get('beløp', 0):,.0f} kr**"
-                )
-                _c2.markdown(f"**Begrunnelse**\n\n{_h.get('begrunnelse', '–')}")
+            st.markdown(
+                f"{_ikon} **{_h['navn']}** — {_h['handling']} {_h['antall']} aksjer "
+                f"à {_h.get('kurs', 0):,.2f} kr = **{_h.get('beløp', 0):,.0f} kr**  \n"
+                f"<small style='color:gray'>{_h.get('begrunnelse', '–')}</small>",
+                unsafe_allow_html=True,
+            )
     else:
-        st.info(f"Ingen handler i dag ({_idag}) — boten kjører neste hverdag kl 09:15.")
+        st.caption(f"Ingen handler i dag ({_idag}) — boten kjører neste hverdag kl 09:15.")
 
     st.divider()
 

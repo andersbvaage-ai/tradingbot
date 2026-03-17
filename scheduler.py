@@ -313,58 +313,72 @@ def kjor_analyse():
     kandidater.sort(key=lambda x: x["score"] + x["oppside_score"], reverse=True)
     topp = kandidater[:MAKS_POSISJONER]
 
-    # Generer forslag
-    forslag   = []
-    nåværende = set(pf["posisjoner"].keys())
+    # Utfør handler automatisk
+    utforte      = []
+    nåværende    = set(pf["posisjoner"].keys())
     topp_tickers = {k["ticker"] for k in topp}
 
-    for k in topp:
-        beløp  = min(kasse * ALLOKERING_PCT, kasse * MAKS_ALLOKERING)
-        antall = int(beløp / k["kurs"])
-        if antall < 1:
-            continue
-        begrunnelse = (f"Score {k['score']}/4 · mom {k['mom']:.1f}% · "
-                       f"rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}%")
-        handling = "HOLD" if k["ticker"] in nåværende else "KJØP"
-        forslag.append({
-            "handling": handling, "navn": k["navn"], "ticker": k["ticker"],
-            "kurs": k["kurs"], "antall": antall,
-            "beløp": round(antall * k["kurs"], 0),
-            "score": k["score"], "begrunnelse": begrunnelse,
-        })
-
-    # Salgsforslag for posisjoner som ikke lenger er topp-kandidater
-    for ticker, pos in pf["posisjoner"].items():
+    # Selg posisjoner som ikke lenger er blant topp-kandidater
+    for ticker, pos in list(pf["posisjoner"].items()):
         if ticker not in topp_tickers:
             kurs = hent_siste_kurs(ticker)
-            if kurs:
-                forslag.append({
-                    "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                    "kurs": kurs, "antall": pos["antall"],
-                    "beløp": round(pos["antall"] * kurs, 0),
-                    "score": 0, "begrunnelse": "Ikke lenger blant topp-kandidater",
-                })
+            if not kurs:
+                continue
+            inntekt     = round(pos["antall"] * kurs, 0)
+            begrunnelse = "Ikke lenger blant topp-kandidater"
+            del pf["posisjoner"][ticker]
+            pf["kasse"] += inntekt
+            pf["historikk"].append({
+                "dato": str(datetime.now()), "handling": "SELG",
+                "ticker": ticker, "navn": pos["navn"],
+                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
+                "begrunnelse": begrunnelse,
+            })
+            utforte.append({
+                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
+                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
+                "begrunnelse": begrunnelse,
+            })
+            print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {inntekt:,.0f} kr")
 
-    # Lagre forslag i portfolio.json
-    pf["ventende_handler"] = forslag
+    # Kjøp topp-kandidater vi ikke allerede eier
+    for k in topp:
+        if k["ticker"] in pf["posisjoner"]:
+            continue  # Allerede i portefølje
+        beløp  = min(pf["kasse"] * ALLOKERING_PCT, pf["kasse"] * MAKS_ALLOKERING)
+        antall = int(beløp / k["kurs"])
+        if antall < 1 or beløp > pf["kasse"]:
+            continue
+        kostnad     = round(antall * k["kurs"], 0)
+        begrunnelse = (f"Score {k['score']}/4 · mom {k['mom']:.1f}% · "
+                       f"rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}%")
+        pf["posisjoner"][k["ticker"]] = {
+            "navn": k["navn"], "antall": antall,
+            "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
+        }
+        pf["kasse"] -= kostnad
+        pf["historikk"].append({
+            "dato": str(datetime.now()), "handling": "KJØP",
+            "ticker": k["ticker"], "navn": k["navn"],
+            "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
+            "begrunnelse": begrunnelse,
+        })
+        utforte.append({
+            "handling": "KJØP", "navn": k["navn"], "ticker": k["ticker"],
+            "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
+            "begrunnelse": begrunnelse,
+        })
+        print(f"  KJØPT: {antall} × {k['navn']} à {k['kurs']:.2f} kr = {kostnad:,.0f} kr")
+
+    pf["ventende_handler"] = []
     pf["sist_analysert"]   = str(datetime.now())
     lagre_portefolje(pf)
 
-    nye = [f for f in forslag if f["handling"] in ("KJØP", "SELG")]
-    print(f"Analyse ferdig: {len([f for f in nye if f['handling']=='KJØP'])} kjøp, "
-          f"{len([f for f in nye if f['handling']=='SELG'])} salg foreslått")
+    kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])
+    selg_antall = len([f for f in utforte if f["handling"] == "SELG"])
+    print(f"Analyse ferdig: {kjop_antall} kjøp utført, {selg_antall} salg utført")
 
-    # Send e-post hvis konfigurert
-    epost_til      = os.environ.get("EPOST_TIL")
-    epost_fra      = os.environ.get("EPOST_FRA")
-    epost_passord  = os.environ.get("EPOST_PASSORD")
-    if epost_til and epost_fra and epost_passord and nye:
-        try:
-            send_epost(nye, epost_til, epost_fra, epost_passord)
-        except Exception as e:
-            print(f"E-post feilet: {e}")
-
-    return forslag
+    return utforte
 
 if __name__ == "__main__":
     kjor_analyse()

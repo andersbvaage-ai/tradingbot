@@ -466,30 +466,30 @@ elif strategi_valg == "Momentum":
     sidebar_params["mom_threshold"] = st.sidebar.slider("Min momentum %",  -10,  20,   0)
 
 # ── Tabs ───────────────────────────────────────────────────────────────────────
-# ── Forsidevisning: ventende forslag ──────────────────────────────────────────
+# ── Forsidevisning: handler utført i dag ──────────────────────────────────────
 _pf_forside = les_portefolje()
-_forslag    = _pf_forside.get("ventende_handler", [])
-_kjop       = [f for f in _forslag if f["handling"] == "KJØP"]
-_selg       = [f for f in _forslag if f["handling"] == "SELG"]
+_idag       = str(datetime.now().date())
+_dagens     = [h for h in _pf_forside.get("historikk", []) if str(h.get("dato", ""))[:10] == _idag]
+_kjop       = [h for h in _dagens if h["handling"] == "KJØP"]
+_selg       = [h for h in _dagens if h["handling"] == "SELG"]
 
 if _kjop or _selg:
     sist = _pf_forside.get("sist_analysert", "")[:16]
-    st.markdown(f"### Dagens handelsforslag  <span style='font-size:0.8em;color:gray'>— analysert {sist}</span>", unsafe_allow_html=True)
+    st.markdown(f"### Dagens handler  <span style='font-size:0.8em;color:gray'>— utført {sist}</span>", unsafe_allow_html=True)
     cols = st.columns(len(_kjop + _selg))
-    for i, f in enumerate(_kjop):
+    for i, h in enumerate(_kjop):
         cols[i].metric(
-            label=f"✅ {f['navn']}",
-            value=f"{f['kurs']:.2f} kr",
-            delta=f"Kjøp {f['antall']} aksjer · {f['beløp']:,.0f} kr"
+            label=f"✅ {h['navn']}",
+            value=f"{h['kurs']:.2f} kr",
+            delta=f"Kjøpt {h['antall']} aksjer · {h['beløp']:,.0f} kr"
         )
-    for i, f in enumerate(_selg):
+    for i, h in enumerate(_selg):
         cols[len(_kjop) + i].metric(
-            label=f"🔴 {f['navn']}",
-            value=f"{f['kurs']:.2f} kr",
-            delta=f"Selg {f['antall']} aksjer · {f['beløp']:,.0f} kr",
+            label=f"🔴 {h['navn']}",
+            value=f"{h['kurs']:.2f} kr",
+            delta=f"Solgt {h['antall']} aksjer · {h['beløp']:,.0f} kr",
             delta_color="inverse"
         )
-    st.caption("Gå til **Porteføljestyrer**-tabben for å godkjenne eller avvise.")
     st.divider()
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest"])
@@ -1238,133 +1238,71 @@ with tab7:
         else:
             vekter = [allokering_pct / 100] * len(topp)
 
-        # Generer forslag
-        forslag = []
-        nåværende = set(pf["posisjoner"].keys())
-
-        for k, vekt in zip(topp, vekter):
-            ticker = k["ticker"]
-            beløp  = kasse * vekt
-            antall = int(beløp / k["kurs"])
-            if antall < 1:
-                continue
-            vekt_tekst = f"{vekt*100:.1f}% av kasse"
-            if ticker in nåværende:
-                forslag.append({
-                    "handling": "HOLD",
-                    "navn": k["navn"], "ticker": ticker,
-                    "kurs": k["kurs"], "antall": antall,
-                    "beløp": round(antall * k["kurs"], 0),
-                    "score": k["score"],
-                    "begrunnelse": f"Score {k['score']}/4 · {vekt_tekst} · allerede i portefølje"
-                })
-            else:
-                forslag.append({
-                    "handling": "KJØP",
-                    "navn": k["navn"], "ticker": ticker,
-                    "kurs": k["kurs"], "antall": antall,
-                    "beløp": round(antall * k["kurs"], 0),
-                    "score": k["score"],
-                    "begrunnelse": f"Score {k['score']}/4 · mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}% · {vekt_tekst}"
-                })
-
-        # Selg det som ikke lenger er blant topp-kandidatene
+        # Utfør handler autonomt
+        utforte      = []
         topp_tickers = {k["ticker"] for k in topp}
-        for ticker, pos in pf["posisjoner"].items():
+
+        # Selg posisjoner som ikke lenger er blant topp-kandidatene
+        for ticker, pos in list(pf["posisjoner"].items()):
             if ticker not in topp_tickers:
                 kurs = hent_siste_kurs(ticker)
                 if kurs:
-                    forslag.append({
-                        "handling": "SELG",
-                        "navn": pos["navn"], "ticker": ticker,
-                        "kurs": kurs, "antall": pos["antall"],
-                        "beløp": round(pos["antall"] * kurs, 0),
-                        "score": 0, "begrunnelse": "Ikke lenger blant topp-kandidater"
-                    })
-
-        st.session_state["forslag"] = forslag
-
-    # ── Vis og godkjenn forslag ───────────────────────────────────────────────
-    # Last forslag fra portfolio.json hvis session ikke har dem
-    if "forslag" not in st.session_state or not st.session_state["forslag"]:
-        pf_aktuell = les_portefolje()
-        if pf_aktuell.get("ventende_handler"):
-            st.session_state["forslag"] = pf_aktuell["ventende_handler"]
-            if pf_aktuell.get("sist_analysert"):
-                st.caption(f"Sist analysert: {pf_aktuell['sist_analysert'][:16]}")
-
-    if "forslag" in st.session_state and st.session_state["forslag"]:
-        forslag = st.session_state["forslag"]
-
-        kjop  = [f for f in forslag if f["handling"] == "KJØP"]
-        selg  = [f for f in forslag if f["handling"] == "SELG"]
-        hold  = [f for f in forslag if f["handling"] == "HOLD"]
-
-        if kjop:
-            st.markdown("#### Kjøpsforslag")
-            for f in kjop:
-                col1, col2, col3 = st.columns([3, 1, 1])
-                col1.markdown(f"**{f['navn']}** ({f['ticker']})  \n"
-                              f"Kurs: {f['kurs']:.2f} kr · {f['antall']} aksjer · "
-                              f"**{f['beløp']:,.0f} kr** · {f['begrunnelse']}")
-                if col2.button("✅ Godkjenn", key=f"kjop_{f['ticker']}"):
-                    pf = les_portefolje()
-                    pris = hent_siste_kurs(f["ticker"]) or f["kurs"]
-                    kostnad = pris * f["antall"]
-                    if kostnad <= pf["kasse"]:
-                        if f["ticker"] in pf["posisjoner"]:
-                            pos = pf["posisjoner"][f["ticker"]]
-                            total = pos["antall"] * pos["snittpris"] + kostnad
-                            pos["antall"]   += f["antall"]
-                            pos["snittpris"] = total / pos["antall"]
-                        else:
-                            pf["posisjoner"][f["ticker"]] = {
-                                "navn": f["navn"], "antall": f["antall"],
-                                "snittpris": pris, "kjøpsdato": str(datetime.now().date())
-                            }
-                        pf["kasse"] -= kostnad
-                        pf["historikk"].append({
-                            "dato": str(datetime.now()), "handling": "KJØP",
-                            "ticker": f["ticker"], "navn": f["navn"],
-                            "antall": f["antall"], "kurs": pris, "beløp": kostnad
-                        })
-                        if "start_kapital" not in pf:
-                            pf["start_kapital"] = pf["kasse"] + kostnad
-                        lagre_portefolje(pf)
-                        st.success(f"Kjøpt {f['antall']} × {f['navn']} for {kostnad:,.0f} kr")
-                        st.rerun()
-                    else:
-                        st.error(f"Ikke nok kasse ({pf['kasse']:,.0f} kr)")
-                col3.button("❌ Avvis", key=f"avvis_kjop_{f['ticker']}")
-
-        if selg:
-            st.markdown("#### Salgsforslag")
-            for f in selg:
-                col1, col2, col3 = st.columns([3, 1, 1])
-                col1.markdown(f"**{f['navn']}** ({f['ticker']})  \n"
-                              f"Kurs: {f['kurs']:.2f} kr · {f['antall']} aksjer · "
-                              f"**{f['beløp']:,.0f} kr** · {f['begrunnelse']}")
-                if col2.button("✅ Godkjenn", key=f"selg_{f['ticker']}"):
-                    pf = les_portefolje()
-                    pris    = hent_siste_kurs(f["ticker"]) or f["kurs"]
-                    inntekt = pris * f["antall"]
-                    if f["ticker"] in pf["posisjoner"]:
-                        del pf["posisjoner"][f["ticker"]]
+                    inntekt = round(pos["antall"] * kurs, 0)
+                    del pf["posisjoner"][ticker]
                     pf["kasse"] += inntekt
                     pf["historikk"].append({
                         "dato": str(datetime.now()), "handling": "SELG",
-                        "ticker": f["ticker"], "navn": f["navn"],
-                        "antall": f["antall"], "kurs": pris, "beløp": inntekt
+                        "ticker": ticker, "navn": pos["navn"],
+                        "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
+                        "begrunnelse": "Ikke lenger blant topp-kandidater",
                     })
-                    lagre_portefolje(pf)
-                    st.success(f"Solgt {f['antall']} × {f['navn']} for {inntekt:,.0f} kr")
-                    st.rerun()
-                col3.button("❌ Avvis", key=f"avvis_selg_{f['ticker']}")
+                    utforte.append({"handling": "SELG", "navn": pos["navn"], "beløp": inntekt})
 
-        if hold:
-            with st.expander(f"HOLD ({len(hold)} posisjoner beholder vi)"):
-                for f in hold:
-                    st.markdown(f"**{f['navn']}** — {f['begrunnelse']}")
+        # Kjøp topp-kandidater vi ikke allerede eier
+        for k, vekt in zip(topp, vekter):
+            if k["ticker"] in pf["posisjoner"]:
+                continue
+            beløp  = pf["kasse"] * vekt
+            antall = int(beløp / k["kurs"])
+            if antall < 1 or beløp > pf["kasse"]:
+                continue
+            kostnad     = round(antall * k["kurs"], 0)
+            begrunnelse = (f"Score {k['score']}/4 · mom {k['mom']:.1f}% · "
+                           f"rel.styrke {k['rel_styrke']:.1f}% · vol↑{k['vol_økning']:.0f}%")
+            pf["posisjoner"][k["ticker"]] = {
+                "navn": k["navn"], "antall": antall,
+                "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
+            }
+            pf["kasse"] -= kostnad
+            pf["historikk"].append({
+                "dato": str(datetime.now()), "handling": "KJØP",
+                "ticker": k["ticker"], "navn": k["navn"],
+                "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
+                "begrunnelse": begrunnelse,
+            })
+            utforte.append({"handling": "KJØP", "navn": k["navn"], "beløp": kostnad})
+
+        pf["ventende_handler"] = []
+        pf["sist_analysert"]   = str(datetime.now())
+        lagre_portefolje(pf)
+        st.session_state.pop("forslag", None)
+
+        kjop_ant = len([u for u in utforte if u["handling"] == "KJØP"])
+        selg_ant = len([u for u in utforte if u["handling"] == "SELG"])
+        st.success(f"Ferdig! {kjop_ant} kjøp og {selg_ant} salg utført automatisk.")
+
+    # ── Dagens utførte handler ────────────────────────────────────────────────
+    pf_ny   = les_portefolje()
+    idag    = str(datetime.now().date())
+    dagens  = [h for h in pf_ny.get("historikk", []) if str(h.get("dato", ""))[:10] == idag]
+    if dagens:
+        st.markdown("#### Handler utført i dag")
+        for h in dagens:
+            ikon = "✅" if h["handling"] == "KJØP" else "🔴"
+            st.markdown(f"{ikon} **{h['navn']}** ({h['ticker']}) — "
+                        f"{h['handling']} {h['antall']} aksjer à {h['kurs']:.2f} kr "
+                        f"= **{h['beløp']:,.0f} kr**  \n"
+                        f"_{h.get('begrunnelse', '')}_")
 
     # ── Handelshistorikk ──────────────────────────────────────────────────────
     pf = les_portefolje()

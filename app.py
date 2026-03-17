@@ -636,25 +636,28 @@ with tab_dash:
     _start       = _pf.get("start_kapital", _kasse)
     _historikk   = _pf.get("historikk", [])
 
-    _total_verdi = _kasse
-    _pos_rader   = []
+    _stop_loss_pct = _pf.get("stop_loss_pct", 0.15)
+    _total_verdi   = _kasse
+    _pos_rader     = []
     for _ticker, _pos in _posisjoner.items():
         _kurs = hent_siste_kurs(_ticker)
         if _kurs:
             _verdi       = _kurs * _pos["antall"]
             _gevinst     = _verdi - _pos["antall"] * _pos["snittpris"]
             _gevinst_pct = (_kurs / _pos["snittpris"] - 1) * 100
+            _sl_kurs     = round(_pos["snittpris"] * (1 - _stop_loss_pct), 2)
+            _sl_avstand  = round((_kurs / _sl_kurs - 1) * 100, 1)
             _total_verdi += _verdi
             _pos_rader.append({
-                "Aksje":       _pos["navn"],
-                "Ticker":      _ticker,
-                "Kjøpsdato":   _pos.get("kjøpsdato", "–"),
-                "Antall":      _pos["antall"],
-                "Snittpris":   round(_pos["snittpris"], 2),
-                "Nåkurs":      round(_kurs, 2),
-                "Verdi (kr)":  round(_verdi, 0),
-                "Gevinst (kr)": round(_gevinst, 0),
-                "Avkastning %": round(_gevinst_pct, 1),
+                "Aksje":          _pos["navn"],
+                "Kjøpsdato":      _pos.get("kjøpsdato", "–"),
+                "Antall":         _pos["antall"],
+                "Snittpris":      round(_pos["snittpris"], 2),
+                "Nåkurs":         round(_kurs, 2),
+                "Avkastning %":   round(_gevinst_pct, 1),
+                "Verdi (kr)":     round(_verdi, 0),
+                "SL-kurs":        _sl_kurs,
+                "Avstand til SL": _sl_avstand,
             })
 
     _avk_pct = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
@@ -680,11 +683,14 @@ with tab_dash:
             use_container_width=True,
             hide_index=True,
             column_config={
-                "Snittpris":    st.column_config.NumberColumn("Snittpris",    format="%.2f kr"),
-                "Nåkurs":       st.column_config.NumberColumn("Nåkurs",       format="%.2f kr"),
-                "Verdi (kr)":   st.column_config.NumberColumn("Verdi",        format="%,.0f kr"),
-                "Gevinst (kr)": st.column_config.NumberColumn("Gevinst",      format="%+,.0f kr"),
-                "Avkastning %": st.column_config.NumberColumn("Avkastning %", format="%+.1f%%"),
+                "Snittpris":      st.column_config.NumberColumn("Snittpris",      format="%.2f kr"),
+                "Nåkurs":         st.column_config.NumberColumn("Nåkurs",         format="%.2f kr"),
+                "Avkastning %":   st.column_config.NumberColumn("Avkastning %",   format="%+.1f%%"),
+                "Verdi (kr)":     st.column_config.NumberColumn("Verdi",          format="%,.0f kr"),
+                "SL-kurs":        st.column_config.NumberColumn(f"SL ({_stop_loss_pct*100:.0f}%)", format="%.2f kr",
+                                    help=f"Selges automatisk hvis kursen faller under dette nivået"),
+                "Avstand til SL": st.column_config.NumberColumn("Avstand til SL", format="%+.1f%%",
+                                    help="Hvor mye kursen kan falle før stop-loss utløses"),
             },
         )
     else:
@@ -1566,11 +1572,28 @@ with tab7:
 
     # ── Nullstill portefølje ──────────────────────────────────────────────────
     with st.expander("Innstillinger"):
-        ny_kasse = st.number_input("Start kapital (kr)", value=int(pf["kasse"]), step=10000)
+        pf_inn = les_portefolje()
+
+        st.markdown("**Stop-loss**")
+        ny_sl = st.slider(
+            "Stop-loss %", min_value=5, max_value=30,
+            value=int(pf_inn.get("stop_loss_pct", 0.15) * 100),
+            help="Posisjoner selges automatisk hvis de faller mer enn dette fra kjøpspris"
+        )
+        if st.button("Lagre stop-loss"):
+            pf_inn["stop_loss_pct"] = ny_sl / 100
+            lagre_portefolje(pf_inn)
+            st.success(f"Stop-loss satt til {ny_sl}%")
+            st.rerun()
+
+        st.divider()
+        st.markdown("**Nullstill portefølje**")
+        ny_kasse = st.number_input("Start kapital (kr)", value=int(pf_inn["kasse"]), step=10000)
         if st.button("Nullstill portefølje"):
             lagre_portefolje({
                 "kasse": ny_kasse, "start_kapital": ny_kasse,
-                "posisjoner": {}, "ventende_handler": [], "historikk": []
+                "posisjoner": {}, "ventende_handler": [], "historikk": [],
+                "stop_loss_pct": ny_sl / 100,
             })
             st.session_state.pop("forslag", None)
             st.success("Portefølje nullstilt!")

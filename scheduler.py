@@ -189,11 +189,12 @@ STORE_CAP_TICKERS = {
 # Univers boten handler i — kun mid/small cap
 UNIVERS = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
 
-MAKS_POSISJONER  = 6
-ALLOKERING_PCT   = 0.15   # 15% av kasse per posisjon
-MAKS_ALLOKERING  = 0.20   # aldri mer enn 20% i én aksje
-MIN_REL_STYRKE   = 0      # må slå OSEBX siste 3 mnd
-MIN_ENSEMBLE     = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
+MAKS_POSISJONER   = 6
+ALLOKERING_PCT    = 0.15   # 15% av kasse per posisjon
+MAKS_ALLOKERING   = 0.20   # aldri mer enn 20% i én aksje
+MIN_REL_STYRKE    = 0      # må slå OSEBX siste 3 mnd
+MIN_ENSEMBLE      = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
+DEFAULT_STOP_LOSS = 0.15   # selg hvis posisjon er ned >15% fra kjøpspris
 
 REGIME_CONFIG = {
     "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15},
@@ -374,11 +375,37 @@ def kjor_analyse():
     topp = kandidater[:maks_pos]
 
     # Utfør handler automatisk
-    utforte      = []
-    nåværende    = set(pf["posisjoner"].keys())
-    topp_tickers = {k["ticker"] for k in topp}
+    utforte       = []
+    stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
+    topp_tickers  = {k["ticker"] for k in topp}
 
-    # Selg posisjoner som ikke lenger er blant topp-kandidater
+    # ── Stop-loss: selg posisjoner som har falt for mye fra kjøpspris ────────
+    for ticker, pos in list(pf["posisjoner"].items()):
+        kurs = hent_siste_kurs(ticker)
+        if not kurs:
+            continue
+        tap_pct = (kurs / pos["snittpris"] - 1) * 100
+        if tap_pct <= -(stop_loss_pct * 100):
+            inntekt     = round(pos["antall"] * kurs, 0)
+            begrunnelse = f"Stop-loss utløst ({tap_pct:.1f}% fra kjøpspris {pos['snittpris']:.2f} kr)"
+            del pf["posisjoner"][ticker]
+            pf["kasse"] += inntekt
+            topp_tickers.discard(ticker)   # ikke kjøp igjen samme dag
+            pf["historikk"].append({
+                "dato": str(datetime.now()), "handling": "SELG",
+                "ticker": ticker, "navn": pos["navn"],
+                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
+                "begrunnelse": begrunnelse,
+            })
+            utforte.append({
+                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
+                "antall": pos["antall"], "kurs": kurs, "beløp": inntekt,
+                "begrunnelse": begrunnelse,
+            })
+            print(f"  STOP-LOSS: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
+                  f"({tap_pct:.1f}%) = {inntekt:,.0f} kr")
+
+    # ── Selg posisjoner som ikke lenger er blant topp-kandidater ─────────────
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker not in topp_tickers:
             kurs = hent_siste_kurs(ticker)

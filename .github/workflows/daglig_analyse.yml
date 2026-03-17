@@ -19,9 +19,14 @@ jobs:
           python-version: "3.11"
 
       - name: Installer avhengigheter
-        run: pip install yfinance pandas
+        run: pip install yfinance pandas cryptography
 
       - name: Kjør analyse
+        env:
+          # Nordnet live-trading (valgfritt — sett disse i GitHub Secrets for å aktivere)
+          # Hvis ikke satt, kjøres analysen som vanlig uten live-utførelse
+          NORDNET_API_KEY:  ${{ secrets.NORDNET_API_KEY }}
+          NORDNET_PRIV_KEY: ${{ secrets.NORDNET_PRIV_KEY }}
         run: python scheduler.py
 
       - name: Lagre oppdatert portefølje

@@ -588,5 +588,58 @@ def kjor_analyse():
 
     return utforte
 
+# ── Nordnet live-utførelse ────────────────────────────────────────────────────
+
+def utfør_nordnet_handler(utforte: list) -> None:
+    """
+    Kjør de samme handlene som scheduler bestemte, men nå mot Nordnet API.
+    Kalles kun hvis NORDNET_API_KEY og NORDNET_PRIV_KEY er satt i miljøet.
+
+    Ticker-mapping: yfinance bruker "EQNR.OL" — Nordnet vil ha "EQNR" (uten .OL).
+    """
+    if not (os.environ.get("NORDNET_API_KEY") and os.environ.get("NORDNET_PRIV_KEY")):
+        return  # Nordnet ikke konfigurert — hopp over
+
+    try:
+        from nordnet_client import NordnetClient
+    except ImportError:
+        print("NORDNET: nordnet_client.py ikke funnet — hopper over live-utførelse")
+        return
+
+    if not utforte:
+        print("NORDNET: Ingen handler å utføre")
+        return
+
+    print("\n── Nordnet live-utførelse ──────────────────────────")
+    try:
+        with NordnetClient() as klient:
+            kontoer = klient.hent_kontoer()
+            if not kontoer:
+                print("NORDNET: Ingen kontoer funnet")
+                return
+            konto = kontoer[0]
+            print(f"NORDNET: Bruker konto {konto.get('accno') or konto.get('accid')}")
+
+            for handel in utforte:
+                ticker   = handel["ticker"]          # e.g. "EQNR.OL"
+                symbol   = ticker.replace(".OL", "") # e.g. "EQNR"
+                antall   = handel["antall"]
+                handling = handel["handling"]
+
+                instrument_id = klient.finn_instrument_id(symbol)
+                if not instrument_id:
+                    print(f"NORDNET: Fant ikke instrument for {symbol} — hopper over")
+                    continue
+
+                if handling == "KJØP":
+                    klient.kjøp(konto, instrument_id, antall)
+                elif handling == "SELG":
+                    klient.selg(konto, instrument_id, antall)
+
+    except Exception as e:
+        print(f"NORDNET: Feil under live-utførelse: {e}")
+
+
 if __name__ == "__main__":
-    kjor_analyse()
+    resultat = kjor_analyse()
+    utfør_nordnet_handler(resultat)

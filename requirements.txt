@@ -4,3 +4,4 @@ backtesting
 pandas
 plotly
 requests
+cryptography

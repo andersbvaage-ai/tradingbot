@@ -70,6 +70,7 @@ def _er_markedstid() -> bool:
     from datetime import time as _time
     return _time(9, 0) <= nå.time() <= _time(17, 30)
 
+@st.cache_data(ttl=900, show_spinner=False)   # 15 min cache
 def hent_siste_kurs(ticker):
     """Henter siste kurs. I åpningstiden: ~15 min forsinket live-kurs (1m intraday).
     Utenfor åpningstiden: siste sluttkurs."""
@@ -87,6 +88,18 @@ def hent_siste_kurs(ticker):
             raw.columns = raw.columns.get_level_values(0)
             kurs = float(raw["Close"].iloc[-1])
         return kurs
+    except Exception:
+        return None
+
+@st.cache_data(ttl=3600, show_spinner=False)  # 1 time cache
+def hent_aksje_historikk(ticker, period="1y"):
+    """Laster ned historisk OHLCV-data. Brukes av screener og porteføljestyrer."""
+    try:
+        raw = yf.download(ticker, period=period, progress=False)
+        if raw.empty:
+            return None
+        raw.columns = raw.columns.get_level_values(0)
+        return raw
     except Exception:
         return None
 
@@ -497,7 +510,7 @@ STORE_CAP_TICKERS = {
 MID_SMALL_CAP = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
 
 # ── Hjelpefunksjoner ───────────────────────────────────────────────────────────
-@st.cache_data(show_spinner=False)
+@st.cache_data(ttl=3600, show_spinner=False)  # 1 time cache
 def hent_data(ticker, start, slutt):
     data = yf.download(ticker, start=str(start), end=str(slutt), progress=False)
     if data.empty:
@@ -721,7 +734,16 @@ with tab_dash:
             st.plotly_chart(_fig, use_container_width=True)
         else:
             st.info("Grafen bygges opp etter hvert som boten kjører daglig. "
-                    "Første datapunkt kommer etter neste kjøring (kl 09:15).")
+                    "Trykk **Ta snapshot nå** for å legge til dagens verdi med en gang.")
+
+        if st.button("📸 Ta snapshot nå", help="Lagrer dagens porteføljeverdi i grafen"):
+            _snap = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
+            _vh = [s for s in _pf.get("verdi_historikk", []) if s["dato"] != _idag]
+            _vh.append(_snap)
+            _pf["verdi_historikk"] = _vh[-365:]
+            lagre_portefolje(_pf)
+            st.success(f"Snapshot lagret: {_total_verdi:,.0f} kr ({_idag})")
+            st.rerun()
 
     with _stat_col:
         st.markdown("#### Statistikk")
@@ -1259,12 +1281,10 @@ with tab6:
 
         for i, (navn, ticker) in enumerate(OSLO_BORS.items()):
             try:
-                raw = yf.download(ticker, period="1y", progress=False)
-                time.sleep(0.05)
-                if raw.empty or len(raw) < 60:
+                raw = hent_aksje_historikk(ticker, "1y")
+                if raw is None or len(raw) < 60:
                     prog.progress((i + 1) / len(OSLO_BORS))
                     continue
-                raw.columns = raw.columns.get_level_values(0)
                 ind = beregn_indikatorer(raw["Close"])
                 if ind is None:
                     prog.progress((i + 1) / len(OSLO_BORS))
@@ -1455,9 +1475,8 @@ with tab7:
             # Hent OSEBX én gang før loopen
             osebx_ret3m = 0.0
             try:
-                osebx_raw = yf.download("^OSEBX", period="6mo", progress=False)
-                osebx_raw.columns = osebx_raw.columns.get_level_values(0)
-                if len(osebx_raw) >= 63:
+                osebx_raw = hent_aksje_historikk("^OSEBX", "6mo")
+                if osebx_raw is not None and len(osebx_raw) >= 63:
                     osebx_ret3m = float(osebx_raw["Close"].pct_change(63).iloc[-1] * 100)
             except Exception:
                 pass
@@ -1466,11 +1485,9 @@ with tab7:
             kandidater = []
             for navn, ticker in univers.items():
                 try:
-                    raw = yf.download(ticker, period="1y", progress=False)
-                    time.sleep(0.05)
-                    if raw.empty or len(raw) < 60:
+                    raw = hent_aksje_historikk(ticker, "1y")
+                    if raw is None or len(raw) < 60:
                         continue
-                    raw.columns = raw.columns.get_level_values(0)
                     ind = beregn_indikatorer(raw["Close"], raw["Volume"], osebx_ret3m)
                     if ind is None:
                         continue
@@ -1517,9 +1534,8 @@ with tab7:
             vols    = []
             for k in topp:
                 try:
-                    raw = yf.download(k["ticker"], period="3mo", progress=False)
-                    raw.columns = raw.columns.get_level_values(0)
-                    vol = float(raw["Close"].pct_change().std())
+                    raw = hent_aksje_historikk(k["ticker"], "3mo")
+                    vol = float(raw["Close"].pct_change().std()) if raw is not None else 0.02
                     vols.append(vol)
                 except Exception:
                     vols.append(0.02)

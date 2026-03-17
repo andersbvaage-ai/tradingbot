@@ -1,5 +1,5 @@
 {
-  "kasse": 1508331.0,
+  "kasse": 2170941.0,
   "start_kapital": 4000000,
   "posisjoner": {
     "SUBC.OL": {
@@ -20,22 +20,10 @@
       "snittpris": 115.80000305175781,
       "kj\u00f8psdato": "2026-03-17"
     },
-    "NOD.OL": {
-      "navn": "Nordic Semiconductor",
-      "antall": 2346,
-      "snittpris": 157.0,
-      "kj\u00f8psdato": "2026-03-17"
-    },
-    "TGS.OL": {
-      "navn": "TGS",
-      "antall": 2680,
-      "snittpris": 116.80000305175781,
-      "kj\u00f8psdato": "2026-03-17"
-    },
-    "BWO.OL": {
-      "navn": "BW Offshore",
-      "antall": 5250,
-      "snittpris": 50.70000076293945,
+    "NEL.OL": {
+      "navn": "Nel Hydrogen",
+      "antall": 128936,
+      "snittpris": 2.2960000038146973,
       "kj\u00f8psdato": "2026-03-17"
     }
   },
@@ -220,7 +208,54 @@
       "kurs": 50.70000076293945,
       "bel\u00f8p": 266175.0,
       "begrunnelse": "Score 3/4 \u00b7 mom 46.9% \u00b7 rel.styrke 30.1% \u00b7 vol\u2191-38%"
+    },
+    {
+      "dato": "2026-03-17 14:53:11.225409",
+      "handling": "SELG",
+      "ticker": "NOD.OL",
+      "navn": "Nordic Semiconductor",
+      "antall": 2346,
+      "kurs": 159.5,
+      "bel\u00f8p": 374187.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 14:53:11.302592",
+      "handling": "SELG",
+      "ticker": "TGS.OL",
+      "navn": "TGS",
+      "antall": 2680,
+      "kurs": 117.0,
+      "bel\u00f8p": 313560.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 14:53:11.377347",
+      "handling": "SELG",
+      "ticker": "BWO.OL",
+      "navn": "BW Offshore",
+      "antall": 5250,
+      "kurs": 51.599998474121094,
+      "bel\u00f8p": 270900.0,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-17 14:53:11.377392",
+      "handling": "KJ\u00d8P",
+      "ticker": "NEL.OL",
+      "navn": "Nel Hydrogen",
+      "antall": 128936,
+      "kurs": 2.2960000038146973,
+      "bel\u00f8p": 296037.0,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (MACD \u00b7 Mom) \u00b7 mom 8.3% \u00b7 rel.styrke 0.4% \u00b7 RSI 69"
     }
   ],
-  "sist_analysert": "2026-03-17 11:00:43.513446"
+  "sist_analysert": "2026-03-17 14:53:11.377399",
+  "regime": "Sideways",
+  "verdi_historikk": [
+    {
+      "dato": "2026-03-17",
+      "total_verdi": 4024293.0
+    }
+  ]
 }

@@ -466,31 +466,48 @@ elif strategi_valg == "Momentum":
     sidebar_params["mom_threshold"] = st.sidebar.slider("Min momentum %",  -10,  20,   0)
 
 # ── Tabs ───────────────────────────────────────────────────────────────────────
-# ── Forsidevisning: handler utført i dag ──────────────────────────────────────
+# ── Forsidevisning ────────────────────────────────────────────────────────────
 _pf_forside = les_portefolje()
 _idag       = str(datetime.now().date())
 _dagens     = [h for h in _pf_forside.get("historikk", []) if str(h.get("dato", ""))[:10] == _idag]
-_kjop       = [h for h in _dagens if h["handling"] == "KJØP"]
-_selg       = [h for h in _dagens if h["handling"] == "SELG"]
 
-if _kjop or _selg:
+# Dagens handler — liten tekst øverst
+if _dagens:
     sist = _pf_forside.get("sist_analysert", "")[:16]
-    st.markdown(f"### Dagens handler  <span style='font-size:0.8em;color:gray'>— utført {sist}</span>", unsafe_allow_html=True)
-    cols = st.columns(len(_kjop + _selg))
-    for i, h in enumerate(_kjop):
-        cols[i].metric(
-            label=f"✅ {h['navn']}",
-            value=f"{h['kurs']:.2f} kr",
-            delta=f"Kjøpt {h['antall']} aksjer · {h['beløp']:,.0f} kr"
-        )
-    for i, h in enumerate(_selg):
-        cols[len(_kjop) + i].metric(
-            label=f"🔴 {h['navn']}",
-            value=f"{h['kurs']:.2f} kr",
-            delta=f"Solgt {h['antall']} aksjer · {h['beløp']:,.0f} kr",
-            delta_color="inverse"
-        )
+    deler = []
+    for h in _dagens:
+        ikon = "✅" if h["handling"] == "KJØP" else "🔴"
+        deler.append(f"{ikon} {h['handling']} {h['navn']} ({h['antall']} aksjer · {h['beløp']:,.0f} kr)")
+    st.caption(f"**Dagens handler** ({sist}): " + "  |  ".join(deler))
+
+# Nåværende portefølje
+_posisjoner = _pf_forside.get("posisjoner", {})
+_kasse      = _pf_forside.get("kasse", 0)
+_start      = _pf_forside.get("start_kapital", _kasse)
+
+if _posisjoner:
+    st.markdown("### Nåværende portefølje")
+    _pos_cols = st.columns(len(_posisjoner) + 1)
+    _total_verdi = _kasse
+    for i, (ticker, pos) in enumerate(_posisjoner.items()):
+        kurs = hent_siste_kurs(ticker)
+        if kurs:
+            verdi = kurs * pos["antall"]
+            _total_verdi += verdi
+            gevinst_pct = (kurs / pos["snittpris"] - 1) * 100
+            _pos_cols[i].metric(
+                label=pos["navn"],
+                value=f"{verdi:,.0f} kr",
+                delta=f"{gevinst_pct:+.1f}%"
+            )
+    _pos_cols[-1].metric(
+        label="Kasse",
+        value=f"{_kasse:,.0f} kr",
+        delta=f"{(_total_verdi/_start - 1)*100:+.1f}% totalt" if _start else None
+    )
     st.divider()
+elif not _dagens:
+    pass  # Ingen posisjoner og ingen handler i dag — vis ingenting
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest"])
 

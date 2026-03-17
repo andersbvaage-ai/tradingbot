@@ -179,6 +179,16 @@ OSLO_BORS = {
     "Saga Pure":                "SAGA.OL",
 }
 
+# De ~15 største selskapene — ekskluderes fra bot-handel (for høy markedsverdi)
+STORE_CAP_TICKERS = {
+    "EQNR.OL", "DNB.OL", "NHY.OL", "MOWI.OL", "TEL.OL",
+    "YAR.OL",  "KOG.OL", "GJF.OL", "AKERBP.OL", "ORK.OL",
+    "STB.OL",  "VAR.OL", "SALM.OL", "TOM.OL", "LSG.OL",
+}
+
+# Univers boten handler i — kun mid/small cap
+UNIVERS = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
+
 MAKS_POSISJONER  = 6
 ALLOKERING_PCT   = 0.15   # 15% av kasse per posisjon
 MAKS_ALLOKERING  = 0.20   # aldri mer enn 20% i én aksje
@@ -301,7 +311,7 @@ def kjor_analyse():
 
     # Analyser alle aksjer
     kandidater = []
-    for navn, ticker in OSLO_BORS.items():
+    for navn, ticker in UNIVERS.items():
         print(f"  Analyserer {navn}...")
         try:
             k = analyser_aksje(navn, ticker, osebx_ret3m)

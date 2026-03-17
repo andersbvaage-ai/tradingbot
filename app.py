@@ -413,6 +413,27 @@ OSLO_BORS = {
     "Saga Pure":                "SAGA.OL",
 }
 
+# De ~15 største selskapene på Oslo Børs (ekskluderes fra bot-handel)
+STORE_CAP_TICKERS = {
+    "EQNR.OL",   # Equinor       ~400 mrd
+    "DNB.OL",    # DNB Bank      ~250 mrd
+    "NHY.OL",    # Norsk Hydro   ~100 mrd
+    "MOWI.OL",   # Mowi          ~100 mrd
+    "TEL.OL",    # Telenor       ~100 mrd
+    "YAR.OL",    # Yara          ~80 mrd
+    "KOG.OL",    # Kongsberg     ~80 mrd
+    "GJF.OL",    # Gjensidige    ~70 mrd
+    "AKERBP.OL", # Aker BP       ~65 mrd
+    "ORK.OL",    # Orkla         ~60 mrd
+    "STB.OL",    # Storebrand    ~55 mrd
+    "VAR.OL",    # Var Energi    ~50 mrd
+    "SALM.OL",   # SalMar        ~50 mrd
+    "TOM.OL",    # Tomra         ~30 mrd
+    "LSG.OL",    # Lerøy Seafood ~30 mrd
+}
+
+MID_SMALL_CAP = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
+
 # ── Hjelpefunksjoner ───────────────────────────────────────────────────────────
 @st.cache_data(show_spinner=False)
 def hent_data(ticker, start, slutt):
@@ -1169,6 +1190,11 @@ with tab7:
         min_value=-20, max_value=20, value=0,
         help="Vis kun aksjer som har gjort det bedre enn OSEBX siste 3 mnd"
     )
+    kun_mid_small = st.checkbox(
+        "Ekskluder de 15 største selskapene (mid/small cap fokus)",
+        value=True,
+        help="Fjerner Equinor, DNB, Hydro, Telenor m.fl. — samme innstilling som den daglige boten"
+    )
 
     if st.button("Kjør analyse og generer forslag", type="primary"):
         with st.spinner("Scanner Oslo Børs..."):
@@ -1182,8 +1208,9 @@ with tab7:
             except Exception:
                 pass
 
+            univers = MID_SMALL_CAP if kun_mid_small else OSLO_BORS
             kandidater = []
-            for navn, ticker in OSLO_BORS.items():
+            for navn, ticker in univers.items():
                 try:
                     raw = yf.download(ticker, period="1y", progress=False)
                     time.sleep(0.05)

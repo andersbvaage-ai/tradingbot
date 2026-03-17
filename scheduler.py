@@ -237,7 +237,8 @@ SEKTORER = {
     "SAGA.OL":"Industri",
 }
 KURTASJE_PCT       = 0.001  # 0.1% av handelsbeløp
-KURTASJE_MIN_KR    = 99     # minimum kurtasje per handel (Nordnet-nivå)
+KURTASJE_MIN_KR    = 79     # minimum kurtasje per handel (Nordnet)
+MAKS_KURTASJE_RATIO = 0.02  # kurtasje skal ikke overstige 2% av posisjonsstørrelsen
 
 def beregn_kurtasje(beløp, pf):
     pct = pf.get("kurtasje_pct", KURTASJE_PCT)
@@ -529,6 +530,20 @@ def kjor_analyse():
             continue
         beløp    = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
         kurtasje = beregn_kurtasje(beløp, pf)
+
+        # Kurtasje-ratio-sjekk: skaler opp posisjonen hvis kurtasjen er for dyr
+        kurtasje_ratio_maks = pf.get("kurtasje_ratio_maks", MAKS_KURTASJE_RATIO)
+        min_kr = pf.get("kurtasje_min_kr", KURTASJE_MIN_KR)
+        min_beløp = min_kr / kurtasje_ratio_maks          # f.eks. 79/0.02 = 3 950 kr
+        if beløp < min_beløp:
+            # Forsøk å skalere opp til lønnsom posisjonsstørrelse (maks 50% av kasse)
+            beløp    = min(min_beløp, pf["kasse"] * 0.5)
+            kurtasje = beregn_kurtasje(beløp, pf)
+            if kurtasje / beløp > kurtasje_ratio_maks:
+                print(f"  KURTASJE-KAP: hopper over {k['navn']} — "
+                      f"kassen ({pf['kasse']:,.0f} kr) er for liten for lønnsom handel")
+                continue
+
         antall   = int((beløp - kurtasje) / k["kurs"])
         if antall < 1 or beløp > pf["kasse"]:
             continue

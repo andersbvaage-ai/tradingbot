@@ -2,8 +2,18 @@ name: Daglig børsanalyse
 
 on:
   schedule:
-    - cron: "15 8 * * 1-5"   # Kl 09:15 norsk tid (UTC+1 vinter), mandag–fredag
-  workflow_dispatch:           # Kan også kjøres manuelt fra GitHub
+    - cron: "15 8 * * 1-5"   # 09:15 norsk tid — full analyse + kjøp
+    - cron: "30 12 * * 1-5"  # 13:30 norsk tid — kun stop-loss-sjekk
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Kjøringsmodus"
+        required: false
+        default: "full"
+        type: choice
+        options:
+          - full
+          - only-stop-loss
 
 jobs:
   analyser:
@@ -21,13 +31,29 @@ jobs:
       - name: Installer avhengigheter
         run: pip install yfinance pandas cryptography
 
-      - name: Kjør analyse
+      - name: Bestem kjøringsmodus
+        id: modus
+        run: |
+          # Ettermiddagskjøringen (12:30 UTC) bruker --only-stop-loss
+          HOUR=$(date -u +%H)
+          MINUTE=$(date -u +%M)
+          INPUT="${{ github.event.inputs.modus }}"
+          if [ "$INPUT" = "only-stop-loss" ]; then
+            echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
+            echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
+          elif [ "$HOUR" = "12" ]; then
+            echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
+            echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
+          else
+            echo "args=" >> $GITHUB_OUTPUT
+            echo "label=Full analyse" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Kjør analyse (${{ steps.modus.outputs.label }})
         env:
-          # Nordnet live-trading (valgfritt — sett disse i GitHub Secrets for å aktivere)
-          # Hvis ikke satt, kjøres analysen som vanlig uten live-utførelse
           NORDNET_API_KEY:  ${{ secrets.NORDNET_API_KEY }}
           NORDNET_PRIV_KEY: ${{ secrets.NORDNET_PRIV_KEY }}
-        run: python scheduler.py
+        run: python scheduler.py ${{ steps.modus.outputs.args }}
 
       - name: Lagre oppdatert portefølje
         run: |
@@ -36,5 +62,5 @@ jobs:
           git fetch origin main
           git reset --soft origin/main
           git add portfolio.json
-          git diff --staged --quiet || git commit -m "Daglig analyse $(date +'%Y-%m-%d')"
+          git diff --staged --quiet || git commit -m "[${{ steps.modus.outputs.label }}] $(date +'%Y-%m-%d %H:%M')"
           git push

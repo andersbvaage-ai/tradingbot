@@ -687,6 +687,56 @@ def utfør_nordnet_handler(utforte: list) -> None:
         print(f"NORDNET: Feil under live-utførelse: {e}")
 
 
+def sjekk_stop_loss() -> list:
+    """
+    Lettversjon: kun trailing stop-loss + oppdater høyeste_kurs.
+    Ingen univers-scan, ingen nye kjøp. Brukes av ettermiddagskjøringen.
+    """
+    pf            = les_portefolje()
+    stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
+    utforte       = []
+
+    print(f"[{datetime.now().strftime('%H:%M')}] Stop-loss-sjekk — {len(pf['posisjoner'])} posisjoner")
+
+    for ticker, pos in list(pf["posisjoner"].items()):
+        kurs = hent_siste_kurs(ticker)
+        if not kurs:
+            continue
+        høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
+        pf["posisjoner"][ticker]["høyeste_kurs"] = høyeste
+
+        tap_fra_topp = (kurs / høyeste - 1) * 100
+        if tap_fra_topp <= -(stop_loss_pct * 100):
+            brutto      = round(pos["antall"] * kurs, 0)
+            kurtasje    = beregn_kurtasje(brutto, pf)
+            inntekt     = brutto - kurtasje
+            begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
+                           f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
+            del pf["posisjoner"][ticker]
+            pf["kasse"] += inntekt
+            pf["historikk"].append({
+                "dato": str(datetime.now()), "handling": "SELG",
+                "ticker": ticker, "navn": pos["navn"],
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+            })
+            utforte.append({
+                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+            })
+            print(f"  TRAILING SL: solgt {pos['navn']} à {kurs:.2f} kr "
+                  f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr)")
+
+    lagre_portefolje(pf)
+    print(f"Stop-loss-sjekk ferdig: {len(utforte)} salg utført")
+    return utforte
+
+
 if __name__ == "__main__":
-    resultat = kjor_analyse()
+    import sys
+    if "--only-stop-loss" in sys.argv:
+        resultat = sjekk_stop_loss()
+    else:
+        resultat = kjor_analyse()
     utfør_nordnet_handler(resultat)

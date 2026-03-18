@@ -710,9 +710,11 @@ with tab_dash:
             for _k in _topp_kand[:5]:
                 _eier = _k["ticker"] in _pf.get("posisjoner", {})
                 _eid_tekst = " · **eier**" if _eier else ""
+                _pe_tekst = f" · P/E {_k['pe']:.0f}" if _k.get("pe") else ""
+                _pb_tekst = f" · P/B {_k['pb']:.1f}" if _k.get("pb") else ""
                 st.markdown(
                     f"**{_k['navn']}** &nbsp; `{_k['ensemble']}/3` &nbsp; "
-                    f"mom {_k['mom']:+.1f}% · RSI {int(_k['rsi'])}{_eid_tekst}",
+                    f"mom {_k['mom']:+.1f}% · RSI {int(_k['rsi'])}{_pe_tekst}{_pb_tekst}{_eid_tekst}",
                     unsafe_allow_html=True,
                 )
         else:

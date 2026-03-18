@@ -702,8 +702,9 @@ with tab_dash:
                 "Avstand til SL": _sl_avstand,
             })
 
-    _avk_pct = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
-    _avk_kr  = _total_verdi - _start
+    _pos_verdi = _total_verdi - _kasse   # verdi kun i aksjer
+    _avk_pct   = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
+    _avk_kr    = _total_verdi - _start
 
     # Statistikk over lukkede handler
     _kjøp_map = {}
@@ -722,10 +723,10 @@ with tab_dash:
 
     # ── Rad 1: Nøkkeltall ─────────────────────────────────────────────────────
     _cm1, _cm2, _cm3, _cm4, _cm5 = st.columns(5)
-    _cm1.metric("Porteføljeverdi",    f"{_total_verdi:,.0f} kr",
+    _cm1.metric("Aksjer (verdi)",     f"{_pos_verdi:,.0f} kr")
+    _cm2.metric("Cash",               f"{_kasse:,.0f} kr")
+    _cm3.metric("Total avkastning",   f"{_avk_pct:+.1f}%" if _start > 0 else "–",
                 delta=f"{_avk_kr:+,.0f} kr" if _start > 0 else None)
-    _cm2.metric("Kasse",              f"{_kasse:,.0f} kr")
-    _cm3.metric("Total avkastning",   f"{_avk_pct:+.1f}%" if _start > 0 else "–")
     _cm4.metric("Åpne posisjoner",    len(_posisjoner))
     _cm5.metric("Utførte handler",    _ant_kjøp + _ant_salg)
 

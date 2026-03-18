@@ -671,7 +671,7 @@ with tab_dash:
     # ── Statuslinje ───────────────────────────────────────────────────────────
     _regime = _pf.get("regime", "Sideways")
     _rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
-    _sist   = _pf.get("sist_analysert", "")[:16].replace("T", " ")
+    _sist   = (_pf.get("sist_analysert") or "")[:16].replace("T", " ")
     _kurs_status = "🟢 Markedet åpent (~15 min forsinket)" if _er_markedstid() else "⚫ Markedet stengt (sluttkurs)"
     st.caption(
         f"{_rcfg['ikon']} Regime: **{_regime}**"

@@ -245,6 +245,31 @@ KURTASJE_MODELLER = {
 }
 KURTASJE_STANDARD = "Mini"  # Standard-modell
 
+def hent_fundamentals(ticker):
+    """Henter P/E og P/B fra yfinance. Returnerer dict — felt er None hvis ukjent."""
+    try:
+        info = yf.Ticker(ticker).info
+        pe = info.get("trailingPE") or info.get("forwardPE")
+        pb = info.get("priceToBook")
+        return {"pe": pe, "pb": pb}
+    except Exception:
+        return {"pe": None, "pb": None}
+
+def fundamental_ok(fund):
+    """
+    Sjekk om fundamentale er akseptable. None = data ikke tilgjengelig = pass through.
+    Returnerer (True/False, grunn-tekst).
+    """
+    pe = fund.get("pe")
+    pb = fund.get("pb")
+    if pe is not None and pe < 0:
+        return False, f"Negativ P/E ({pe:.1f}) — taper penger"
+    if pe is not None and pe > 60:
+        return False, f"P/E for høy ({pe:.1f} > 60)"
+    if pb is not None and pb > 15:
+        return False, f"P/B for høy ({pb:.1f} > 15)"
+    return True, ""
+
 def beregn_kurtasje(beløp, pf):
     modell_navn = pf.get("kurtasje_modell", KURTASJE_STANDARD)
     modell      = KURTASJE_MODELLER.get(modell_navn, KURTASJE_MODELLER[KURTASJE_STANDARD])
@@ -538,6 +563,23 @@ def kjor_analyse():
                   f"(kurtasje {kurtasje:,.0f} kr)")
 
     # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
+    # Hent fundamentals for topp-kandidater (kun disse — sparer tid vs alle ~150 tickers)
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter fundamentals for {len(topp)} topp-kandidater...")
+    topp_med_fund = []
+    for k in topp:
+        if k["ticker"] in pf["posisjoner"]:
+            topp_med_fund.append(k)   # allerede eid — ikke filtrer ut
+            continue
+        fund = hent_fundamentals(k["ticker"])
+        ok, grunn = fundamental_ok(fund)
+        if not ok:
+            print(f"  FUNDAMENTAL-FILTER: hopper over {k['navn']} — {grunn}")
+            continue
+        k["pe"] = fund["pe"]
+        k["pb"] = fund["pb"]
+        topp_med_fund.append(k)
+    topp = topp_med_fund
+
     # Tell opp nåværende sektoreksponering
     sektor_teller = {}
     for ticker in pf["posisjoner"]:
@@ -556,7 +598,9 @@ def kjor_analyse():
         vol_60d    = k.get("vol_60d", TARGET_VOL)
         vol_faktor = TARGET_VOL / vol_60d if vol_60d > 0 else 1.0
         vol_faktor = max(0.5, min(2.0, vol_faktor))   # clamp til [50%, 200%]
-        beløp    = min(pf["kasse"] * allok * vol_faktor, pf["kasse"] * MAKS_ALLOKERING)
+        # Ensemble-boost: 3/3 signaler = høyere konfidens → 15% større posisjon
+        ensemble_boost = 1.15 if k["ensemble"] >= 3 else 1.0
+        beløp    = min(pf["kasse"] * allok * vol_faktor * ensemble_boost, pf["kasse"] * MAKS_ALLOKERING)
         kurtasje = beregn_kurtasje(beløp, pf)
 
         # Kurtasje-ratio-sjekk: skaler opp posisjonen hvis kurtasjen er for dyr
@@ -580,9 +624,11 @@ def kjor_analyse():
         totalt      = kostnad + kurtasje
         if totalt > pf["kasse"]:
             continue
+        pe_tekst = f"P/E {k['pe']:.0f}" if k.get("pe") else "P/E –"
+        pb_tekst = f"P/B {k['pb']:.1f}" if k.get("pb") else "P/B –"
         begrunnelse = (f"[{regime}] Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
                        f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
-                       f"RSI {k['rsi']:.0f}")
+                       f"RSI {k['rsi']:.0f} · {pe_tekst} · {pb_tekst}")
         pf["posisjoner"][k["ticker"]] = {
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
@@ -611,15 +657,17 @@ def kjor_analyse():
     # ── Lagre topp-kandidater for visning i Dashboard ────────────────────────
     pf["topp_kandidater"] = [
         {
-            "navn":        k["navn"],
-            "ticker":      k["ticker"],
-            "ensemble":    k["ensemble"],
+            "navn":           k["navn"],
+            "ticker":         k["ticker"],
+            "ensemble":       k["ensemble"],
             "ensemble_tekst": k["ensemble_tekst"],
-            "score":       round(k["score"], 2),
-            "mom":         round(k["mom"], 1),
-            "rel_styrke":  round(k["rel_styrke"], 1),
-            "rsi":         round(k["rsi"], 0),
-            "kurs":        round(k["kurs"], 2),
+            "score":          round(k["score"], 2),
+            "mom":            round(k["mom"], 1),
+            "rel_styrke":     round(k["rel_styrke"], 1),
+            "rsi":            round(k["rsi"], 0),
+            "kurs":           round(k["kurs"], 2),
+            "pe":             round(k["pe"], 1) if k.get("pe") else None,
+            "pb":             round(k["pb"], 2) if k.get("pb") else None,
         }
         for k in kandidater[:8]   # topp 8, uavhengig av om de ble kjøpt
     ]

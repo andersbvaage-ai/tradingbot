@@ -1537,7 +1537,12 @@ with tab_bt:
         col_sb1, col_sb2, col_sb3 = st.columns(3)
         sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n")
         sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score")
-        sb_kommisjon = col_sb3.slider("Kurtasje per handel (%)", 0.0, 1.0, 0.2, key="sb_kom") / 100
+        _sb_kurt_valg = col_sb3.selectbox(
+            "Kurtasjeklasse", ["Mini (0,15% · min 29 kr)", "Normal (0,049% · min 79 kr)"],
+            key="sb_kurt"
+        )
+        sb_kommisjon = 0.0015 if "Mini" in _sb_kurt_valg else 0.00049
+        _sb_kurt_min = 29    if "Mini" in _sb_kurt_valg else 79
 
         if st.button("Kjør screener-backtest", type="primary"):
             from dateutil.relativedelta import relativedelta
@@ -1634,8 +1639,9 @@ with tab_bt:
                             fremtid = df[(df.index > dato) & (df.index <= neste)]
                             if not fremtid.empty:
                                 kurs    = float(fremtid["Close"].iloc[-1])
-                                inntekt = kurs * nåværende_aksjer[navn]["antall"]
-                                ny_kasse += inntekt * (1 - sb_kommisjon)
+                                inntekt  = kurs * nåværende_aksjer[navn]["antall"]
+                                kurt_sb  = max(inntekt * sb_kommisjon, _sb_kurt_min)
+                                ny_kasse += inntekt - kurt_sb
                             del nåværende_aksjer[navn]
 
                     # Kjøp nye
@@ -1646,10 +1652,11 @@ with tab_bt:
                             hist = df[df.index <= dato]
                             if hist.empty:
                                 continue
-                            kurs   = float(hist["Close"].iloc[-1])
-                            antall = int((allok * (1 - sb_kommisjon)) / kurs)
+                            kurs    = float(hist["Close"].iloc[-1])
+                            kurt_sb = max(allok * sb_kommisjon, _sb_kurt_min)
+                            antall  = int((allok - kurt_sb) / kurs)
                             if antall > 0:
-                                kostnad = antall * kurs * (1 + sb_kommisjon)
+                                kostnad = antall * kurs + kurt_sb
                                 if kostnad <= ny_kasse:
                                     nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
                                     ny_kasse -= kostnad

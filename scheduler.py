@@ -753,9 +753,9 @@ def send_varsel(utforte: list, modus: str = "full") -> None:
         linjer.append(f"SL: {h['navn']} — {h['antall']} stk à {h['kurs']:.2f} kr "
                       f"= {h['beløp']:,.0f} kr")
 
-    tittel = f"Trading Bot — {len(kjøp)} kjøp, {len(salg)} salg"
+    tittel = f"Trading Bot - {len(kjøp)} kjøp, {len(salg)} salg"
     if modus == "stop-loss":
-        tittel = f"Trading Bot — Stop-loss: {len(salg)} salg"
+        tittel = f"Trading Bot - Stop-loss: {len(salg)} salg"
 
     try:
         requests.post(

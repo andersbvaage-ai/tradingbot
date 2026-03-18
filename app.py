@@ -726,7 +726,8 @@ with tab_dash:
         if _kurs:
             _verdi       = _kurs * _pos["antall"]
             _gevinst_pct = (_kurs / _pos["snittpris"] - 1) * 100
-            _sl_kurs     = round(_pos["snittpris"] * (1 - _stop_loss_pct), 2)
+            _høyeste     = _pos.get("høyeste_kurs", _pos["snittpris"])
+            _sl_kurs     = round(_høyeste * (1 - _stop_loss_pct), 2)
             _sl_avstand  = round((_kurs / _sl_kurs - 1) * 100, 1)
             _total_verdi += _verdi
             _pos_rader.append({

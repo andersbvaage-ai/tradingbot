@@ -438,17 +438,23 @@ def kjor_analyse():
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     topp_tickers  = {k["ticker"] for k in topp}
 
-    # ── Stop-loss: selg posisjoner som har falt for mye fra kjøpspris ────────
+    # ── Trailing stop-loss: oppdater høyeste kurs, selg ved brudd ────────────
     for ticker, pos in list(pf["posisjoner"].items()):
         kurs = hent_siste_kurs(ticker)
         if not kurs:
             continue
-        tap_pct = (kurs / pos["snittpris"] - 1) * 100
-        if tap_pct <= -(stop_loss_pct * 100):
+        # Oppdater høyeste kurs siden kjøp (trailing-referanse)
+        høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
+        pf["posisjoner"][ticker]["høyeste_kurs"] = høyeste
+
+        # Utløs salg hvis kursen faller mer enn stop_loss_pct fra toppen
+        tap_fra_topp = (kurs / høyeste - 1) * 100
+        if tap_fra_topp <= -(stop_loss_pct * 100):
             brutto      = round(pos["antall"] * kurs, 0)
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje
-            begrunnelse = f"Stop-loss utløst ({tap_pct:.1f}% fra kjøpspris {pos['snittpris']:.2f} kr)"
+            begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
+                           f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             topp_tickers.discard(ticker)
@@ -463,8 +469,9 @@ def kjor_analyse():
                 "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
-            print(f"  STOP-LOSS: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
-                  f"({tap_pct:.1f}%) = {brutto:,.0f} kr (kurtasje {kurtasje:,.0f} kr)")
+            print(f"  TRAILING SL: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
+                  f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr) = {brutto:,.0f} kr "
+                  f"(kurtasje {kurtasje:,.0f} kr)")
 
     # ── Selg posisjoner der alle 3 ensemble-signaler har snudd negativt ──────
     for ticker, pos in list(pf["posisjoner"].items()):
@@ -565,6 +572,7 @@ def kjor_analyse():
         pf["posisjoner"][k["ticker"]] = {
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
+            "høyeste_kurs": k["kurs"],
         }
         pf["kasse"] -= totalt
         sektor_teller[sektor] = sektor_teller.get(sektor, 0) + 1

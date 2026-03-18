@@ -6,21 +6,22 @@
       "navn": "Subsea 7",
       "antall": 15,
       "snittpris": 257.79998779296875,
-      "kj\u00f8psdato": "2026-03-18"
+      "kjøpsdato": "2026-03-18",
+      "høyeste_kurs": 257.79998779296875
     }
   },
   "ventende_handler": [],
   "historikk": [
     {
       "dato": "2026-03-18 09:32:51.327878",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "SUBC.OL",
       "navn": "Subsea 7",
       "antall": 15,
       "kurs": 257.79998779296875,
-      "bel\u00f8p": 3867.0,
+      "beløp": 3867.0,
       "kurtasje": 79,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 32.8% \u00b7 rel.styrke 31.2% \u00b7 RSI 46"
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend · Mom) · mom 32.8% · rel.styrke 31.2% · RSI 46"
     }
   ],
   "sist_analysert": "2026-03-18 09:32:51.327907",

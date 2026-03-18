@@ -209,9 +209,9 @@ def detect_regime(osebx_close):
         return "Sideways"
 
 REGIME_CONFIG = {
-    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15, "ikon": "🟢", "farge": "green"},
-    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12, "ikon": "🟡", "farge": "orange"},
-    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10, "ikon": "🔴", "farge": "red"},
+    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15, "maks_per_sektor": 3, "ikon": "🟢", "farge": "green"},
+    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12, "maks_per_sektor": 2, "ikon": "🟡", "farge": "orange"},
+    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10, "maks_per_sektor": 1, "ikon": "🔴", "farge": "red"},
 }
 
 # ── Strategier ─────────────────────────────────────────────────────────────────
@@ -1571,9 +1571,9 @@ with tab_bt:
             sb_data_slutt = sb_slutt.strftime("%Y-%m-%d")
 
             # Last all historisk data på forhånd
-            with st.spinner("Laster historisk data for alle aksjer..."):
+            with st.spinner("Laster historisk data for mid/small cap-universet..."):
                 all_data = {}
-                for navn, ticker in OSLO_BORS.items():
+                for navn, ticker in MID_SMALL_CAP.items():
                     d = hent_data(ticker, sb_data_start, sb_data_slutt)
                     if d is not None and len(d) > 60:
                         all_data[navn] = (ticker, d)
@@ -1667,7 +1667,18 @@ with tab_bt:
                             continue
 
                     kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
-                    topp      = {k["navn"]: k for k in kandidater[:_maks_pos_sb]}
+                    # Sektor-kap: speiler live-bot (regime-basert maks per sektor)
+                    _maks_sek_sb = REGIME_CONFIG.get(_regime_dato, REGIME_CONFIG["Sideways"])["maks_per_sektor"] if _sb_regime else 99
+                    _sek_teller  = {}
+                    _topp_liste  = []
+                    for _k in kandidater:
+                        _s = SEKTORER.get(_k["ticker"], "Annet")
+                        if _sek_teller.get(_s, 0) < _maks_sek_sb:
+                            _topp_liste.append(_k)
+                            _sek_teller[_s] = _sek_teller.get(_s, 0) + 1
+                        if len(_topp_liste) >= _maks_pos_sb:
+                            break
+                    topp      = {k["navn"]: k for k in _topp_liste}
                     # Hold-sone: behold posisjoner i topp 2×N med ensemble≥1 (speil av live-bot)
                     hold_n    = _maks_pos_sb * 2
                     hold_zone = {

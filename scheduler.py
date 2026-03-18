@@ -245,29 +245,40 @@ KURTASJE_MODELLER = {
 }
 KURTASJE_STANDARD = "Mini"  # Standard-modell
 
+SYKLISKE_SEKTORER = {"Energi", "Shipping"}  # sektorer der utbytte er et kvalitetstegn
+
 def hent_fundamentals(ticker):
-    """Henter P/E og P/B fra yfinance. Returnerer dict — felt er None hvis ukjent."""
+    """Henter P/E, P/B og dividendYield fra yfinance. Returnerer dict — felt er None hvis ukjent."""
     try:
         info = yf.Ticker(ticker).info
-        pe = info.get("trailingPE") or info.get("forwardPE")
-        pb = info.get("priceToBook")
-        return {"pe": pe, "pb": pb}
+        pe    = info.get("trailingPE") or info.get("forwardPE")
+        pb    = info.get("priceToBook")
+        yield_ = info.get("dividendYield")   # f.eks. 0.045 = 4,5%
+        return {"pe": pe, "pb": pb, "yield": yield_}
     except Exception:
-        return {"pe": None, "pb": None}
+        return {"pe": None, "pb": None, "yield": None}
 
-def fundamental_ok(fund):
+def fundamental_ok(fund, sektor=None):
     """
     Sjekk om fundamentale er akseptable. None = data ikke tilgjengelig = pass through.
     Returnerer (True/False, grunn-tekst).
     """
-    pe = fund.get("pe")
-    pb = fund.get("pb")
+    pe     = fund.get("pe")
+    pb     = fund.get("pb")
+    yield_ = fund.get("yield")
+
     if pe is not None and pe < 0:
         return False, f"Negativ P/E ({pe:.1f}) — taper penger"
     if pe is not None and pe > 60:
         return False, f"P/E for høy ({pe:.1f} > 60)"
     if pb is not None and pb > 15:
         return False, f"P/B for høy ({pb:.1f} > 15)"
+
+    # Sykliske sektorer: lønnsomme selskaper uten utbytte er et rødt flagg
+    if sektor in SYKLISKE_SEKTORER:
+        if yield_ is not None and yield_ == 0.0 and pe is not None and pe > 0:
+            return False, f"Ingen utbytte i syklisk sektor ({sektor})"
+
     return True, ""
 
 def beregn_kurtasje(beløp, pf):
@@ -573,7 +584,8 @@ def kjor_analyse():
             topp_med_fund.append(k)   # allerede eid — ikke filtrer ut
             continue
         fund = hent_fundamentals(k["ticker"])
-        ok, grunn = fundamental_ok(fund)
+        sektor = SEKTORER.get(k["ticker"], "Annet")
+        ok, grunn = fundamental_ok(fund, sektor=sektor)
         if not ok:
             print(f"  FUNDAMENTAL-FILTER: hopper over {k['navn']} — {grunn}")
             continue
@@ -670,6 +682,7 @@ def kjor_analyse():
             "kurs":           round(k["kurs"], 2),
             "pe":             round(k["pe"], 1) if k.get("pe") else None,
             "pb":             round(k["pb"], 2) if k.get("pb") else None,
+            "yield":          round(k["yield"] * 100, 1) if k.get("yield") else None,
         }
         for k in kandidater[:8]   # topp 8, uavhengig av om de ble kjøpt
     ]

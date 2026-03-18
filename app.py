@@ -1527,7 +1527,7 @@ with tab_bt:
                         else:
                             st.error("Strategien er overfittet — den fungerer på treningsdata men ikke i virkeligheten.")
 
-    elif _bt_valg in ("Screener-backtest", "Strategi-backtest"):
+    elif _bt_valg == "Screener-backtest":
         st.subheader("Screener-backtest")
         st.caption(
             "Simulerer hva som ville skjedd om boten kjøpte topp-aksjene hver måned og rebalanserte. "
@@ -1777,7 +1777,7 @@ with tab_bt:
                     for r in rebalanse_log:
                         st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")
 
-        st.divider()
+    elif _bt_valg == "Strategi-backtest":
         st.markdown("### Strategi-backtest — Ensemble + Regime + Trailing SL")
         st.caption(
             "Simulerer den nøyaktige live-strategien historisk med ukentlig rebalansering. "

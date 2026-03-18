@@ -481,7 +481,7 @@ def kjor_analyse():
     topp_tickers  = {k["ticker"] for k in topp}
 
     # Hold-sone: behold posisjoner i topp 2×maks_pos med ensemble≥1 (hindrer unødvendig churning)
-    hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 2] if k["ensemble"] >= 1}
+    hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 3] if k["ensemble"] >= 1}
 
     # ── Trailing stop-loss: oppdater høyeste kurs, selg ved brudd ────────────
     for ticker, pos in list(pf["posisjoner"].items()):

@@ -1681,7 +1681,7 @@ with tab_bt:
                             break
                     topp      = {k["navn"]: k for k in _topp_liste}
                     # Hold-sone: behold posisjoner i topp 2×N med ensemble≥1 (speil av live-bot)
-                    hold_n    = _maks_pos_sb * 2
+                    hold_n    = _maks_pos_sb * 3
                     hold_zone = {
                         k["navn"] for k in kandidater[:hold_n]
                         if (_sb_regime and k.get("ensemble", 0) >= max(_min_ens_sb, 1))

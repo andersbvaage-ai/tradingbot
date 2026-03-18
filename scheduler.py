@@ -586,6 +586,22 @@ def kjor_analyse():
     pf["sist_analysert"]   = str(datetime.now())
     pf["regime"]           = regime
 
+    # ── Lagre topp-kandidater for visning i Dashboard ────────────────────────
+    pf["topp_kandidater"] = [
+        {
+            "navn":        k["navn"],
+            "ticker":      k["ticker"],
+            "ensemble":    k["ensemble"],
+            "ensemble_tekst": k["ensemble_tekst"],
+            "score":       round(k["score"], 2),
+            "mom":         round(k["mom"], 1),
+            "rel_styrke":  round(k["rel_styrke"], 1),
+            "rsi":         round(k["rsi"], 0),
+            "kurs":        round(k["kurs"], 2),
+        }
+        for k in kandidater[:8]   # topp 8, uavhengig av om de ble kjøpt
+    ]
+
     # ── Daglig snapshot av porteføljeverdi ───────────────────────────────────
     total_pos_verdi = 0
     for ticker, pos in pf["posisjoner"].items():

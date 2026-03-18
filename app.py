@@ -668,8 +668,8 @@ with tab_dash:
     _start      = _pf.get("start_kapital", _kasse)
     _stop_loss_pct = _pf.get("stop_loss_pct", 0.15)
 
-    # ── Statuslinje ───────────────────────────────────────────────────────────
-    _regime = _pf.get("regime", "Sideways")
+    # ── Statuslinje og regime-beskrivelse ─────────────────────────────────────
+    _regime = _pf.get("regime") or "Sideways"
     _rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
     _sist   = (_pf.get("sist_analysert") or "")[:16].replace("T", " ")
     _kurs_status = "🟢 Markedet åpent (~15 min forsinket)" if _er_markedstid() else "⚫ Markedet stengt (sluttkurs)"
@@ -678,6 +678,45 @@ with tab_dash:
         + (f"  ·  Sist analysert: **{_sist}**" if _sist else "")
         + f"  ·  {_kurs_status}"
     )
+
+    _REGIME_BESKRIVELSE = {
+        "Bull": (
+            "Oslo Børs er i **oppgang** — OSEBX over 200-dagers snitt med positiv 3-måneders trend. "
+            "Boten er i offensiv modus og kjøper opp til **6 posisjoner** med 15% allokering per aksje. "
+            "Fokus på aksjer med sterk momentum, relativ styrke mot OSEBX og volum-bekreftelse."
+        ),
+        "Sideways": (
+            "Oslo Børs er i **nøytralt terreng** — OSEBX nær 200-dagers snitt uten klar retning. "
+            "Boten er i forsiktig modus med maks **4 posisjoner** og 12% allokering. "
+            "Favoriserer aksjer med klare momentum-signaler og lav volatilitet."
+        ),
+        "Bear": (
+            "Oslo Børs er i **nedgang** — OSEBX under 200-dagers snitt med negativ trend. "
+            "Boten er i defensiv modus: maks **2 posisjoner**, 10% allokering, og krever "
+            "alle 3 ensemble-signaler (3/3) for å kjøpe. Kapital bevares primært i cash."
+        ),
+    }
+    _reg_col, _kand_col = st.columns([1, 1])
+    with _reg_col:
+        st.markdown(f"**{_rcfg['ikon']} Markedssituasjon — {_regime}**")
+        st.markdown(_REGIME_BESKRIVELSE.get(_regime, ""))
+
+    _topp_kand = _pf.get("topp_kandidater", [])
+    with _kand_col:
+        if _topp_kand:
+            st.markdown("**Aksjer boten vurderer nå**")
+            for _k in _topp_kand[:5]:
+                _eier = _k["ticker"] in _pf.get("posisjoner", {})
+                _eid_tekst = " · **eier**" if _eier else ""
+                st.markdown(
+                    f"**{_k['navn']}** &nbsp; `{_k['ensemble']}/3` &nbsp; "
+                    f"mom {_k['mom']:+.1f}% · RSI {int(_k['rsi'])}{_eid_tekst}",
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.caption("Ingen kandidatdata ennå — kjør analyse for å se.")
+
+    st.divider()
 
     # ── Hent live kurser og bygg posisjonsdata ────────────────────────────────
     _total_verdi = _kasse

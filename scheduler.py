@@ -442,6 +442,9 @@ def kjor_analyse():
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     topp_tickers  = {k["ticker"] for k in topp}
 
+    # Hold-sone: behold posisjoner i topp 2×maks_pos med ensemble≥1 (hindrer unødvendig churning)
+    hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 2] if k["ensemble"] >= 1}
+
     # ── Trailing stop-loss: oppdater høyeste kurs, selg ved brudd ────────────
     for ticker, pos in list(pf["posisjoner"].items()):
         kurs = hent_siste_kurs(ticker)
@@ -505,8 +508,11 @@ def kjor_analyse():
             })
             print(f"  ENSEMBLE=0: solgt {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr")
 
-    # ── Selg posisjoner som ikke lenger er blant topp-kandidater ─────────────
+    # ── Selg posisjoner som har falt ut av hold-sonen (topp 2×N, ensemble≥1) ──
     for ticker, pos in list(pf["posisjoner"].items()):
+        if ticker in hold_tickers:
+            print(f"  HOLDER: {pos['navn']} — fortsatt i hold-sone (topp {maks_pos * 2})")
+            continue
         if ticker not in topp_tickers:
             kurs = hent_siste_kurs(ticker)
             if not kurs:

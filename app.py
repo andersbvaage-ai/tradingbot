@@ -1534,15 +1534,25 @@ with tab_bt:
             "Tester om screener-logikken faktisk gir meravkastning over tid."
         )
 
+        _sb_modus = st.radio(
+            "Antall aksjer",
+            ["Manuelt", "Regime-basert (live-strategi)"],
+            horizontal=True, key="sb_modus",
+            help="Regime-basert bruker Bull/Sideways/Bear-konfig: 6/4/2 posisjoner og ensemble-krav"
+        )
+
         col_sb1, col_sb2, col_sb3 = st.columns(3)
-        sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n")
-        sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score")
+        sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n",
+                                      disabled=(_sb_modus == "Regime-basert (live-strategi)"))
+        sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score",
+                                      disabled=(_sb_modus == "Regime-basert (live-strategi)"))
         _sb_kurt_valg = col_sb3.selectbox(
             "Kurtasjeklasse", ["Mini (0,15% · min 29 kr)", "Normal (0,049% · min 79 kr)"],
             key="sb_kurt"
         )
-        sb_kommisjon = 0.0015 if "Mini" in _sb_kurt_valg else 0.00049
-        _sb_kurt_min = 29    if "Mini" in _sb_kurt_valg else 79
+        sb_kommisjon  = 0.0015 if "Mini" in _sb_kurt_valg else 0.00049
+        _sb_kurt_min  = 29    if "Mini" in _sb_kurt_valg else 79
+        _sb_regime    = _sb_modus == "Regime-basert (live-strategi)"
 
         if st.button("Kjør screener-backtest", type="primary"):
             from dateutil.relativedelta import relativedelta
@@ -1603,6 +1613,21 @@ with tab_bt:
                 for i, dato in enumerate(datoer[:-1]):
                     neste = datoer[i + 1]
 
+                    # Regime-deteksjon (kun i regime-modus)
+                    _regime_dato  = "Sideways"
+                    _maks_pos_sb  = sb_topp_n
+                    _min_ens_sb   = 0
+                    _osebx_r3m_sb = 0.0
+                    if _sb_regime and osebx_data is not None:
+                        _ox_til_dato = osebx_data["Close"][osebx_data.index <= dato]
+                        if len(_ox_til_dato) >= 10:
+                            _regime_dato = detect_regime(_ox_til_dato)
+                        _rcfg_sb    = REGIME_CONFIG.get(_regime_dato, REGIME_CONFIG["Sideways"])
+                        _maks_pos_sb = _rcfg_sb["maks_pos"]
+                        _min_ens_sb  = _rcfg_sb["min_ensemble"]
+                        if len(_ox_til_dato) >= 63:
+                            _osebx_r3m_sb = float(_ox_til_dato.pct_change(63).iloc[-1] * 100)
+
                     # Score alle aksjer basert på data frem til denne datoen
                     kandidater = []
                     for navn, (ticker, df) in all_data.items():
@@ -1610,17 +1635,29 @@ with tab_bt:
                         if len(historisk) < 60:
                             continue
                         try:
-                            ind = beregn_indikatorer(historisk["Close"])
-                            if ind and ind["score"] >= sb_min_score:
-                                kandidater.append({
-                                    "navn": navn, "ticker": ticker,
-                                    "score": ind["score"], "mom": ind["mom"],
-                                })
+                            ind = beregn_indikatorer(
+                                historisk["Close"],
+                                historisk["Volume"] if "Volume" in historisk else None,
+                                _osebx_r3m_sb,
+                            )
+                            if not ind:
+                                continue
+                            if _sb_regime:
+                                if ind["ensemble"] < _min_ens_sb or not ind["rsi_ok"]:
+                                    continue
+                            else:
+                                if ind["score"] < sb_min_score:
+                                    continue
+                            kandidater.append({
+                                "navn": navn, "ticker": ticker,
+                                "score": ind["score"] + ind["oppside_score"],
+                                "mom": ind["mom"],
+                            })
                         except Exception:
                             continue
 
                     kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
-                    topp = {k["navn"]: k for k in kandidater[:sb_topp_n]}
+                    topp = {k["navn"]: k for k in kandidater[:_maks_pos_sb]}
 
                     # Beregn avkastning for inneværende måned
                     total_verdi = kasse_sb

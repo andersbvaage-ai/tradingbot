@@ -656,7 +656,9 @@ elif strategi_valg == "Momentum":
     sidebar_params["mom_lookback"]  = st.sidebar.slider("Lookback (dager)", 60, 252, 126)
     sidebar_params["mom_threshold"] = st.sidebar.slider("Min momentum %",  -10,  20,   0)
 
-tab_dash, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Dashboard", "Backtest", "Sammenlign aksjer", "Optimalisering", "Portefølje", "Walk-Forward", "Oslo Børs Screener", "Porteføljestyrer", "Screener-backtest", "ℹ️ Info"])
+tab_dash, tab_analyse, tab_bt, tab_pf, tab_info = st.tabs([
+    "Dashboard", "Analyse", "Backtest", "Porteføljestyrer", "ℹ️ Info"
+])
 
 # ─── TAB DASHBOARD ────────────────────────────────────────────────────────────
 with tab_dash:
@@ -1031,103 +1033,109 @@ with tab_dash:
     else:
         st.info("Ingen handelshistorikk ennå. Boten kjører første gang neste hverdag kl 09:15.")
 
-# ─── TAB 1: BACKTEST ──────────────────────────────────────────────────────────
-with tab1:
-    valgt_navn = st.selectbox("Velg aksje", list(TICKERS.keys()))
-    ticker = st.text_input("Ticker", value="EQNR.OL") if TICKERS[valgt_navn] == "CUSTOM" else TICKERS[valgt_navn]
+# ─── TAB ANALYSE ──────────────────────────────────────────────────────────────
+with tab_analyse:
+    st.subheader("Oslo Børs Screener")
+    st.caption("Scanner alle aksjer og viser hvem som har kjøpssignal akkurat nå.")
 
-    if st.button("Kjør backtest", type="primary"):
-        with st.spinner("Henter data..."):
-            data = hent_data(ticker, start_dato, slutt_dato)
-        if data is None:
-            st.error(f"Fant ingen data for {ticker}.")
-        else:
-            strategi_cls = hent_strategi_cls(strategi_valg, stop_loss_pct, sidebar_params)
-            with st.spinner("Kjører backtest..."):
-                bt    = Backtest(data, strategi_cls, cash=kapital, commission=0.002)
-                stats = bt.run()
-            vis_metrikker(stats)
-            vis_charts(stats, data)
-            trades = stats["_trades"]
-            if not trades.empty:
-                st.subheader("Handler")
-                vis_cols = [c for c in ["EntryTime","ExitTime","EntryPrice","ExitPrice","ReturnPct","PnL"] if c in trades.columns]
-                st.dataframe(trades[vis_cols].round(2), use_container_width=True)
-            else:
-                st.info("Ingen avsluttede handler i denne perioden.")
+    col_s1, col_s2 = st.columns([2, 1])
+    with col_s2:
+        min_score = st.slider(
+            "Minimum signalstyrke",
+            min_value=0, max_value=4, value=2,
+            help=(
+                "Antall indikatorer (av 4) som må være positive for at aksjen vises:\n\n"
+                "**0** — vis alle aksjer\n\n"
+                "**1** — minst én indikator positiv\n\n"
+                "**2** — minst to indikatorer positive (anbefalt)\n\n"
+                "**3** — tre av fire indikatorer positive (sterk kandidat)\n\n"
+                "**4** — alle fire indikatorer enige om kjøp (sjelden, men sterkest signal)"
+            )
+        )
+        vis_alle  = st.checkbox("Vis alle (inkl. uten signal)", value=False)
 
-# ─── TAB 2: SAMMENLIGN ────────────────────────────────────────────────────────
-with tab2:
-    valgte = st.multiselect("Velg aksjer å sammenligne", list(ALLE_TICKERS.keys()),
-        default=["Equinor (NO)", "Telenor (NO)", "Hydro (NO)", "Volvo (SE)"])
-
-    if st.button("Sammenlign", type="primary"):
-        strategi_cls = hent_strategi_cls(strategi_valg, stop_loss_pct, sidebar_params)
+    if st.button("Scan Oslo Børs", type="primary"):
         rader = []
         prog  = st.progress(0)
-        for i, navn in enumerate(valgte):
-            data = hent_data(ALLE_TICKERS[navn], start_dato, slutt_dato)
-            if data is None or len(data) < MIN_RADER:
-                continue
-            res = Backtest(data, strategi_cls, cash=kapital, commission=0.002).run()
-            win = res["Win Rate [%]"]
-            rader.append({"Aksje": navn,
-                "Avkastning %": round(res["Return [%]"], 1),
-                "Buy & Hold %": round(res["Buy & Hold Return [%]"], 1),
-                "CAGR %":       round(res["CAGR [%]"], 1),
-                "Sharpe":       round(res["Sharpe Ratio"], 2),
-                "Drawdown %":   round(res["Max. Drawdown [%]"], 1),
-                "Handler":      int(res["# Trades"]),
-                "Win %":        round(win, 1) if not pd.isna(win) else None})
-            prog.progress((i + 1) / len(valgte))
+
+        for i, (navn, ticker) in enumerate(OSLO_BORS.items()):
+            try:
+                raw = hent_aksje_historikk(ticker, "1y")
+                if raw is None or len(raw) < 60:
+                    prog.progress((i + 1) / len(OSLO_BORS))
+                    continue
+                ind = beregn_indikatorer(raw["Close"])
+                if ind is None:
+                    prog.progress((i + 1) / len(OSLO_BORS))
+                    continue
+
+                sma_signal  = ind["sma10"] > ind["sma50"]
+                rsi_signal  = 40 < ind["rsi"] < 65
+                macd_signal = ind["macd_v"] > ind["sig_v"]
+                mom_signal  = ind["mom"] > 0
+
+                if ind["score"] >= 4:   anbefaling = "Sterkt kjøp"
+                elif ind["score"] == 3: anbefaling = "Kjøp"
+                elif ind["score"] == 2: anbefaling = "Nøytral"
+                elif ind["score"] == 1: anbefaling = "Svak"
+                else:                   anbefaling = "Selg / unngå"
+
+                rader.append({
+                    "Aksje":       navn,
+                    "Kurs":        round(ind["pris"], 2),
+                    "SMA10>50":    "✅" if sma_signal  else "❌",
+                    "RSI (40-65)": "✅" if rsi_signal  else "❌",
+                    "MACD":        "✅" if macd_signal else "❌",
+                    "Momentum":    "✅" if mom_signal  else "❌",
+                    "Score":       ind["score"],
+                    "RSI verdi":   round(ind["rsi"], 1),
+                    "Mom 6mnd %":  round(ind["mom"], 1),
+                    "Signal":      anbefaling,
+                    "_score":      ind["score"],
+                })
+            except Exception:
+                pass
+            prog.progress((i + 1) / len(OSLO_BORS))
 
         if rader:
-            df = pd.DataFrame(rader).sort_values("Avkastning %", ascending=False)
-            st.dataframe(df, use_container_width=True)
-            fig = go.Figure()
-            for r in rader:
-                fig.add_trace(go.Bar(name=r["Aksje"],
-                    x=["Strategi", "Buy & Hold"], y=[r["Avkastning %"], r["Buy & Hold %"]]))
-            fig.update_layout(barmode="group", title="Avkastning sammenligning",
-                              template="plotly_dark", height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            df_screen = pd.DataFrame(rader)
+            df_screen = df_screen.sort_values("Score", ascending=False)
 
-# ─── TAB 3: OPTIMALISERING ────────────────────────────────────────────────────
-with tab3:
-    valgt_opt  = st.selectbox("Velg aksje for optimalisering", list(ALLE_TICKERS.keys()))
-    maks_param = st.selectbox("Optimaliser for", ["Sharpe Ratio", "Return [%]", "CAGR [%]"])
+            if not vis_alle:
+                df_screen = df_screen[df_screen["Score"] >= min_score]
 
-    if st.button("Kjør optimalisering", type="primary"):
-        data = hent_data(ALLE_TICKERS[valgt_opt], start_dato, slutt_dato)
-        if data is None:
-            st.error("Fant ingen data.")
-        else:
-            bt = Backtest(data, SmaRsiStrategy, cash=kapital, commission=0.002)
-            with st.spinner("Optimaliserer... (30-60 sekunder)"):
-                stats, heatmap = bt.optimize(
-                    sma_fast=range(5, 35, 5), sma_slow=range(20, 110, 10),
-                    rsi_period=range(10, 22, 2), stop_loss=range(3, 12, 2),
-                    constraint=lambda p: p.sma_fast < p.sma_slow,
-                    maximize=maks_param, return_heatmap=True)
-            best = stats._strategy
-            st.success(f"Beste parametere: SMA {best.sma_fast}/{best.sma_slow} | RSI {best.rsi_period} | Stop-loss {best.stop_loss}%")
-            vis_metrikker(stats)
-            st.subheader("Heatmap: SMA rask vs treg")
-            try:
-                hm = heatmap.groupby(["sma_fast", "sma_slow"]).mean().unstack()
-                fig_hm = go.Figure(go.Heatmap(
-                    z=hm.values, x=hm.columns.get_level_values(1).tolist(),
-                    y=hm.index.tolist(), colorscale="RdYlGn", zmid=0,
-                    text=hm.values.round(2), texttemplate="%{text}",
-                    colorbar=dict(title=maks_param)))
-                fig_hm.update_layout(xaxis_title="SMA treg", yaxis_title="SMA rask",
-                                     template="plotly_dark", height=400)
-                st.plotly_chart(fig_hm, use_container_width=True)
-            except Exception:
-                st.info("Heatmap ikke tilgjengelig.")
+            vis = df_screen.drop(columns=["_score"])
+            st.dataframe(vis, use_container_width=True, hide_index=True)
 
-# ─── TAB 4: PORTEFØLJE ────────────────────────────────────────────────────────
-with tab4:
+            # Oppsummering
+            sterkt = len(df_screen[df_screen["Score"] == 4])
+            kjop   = len(df_screen[df_screen["Score"] == 3])
+            noyt   = len(df_screen[df_screen["Score"] == 2])
+            selg   = len(df_screen[df_screen["Score"] <= 1])
+
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Sterkt kjøp (4/4)", sterkt)
+            c2.metric("Kjøp (3/4)",        kjop)
+            c3.metric("Nøytral (2/4)",     noyt)
+            c4.metric("Svak/Selg (0-1/4)", selg)
+
+            # Bar chart
+            topp = df_screen[df_screen["Score"] >= 3].head(15)
+            if not topp.empty:
+                st.subheader("Sterkeste kjøpssignaler")
+                fig_sc = go.Figure(go.Bar(
+                    x=topp["Aksje"], y=topp["Score"],
+                    marker_color=["#26a69a" if s == 4 else "#66bb6a" for s in topp["Score"]],
+                    text=topp["Signal"], textposition="outside",
+                ))
+                fig_sc.update_layout(
+                    template="plotly_dark", height=350,
+                    yaxis=dict(range=[0, 4.5], title="Signalstyrke"),
+                    margin=dict(t=20, b=0),
+                )
+                st.plotly_chart(fig_sc, use_container_width=True)
+
+    st.divider()
     st.subheader("Porteføljeanalyse")
     st.caption("Tester alle strategier mot alle aksjer og bygger en optimal portefølje.")
 
@@ -1257,271 +1265,760 @@ with tab4:
         else:
             st.warning("Ikke nok gyldige kombinasjoner til å bygge portefølje.")
 
-# ─── TAB 5: WALK-FORWARD ──────────────────────────────────────────────────────
-with tab5:
-    st.subheader("Walk-Forward analyse")
-    st.caption(
-        "Optimaliserer parametere på treningsdata, tester på ukjent data. "
-        "Gir et realistisk bilde av hvordan strategien vil prestere fremover."
+# ─── TAB BACKTEST ─────────────────────────────────────────────────────────────
+with tab_bt:
+    _bt_valg = st.radio(
+        "",
+        ["Enkeltaksje", "Sammenlign", "Optimalisering", "Walk-Forward", "Screener-backtest", "Strategi-backtest"],
+        horizontal=True, key="bt_nav", label_visibility="collapsed"
     )
+    st.divider()
 
-    wf_aksje   = st.selectbox("Aksje", list(ALLE_TICKERS.keys()), key="wf_aksje")
-    col_a, col_b, col_c = st.columns(3)
-    train_mnd  = col_a.slider("Treningsperiode (måneder)", 6, 24, 12)
-    test_mnd   = col_b.slider("Testperiode (måneder)",     3, 12,  6)
-    maks_wf    = col_c.selectbox("Optimaliser for", ["Sharpe Ratio", "Return [%]", "CAGR [%]"], key="wf_maks")
+    if _bt_valg == "Enkeltaksje":
+        valgt_navn = st.selectbox("Velg aksje", list(TICKERS.keys()))
+        ticker = st.text_input("Ticker", value="EQNR.OL") if TICKERS[valgt_navn] == "CUSTOM" else TICKERS[valgt_navn]
 
-    st.info(
-        f"Med perioden **{valgt_periode}** og {train_mnd} mnd trening / {test_mnd} mnd test "
-        f"får du ca. **{max(1, (pd.Timestamp(slutt_dato) - pd.Timestamp(start_dato)).days // (test_mnd * 30))} vinduer**."
-    )
+        if st.button("Kjør backtest", type="primary"):
+            with st.spinner("Henter data..."):
+                data = hent_data(ticker, start_dato, slutt_dato)
+            if data is None:
+                st.error(f"Fant ingen data for {ticker}.")
+            else:
+                strategi_cls = hent_strategi_cls(strategi_valg, stop_loss_pct, sidebar_params)
+                with st.spinner("Kjører backtest..."):
+                    bt    = Backtest(data, strategi_cls, cash=kapital, commission=0.002)
+                    stats = bt.run()
+                vis_metrikker(stats)
+                vis_charts(stats, data)
+                trades = stats["_trades"]
+                if not trades.empty:
+                    st.subheader("Handler")
+                    vis_cols = [c for c in ["EntryTime","ExitTime","EntryPrice","ExitPrice","ReturnPct","PnL"] if c in trades.columns]
+                    st.dataframe(trades[vis_cols].round(2), use_container_width=True)
+                else:
+                    st.info("Ingen avsluttede handler i denne perioden.")
 
-    if st.button("Kjør walk-forward", type="primary"):
-        data_full = hent_data(ALLE_TICKERS[wf_aksje], start_dato, slutt_dato)
-        if data_full is None or len(data_full) < MIN_RADER:
-            st.error("Ikke nok data for denne perioden.")
-        else:
+    elif _bt_valg == "Sammenlign":
+        valgte = st.multiselect("Velg aksjer å sammenligne", list(ALLE_TICKERS.keys()),
+            default=["Equinor (NO)", "Telenor (NO)", "Hydro (NO)", "Volvo (SE)"])
+
+        if st.button("Sammenlign", type="primary"):
+            strategi_cls = hent_strategi_cls(strategi_valg, stop_loss_pct, sidebar_params)
+            rader = []
+            prog  = st.progress(0)
+            for i, navn in enumerate(valgte):
+                data = hent_data(ALLE_TICKERS[navn], start_dato, slutt_dato)
+                if data is None or len(data) < MIN_RADER:
+                    continue
+                res = Backtest(data, strategi_cls, cash=kapital, commission=0.002).run()
+                win = res["Win Rate [%]"]
+                rader.append({"Aksje": navn,
+                    "Avkastning %": round(res["Return [%]"], 1),
+                    "Buy & Hold %": round(res["Buy & Hold Return [%]"], 1),
+                    "CAGR %":       round(res["CAGR [%]"], 1),
+                    "Sharpe":       round(res["Sharpe Ratio"], 2),
+                    "Drawdown %":   round(res["Max. Drawdown [%]"], 1),
+                    "Handler":      int(res["# Trades"]),
+                    "Win %":        round(win, 1) if not pd.isna(win) else None})
+                prog.progress((i + 1) / len(valgte))
+
+            if rader:
+                df = pd.DataFrame(rader).sort_values("Avkastning %", ascending=False)
+                st.dataframe(df, use_container_width=True)
+                fig = go.Figure()
+                for r in rader:
+                    fig.add_trace(go.Bar(name=r["Aksje"],
+                        x=["Strategi", "Buy & Hold"], y=[r["Avkastning %"], r["Buy & Hold %"]]))
+                fig.update_layout(barmode="group", title="Avkastning sammenligning",
+                                  template="plotly_dark", height=400)
+                st.plotly_chart(fig, use_container_width=True)
+
+    elif _bt_valg == "Optimalisering":
+        valgt_opt  = st.selectbox("Velg aksje for optimalisering", list(ALLE_TICKERS.keys()))
+        maks_param = st.selectbox("Optimaliser for", ["Sharpe Ratio", "Return [%]", "CAGR [%]"])
+
+
+        if st.button("Kjør optimalisering", type="primary"):
+            data = hent_data(ALLE_TICKERS[valgt_opt], start_dato, slutt_dato)
+            if data is None:
+                st.error("Fant ingen data.")
+            else:
+                bt = Backtest(data, SmaRsiStrategy, cash=kapital, commission=0.002)
+                with st.spinner("Optimaliserer... (30-60 sekunder)"):
+                    stats, heatmap = bt.optimize(
+                        sma_fast=range(5, 35, 5), sma_slow=range(20, 110, 10),
+                        rsi_period=range(10, 22, 2), stop_loss=range(3, 12, 2),
+                        constraint=lambda p: p.sma_fast < p.sma_slow,
+                        maximize=maks_param, return_heatmap=True)
+                best = stats._strategy
+                st.success(f"Beste parametere: SMA {best.sma_fast}/{best.sma_slow} | RSI {best.rsi_period} | Stop-loss {best.stop_loss}%")
+                vis_metrikker(stats)
+                st.subheader("Heatmap: SMA rask vs treg")
+                try:
+                    hm = heatmap.groupby(["sma_fast", "sma_slow"]).mean().unstack()
+                    fig_hm = go.Figure(go.Heatmap(
+                        z=hm.values, x=hm.columns.get_level_values(1).tolist(),
+                        y=hm.index.tolist(), colorscale="RdYlGn", zmid=0,
+                        text=hm.values.round(2), texttemplate="%{text}",
+                        colorbar=dict(title=maks_param)))
+                    fig_hm.update_layout(xaxis_title="SMA treg", yaxis_title="SMA rask",
+                                         template="plotly_dark", height=400)
+                    st.plotly_chart(fig_hm, use_container_width=True)
+                except Exception:
+                    st.info("Heatmap ikke tilgjengelig.")
+
+    elif _bt_valg == "Walk-Forward":
+        st.subheader("Walk-Forward analyse")
+        st.caption(
+            "Optimaliserer parametere på treningsdata, tester på ukjent data. "
+            "Gir et realistisk bilde av hvordan strategien vil prestere fremover."
+        )
+
+        wf_aksje   = st.selectbox("Aksje", list(ALLE_TICKERS.keys()), key="wf_aksje")
+        col_a, col_b, col_c = st.columns(3)
+        train_mnd  = col_a.slider("Treningsperiode (måneder)", 6, 24, 12)
+        test_mnd   = col_b.slider("Testperiode (måneder)",     3, 12,  6)
+        maks_wf    = col_c.selectbox("Optimaliser for", ["Sharpe Ratio", "Return [%]", "CAGR [%]"], key="wf_maks")
+
+        st.info(
+            f"Med perioden **{valgt_periode}** og {train_mnd} mnd trening / {test_mnd} mnd test "
+            f"får du ca. **{max(1, (pd.Timestamp(slutt_dato) - pd.Timestamp(start_dato)).days // (test_mnd * 30))} vinduer**."
+        )
+
+        if st.button("Kjør walk-forward", type="primary"):
+            data_full = hent_data(ALLE_TICKERS[wf_aksje], start_dato, slutt_dato)
+            if data_full is None or len(data_full) < MIN_RADER:
+                st.error("Ikke nok data for denne perioden.")
+            else:
+                from dateutil.relativedelta import relativedelta
+
+                start_dt = pd.Timestamp(start_dato)
+                slutt_dt = pd.Timestamp(slutt_dato)
+
+                # Generer vinduer
+                vinduer = []
+                current = start_dt
+                while True:
+                    train_end = current + relativedelta(months=train_mnd)
+                    test_end  = train_end + relativedelta(months=test_mnd)
+                    if test_end > slutt_dt:
+                        break
+                    vinduer.append((current, train_end, train_end, test_end))
+                    current = current + relativedelta(months=test_mnd)
+
+                if not vinduer:
+                    st.error("Perioden er for kort for disse innstillingene. Prøv kortere trening/test eller lengre periode.")
+                else:
+                    oos_kurver   = []   # out-of-sample equity stykker
+                    is_kurver    = []   # in-sample equity stykker
+                    param_rader  = []
+                    prog = st.progress(0)
+
+                    for i, (tr_start, tr_end, te_start, te_end) in enumerate(vinduer):
+                        train_data = data_full[(data_full.index >= tr_start) & (data_full.index < tr_end)]
+                        test_data  = data_full[(data_full.index >= te_start) & (data_full.index < te_end)]
+
+                        if len(train_data) < MIN_RADER or len(test_data) < 20:
+                            prog.progress((i + 1) / len(vinduer))
+                            continue
+
+                        try:
+                            # Optimaliser på treningsdata
+                            bt_train = Backtest(train_data, SmaRsiStrategy, cash=kapital, commission=0.002)
+                            best_stats = bt_train.optimize(
+                                sma_fast=range(5, 30, 5),
+                                sma_slow=range(20, 80, 10),
+                                rsi_period=range(10, 22, 4),
+                                stop_loss=range(3, 12, 3),
+                                constraint=lambda p: p.sma_fast < p.sma_slow,
+                                maximize=maks_wf,
+                            )
+                            best = best_stats._strategy
+                            is_ret = best_stats["Return [%]"]
+
+                            # Test på ukjente data med beste parametere
+                            SmaRsiStrategy.sma_fast   = best.sma_fast
+                            SmaRsiStrategy.sma_slow   = best.sma_slow
+                            SmaRsiStrategy.rsi_period = best.rsi_period
+                            SmaRsiStrategy.stop_loss  = best.stop_loss
+
+                            bt_test  = Backtest(test_data, SmaRsiStrategy, cash=kapital, commission=0.002)
+                            oos_stats = bt_test.run()
+                            oos_ret  = oos_stats["Return [%]"]
+
+                            # Normaliser equity-kurver
+                            oos_eq = oos_stats["_equity_curve"]["Equity"]
+                            is_eq  = best_stats["_equity_curve"]["Equity"]
+                            oos_kurver.append(oos_eq / oos_eq.iloc[0])
+                            is_kurver.append(is_eq  / is_eq.iloc[0])
+
+                            param_rader.append({
+                                "Vindu":       f"{te_start.strftime('%Y-%m')} → {te_end.strftime('%Y-%m')}",
+                                "SMA":         f"{best.sma_fast}/{best.sma_slow}",
+                                "RSI":         best.rsi_period,
+                                "Stop-loss %": best.stop_loss,
+                                "IS avk. %":   round(is_ret, 1),
+                                "OOS avk. %":  round(oos_ret, 1),
+                                "OOS Sharpe":  round(oos_stats["Sharpe Ratio"], 2) if not pd.isna(oos_stats["Sharpe Ratio"]) else None,
+                            })
+                        except Exception:
+                            pass
+
+                        prog.progress((i + 1) / len(vinduer))
+
+                    if not param_rader:
+                        st.error("Ingen vinduer ga gyldige resultater.")
+                    else:
+                        # Tabell med parametere og resultater per vindu
+                        st.subheader("Resultater per vindu")
+                        df_wf = pd.DataFrame(param_rader)
+                        st.dataframe(df_wf, use_container_width=True)
+
+                        # Sammenstilt OOS equity curve
+                        st.subheader("Sammenstilt out-of-sample equity curve")
+
+                        # Bygg sammenhengende kurve ved å kjede segmentene
+                        alle_x, alle_y = [], []
+                        verdi = float(kapital)
+                        for seg in oos_kurver:
+                            y_vals = seg.values * verdi
+                            alle_x.extend(seg.index.tolist())
+                            alle_y.extend(y_vals.tolist())
+                            verdi = y_vals[-1]
+
+                        # Buy & Hold for samme periode
+                        bh_start_idx = data_full.index[data_full.index >= pd.Timestamp(vinduer[0][2])][0]
+                        bh_end_idx   = data_full.index[data_full.index <= pd.Timestamp(vinduer[-1][3])][-1]
+                        bh_data      = data_full.loc[bh_start_idx:bh_end_idx, "Close"]
+                        bh_y         = (bh_data / bh_data.iloc[0] * kapital).values
+
+                        fig_wf = go.Figure()
+                        fig_wf.add_trace(go.Scatter(x=alle_x, y=alle_y,
+                            name="Walk-Forward OOS", line=dict(color="#00b4d8", width=2)))
+                        fig_wf.add_trace(go.Scatter(x=bh_data.index, y=bh_y,
+                            name="Buy & Hold", line=dict(color="#f77f00", dash="dash")))
+
+                        # Marker skiller mellom vinduer
+                        for _, _, te_start, _ in vinduer:
+                            fig_wf.add_vline(x=te_start, line_width=1,
+                                line_dash="dot", line_color="rgba(255,255,255,0.2)")
+
+                        fig_wf.update_layout(template="plotly_dark", height=450,
+                            yaxis_title="Kapital (kr)",
+                            title="OOS = hva strategien faktisk ville gjort på ukjent data")
+                        st.plotly_chart(fig_wf, use_container_width=True)
+
+                        # Oppsummering
+                        oos_total = (alle_y[-1] / kapital - 1) * 100
+                        bh_total  = (bh_y[-1]  / kapital - 1) * 100
+                        is_snitt  = df_wf["IS avk. %"].mean()
+                        oos_snitt = df_wf["OOS avk. %"].mean()
+
+                        c1, c2, c3, c4 = st.columns(4)
+                        c1.metric("OOS total avkastning",    f"{oos_total:.1f}%", f"{oos_total - bh_total:.1f}% vs B&H")
+                        c2.metric("Buy & Hold avkastning",   f"{bh_total:.1f}%")
+                        c3.metric("Snitt IS avkastning",     f"{is_snitt:.1f}%")
+                        c4.metric("Snitt OOS avkastning",    f"{oos_snitt:.1f}%")
+
+                        if oos_snitt > 0:
+                            st.success("Strategien er robust — den holder seg på ukjent data.")
+                        elif oos_snitt > -5:
+                            st.warning("Strategien er moderat robust — noe overfit til treningsdata.")
+                        else:
+                            st.error("Strategien er overfittet — den fungerer på treningsdata men ikke i virkeligheten.")
+
+    elif _bt_valg in ("Screener-backtest", "Strategi-backtest"):
+        st.subheader("Screener-backtest")
+        st.caption(
+            "Simulerer hva som ville skjedd om boten kjøpte topp-aksjene hver måned og rebalanserte. "
+            "Tester om screener-logikken faktisk gir meravkastning over tid."
+        )
+
+        col_sb1, col_sb2, col_sb3 = st.columns(3)
+        sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n")
+        sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score")
+        sb_kommisjon = col_sb3.slider("Kurtasje per handel (%)", 0.0, 1.0, 0.2, key="sb_kom") / 100
+
+        if st.button("Kjør screener-backtest", type="primary"):
             from dateutil.relativedelta import relativedelta
 
-            start_dt = pd.Timestamp(start_dato)
-            slutt_dt = pd.Timestamp(slutt_dato)
+            sb_start = pd.Timestamp(start_dato)
+            sb_slutt = pd.Timestamp(slutt_dato)
+            sb_data_start = (sb_start - relativedelta(months=3)).strftime("%Y-%m-%d")
+            sb_data_slutt = sb_slutt.strftime("%Y-%m-%d")
 
-            # Generer vinduer
-            vinduer = []
-            current = start_dt
-            while True:
-                train_end = current + relativedelta(months=train_mnd)
-                test_end  = train_end + relativedelta(months=test_mnd)
-                if test_end > slutt_dt:
-                    break
-                vinduer.append((current, train_end, train_end, test_end))
-                current = current + relativedelta(months=test_mnd)
+            # Last all historisk data på forhånd
+            with st.spinner("Laster historisk data for alle aksjer..."):
+                all_data = {}
+                for navn, ticker in OSLO_BORS.items():
+                    d = hent_data(ticker, sb_data_start, sb_data_slutt)
+                    if d is not None and len(d) > 60:
+                        all_data[navn] = (ticker, d)
 
-            if not vinduer:
-                st.error("Perioden er for kort for disse innstillingene. Prøv kortere trening/test eller lengre periode.")
+            if not all_data:
+                st.error("Ingen data tilgjengelig.")
             else:
-                oos_kurver   = []   # out-of-sample equity stykker
-                is_kurver    = []   # in-sample equity stykker
-                param_rader  = []
+                # Generer månedlige rebalanseringsdatoer
+                datoer = []
+                dato   = sb_start
+                while dato <= sb_slutt:
+                    datoer.append(dato)
+                    dato = dato + relativedelta(months=1)
+
+                portefolje_verdi  = [float(kapital)]
+                osebx_verdi       = [float(kapital)]
+                rebalanse_log     = []
+                nåværende_aksjer  = {}
+                kasse_sb          = float(kapital)
+
                 prog = st.progress(0)
 
-                for i, (tr_start, tr_end, te_start, te_end) in enumerate(vinduer):
-                    train_data = data_full[(data_full.index >= tr_start) & (data_full.index < tr_end)]
-                    test_data  = data_full[(data_full.index >= te_start) & (data_full.index < te_end)]
+                # Hent OSEBX for benchmark
+                # Prøv flere ticker-alternativer for Oslo Børs benchmark
+                osebx_data = None
+                for bm_ticker in ["^OSEBX", "OSEBX.OL", "^OSEAX"]:
+                    osebx_data = hent_data(bm_ticker, sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
+                    if osebx_data is not None and len(osebx_data) > 10:
+                        break
 
-                    if len(train_data) < MIN_RADER or len(test_data) < 20:
-                        prog.progress((i + 1) / len(vinduer))
+                # Fallback: bruk lik-vektet snitt av alle aksjer i universet
+                if osebx_data is None or len(osebx_data) < 10:
+                    bm_kurver = [
+                        (df["Close"] / df["Close"].iloc[0])
+                        for _, df in all_data.values()
+                        if len(df) > 60
+                    ]
+                    if bm_kurver:
+                        felles = bm_kurver[0].index
+                        aligned = [k.reindex(felles, method="ffill") for k in bm_kurver]
+                        bm_snitt = pd.concat(aligned, axis=1).mean(axis=1)
+                        osebx_data = pd.DataFrame({"Close": bm_snitt * float(kapital)})
+                        st.caption("Benchmark: lik-vektet snitt av alle Oslo Børs-aksjer i universet")
+
+                for i, dato in enumerate(datoer[:-1]):
+                    neste = datoer[i + 1]
+
+                    # Score alle aksjer basert på data frem til denne datoen
+                    kandidater = []
+                    for navn, (ticker, df) in all_data.items():
+                        historisk = df[df.index <= dato]
+                        if len(historisk) < 60:
+                            continue
+                        try:
+                            ind = beregn_indikatorer(historisk["Close"])
+                            if ind and ind["score"] >= sb_min_score:
+                                kandidater.append({
+                                    "navn": navn, "ticker": ticker,
+                                    "score": ind["score"], "mom": ind["mom"],
+                                })
+                        except Exception:
+                            continue
+
+                    kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
+                    topp = {k["navn"]: k for k in kandidater[:sb_topp_n]}
+
+                    # Beregn avkastning for inneværende måned
+                    total_verdi = kasse_sb
+                    for navn, pos in nåværende_aksjer.items():
+                        df = all_data[navn][1]
+                        fremtid = df[(df.index > dato) & (df.index <= neste)]
+                        if not fremtid.empty:
+                            sluttkurs = float(fremtid["Close"].iloc[-1])
+                            total_verdi += pos["antall"] * sluttkurs
+
+                    # Rebalanser: selg det som ikke er i topp
+                    ny_kasse = kasse_sb
+                    for navn in list(nåværende_aksjer.keys()):
+                        if navn not in topp:
+                            df      = all_data[navn][1]
+                            fremtid = df[(df.index > dato) & (df.index <= neste)]
+                            if not fremtid.empty:
+                                kurs    = float(fremtid["Close"].iloc[-1])
+                                inntekt = kurs * nåværende_aksjer[navn]["antall"]
+                                ny_kasse += inntekt * (1 - sb_kommisjon)
+                            del nåværende_aksjer[navn]
+
+                    # Kjøp nye
+                    allok = ny_kasse / max(len(topp), 1)
+                    for navn, k in topp.items():
+                        if navn not in nåværende_aksjer:
+                            df   = all_data[navn][1]
+                            hist = df[df.index <= dato]
+                            if hist.empty:
+                                continue
+                            kurs   = float(hist["Close"].iloc[-1])
+                            antall = int((allok * (1 - sb_kommisjon)) / kurs)
+                            if antall > 0:
+                                kostnad = antall * kurs * (1 + sb_kommisjon)
+                                if kostnad <= ny_kasse:
+                                    nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
+                                    ny_kasse -= kostnad
+
+                    kasse_sb = ny_kasse
+
+                    # Beregn porteføljeverdi ved neste dato
+                    total_neste = kasse_sb
+                    for navn, pos in nåværende_aksjer.items():
+                        df      = all_data[navn][1]
+                        fremtid = df[(df.index > dato) & (df.index <= neste)]
+                        if not fremtid.empty:
+                            total_neste += pos["antall"] * float(fremtid["Close"].iloc[-1])
+
+                    portefolje_verdi.append(total_neste)
+
+                    # OSEBX benchmark
+                    if osebx_data is not None:
+                        osebx_slice = osebx_data[(osebx_data.index > dato) & (osebx_data.index <= neste)]
+                        osebx_prev  = osebx_data[osebx_data.index <= dato]
+                        if not osebx_slice.empty and not osebx_prev.empty and len(osebx_verdi) > 0:
+                            osebx_ret = float(osebx_slice["Close"].iloc[-1]) / float(osebx_prev["Close"].iloc[-1]) - 1
+                            osebx_verdi.append(osebx_verdi[-1] * (1 + osebx_ret))
+                        elif len(osebx_verdi) > 0:
+                            osebx_verdi.append(osebx_verdi[-1])
+
+                    rebalanse_log.append({
+                        "Dato":       dato.strftime("%Y-%m"),
+                        "Portefølje": [n for n in nåværende_aksjer.keys()],
+                        "Verdi (kr)": round(total_neste, 0),
+                    })
+
+                    prog.progress((i + 1) / (len(datoer) - 1))
+
+                # ── Resultater ────────────────────────────────────────────────
+                port_ret  = (portefolje_verdi[-1] / portefolje_verdi[0] - 1) * 100
+                osebx_ret = (osebx_verdi[-1] / osebx_verdi[0] - 1) * 100 if osebx_verdi else 0
+
+                c1, c2, c3, c4 = st.columns(4)
+                c1.metric("Screener avkastning",  f"{port_ret:.1f}%",  f"{port_ret - osebx_ret:.1f}% vs OSEBX")
+                c2.metric("OSEBX avkastning",     f"{osebx_ret:.1f}%")
+                c3.metric("Rebalanseringer",       len(datoer) - 1)
+                c4.metric("Slutt verdi",          f"{portefolje_verdi[-1]:,.0f} kr")
+
+                # Equity curve
+                fig_sb = go.Figure()
+                fig_sb.add_trace(go.Scatter(
+                    x=datoer[:len(portefolje_verdi)], y=portefolje_verdi,
+                    name="Screener-portefølje", line=dict(color="#00b4d8", width=2)))
+                if osebx_verdi:
+                    fig_sb.add_trace(go.Scatter(
+                        x=datoer[:len(osebx_verdi)], y=osebx_verdi,
+                        name="OSEBX (benchmark)", line=dict(color="#f77f00", dash="dash")))
+                fig_sb.update_layout(
+                    template="plotly_dark", height=450,
+                    yaxis_title="Kapital (kr)",
+                    title="Screener-portefølje vs Oslo Børs (månedlig rebalansering)"
+                )
+                st.plotly_chart(fig_sb, use_container_width=True)
+
+                # Faktor-bidrag
+                st.subheader("Hvilke faktorer ga best treff?")
+                faktor_score = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
+                faktor_count = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
+
+                for navn, (ticker, df) in all_data.items():
+                    for dato in datoer[:-1]:
+                        hist = df[df.index <= dato]
+                        if len(hist) < 60:
+                            continue
+                        try:
+                            close  = hist["Close"]
+                            fremtid = df[(df.index > dato) & (df.index <= dato + relativedelta(months=1))]
+                            if fremtid.empty:
+                                continue
+                            ret = float(fremtid["Close"].iloc[-1]) / float(close.iloc[-1]) - 1
+
+                            sma10  = float(close.rolling(10).mean().iloc[-1])
+                            sma50  = float(close.rolling(50).mean().iloc[-1])
+                            delta  = close.diff()
+                            gain   = delta.clip(lower=0).rolling(14).mean()
+                            loss   = (-delta.clip(upper=0)).rolling(14).mean()
+                            rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
+                            ema12  = close.ewm(span=12).mean()
+                            ema26  = close.ewm(span=26).mean()
+                            macd_v = float((ema12 - ema26).iloc[-1])
+                            sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+                            mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
+
+                            if sma10 > sma50:
+                                faktor_score["SMA (trend)"] += ret
+                                faktor_count["SMA (trend)"] += 1
+                            if 40 < rsi < 65:
+                                faktor_score["RSI (40-65)"] += ret
+                                faktor_count["RSI (40-65)"] += 1
+                            if macd_v > sig_v:
+                                faktor_score["MACD"] += ret
+                                faktor_count["MACD"] += 1
+                            if mom > 0:
+                                faktor_score["Momentum"] += ret
+                                faktor_count["Momentum"] += 1
+                        except Exception:
+                            continue
+
+                snitt_ret = {
+                    k: (faktor_score[k] / faktor_count[k] * 100) if faktor_count[k] > 0 else 0
+                    for k in faktor_score
+                }
+                fig_fak = go.Figure(go.Bar(
+                    x=list(snitt_ret.keys()),
+                    y=list(snitt_ret.values()),
+                    marker_color=["#26a69a" if v > 0 else "#ef5350" for v in snitt_ret.values()],
+                    text=[f"{v:.2f}%" for v in snitt_ret.values()],
+                    textposition="outside",
+                ))
+                fig_fak.update_layout(
+                    template="plotly_dark", height=350,
+                    yaxis_title="Gjennomsnittlig månedlig avkastning (%)",
+                    title="Snittavkastning per faktor (når faktoren er positiv)"
+                )
+                st.plotly_chart(fig_fak, use_container_width=True)
+
+                # Rebalanseringslogg
+                with st.expander("Månedlig rebalanseringslogg"):
+                    for r in rebalanse_log:
+                        st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")
+
+        st.divider()
+        st.markdown("### Strategi-backtest — Ensemble + Regime + Trailing SL")
+        st.caption(
+            "Simulerer den nøyaktige live-strategien historisk med ukentlig rebalansering. "
+            "Inkluderer regime-deteksjon, ensemble-signaler, trailing stop-loss og kurtasje."
+        )
+
+        _sb2_col1, _sb2_col2, _sb2_col3, _sb2_col4 = st.columns(4)
+        _str_kapital = _sb2_col1.number_input("Startkapital (kr)", value=100000, step=10000, key="str_kap")
+        _str_sl      = _sb2_col2.slider("Trailing SL %", 3, 20, 7, key="str_sl") / 100
+        _str_periode = _sb2_col3.selectbox("Periode", ["1 år", "2 år", "3 år", "5 år"], index=1, key="str_per")
+        _str_kurt    = _sb2_col4.selectbox("Kurtasje", ["Mini (0,15% · 29 kr)", "Normal (0,049% · 79 kr)"], key="str_kurt")
+
+        _str_kurt_pct = 0.0015 if "Mini" in _str_kurt else 0.00049
+        _str_kurt_min = 29     if "Mini" in _str_kurt else 79
+        _str_år       = {"1 år": 1, "2 år": 2, "3 år": 3, "5 år": 5}[_str_periode]
+        _str_slutt    = datetime.now().date()
+        _str_start    = (_str_slutt - pd.DateOffset(years=_str_år)).date()
+
+        if st.button("Kjør strategi-backtest", type="primary", key="str_bt_knapp"):
+
+            @st.cache_data(ttl=7200, show_spinner=False)
+            def _last_batch(tickers_tuple, start_s, slutt_s):
+                raw = yf.download(list(tickers_tuple), start=start_s, end=slutt_s,
+                                  progress=False, auto_adjust=True)
+                return raw
+
+            _alle_tickers = list(OSLO_BORS.values())
+            _navn_map     = {v: k for k, v in OSLO_BORS.items()}
+
+            with st.spinner("Laster data for alle aksjer..."):
+                _data_start = (pd.Timestamp(_str_start) - pd.DateOffset(days=300)).strftime("%Y-%m-%d")
+                _raw_batch  = _last_batch(tuple(_alle_tickers), _data_start, str(_str_slutt))
+                _osebx_raw  = None
+                for _bm in ["^OSEBX", "^OSEAX"]:
+                    _tmp = hent_aksje_historikk(_bm, "5y")
+                    if _tmp is not None and not _tmp.empty:
+                        _osebx_raw = _tmp["Close"]
+                        _osebx_raw.index = pd.to_datetime(_osebx_raw.index).tz_localize(None)
+                        break
+
+            # Bygg close/volume per ticker
+            _close_dict = {}
+            _vol_dict   = {}
+            if isinstance(_raw_batch.columns, pd.MultiIndex):
+                for _t in _alle_tickers:
+                    try:
+                        _c = _raw_batch["Close"][_t].dropna()
+                        _v = _raw_batch["Volume"][_t].dropna() if "Volume" in _raw_batch else None
+                        if len(_c) > 60:
+                            _close_dict[_t] = _c
+                            _vol_dict[_t]   = _v
+                    except Exception:
+                        continue
+            else:
+                # Enkelt-ticker fallback
+                for _t in _alle_tickers:
+                    try:
+                        _c = _raw_batch["Close"].dropna()
+                        if len(_c) > 60:
+                            _close_dict[_t] = _c
+                    except Exception:
                         continue
 
+            # Ukentlige rebalanseringsdatoer (fredager)
+            _alle_datoer = pd.date_range(str(_str_start), str(_str_slutt), freq="W-FRI")
+            _portefolje  = {"kasse": float(_str_kapital), "posisjoner": {}}
+            _verdi_serie = []
+            _dato_serie  = []
+            _handler_log = []
+
+            _prog = st.progress(0)
+            for _i, _dato in enumerate(_alle_datoer):
+                _dato_str = _dato.strftime("%Y-%m-%d")
+
+                # Regime
+                _regime = "Sideways"
+                if _osebx_raw is not None:
+                    _osebx_til_dato = _osebx_raw[_osebx_raw.index <= _dato]
+                    if len(_osebx_til_dato) >= 10:
+                        _regime = detect_regime(_osebx_til_dato)
+                _rcfg_bt    = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
+                _maks_pos   = _rcfg_bt["maks_pos"]
+                _min_ens    = _rcfg_bt["min_ensemble"]
+
+                # OSEBX 3mnd-avkastning for relativ styrke
+                _osebx_ret3m = 0.0
+                if _osebx_raw is not None:
+                    _ox = _osebx_raw[_osebx_raw.index <= _dato]
+                    if len(_ox) >= 63:
+                        _osebx_ret3m = float(_ox.pct_change(63).iloc[-1] * 100)
+
+                # Beregn indikatorer for alle tickers
+                _kandidater = []
+                for _t, _close_full in _close_dict.items():
+                    _close_t = _close_full[_close_full.index <= _dato]
+                    if len(_close_t) < 60:
+                        continue
+                    _vol_t = _vol_dict.get(_t)
+                    if _vol_t is not None:
+                        _vol_t = _vol_t[_vol_t.index <= _dato]
                     try:
-                        # Optimaliser på treningsdata
-                        bt_train = Backtest(train_data, SmaRsiStrategy, cash=kapital, commission=0.002)
-                        best_stats = bt_train.optimize(
-                            sma_fast=range(5, 30, 5),
-                            sma_slow=range(20, 80, 10),
-                            rsi_period=range(10, 22, 4),
-                            stop_loss=range(3, 12, 3),
-                            constraint=lambda p: p.sma_fast < p.sma_slow,
-                            maximize=maks_wf,
-                        )
-                        best = best_stats._strategy
-                        is_ret = best_stats["Return [%]"]
-
-                        # Test på ukjente data med beste parametere
-                        SmaRsiStrategy.sma_fast   = best.sma_fast
-                        SmaRsiStrategy.sma_slow   = best.sma_slow
-                        SmaRsiStrategy.rsi_period = best.rsi_period
-                        SmaRsiStrategy.stop_loss  = best.stop_loss
-
-                        bt_test  = Backtest(test_data, SmaRsiStrategy, cash=kapital, commission=0.002)
-                        oos_stats = bt_test.run()
-                        oos_ret  = oos_stats["Return [%]"]
-
-                        # Normaliser equity-kurver
-                        oos_eq = oos_stats["_equity_curve"]["Equity"]
-                        is_eq  = best_stats["_equity_curve"]["Equity"]
-                        oos_kurver.append(oos_eq / oos_eq.iloc[0])
-                        is_kurver.append(is_eq  / is_eq.iloc[0])
-
-                        param_rader.append({
-                            "Vindu":       f"{te_start.strftime('%Y-%m')} → {te_end.strftime('%Y-%m')}",
-                            "SMA":         f"{best.sma_fast}/{best.sma_slow}",
-                            "RSI":         best.rsi_period,
-                            "Stop-loss %": best.stop_loss,
-                            "IS avk. %":   round(is_ret, 1),
-                            "OOS avk. %":  round(oos_ret, 1),
-                            "OOS Sharpe":  round(oos_stats["Sharpe Ratio"], 2) if not pd.isna(oos_stats["Sharpe Ratio"]) else None,
-                        })
+                        _ind = beregn_indikatorer(_close_t, _vol_t, _osebx_ret3m)
+                        if _ind and _ind["ensemble"] >= _min_ens and _ind["rsi_ok"]:
+                            _vol_60d = float(_close_t.pct_change().rolling(60).std().iloc[-1] * (252**0.5))
+                            _kandidater.append({
+                                "ticker": _t, "navn": _navn_map.get(_t, _t),
+                                "kurs":   _ind["pris"],
+                                "score":  _ind["score"] + _ind["oppside_score"],
+                                "vol_60d": _vol_60d if _vol_60d > 0 else 0.20,
+                            })
                     except Exception:
-                        pass
+                        continue
 
-                    prog.progress((i + 1) / len(vinduer))
+                _kandidater.sort(key=lambda x: x["score"], reverse=True)
+                _topp        = _kandidater[:_maks_pos]
+                _topp_ticker = {k["ticker"] for k in _topp}
 
-                if not param_rader:
-                    st.error("Ingen vinduer ga gyldige resultater.")
-                else:
-                    # Tabell med parametere og resultater per vindu
-                    st.subheader("Resultater per vindu")
-                    df_wf = pd.DataFrame(param_rader)
-                    st.dataframe(df_wf, use_container_width=True)
+                # Trailing stop-loss
+                for _t, _pos in list(_portefolje["posisjoner"].items()):
+                    _close_t = _close_dict.get(_t)
+                    if _close_t is None:
+                        continue
+                    _close_t = _close_t[_close_t.index <= _dato]
+                    if _close_t.empty:
+                        continue
+                    _kurs_nå = float(_close_t.iloc[-1])
+                    _høy = max(_pos.get("høyeste_kurs", _pos["snittpris"]), _kurs_nå)
+                    _portefolje["posisjoner"][_t]["høyeste_kurs"] = _høy
+                    if (_kurs_nå / _høy - 1) <= -_str_sl:
+                        _brutto   = round(_pos["antall"] * _kurs_nå, 0)
+                        _kurt     = max(_brutto * _str_kurt_pct, _str_kurt_min)
+                        _portefolje["kasse"] += _brutto - _kurt
+                        del _portefolje["posisjoner"][_t]
+                        _topp_ticker.discard(_t)
+                        _handler_log.append({"dato": _dato_str, "handling": "SELG (SL)",
+                                             "navn": _pos["navn"], "kurs": _kurs_nå})
 
-                    # Sammenstilt OOS equity curve
-                    st.subheader("Sammenstilt out-of-sample equity curve")
+                # Selg ikke-topp
+                for _t, _pos in list(_portefolje["posisjoner"].items()):
+                    if _t not in _topp_ticker:
+                        _close_t = _close_dict.get(_t)
+                        if _close_t is None:
+                            continue
+                        _close_t = _close_t[_close_t.index <= _dato]
+                        if _close_t.empty:
+                            continue
+                        _kurs_nå = float(_close_t.iloc[-1])
+                        _brutto  = round(_pos["antall"] * _kurs_nå, 0)
+                        _kurt    = max(_brutto * _str_kurt_pct, _str_kurt_min)
+                        _portefolje["kasse"] += _brutto - _kurt
+                        del _portefolje["posisjoner"][_t]
+                        _handler_log.append({"dato": _dato_str, "handling": "SELG",
+                                             "navn": _pos["navn"], "kurs": _kurs_nå})
 
-                    # Bygg sammenhengende kurve ved å kjede segmentene
-                    alle_x, alle_y = [], []
-                    verdi = float(kapital)
-                    for seg in oos_kurver:
-                        y_vals = seg.values * verdi
-                        alle_x.extend(seg.index.tolist())
-                        alle_y.extend(y_vals.tolist())
-                        verdi = y_vals[-1]
+                # Kjøp topp
+                for _k in _topp:
+                    if _k["ticker"] in _portefolje["posisjoner"]:
+                        continue
+                    _vol_f   = max(0.5, min(2.0, 0.20 / _k["vol_60d"]))
+                    _allok   = _rcfg_bt["allok"] * _vol_f
+                    _beløp   = min(_portefolje["kasse"] * _allok, _portefolje["kasse"] * 0.5)
+                    _kurt    = max(_beløp * _str_kurt_pct, _str_kurt_min)
+                    _antall  = int((_beløp - _kurt) / _k["kurs"]) if _k["kurs"] > 0 else 0
+                    if _antall < 1:
+                        continue
+                    _kostnad = round(_antall * _k["kurs"], 0)
+                    _totalt  = _kostnad + _kurt
+                    if _totalt > _portefolje["kasse"]:
+                        continue
+                    _portefolje["posisjoner"][_k["ticker"]] = {
+                        "navn": _k["navn"], "antall": _antall,
+                        "snittpris": _k["kurs"], "høyeste_kurs": _k["kurs"],
+                    }
+                    _portefolje["kasse"] -= _totalt
+                    _handler_log.append({"dato": _dato_str, "handling": "KJØP",
+                                         "navn": _k["navn"], "kurs": _k["kurs"]})
 
-                    # Buy & Hold for samme periode
-                    bh_start_idx = data_full.index[data_full.index >= pd.Timestamp(vinduer[0][2])][0]
-                    bh_end_idx   = data_full.index[data_full.index <= pd.Timestamp(vinduer[-1][3])][-1]
-                    bh_data      = data_full.loc[bh_start_idx:bh_end_idx, "Close"]
-                    bh_y         = (bh_data / bh_data.iloc[0] * kapital).values
-
-                    fig_wf = go.Figure()
-                    fig_wf.add_trace(go.Scatter(x=alle_x, y=alle_y,
-                        name="Walk-Forward OOS", line=dict(color="#00b4d8", width=2)))
-                    fig_wf.add_trace(go.Scatter(x=bh_data.index, y=bh_y,
-                        name="Buy & Hold", line=dict(color="#f77f00", dash="dash")))
-
-                    # Marker skiller mellom vinduer
-                    for _, _, te_start, _ in vinduer:
-                        fig_wf.add_vline(x=te_start, line_width=1,
-                            line_dash="dot", line_color="rgba(255,255,255,0.2)")
-
-                    fig_wf.update_layout(template="plotly_dark", height=450,
-                        yaxis_title="Kapital (kr)",
-                        title="OOS = hva strategien faktisk ville gjort på ukjent data")
-                    st.plotly_chart(fig_wf, use_container_width=True)
-
-                    # Oppsummering
-                    oos_total = (alle_y[-1] / kapital - 1) * 100
-                    bh_total  = (bh_y[-1]  / kapital - 1) * 100
-                    is_snitt  = df_wf["IS avk. %"].mean()
-                    oos_snitt = df_wf["OOS avk. %"].mean()
-
-                    c1, c2, c3, c4 = st.columns(4)
-                    c1.metric("OOS total avkastning",    f"{oos_total:.1f}%", f"{oos_total - bh_total:.1f}% vs B&H")
-                    c2.metric("Buy & Hold avkastning",   f"{bh_total:.1f}%")
-                    c3.metric("Snitt IS avkastning",     f"{is_snitt:.1f}%")
-                    c4.metric("Snitt OOS avkastning",    f"{oos_snitt:.1f}%")
-
-                    if oos_snitt > 0:
-                        st.success("Strategien er robust — den holder seg på ukjent data.")
-                    elif oos_snitt > -5:
-                        st.warning("Strategien er moderat robust — noe overfit til treningsdata.")
-                    else:
-                        st.error("Strategien er overfittet — den fungerer på treningsdata men ikke i virkeligheten.")
-
-# ─── TAB 6: OSLO BØRS SCREENER ────────────────────────────────────────────────
-with tab6:
-    st.subheader("Oslo Børs Screener")
-    st.caption("Scanner alle aksjer og viser hvem som har kjøpssignal akkurat nå.")
-
-    col_s1, col_s2 = st.columns([2, 1])
-    with col_s2:
-        min_score = st.slider(
-            "Minimum signalstyrke",
-            min_value=0, max_value=4, value=2,
-            help=(
-                "Antall indikatorer (av 4) som må være positive for at aksjen vises:\n\n"
-                "**0** — vis alle aksjer\n\n"
-                "**1** — minst én indikator positiv\n\n"
-                "**2** — minst to indikatorer positive (anbefalt)\n\n"
-                "**3** — tre av fire indikatorer positive (sterk kandidat)\n\n"
-                "**4** — alle fire indikatorer enige om kjøp (sjelden, men sterkest signal)"
-            )
-        )
-        vis_alle  = st.checkbox("Vis alle (inkl. uten signal)", value=False)
-
-    if st.button("Scan Oslo Børs", type="primary"):
-        rader = []
-        prog  = st.progress(0)
-
-        for i, (navn, ticker) in enumerate(OSLO_BORS.items()):
-            try:
-                raw = hent_aksje_historikk(ticker, "1y")
-                if raw is None or len(raw) < 60:
-                    prog.progress((i + 1) / len(OSLO_BORS))
-                    continue
-                ind = beregn_indikatorer(raw["Close"])
-                if ind is None:
-                    prog.progress((i + 1) / len(OSLO_BORS))
-                    continue
-
-                sma_signal  = ind["sma10"] > ind["sma50"]
-                rsi_signal  = 40 < ind["rsi"] < 65
-                macd_signal = ind["macd_v"] > ind["sig_v"]
-                mom_signal  = ind["mom"] > 0
-
-                if ind["score"] >= 4:   anbefaling = "Sterkt kjøp"
-                elif ind["score"] == 3: anbefaling = "Kjøp"
-                elif ind["score"] == 2: anbefaling = "Nøytral"
-                elif ind["score"] == 1: anbefaling = "Svak"
-                else:                   anbefaling = "Selg / unngå"
-
-                rader.append({
-                    "Aksje":       navn,
-                    "Kurs":        round(ind["pris"], 2),
-                    "SMA10>50":    "✅" if sma_signal  else "❌",
-                    "RSI (40-65)": "✅" if rsi_signal  else "❌",
-                    "MACD":        "✅" if macd_signal else "❌",
-                    "Momentum":    "✅" if mom_signal  else "❌",
-                    "Score":       ind["score"],
-                    "RSI verdi":   round(ind["rsi"], 1),
-                    "Mom 6mnd %":  round(ind["mom"], 1),
-                    "Signal":      anbefaling,
-                    "_score":      ind["score"],
-                })
-            except Exception:
-                pass
-            prog.progress((i + 1) / len(OSLO_BORS))
-
-        if rader:
-            df_screen = pd.DataFrame(rader)
-            df_screen = df_screen.sort_values("Score", ascending=False)
-
-            if not vis_alle:
-                df_screen = df_screen[df_screen["Score"] >= min_score]
-
-            vis = df_screen.drop(columns=["_score"])
-            st.dataframe(vis, use_container_width=True, hide_index=True)
-
-            # Oppsummering
-            sterkt = len(df_screen[df_screen["Score"] == 4])
-            kjop   = len(df_screen[df_screen["Score"] == 3])
-            noyt   = len(df_screen[df_screen["Score"] == 2])
-            selg   = len(df_screen[df_screen["Score"] <= 1])
-
-            c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Sterkt kjøp (4/4)", sterkt)
-            c2.metric("Kjøp (3/4)",        kjop)
-            c3.metric("Nøytral (2/4)",     noyt)
-            c4.metric("Svak/Selg (0-1/4)", selg)
-
-            # Bar chart
-            topp = df_screen[df_screen["Score"] >= 3].head(15)
-            if not topp.empty:
-                st.subheader("Sterkeste kjøpssignaler")
-                fig_sc = go.Figure(go.Bar(
-                    x=topp["Aksje"], y=topp["Score"],
-                    marker_color=["#26a69a" if s == 4 else "#66bb6a" for s in topp["Score"]],
-                    text=topp["Signal"], textposition="outside",
-                ))
-                fig_sc.update_layout(
-                    template="plotly_dark", height=350,
-                    yaxis=dict(range=[0, 4.5], title="Signalstyrke"),
-                    margin=dict(t=20, b=0),
+                # Daglig verdi
+                _pos_verdi = sum(
+                    float(_close_dict[_t][_close_dict[_t].index <= _dato].iloc[-1]) * _p["antall"]
+                    for _t, _p in _portefolje["posisjoner"].items()
+                    if _t in _close_dict and len(_close_dict[_t][_close_dict[_t].index <= _dato]) > 0
                 )
-                st.plotly_chart(fig_sc, use_container_width=True)
+                _verdi_serie.append(_portefolje["kasse"] + _pos_verdi)
+                _dato_serie.append(_dato)
+                _prog.progress((_i + 1) / len(_alle_datoer))
 
-# ─── TAB 7: PORTEFØLJESTYRER ──────────────────────────────────────────────────
-with tab7:
+            # ── Resultater ────────────────────────────────────────────────────
+            _tot_ret  = (_verdi_serie[-1] / _str_kapital - 1) * 100 if _verdi_serie else 0
+            _rv       = pd.Series(_verdi_serie)
+            _rets_bt  = _rv.pct_change().dropna()
+            _sharpe   = float((_rets_bt.mean() / _rets_bt.std()) * (252**0.5)) if _rets_bt.std() > 0 else 0
+            _cummax   = _rv.cummax()
+            _max_dd   = float(((_rv - _cummax) / _cummax * 100).min()) if len(_rv) > 1 else 0
+            _vol_bt   = float(_rets_bt.std() * (252**0.5) * 100)
+            _ant_kjøp = len([h for h in _handler_log if h["handling"] == "KJØP"])
+            _ant_selg = len([h for h in _handler_log if "SELG" in h["handling"]])
+
+            # OSEBX-benchmark for samme periode
+            _osebx_bt = None
+            if _osebx_raw is not None:
+                _ox_bt = _osebx_raw[(_osebx_raw.index >= pd.Timestamp(_str_start)) &
+                                    (_osebx_raw.index <= pd.Timestamp(_str_slutt))]
+                if len(_ox_bt) > 1:
+                    _osebx_bt = (_ox_bt / float(_ox_bt.iloc[0])) * _str_kapital
+
+            _osebx_ret_bt = float((_osebx_bt.iloc[-1] / _str_kapital - 1) * 100) if _osebx_bt is not None else 0
+
+            _m1, _m2, _m3, _m4, _m5, _m6 = st.columns(6)
+            _m1.metric("Avkastning", f"{_tot_ret:.1f}%", f"{_tot_ret - _osebx_ret_bt:.1f}% vs OSEBX")
+            _m2.metric("OSEBX", f"{_osebx_ret_bt:.1f}%")
+            _m3.metric("Sharpe", f"{_sharpe:.2f}")
+            _m4.metric("Maks drawdown", f"{_max_dd:.1f}%")
+            _m5.metric("Volatilitet", f"{_vol_bt:.1f}%")
+            _m6.metric("Handler", f"{_ant_kjøp} kjøp / {_ant_selg} salg")
+
+            _fig_str = go.Figure()
+            _fig_str.add_trace(go.Scatter(
+                x=_dato_serie, y=_verdi_serie,
+                name="Strategi", line=dict(color="#4C8BF5", width=2)))
+            if _osebx_bt is not None:
+                _fig_str.add_trace(go.Scatter(
+                    x=_osebx_bt.index, y=_osebx_bt.values,
+                    name="OSEBX", line=dict(color="#f77f00", dash="dash", width=1.5)))
+            _fig_str.add_hline(y=_str_kapital, line_dash="dot", line_color="gray")
+            _fig_str.update_layout(
+                template="plotly_dark", height=400,
+                margin=dict(l=0, r=0, t=20, b=0),
+                yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            )
+            st.plotly_chart(_fig_str, use_container_width=True)
+
+            with st.expander("Handelslogg"):
+                if _handler_log:
+                    st.dataframe(pd.DataFrame(_handler_log), use_container_width=True, hide_index=True)
+                else:
+                    st.info("Ingen handler i perioden.")
+
+# ─── TAB PORTEFØLJESTYRER ─────────────────────────────────────────────────────
+with tab_pf:
     st.subheader("Porteføljestyrer (Paper Trading)")
     st.info(
         "**Hvordan det fungerer:**\n\n"
@@ -1843,499 +2340,8 @@ with tab7:
             st.success("Portefølje nullstilt!")
             st.rerun()
 
-# ─── TAB 8: SCREENER-BACKTEST ─────────────────────────────────────────────────
-with tab8:
-    st.subheader("Screener-backtest")
-    st.caption(
-        "Simulerer hva som ville skjedd om boten kjøpte topp-aksjene hver måned og rebalanserte. "
-        "Tester om screener-logikken faktisk gir meravkastning over tid."
-    )
-
-    col_sb1, col_sb2, col_sb3 = st.columns(3)
-    sb_topp_n    = col_sb1.slider("Antall aksjer i portefølje", 3, 10, 5, key="sb_n")
-    sb_min_score = col_sb2.slider("Min score for å inkluderes", 1, 4, 2, key="sb_score")
-    sb_kommisjon = col_sb3.slider("Kurtasje per handel (%)", 0.0, 1.0, 0.2, key="sb_kom") / 100
-
-    if st.button("Kjør screener-backtest", type="primary"):
-        from dateutil.relativedelta import relativedelta
-
-        sb_start = pd.Timestamp(start_dato)
-        sb_slutt = pd.Timestamp(slutt_dato)
-        sb_data_start = (sb_start - relativedelta(months=3)).strftime("%Y-%m-%d")
-        sb_data_slutt = sb_slutt.strftime("%Y-%m-%d")
-
-        # Last all historisk data på forhånd
-        with st.spinner("Laster historisk data for alle aksjer..."):
-            all_data = {}
-            for navn, ticker in OSLO_BORS.items():
-                d = hent_data(ticker, sb_data_start, sb_data_slutt)
-                if d is not None and len(d) > 60:
-                    all_data[navn] = (ticker, d)
-
-        if not all_data:
-            st.error("Ingen data tilgjengelig.")
-        else:
-            # Generer månedlige rebalanseringsdatoer
-            datoer = []
-            dato   = sb_start
-            while dato <= sb_slutt:
-                datoer.append(dato)
-                dato = dato + relativedelta(months=1)
-
-            portefolje_verdi  = [float(kapital)]
-            osebx_verdi       = [float(kapital)]
-            rebalanse_log     = []
-            nåværende_aksjer  = {}
-            kasse_sb          = float(kapital)
-
-            prog = st.progress(0)
-
-            # Hent OSEBX for benchmark
-            # Prøv flere ticker-alternativer for Oslo Børs benchmark
-            osebx_data = None
-            for bm_ticker in ["^OSEBX", "OSEBX.OL", "^OSEAX"]:
-                osebx_data = hent_data(bm_ticker, sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
-                if osebx_data is not None and len(osebx_data) > 10:
-                    break
-
-            # Fallback: bruk lik-vektet snitt av alle aksjer i universet
-            if osebx_data is None or len(osebx_data) < 10:
-                bm_kurver = [
-                    (df["Close"] / df["Close"].iloc[0])
-                    for _, df in all_data.values()
-                    if len(df) > 60
-                ]
-                if bm_kurver:
-                    felles = bm_kurver[0].index
-                    aligned = [k.reindex(felles, method="ffill") for k in bm_kurver]
-                    bm_snitt = pd.concat(aligned, axis=1).mean(axis=1)
-                    osebx_data = pd.DataFrame({"Close": bm_snitt * float(kapital)})
-                    st.caption("Benchmark: lik-vektet snitt av alle Oslo Børs-aksjer i universet")
-
-            for i, dato in enumerate(datoer[:-1]):
-                neste = datoer[i + 1]
-
-                # Score alle aksjer basert på data frem til denne datoen
-                kandidater = []
-                for navn, (ticker, df) in all_data.items():
-                    historisk = df[df.index <= dato]
-                    if len(historisk) < 60:
-                        continue
-                    try:
-                        ind = beregn_indikatorer(historisk["Close"])
-                        if ind and ind["score"] >= sb_min_score:
-                            kandidater.append({
-                                "navn": navn, "ticker": ticker,
-                                "score": ind["score"], "mom": ind["mom"],
-                            })
-                    except Exception:
-                        continue
-
-                kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
-                topp = {k["navn"]: k for k in kandidater[:sb_topp_n]}
-
-                # Beregn avkastning for inneværende måned
-                total_verdi = kasse_sb
-                for navn, pos in nåværende_aksjer.items():
-                    df = all_data[navn][1]
-                    fremtid = df[(df.index > dato) & (df.index <= neste)]
-                    if not fremtid.empty:
-                        sluttkurs = float(fremtid["Close"].iloc[-1])
-                        total_verdi += pos["antall"] * sluttkurs
-
-                # Rebalanser: selg det som ikke er i topp
-                ny_kasse = kasse_sb
-                for navn in list(nåværende_aksjer.keys()):
-                    if navn not in topp:
-                        df      = all_data[navn][1]
-                        fremtid = df[(df.index > dato) & (df.index <= neste)]
-                        if not fremtid.empty:
-                            kurs    = float(fremtid["Close"].iloc[-1])
-                            inntekt = kurs * nåværende_aksjer[navn]["antall"]
-                            ny_kasse += inntekt * (1 - sb_kommisjon)
-                        del nåværende_aksjer[navn]
-
-                # Kjøp nye
-                allok = ny_kasse / max(len(topp), 1)
-                for navn, k in topp.items():
-                    if navn not in nåværende_aksjer:
-                        df   = all_data[navn][1]
-                        hist = df[df.index <= dato]
-                        if hist.empty:
-                            continue
-                        kurs   = float(hist["Close"].iloc[-1])
-                        antall = int((allok * (1 - sb_kommisjon)) / kurs)
-                        if antall > 0:
-                            kostnad = antall * kurs * (1 + sb_kommisjon)
-                            if kostnad <= ny_kasse:
-                                nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
-                                ny_kasse -= kostnad
-
-                kasse_sb = ny_kasse
-
-                # Beregn porteføljeverdi ved neste dato
-                total_neste = kasse_sb
-                for navn, pos in nåværende_aksjer.items():
-                    df      = all_data[navn][1]
-                    fremtid = df[(df.index > dato) & (df.index <= neste)]
-                    if not fremtid.empty:
-                        total_neste += pos["antall"] * float(fremtid["Close"].iloc[-1])
-
-                portefolje_verdi.append(total_neste)
-
-                # OSEBX benchmark
-                if osebx_data is not None:
-                    osebx_slice = osebx_data[(osebx_data.index > dato) & (osebx_data.index <= neste)]
-                    osebx_prev  = osebx_data[osebx_data.index <= dato]
-                    if not osebx_slice.empty and not osebx_prev.empty and len(osebx_verdi) > 0:
-                        osebx_ret = float(osebx_slice["Close"].iloc[-1]) / float(osebx_prev["Close"].iloc[-1]) - 1
-                        osebx_verdi.append(osebx_verdi[-1] * (1 + osebx_ret))
-                    elif len(osebx_verdi) > 0:
-                        osebx_verdi.append(osebx_verdi[-1])
-
-                rebalanse_log.append({
-                    "Dato":       dato.strftime("%Y-%m"),
-                    "Portefølje": [n for n in nåværende_aksjer.keys()],
-                    "Verdi (kr)": round(total_neste, 0),
-                })
-
-                prog.progress((i + 1) / (len(datoer) - 1))
-
-            # ── Resultater ────────────────────────────────────────────────────
-            port_ret  = (portefolje_verdi[-1] / portefolje_verdi[0] - 1) * 100
-            osebx_ret = (osebx_verdi[-1] / osebx_verdi[0] - 1) * 100 if osebx_verdi else 0
-
-            c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Screener avkastning",  f"{port_ret:.1f}%",  f"{port_ret - osebx_ret:.1f}% vs OSEBX")
-            c2.metric("OSEBX avkastning",     f"{osebx_ret:.1f}%")
-            c3.metric("Rebalanseringer",       len(datoer) - 1)
-            c4.metric("Slutt verdi",          f"{portefolje_verdi[-1]:,.0f} kr")
-
-            # Equity curve
-            fig_sb = go.Figure()
-            fig_sb.add_trace(go.Scatter(
-                x=datoer[:len(portefolje_verdi)], y=portefolje_verdi,
-                name="Screener-portefølje", line=dict(color="#00b4d8", width=2)))
-            if osebx_verdi:
-                fig_sb.add_trace(go.Scatter(
-                    x=datoer[:len(osebx_verdi)], y=osebx_verdi,
-                    name="OSEBX (benchmark)", line=dict(color="#f77f00", dash="dash")))
-            fig_sb.update_layout(
-                template="plotly_dark", height=450,
-                yaxis_title="Kapital (kr)",
-                title="Screener-portefølje vs Oslo Børs (månedlig rebalansering)"
-            )
-            st.plotly_chart(fig_sb, use_container_width=True)
-
-            # Faktor-bidrag
-            st.subheader("Hvilke faktorer ga best treff?")
-            faktor_score = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
-            faktor_count = {"SMA (trend)": 0, "RSI (40-65)": 0, "MACD": 0, "Momentum": 0}
-
-            for navn, (ticker, df) in all_data.items():
-                for dato in datoer[:-1]:
-                    hist = df[df.index <= dato]
-                    if len(hist) < 60:
-                        continue
-                    try:
-                        close  = hist["Close"]
-                        fremtid = df[(df.index > dato) & (df.index <= dato + relativedelta(months=1))]
-                        if fremtid.empty:
-                            continue
-                        ret = float(fremtid["Close"].iloc[-1]) / float(close.iloc[-1]) - 1
-
-                        sma10  = float(close.rolling(10).mean().iloc[-1])
-                        sma50  = float(close.rolling(50).mean().iloc[-1])
-                        delta  = close.diff()
-                        gain   = delta.clip(lower=0).rolling(14).mean()
-                        loss   = (-delta.clip(upper=0)).rolling(14).mean()
-                        rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-                        ema12  = close.ewm(span=12).mean()
-                        ema26  = close.ewm(span=26).mean()
-                        macd_v = float((ema12 - ema26).iloc[-1])
-                        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
-                        mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
-
-                        if sma10 > sma50:
-                            faktor_score["SMA (trend)"] += ret
-                            faktor_count["SMA (trend)"] += 1
-                        if 40 < rsi < 65:
-                            faktor_score["RSI (40-65)"] += ret
-                            faktor_count["RSI (40-65)"] += 1
-                        if macd_v > sig_v:
-                            faktor_score["MACD"] += ret
-                            faktor_count["MACD"] += 1
-                        if mom > 0:
-                            faktor_score["Momentum"] += ret
-                            faktor_count["Momentum"] += 1
-                    except Exception:
-                        continue
-
-            snitt_ret = {
-                k: (faktor_score[k] / faktor_count[k] * 100) if faktor_count[k] > 0 else 0
-                for k in faktor_score
-            }
-            fig_fak = go.Figure(go.Bar(
-                x=list(snitt_ret.keys()),
-                y=list(snitt_ret.values()),
-                marker_color=["#26a69a" if v > 0 else "#ef5350" for v in snitt_ret.values()],
-                text=[f"{v:.2f}%" for v in snitt_ret.values()],
-                textposition="outside",
-            ))
-            fig_fak.update_layout(
-                template="plotly_dark", height=350,
-                yaxis_title="Gjennomsnittlig månedlig avkastning (%)",
-                title="Snittavkastning per faktor (når faktoren er positiv)"
-            )
-            st.plotly_chart(fig_fak, use_container_width=True)
-
-            # Rebalanseringslogg
-            with st.expander("Månedlig rebalanseringslogg"):
-                for r in rebalanse_log:
-                    st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")
-
-        st.divider()
-        st.markdown("### Strategi-backtest — Ensemble + Regime + Trailing SL")
-        st.caption(
-            "Simulerer den nøyaktige live-strategien historisk med ukentlig rebalansering. "
-            "Inkluderer regime-deteksjon, ensemble-signaler, trailing stop-loss og kurtasje."
-        )
-
-        _sb2_col1, _sb2_col2, _sb2_col3, _sb2_col4 = st.columns(4)
-        _str_kapital = _sb2_col1.number_input("Startkapital (kr)", value=100000, step=10000, key="str_kap")
-        _str_sl      = _sb2_col2.slider("Trailing SL %", 3, 20, 7, key="str_sl") / 100
-        _str_periode = _sb2_col3.selectbox("Periode", ["1 år", "2 år", "3 år", "5 år"], index=1, key="str_per")
-        _str_kurt    = _sb2_col4.selectbox("Kurtasje", ["Mini (0,15% · 29 kr)", "Normal (0,049% · 79 kr)"], key="str_kurt")
-
-        _str_kurt_pct = 0.0015 if "Mini" in _str_kurt else 0.00049
-        _str_kurt_min = 29     if "Mini" in _str_kurt else 79
-        _str_år       = {"1 år": 1, "2 år": 2, "3 år": 3, "5 år": 5}[_str_periode]
-        _str_slutt    = datetime.now().date()
-        _str_start    = (_str_slutt - pd.DateOffset(years=_str_år)).date()
-
-        if st.button("Kjør strategi-backtest", type="primary", key="str_bt_knapp"):
-
-            @st.cache_data(ttl=7200, show_spinner=False)
-            def _last_batch(tickers_tuple, start_s, slutt_s):
-                raw = yf.download(list(tickers_tuple), start=start_s, end=slutt_s,
-                                  progress=False, auto_adjust=True)
-                return raw
-
-            _alle_tickers = list(OSLO_BORS.values())
-            _navn_map     = {v: k for k, v in OSLO_BORS.items()}
-
-            with st.spinner("Laster data for alle aksjer..."):
-                _data_start = (pd.Timestamp(_str_start) - pd.DateOffset(days=300)).strftime("%Y-%m-%d")
-                _raw_batch  = _last_batch(tuple(_alle_tickers), _data_start, str(_str_slutt))
-                _osebx_raw  = None
-                for _bm in ["^OSEBX", "^OSEAX"]:
-                    _tmp = hent_aksje_historikk(_bm, "5y")
-                    if _tmp is not None and not _tmp.empty:
-                        _osebx_raw = _tmp["Close"]
-                        _osebx_raw.index = pd.to_datetime(_osebx_raw.index).tz_localize(None)
-                        break
-
-            # Bygg close/volume per ticker
-            _close_dict = {}
-            _vol_dict   = {}
-            if isinstance(_raw_batch.columns, pd.MultiIndex):
-                for _t in _alle_tickers:
-                    try:
-                        _c = _raw_batch["Close"][_t].dropna()
-                        _v = _raw_batch["Volume"][_t].dropna() if "Volume" in _raw_batch else None
-                        if len(_c) > 60:
-                            _close_dict[_t] = _c
-                            _vol_dict[_t]   = _v
-                    except Exception:
-                        continue
-            else:
-                # Enkelt-ticker fallback
-                for _t in _alle_tickers:
-                    try:
-                        _c = _raw_batch["Close"].dropna()
-                        if len(_c) > 60:
-                            _close_dict[_t] = _c
-                    except Exception:
-                        continue
-
-            # Ukentlige rebalanseringsdatoer (fredager)
-            _alle_datoer = pd.date_range(str(_str_start), str(_str_slutt), freq="W-FRI")
-            _portefolje  = {"kasse": float(_str_kapital), "posisjoner": {}}
-            _verdi_serie = []
-            _dato_serie  = []
-            _handler_log = []
-
-            _prog = st.progress(0)
-            for _i, _dato in enumerate(_alle_datoer):
-                _dato_str = _dato.strftime("%Y-%m-%d")
-
-                # Regime
-                _regime = "Sideways"
-                if _osebx_raw is not None:
-                    _osebx_til_dato = _osebx_raw[_osebx_raw.index <= _dato]
-                    if len(_osebx_til_dato) >= 10:
-                        _regime = detect_regime(_osebx_til_dato)
-                _rcfg_bt    = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
-                _maks_pos   = _rcfg_bt["maks_pos"]
-                _min_ens    = _rcfg_bt["min_ensemble"]
-
-                # OSEBX 3mnd-avkastning for relativ styrke
-                _osebx_ret3m = 0.0
-                if _osebx_raw is not None:
-                    _ox = _osebx_raw[_osebx_raw.index <= _dato]
-                    if len(_ox) >= 63:
-                        _osebx_ret3m = float(_ox.pct_change(63).iloc[-1] * 100)
-
-                # Beregn indikatorer for alle tickers
-                _kandidater = []
-                for _t, _close_full in _close_dict.items():
-                    _close_t = _close_full[_close_full.index <= _dato]
-                    if len(_close_t) < 60:
-                        continue
-                    _vol_t = _vol_dict.get(_t)
-                    if _vol_t is not None:
-                        _vol_t = _vol_t[_vol_t.index <= _dato]
-                    try:
-                        _ind = beregn_indikatorer(_close_t, _vol_t, _osebx_ret3m)
-                        if _ind and _ind["ensemble"] >= _min_ens and _ind["rsi_ok"]:
-                            _vol_60d = float(_close_t.pct_change().rolling(60).std().iloc[-1] * (252**0.5))
-                            _kandidater.append({
-                                "ticker": _t, "navn": _navn_map.get(_t, _t),
-                                "kurs":   _ind["pris"],
-                                "score":  _ind["score"] + _ind["oppside_score"],
-                                "vol_60d": _vol_60d if _vol_60d > 0 else 0.20,
-                            })
-                    except Exception:
-                        continue
-
-                _kandidater.sort(key=lambda x: x["score"], reverse=True)
-                _topp        = _kandidater[:_maks_pos]
-                _topp_ticker = {k["ticker"] for k in _topp}
-
-                # Trailing stop-loss
-                for _t, _pos in list(_portefolje["posisjoner"].items()):
-                    _close_t = _close_dict.get(_t)
-                    if _close_t is None:
-                        continue
-                    _close_t = _close_t[_close_t.index <= _dato]
-                    if _close_t.empty:
-                        continue
-                    _kurs_nå = float(_close_t.iloc[-1])
-                    _høy = max(_pos.get("høyeste_kurs", _pos["snittpris"]), _kurs_nå)
-                    _portefolje["posisjoner"][_t]["høyeste_kurs"] = _høy
-                    if (_kurs_nå / _høy - 1) <= -_str_sl:
-                        _brutto   = round(_pos["antall"] * _kurs_nå, 0)
-                        _kurt     = max(_brutto * _str_kurt_pct, _str_kurt_min)
-                        _portefolje["kasse"] += _brutto - _kurt
-                        del _portefolje["posisjoner"][_t]
-                        _topp_ticker.discard(_t)
-                        _handler_log.append({"dato": _dato_str, "handling": "SELG (SL)",
-                                             "navn": _pos["navn"], "kurs": _kurs_nå})
-
-                # Selg ikke-topp
-                for _t, _pos in list(_portefolje["posisjoner"].items()):
-                    if _t not in _topp_ticker:
-                        _close_t = _close_dict.get(_t)
-                        if _close_t is None:
-                            continue
-                        _close_t = _close_t[_close_t.index <= _dato]
-                        if _close_t.empty:
-                            continue
-                        _kurs_nå = float(_close_t.iloc[-1])
-                        _brutto  = round(_pos["antall"] * _kurs_nå, 0)
-                        _kurt    = max(_brutto * _str_kurt_pct, _str_kurt_min)
-                        _portefolje["kasse"] += _brutto - _kurt
-                        del _portefolje["posisjoner"][_t]
-                        _handler_log.append({"dato": _dato_str, "handling": "SELG",
-                                             "navn": _pos["navn"], "kurs": _kurs_nå})
-
-                # Kjøp topp
-                for _k in _topp:
-                    if _k["ticker"] in _portefolje["posisjoner"]:
-                        continue
-                    _vol_f   = max(0.5, min(2.0, 0.20 / _k["vol_60d"]))
-                    _allok   = _rcfg_bt["allok"] * _vol_f
-                    _beløp   = min(_portefolje["kasse"] * _allok, _portefolje["kasse"] * 0.5)
-                    _kurt    = max(_beløp * _str_kurt_pct, _str_kurt_min)
-                    _antall  = int((_beløp - _kurt) / _k["kurs"]) if _k["kurs"] > 0 else 0
-                    if _antall < 1:
-                        continue
-                    _kostnad = round(_antall * _k["kurs"], 0)
-                    _totalt  = _kostnad + _kurt
-                    if _totalt > _portefolje["kasse"]:
-                        continue
-                    _portefolje["posisjoner"][_k["ticker"]] = {
-                        "navn": _k["navn"], "antall": _antall,
-                        "snittpris": _k["kurs"], "høyeste_kurs": _k["kurs"],
-                    }
-                    _portefolje["kasse"] -= _totalt
-                    _handler_log.append({"dato": _dato_str, "handling": "KJØP",
-                                         "navn": _k["navn"], "kurs": _k["kurs"]})
-
-                # Daglig verdi
-                _pos_verdi = sum(
-                    float(_close_dict[_t][_close_dict[_t].index <= _dato].iloc[-1]) * _p["antall"]
-                    for _t, _p in _portefolje["posisjoner"].items()
-                    if _t in _close_dict and len(_close_dict[_t][_close_dict[_t].index <= _dato]) > 0
-                )
-                _verdi_serie.append(_portefolje["kasse"] + _pos_verdi)
-                _dato_serie.append(_dato)
-                _prog.progress((_i + 1) / len(_alle_datoer))
-
-            # ── Resultater ────────────────────────────────────────────────────
-            _tot_ret  = (_verdi_serie[-1] / _str_kapital - 1) * 100 if _verdi_serie else 0
-            _rv       = pd.Series(_verdi_serie)
-            _rets_bt  = _rv.pct_change().dropna()
-            _sharpe   = float((_rets_bt.mean() / _rets_bt.std()) * (252**0.5)) if _rets_bt.std() > 0 else 0
-            _cummax   = _rv.cummax()
-            _max_dd   = float(((_rv - _cummax) / _cummax * 100).min()) if len(_rv) > 1 else 0
-            _vol_bt   = float(_rets_bt.std() * (252**0.5) * 100)
-            _ant_kjøp = len([h for h in _handler_log if h["handling"] == "KJØP"])
-            _ant_selg = len([h for h in _handler_log if "SELG" in h["handling"]])
-
-            # OSEBX-benchmark for samme periode
-            _osebx_bt = None
-            if _osebx_raw is not None:
-                _ox_bt = _osebx_raw[(_osebx_raw.index >= pd.Timestamp(_str_start)) &
-                                    (_osebx_raw.index <= pd.Timestamp(_str_slutt))]
-                if len(_ox_bt) > 1:
-                    _osebx_bt = (_ox_bt / float(_ox_bt.iloc[0])) * _str_kapital
-
-            _osebx_ret_bt = float((_osebx_bt.iloc[-1] / _str_kapital - 1) * 100) if _osebx_bt is not None else 0
-
-            _m1, _m2, _m3, _m4, _m5, _m6 = st.columns(6)
-            _m1.metric("Avkastning", f"{_tot_ret:.1f}%", f"{_tot_ret - _osebx_ret_bt:.1f}% vs OSEBX")
-            _m2.metric("OSEBX", f"{_osebx_ret_bt:.1f}%")
-            _m3.metric("Sharpe", f"{_sharpe:.2f}")
-            _m4.metric("Maks drawdown", f"{_max_dd:.1f}%")
-            _m5.metric("Volatilitet", f"{_vol_bt:.1f}%")
-            _m6.metric("Handler", f"{_ant_kjøp} kjøp / {_ant_selg} salg")
-
-            _fig_str = go.Figure()
-            _fig_str.add_trace(go.Scatter(
-                x=_dato_serie, y=_verdi_serie,
-                name="Strategi", line=dict(color="#4C8BF5", width=2)))
-            if _osebx_bt is not None:
-                _fig_str.add_trace(go.Scatter(
-                    x=_osebx_bt.index, y=_osebx_bt.values,
-                    name="OSEBX", line=dict(color="#f77f00", dash="dash", width=1.5)))
-            _fig_str.add_hline(y=_str_kapital, line_dash="dot", line_color="gray")
-            _fig_str.update_layout(
-                template="plotly_dark", height=400,
-                margin=dict(l=0, r=0, t=20, b=0),
-                yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
-                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-            )
-            st.plotly_chart(_fig_str, use_container_width=True)
-
-            with st.expander("Handelslogg"):
-                if _handler_log:
-                    st.dataframe(pd.DataFrame(_handler_log), use_container_width=True, hide_index=True)
-                else:
-                    st.info("Ingen handler i perioden.")
-
-# ─── TAB 9: INFO ──────────────────────────────────────────────────────────────
-with tab9:
+# ─── TAB INFO ─────────────────────────────────────────────────────────────────
+with tab_info:
     st.markdown("# Nordic Trading Bot — Strategiguide")
     st.caption("En oversikt over alle strategier, signaler og beslutningslogikk i boten.")
 

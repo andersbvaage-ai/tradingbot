@@ -1665,44 +1665,35 @@ with tab_bt:
                     kandidater.sort(key=lambda x: (x["score"], x["mom"]), reverse=True)
                     topp = {k["navn"]: k for k in kandidater[:_maks_pos_sb]}
 
-                    # Beregn avkastning for inneværende måned
-                    total_verdi = kasse_sb
-                    for navn, pos in nåværende_aksjer.items():
-                        df = all_data[navn][1]
-                        fremtid = df[(df.index > dato) & (df.index <= neste)]
-                        if not fremtid.empty:
-                            sluttkurs = float(fremtid["Close"].iloc[-1])
-                            total_verdi += pos["antall"] * sluttkurs
-
-                    # Rebalanser: selg det som ikke er i topp (til dato-kurs, samme dag som kjøp)
+                    # Full månedlig rebalansering: selg ALT til dato-kurs, kjøp ALT i topp likt
                     ny_kasse = kasse_sb
-                    for navn in list(nåværende_aksjer.keys()):
-                        if navn not in topp:
-                            df        = all_data[navn][1]
-                            hist_sell = df[df.index <= dato]
-                            if not hist_sell.empty:
-                                kurs     = float(hist_sell["Close"].iloc[-1])
-                                inntekt  = kurs * nåværende_aksjer[navn]["antall"]
-                                kurt_sb  = max(inntekt * sb_kommisjon, _sb_kurt_min)
-                                ny_kasse += inntekt - kurt_sb
-                            del nåværende_aksjer[navn]
 
-                    # Kjøp nye
+                    # Selg alle eksisterende posisjoner
+                    for navn in list(nåværende_aksjer.keys()):
+                        df        = all_data[navn][1]
+                        hist_sell = df[df.index <= dato]
+                        if not hist_sell.empty:
+                            kurs     = float(hist_sell["Close"].iloc[-1])
+                            inntekt  = kurs * nåværende_aksjer[navn]["antall"]
+                            kurt_sb  = max(inntekt * sb_kommisjon, _sb_kurt_min)
+                            ny_kasse += inntekt - kurt_sb
+                    nåværende_aksjer = {}
+
+                    # Kjøp alle topp-aksjer likt (ekte equal-weight rebalansering)
                     allok = ny_kasse / max(len(topp), 1)
                     for navn, k in topp.items():
-                        if navn not in nåværende_aksjer:
-                            df   = all_data[navn][1]
-                            hist = df[df.index <= dato]
-                            if hist.empty:
-                                continue
-                            kurs    = float(hist["Close"].iloc[-1])
-                            kurt_sb = max(allok * sb_kommisjon, _sb_kurt_min)
-                            antall  = int((allok - kurt_sb) / kurs)
-                            if antall > 0:
-                                kostnad = antall * kurs + kurt_sb
-                                if kostnad <= ny_kasse:
-                                    nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
-                                    ny_kasse -= kostnad
+                        df   = all_data[navn][1]
+                        hist = df[df.index <= dato]
+                        if hist.empty:
+                            continue
+                        kurs    = float(hist["Close"].iloc[-1])
+                        kurt_sb = max(allok * sb_kommisjon, _sb_kurt_min)
+                        antall  = int((allok - kurt_sb) / kurs)
+                        if antall > 0:
+                            kostnad = antall * kurs + kurt_sb
+                            if kostnad <= ny_kasse:
+                                nåværende_aksjer[navn] = {"antall": antall, "kurs": kurs}
+                                ny_kasse -= kostnad
 
                     kasse_sb = ny_kasse
 

@@ -1755,36 +1755,37 @@ with tab7:
             help="Posisjoner selges automatisk hvis de faller mer enn dette fra kjøpspris"
         )
 
-        st.markdown("**Kurtasje**")
-        _kurt_col1, _kurt_col2, _kurt_col3 = st.columns(3)
-        ny_kurt_pct = _kurt_col1.number_input(
-            "Kurtasje % per handel", min_value=0.0, max_value=1.0,
-            value=float(pf_inn.get("kurtasje_pct", 0.001)) * 100,
-            step=0.01, format="%.3f",
-            help="Prosent av handelsbeløp. Nordnet: 0.1%"
+        st.markdown("**Kurtasje (Nordnet, Oslo Børs)**")
+        _MODELLER = {
+            "Mini":   {"pct": 0.0015,  "min_kr": 29, "info": "0,15% · min 29 kr · best for handler < 52 667 kr"},
+            "Normal": {"pct": 0.00049, "min_kr": 79, "info": "0,049% · min 79 kr · best for handler > 52 667 kr"},
+        }
+        _kurt_col1, _kurt_col2 = st.columns([1, 2])
+        ny_modell = _kurt_col1.selectbox(
+            "Kurtasjeklasse",
+            options=list(_MODELLER.keys()),
+            index=list(_MODELLER.keys()).index(pf_inn.get("kurtasje_modell", "Mini")),
+            help="Velg samme klasse som du har satt i Nordnet under Mine sider"
         )
-        ny_kurt_min = _kurt_col2.number_input(
-            "Minimum kurtasje (kr)", min_value=0, max_value=500,
-            value=int(pf_inn.get("kurtasje_min_kr", 79)),
-            step=1,
-            help="Minste kurtasje per handel. Nordnet: 79 kr"
-        )
-        ny_kurt_ratio = _kurt_col3.number_input(
+        _m = _MODELLER[ny_modell]
+        _kurt_col2.info(f"**{ny_modell}:** {_m['info']}\n\n"
+                        f"Minimumsposisjon for 2%-ratio: **{int(_m['min_kr'] / 0.02):,} kr**")
+
+        ny_kurt_ratio = st.number_input(
             "Maks kurtasje-ratio (%)", min_value=0.5, max_value=10.0,
             value=float(pf_inn.get("kurtasje_ratio_maks", 0.02)) * 100,
             step=0.5, format="%.1f",
-            help="Boten hopper over handler der kurtasjen overstiger X% av posisjonen. "
-                 "Minimumsposisjon = min.kurtasje / ratio. Med 79 kr og 2%: min 3 950 kr per posisjon."
+            help="Boten hopper over handler der kurtasjen overstiger X% av posisjonen."
         )
 
         if st.button("Lagre innstillinger"):
             pf_inn["stop_loss_pct"]       = ny_sl / 100
-            pf_inn["kurtasje_pct"]        = ny_kurt_pct / 100
-            pf_inn["kurtasje_min_kr"]     = ny_kurt_min
+            pf_inn["kurtasje_modell"]     = ny_modell
             pf_inn["kurtasje_ratio_maks"] = ny_kurt_ratio / 100
             lagre_portefolje(pf_inn)
-            st.success(f"Lagret — stop-loss {ny_sl}%, kurtasje {ny_kurt_pct:.3f}% "
-                       f"min {ny_kurt_min} kr, maks ratio {ny_kurt_ratio:.1f}%")
+            st.success(f"Lagret — stop-loss {ny_sl}%, kurtasje {ny_modell} "
+                       f"({_m['pct']*100:.3f}% · min {_m['min_kr']} kr), "
+                       f"maks ratio {ny_kurt_ratio:.1f}%")
             st.rerun()
 
         st.divider()
@@ -1795,8 +1796,7 @@ with tab7:
                 "kasse": ny_kasse, "start_kapital": ny_kasse,
                 "posisjoner": {}, "ventende_handler": [], "historikk": [],
                 "stop_loss_pct":       ny_sl / 100,
-                "kurtasje_pct":        ny_kurt_pct / 100,
-                "kurtasje_min_kr":     ny_kurt_min,
+                "kurtasje_modell":     ny_modell,
                 "kurtasje_ratio_maks": ny_kurt_ratio / 100,
             })
             st.session_state.pop("forslag", None)

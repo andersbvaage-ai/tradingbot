@@ -236,13 +236,20 @@ SEKTORER = {
     "HBC.OL":"Industri",   "TRVX.OL":"Helse",     "NUM.OL":"Industri",   "AGLX.OL":"Industri",
     "SAGA.OL":"Industri",
 }
-KURTASJE_PCT       = 0.001  # 0.1% av handelsbeløp
-KURTASJE_MIN_KR    = 79     # minimum kurtasje per handel (Nordnet)
 MAKS_KURTASJE_RATIO = 0.02  # kurtasje skal ikke overstige 2% av posisjonsstørrelsen
 
+# Nordnet kurtasjemodeller (Norden/Oslo Børs)
+KURTASJE_MODELLER = {
+    "Mini":   {"pct": 0.0015, "min_kr": 29},   # Best for handler < 52 667 kr
+    "Normal": {"pct": 0.00049, "min_kr": 79},  # Best for handler > 52 667 kr
+}
+KURTASJE_STANDARD = "Mini"  # Standard-modell
+
 def beregn_kurtasje(beløp, pf):
-    pct = pf.get("kurtasje_pct", KURTASJE_PCT)
-    min_kr = pf.get("kurtasje_min_kr", KURTASJE_MIN_KR)
+    modell_navn = pf.get("kurtasje_modell", KURTASJE_STANDARD)
+    modell      = KURTASJE_MODELLER.get(modell_navn, KURTASJE_MODELLER[KURTASJE_STANDARD])
+    pct         = modell["pct"]
+    min_kr      = modell["min_kr"]
     return round(max(beløp * pct, min_kr), 0)
 
 REGIME_CONFIG = {
@@ -533,8 +540,9 @@ def kjor_analyse():
 
         # Kurtasje-ratio-sjekk: skaler opp posisjonen hvis kurtasjen er for dyr
         kurtasje_ratio_maks = pf.get("kurtasje_ratio_maks", MAKS_KURTASJE_RATIO)
-        min_kr = pf.get("kurtasje_min_kr", KURTASJE_MIN_KR)
-        min_beløp = min_kr / kurtasje_ratio_maks          # f.eks. 79/0.02 = 3 950 kr
+        modell_navn = pf.get("kurtasje_modell", KURTASJE_STANDARD)
+        min_kr      = KURTASJE_MODELLER.get(modell_navn, KURTASJE_MODELLER[KURTASJE_STANDARD])["min_kr"]
+        min_beløp   = min_kr / kurtasje_ratio_maks         # f.eks. 29/0.02 = 1 450 kr (Mini)
         if beløp < min_beløp:
             # Forsøk å skalere opp til lønnsom posisjonsstørrelse (maks 50% av kasse)
             beløp    = min(min_beløp, pf["kasse"] * 0.5)

@@ -32,7 +32,6 @@
     }
   ],
   "stop_loss_pct": 0.07,
-  "kurtasje_pct": 0.001,
-  "kurtasje_min_kr": 79,
+  "kurtasje_modell": "Mini",
   "kurtasje_ratio_maks": 0.02
 }

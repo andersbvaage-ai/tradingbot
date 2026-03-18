@@ -2094,6 +2094,246 @@ with tab8:
                 for r in rebalanse_log:
                     st.markdown(f"**{r['Dato']}** — {', '.join(r['Portefølje'])} — {r['Verdi (kr)']:,.0f} kr")
 
+        st.divider()
+        st.markdown("### Strategi-backtest — Ensemble + Regime + Trailing SL")
+        st.caption(
+            "Simulerer den nøyaktige live-strategien historisk med ukentlig rebalansering. "
+            "Inkluderer regime-deteksjon, ensemble-signaler, trailing stop-loss og kurtasje."
+        )
+
+        _sb2_col1, _sb2_col2, _sb2_col3, _sb2_col4 = st.columns(4)
+        _str_kapital = _sb2_col1.number_input("Startkapital (kr)", value=100000, step=10000, key="str_kap")
+        _str_sl      = _sb2_col2.slider("Trailing SL %", 3, 20, 7, key="str_sl") / 100
+        _str_periode = _sb2_col3.selectbox("Periode", ["1 år", "2 år", "3 år", "5 år"], index=1, key="str_per")
+        _str_kurt    = _sb2_col4.selectbox("Kurtasje", ["Mini (0,15% · 29 kr)", "Normal (0,049% · 79 kr)"], key="str_kurt")
+
+        _str_kurt_pct = 0.0015 if "Mini" in _str_kurt else 0.00049
+        _str_kurt_min = 29     if "Mini" in _str_kurt else 79
+        _str_år       = {"1 år": 1, "2 år": 2, "3 år": 3, "5 år": 5}[_str_periode]
+        _str_slutt    = datetime.now().date()
+        _str_start    = (_str_slutt - pd.DateOffset(years=_str_år)).date()
+
+        if st.button("Kjør strategi-backtest", type="primary", key="str_bt_knapp"):
+
+            @st.cache_data(ttl=7200, show_spinner=False)
+            def _last_batch(tickers_tuple, start_s, slutt_s):
+                raw = yf.download(list(tickers_tuple), start=start_s, end=slutt_s,
+                                  progress=False, auto_adjust=True)
+                return raw
+
+            _alle_tickers = list(OSLO_BORS.values())
+            _navn_map     = {v: k for k, v in OSLO_BORS.items()}
+
+            with st.spinner("Laster data for alle aksjer..."):
+                _data_start = (pd.Timestamp(_str_start) - pd.DateOffset(days=300)).strftime("%Y-%m-%d")
+                _raw_batch  = _last_batch(tuple(_alle_tickers), _data_start, str(_str_slutt))
+                _osebx_raw  = None
+                for _bm in ["^OSEBX", "^OSEAX"]:
+                    _tmp = hent_aksje_historikk(_bm, "5y")
+                    if _tmp is not None and not _tmp.empty:
+                        _osebx_raw = _tmp["Close"]
+                        _osebx_raw.index = pd.to_datetime(_osebx_raw.index).tz_localize(None)
+                        break
+
+            # Bygg close/volume per ticker
+            _close_dict = {}
+            _vol_dict   = {}
+            if isinstance(_raw_batch.columns, pd.MultiIndex):
+                for _t in _alle_tickers:
+                    try:
+                        _c = _raw_batch["Close"][_t].dropna()
+                        _v = _raw_batch["Volume"][_t].dropna() if "Volume" in _raw_batch else None
+                        if len(_c) > 60:
+                            _close_dict[_t] = _c
+                            _vol_dict[_t]   = _v
+                    except Exception:
+                        continue
+            else:
+                # Enkelt-ticker fallback
+                for _t in _alle_tickers:
+                    try:
+                        _c = _raw_batch["Close"].dropna()
+                        if len(_c) > 60:
+                            _close_dict[_t] = _c
+                    except Exception:
+                        continue
+
+            # Ukentlige rebalanseringsdatoer (fredager)
+            _alle_datoer = pd.date_range(str(_str_start), str(_str_slutt), freq="W-FRI")
+            _portefolje  = {"kasse": float(_str_kapital), "posisjoner": {}}
+            _verdi_serie = []
+            _dato_serie  = []
+            _handler_log = []
+
+            _prog = st.progress(0)
+            for _i, _dato in enumerate(_alle_datoer):
+                _dato_str = _dato.strftime("%Y-%m-%d")
+
+                # Regime
+                _regime = "Sideways"
+                if _osebx_raw is not None:
+                    _osebx_til_dato = _osebx_raw[_osebx_raw.index <= _dato]
+                    if len(_osebx_til_dato) >= 10:
+                        _regime = detect_regime(_osebx_til_dato)
+                _rcfg_bt    = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
+                _maks_pos   = _rcfg_bt["maks_pos"]
+                _min_ens    = _rcfg_bt["min_ensemble"]
+
+                # OSEBX 3mnd-avkastning for relativ styrke
+                _osebx_ret3m = 0.0
+                if _osebx_raw is not None:
+                    _ox = _osebx_raw[_osebx_raw.index <= _dato]
+                    if len(_ox) >= 63:
+                        _osebx_ret3m = float(_ox.pct_change(63).iloc[-1] * 100)
+
+                # Beregn indikatorer for alle tickers
+                _kandidater = []
+                for _t, _close_full in _close_dict.items():
+                    _close_t = _close_full[_close_full.index <= _dato]
+                    if len(_close_t) < 60:
+                        continue
+                    _vol_t = _vol_dict.get(_t)
+                    if _vol_t is not None:
+                        _vol_t = _vol_t[_vol_t.index <= _dato]
+                    try:
+                        _ind = beregn_indikatorer(_close_t, _vol_t, _osebx_ret3m)
+                        if _ind and _ind["ensemble"] >= _min_ens and _ind["rsi_ok"]:
+                            _vol_60d = float(_close_t.pct_change().rolling(60).std().iloc[-1] * (252**0.5))
+                            _kandidater.append({
+                                "ticker": _t, "navn": _navn_map.get(_t, _t),
+                                "kurs":   _ind["pris"],
+                                "score":  _ind["score"] + _ind["oppside_score"],
+                                "vol_60d": _vol_60d if _vol_60d > 0 else 0.20,
+                            })
+                    except Exception:
+                        continue
+
+                _kandidater.sort(key=lambda x: x["score"], reverse=True)
+                _topp        = _kandidater[:_maks_pos]
+                _topp_ticker = {k["ticker"] for k in _topp}
+
+                # Trailing stop-loss
+                for _t, _pos in list(_portefolje["posisjoner"].items()):
+                    _close_t = _close_dict.get(_t)
+                    if _close_t is None:
+                        continue
+                    _close_t = _close_t[_close_t.index <= _dato]
+                    if _close_t.empty:
+                        continue
+                    _kurs_nå = float(_close_t.iloc[-1])
+                    _høy = max(_pos.get("høyeste_kurs", _pos["snittpris"]), _kurs_nå)
+                    _portefolje["posisjoner"][_t]["høyeste_kurs"] = _høy
+                    if (_kurs_nå / _høy - 1) <= -_str_sl:
+                        _brutto   = round(_pos["antall"] * _kurs_nå, 0)
+                        _kurt     = max(_brutto * _str_kurt_pct, _str_kurt_min)
+                        _portefolje["kasse"] += _brutto - _kurt
+                        del _portefolje["posisjoner"][_t]
+                        _topp_ticker.discard(_t)
+                        _handler_log.append({"dato": _dato_str, "handling": "SELG (SL)",
+                                             "navn": _pos["navn"], "kurs": _kurs_nå})
+
+                # Selg ikke-topp
+                for _t, _pos in list(_portefolje["posisjoner"].items()):
+                    if _t not in _topp_ticker:
+                        _close_t = _close_dict.get(_t)
+                        if _close_t is None:
+                            continue
+                        _close_t = _close_t[_close_t.index <= _dato]
+                        if _close_t.empty:
+                            continue
+                        _kurs_nå = float(_close_t.iloc[-1])
+                        _brutto  = round(_pos["antall"] * _kurs_nå, 0)
+                        _kurt    = max(_brutto * _str_kurt_pct, _str_kurt_min)
+                        _portefolje["kasse"] += _brutto - _kurt
+                        del _portefolje["posisjoner"][_t]
+                        _handler_log.append({"dato": _dato_str, "handling": "SELG",
+                                             "navn": _pos["navn"], "kurs": _kurs_nå})
+
+                # Kjøp topp
+                for _k in _topp:
+                    if _k["ticker"] in _portefolje["posisjoner"]:
+                        continue
+                    _vol_f   = max(0.5, min(2.0, 0.20 / _k["vol_60d"]))
+                    _allok   = _rcfg_bt["allok"] * _vol_f
+                    _beløp   = min(_portefolje["kasse"] * _allok, _portefolje["kasse"] * 0.5)
+                    _kurt    = max(_beløp * _str_kurt_pct, _str_kurt_min)
+                    _antall  = int((_beløp - _kurt) / _k["kurs"]) if _k["kurs"] > 0 else 0
+                    if _antall < 1:
+                        continue
+                    _kostnad = round(_antall * _k["kurs"], 0)
+                    _totalt  = _kostnad + _kurt
+                    if _totalt > _portefolje["kasse"]:
+                        continue
+                    _portefolje["posisjoner"][_k["ticker"]] = {
+                        "navn": _k["navn"], "antall": _antall,
+                        "snittpris": _k["kurs"], "høyeste_kurs": _k["kurs"],
+                    }
+                    _portefolje["kasse"] -= _totalt
+                    _handler_log.append({"dato": _dato_str, "handling": "KJØP",
+                                         "navn": _k["navn"], "kurs": _k["kurs"]})
+
+                # Daglig verdi
+                _pos_verdi = sum(
+                    float(_close_dict[_t][_close_dict[_t].index <= _dato].iloc[-1]) * _p["antall"]
+                    for _t, _p in _portefolje["posisjoner"].items()
+                    if _t in _close_dict and len(_close_dict[_t][_close_dict[_t].index <= _dato]) > 0
+                )
+                _verdi_serie.append(_portefolje["kasse"] + _pos_verdi)
+                _dato_serie.append(_dato)
+                _prog.progress((_i + 1) / len(_alle_datoer))
+
+            # ── Resultater ────────────────────────────────────────────────────
+            _tot_ret  = (_verdi_serie[-1] / _str_kapital - 1) * 100 if _verdi_serie else 0
+            _rv       = pd.Series(_verdi_serie)
+            _rets_bt  = _rv.pct_change().dropna()
+            _sharpe   = float((_rets_bt.mean() / _rets_bt.std()) * (252**0.5)) if _rets_bt.std() > 0 else 0
+            _cummax   = _rv.cummax()
+            _max_dd   = float(((_rv - _cummax) / _cummax * 100).min()) if len(_rv) > 1 else 0
+            _vol_bt   = float(_rets_bt.std() * (252**0.5) * 100)
+            _ant_kjøp = len([h for h in _handler_log if h["handling"] == "KJØP"])
+            _ant_selg = len([h for h in _handler_log if "SELG" in h["handling"]])
+
+            # OSEBX-benchmark for samme periode
+            _osebx_bt = None
+            if _osebx_raw is not None:
+                _ox_bt = _osebx_raw[(_osebx_raw.index >= pd.Timestamp(_str_start)) &
+                                    (_osebx_raw.index <= pd.Timestamp(_str_slutt))]
+                if len(_ox_bt) > 1:
+                    _osebx_bt = (_ox_bt / float(_ox_bt.iloc[0])) * _str_kapital
+
+            _osebx_ret_bt = float((_osebx_bt.iloc[-1] / _str_kapital - 1) * 100) if _osebx_bt is not None else 0
+
+            _m1, _m2, _m3, _m4, _m5, _m6 = st.columns(6)
+            _m1.metric("Avkastning", f"{_tot_ret:.1f}%", f"{_tot_ret - _osebx_ret_bt:.1f}% vs OSEBX")
+            _m2.metric("OSEBX", f"{_osebx_ret_bt:.1f}%")
+            _m3.metric("Sharpe", f"{_sharpe:.2f}")
+            _m4.metric("Maks drawdown", f"{_max_dd:.1f}%")
+            _m5.metric("Volatilitet", f"{_vol_bt:.1f}%")
+            _m6.metric("Handler", f"{_ant_kjøp} kjøp / {_ant_selg} salg")
+
+            _fig_str = go.Figure()
+            _fig_str.add_trace(go.Scatter(
+                x=_dato_serie, y=_verdi_serie,
+                name="Strategi", line=dict(color="#4C8BF5", width=2)))
+            if _osebx_bt is not None:
+                _fig_str.add_trace(go.Scatter(
+                    x=_osebx_bt.index, y=_osebx_bt.values,
+                    name="OSEBX", line=dict(color="#f77f00", dash="dash", width=1.5)))
+            _fig_str.add_hline(y=_str_kapital, line_dash="dot", line_color="gray")
+            _fig_str.update_layout(
+                template="plotly_dark", height=400,
+                margin=dict(l=0, r=0, t=20, b=0),
+                yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            )
+            st.plotly_chart(_fig_str, use_container_width=True)
+
+            with st.expander("Handelslogg"):
+                if _handler_log:
+                    st.dataframe(pd.DataFrame(_handler_log), use_container_width=True, hide_index=True)
+                else:
+                    st.info("Ingen handler i perioden.")
+
 # ─── TAB 9: INFO ──────────────────────────────────────────────────────────────
 with tab9:
     st.markdown("# Nordic Trading Bot — Strategiguide")

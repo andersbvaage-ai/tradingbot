@@ -236,6 +236,7 @@ SEKTORER = {
     "SAGA.OL":"Industri",
 }
 MAKS_KURTASJE_RATIO = 0.02  # kurtasje skal ikke overstige 2% av posisjonsstørrelsen
+TARGET_VOL          = 0.20  # referansevolatilitet for posisjonsstørrelse (20% annualisert)
 
 # Nordnet kurtasjemodeller (Norden/Oslo Børs)
 KURTASJE_MODELLER = {
@@ -349,11 +350,15 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     score         = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
     oppside_score = (rel_styrke / 10) + (vol_økning / 50) + (nærhet_topp / 100)
 
+    # 60-dagers realisert volatilitet (annualisert)
+    vol_60d = float(close.pct_change().rolling(60).std().iloc[-1] * (252 ** 0.5)) if len(close) >= 60 else 0.20
+
     return {
         "navn": navn, "ticker": ticker, "kurs": pris,
         "score": score, "ensemble": ensemble, "ensemble_tekst": stemmer,
         "rsi": rsi, "mom": mom, "rel_styrke": rel_styrke,
         "vol_økning": vol_økning, "nærhet_topp": nærhet_topp, "oppside_score": oppside_score,
+        "vol_60d": vol_60d,
     }
 
 def send_epost(forslag, epost_til, epost_fra, epost_passord):
@@ -541,7 +546,11 @@ def kjor_analyse():
         if sektor_teller.get(sektor, 0) >= MAKS_PER_SEKTOR:
             print(f"  SEKTOR-KAP: hopper over {k['navn']} ({sektor} har allerede {sektor_teller[sektor]} pos)")
             continue
-        beløp    = min(pf["kasse"] * allok, pf["kasse"] * MAKS_ALLOKERING)
+        # Volatilitetsbasert posisjonsstørrelse — stabile aksjer får mer, volatile mindre
+        vol_60d    = k.get("vol_60d", TARGET_VOL)
+        vol_faktor = TARGET_VOL / vol_60d if vol_60d > 0 else 1.0
+        vol_faktor = max(0.5, min(2.0, vol_faktor))   # clamp til [50%, 200%]
+        beløp    = min(pf["kasse"] * allok * vol_faktor, pf["kasse"] * MAKS_ALLOKERING)
         kurtasje = beregn_kurtasje(beløp, pf)
 
         # Kurtasje-ratio-sjekk: skaler opp posisjonen hvis kurtasjen er for dyr

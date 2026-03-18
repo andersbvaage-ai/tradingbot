@@ -775,10 +775,15 @@ def send_varsel(utforte: list, modus: str = "full") -> None:
 
 if __name__ == "__main__":
     import sys
-    if "--only-stop-loss" in sys.argv:
+    if "--test-varsel" in sys.argv:
+        send_varsel([{
+            "handling": "KJØP", "navn": "Test AS", "antall": 10,
+            "kurs": 100.0, "beløp": 1000.0,
+        }], modus="full")
+    elif "--only-stop-loss" in sys.argv:
         resultat = sjekk_stop_loss()
         send_varsel(resultat, modus="stop-loss")
     else:
         resultat = kjor_analyse()
         send_varsel(resultat, modus="full")
-    utfør_nordnet_handler(resultat)
+        utfør_nordnet_handler(resultat)

@@ -14,6 +14,7 @@ on:
         options:
           - full
           - only-stop-loss
+          - test-varsel
 
 jobs:
   analyser:
@@ -38,7 +39,10 @@ jobs:
           HOUR=$(date -u +%H)
           MINUTE=$(date -u +%M)
           INPUT="${{ github.event.inputs.modus }}"
-          if [ "$INPUT" = "only-stop-loss" ]; then
+          if [ "$INPUT" = "test-varsel" ]; then
+            echo "args=--test-varsel" >> $GITHUB_OUTPUT
+            echo "label=Test varsel" >> $GITHUB_OUTPUT
+          elif [ "$INPUT" = "only-stop-loss" ]; then
             echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
             echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
           elif [ "$HOUR" = "12" ]; then

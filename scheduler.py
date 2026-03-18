@@ -278,9 +278,9 @@ def beregn_kurtasje(beløp, pf):
     return round(max(beløp * pct, min_kr), 0)
 
 REGIME_CONFIG = {
-    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15},
-    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12},
-    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10},
+    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15, "maks_per_sektor": 3},
+    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12, "maks_per_sektor": 2},
+    "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10, "maks_per_sektor": 1},
 }
 
 def detect_regime(osebx_close):
@@ -438,12 +438,14 @@ def kjor_analyse():
     except Exception:
         pass
 
-    rcfg         = REGIME_CONFIG[regime]
-    min_ensemble = rcfg["min_ensemble"]
-    maks_pos     = rcfg["maks_pos"]
-    allok        = rcfg["allok"]
+    rcfg             = REGIME_CONFIG[regime]
+    min_ensemble     = rcfg["min_ensemble"]
+    maks_pos         = rcfg["maks_pos"]
+    allok            = rcfg["allok"]
+    maks_per_sektor  = rcfg["maks_per_sektor"]
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Regime: {regime} "
-          f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos)")
+          f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos, "
+          f"maks {maks_per_sektor}/sektor)")
 
     # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
     kandidater    = []
@@ -591,7 +593,7 @@ def kjor_analyse():
             continue
         # Sektorkap — hopp over hvis sektoren allerede er fullt
         sektor = SEKTORER.get(k["ticker"], "Annet")
-        if sektor_teller.get(sektor, 0) >= MAKS_PER_SEKTOR:
+        if sektor_teller.get(sektor, 0) >= maks_per_sektor:
             print(f"  SEKTOR-KAP: hopper over {k['navn']} ({sektor} har allerede {sektor_teller[sektor]} pos)")
             continue
         # Volatilitetsbasert posisjonsstørrelse — stabile aksjer får mer, volatile mindre
@@ -836,6 +838,79 @@ def send_varsel(utforte: list, modus: str = "full") -> None:
         print(f"Varsel feilet: {e}")
 
 
+def send_ukentlig_rapport() -> None:
+    """
+    Sender ukentlig oppsummering via ntfy.sh hver fredag kl. 16:00.
+    Viser avkastning, åpne posisjoner og ukens handler.
+    """
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic:
+        print("Ukentlig rapport: NTFY_TOPIC ikke satt — hopper over")
+        return
+
+    pf = les_portefolje()
+
+    # Beregn live porteføljeverdi
+    total_pos_verdi = 0
+    pos_linjer = []
+    for ticker, pos in pf["posisjoner"].items():
+        kurs = hent_siste_kurs(ticker)
+        if kurs:
+            verdi        = kurs * pos["antall"]
+            gevinst_pct  = (kurs / pos["snittpris"] - 1) * 100
+            total_pos_verdi += verdi
+            pos_linjer.append(f"  {pos['navn']}: {gevinst_pct:+.1f}% ({verdi:,.0f} kr)")
+
+    total_verdi    = pf["kasse"] + total_pos_verdi
+    start_kapital  = pf.get("start_kapital", 10000)
+    avkastning_pct = (total_verdi / start_kapital - 1) * 100
+
+    # Handler siste 7 dager
+    fra_dato = (datetime.now() - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+    ukens_handler = [h for h in pf.get("historikk", []) if str(h["dato"])[:10] >= fra_dato]
+    kjøp_uke = [h for h in ukens_handler if h["handling"] == "KJØP"]
+    salg_uke = [h for h in ukens_handler if h["handling"] == "SELG"]
+
+    linjer = [
+        f"Uke {datetime.now().strftime('%W')} — {datetime.now().strftime('%d.%m.%Y')}",
+        f"Portefølje: {total_verdi:,.0f} kr ({avkastning_pct:+.1f}% siden start)",
+        f"Regime: {pf.get('regime', '–')} | Kasse: {pf['kasse']:,.0f} kr",
+        "",
+    ]
+
+    if pos_linjer:
+        linjer.append("Åpne posisjoner:")
+        linjer.extend(pos_linjer)
+    else:
+        linjer.append("Ingen åpne posisjoner")
+
+    if kjøp_uke or salg_uke:
+        linjer.append("")
+        linjer.append(f"Denne uken: {len(kjøp_uke)} kjøp, {len(salg_uke)} salg")
+        for h in kjøp_uke:
+            linjer.append(f"  KJ: {h['navn']} {h['antall']} stk à {h['kurs']:.2f} kr")
+        for h in salg_uke:
+            linjer.append(f"  SL: {h['navn']} {h['antall']} stk à {h['kurs']:.2f} kr")
+    else:
+        linjer.append("")
+        linjer.append("Ingen handler denne uken")
+
+    try:
+        requests.post(
+            f"https://ntfy.sh/{topic}",
+            data="\n".join(linjer).encode("utf-8"),
+            headers={
+                "Title":    f"Trading Bot — Ukesrapport {avkastning_pct:+.1f}%",
+                "Priority": "default",
+                "Tags":     "bar_chart",
+            },
+            timeout=10,
+        )
+        print(f"Ukentlig rapport sendt: {total_verdi:,.0f} kr ({avkastning_pct:+.1f}%)")
+    except Exception as e:
+        print(f"Ukentlig rapport feilet: {e}")
+
+
 if __name__ == "__main__":
     import sys
     if "--test-varsel" in sys.argv:
@@ -843,6 +918,8 @@ if __name__ == "__main__":
             "handling": "KJØP", "navn": "Test AS", "antall": 10,
             "kurs": 100.0, "beløp": 1000.0,
         }], modus="full")
+    elif "--ukentlig-rapport" in sys.argv:
+        send_ukentlig_rapport()
     elif "--only-stop-loss" in sys.argv:
         resultat = sjekk_stop_loss()
         send_varsel(resultat, modus="stop-loss")

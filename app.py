@@ -1589,6 +1589,8 @@ with tab_bt:
                 portefolje_verdi  = [float(kapital)]
                 osebx_verdi       = [float(kapital)]
                 rebalanse_log     = []
+                antall_kjøp_sb    = 0
+                antall_salg_sb    = 0
                 nåværende_aksjer  = {}
                 kasse_sb          = float(kapital)
 
@@ -1684,6 +1686,7 @@ with tab_bt:
                             inntekt  = kurs * nåværende_aksjer[navn]["antall"]
                             kurt_sb  = max(inntekt * sb_kommisjon, _sb_kurt_min)
                             ny_kasse += inntekt - kurt_sb
+                            antall_salg_sb += 1
                         del nåværende_aksjer[navn]
 
                     # Kjøp nye topp-aksjer (de som ikke allerede holdes)
@@ -1703,6 +1706,7 @@ with tab_bt:
                                 if kostnad <= ny_kasse:
                                     nåværende_aksjer[k["navn"]] = {"antall": antall, "kurs": kurs}
                                     ny_kasse -= kostnad
+                                    antall_kjøp_sb += 1
 
                     kasse_sb = ny_kasse
 
@@ -1738,11 +1742,12 @@ with tab_bt:
                 port_ret  = (portefolje_verdi[-1] / portefolje_verdi[0] - 1) * 100
                 osebx_ret = (osebx_verdi[-1] / osebx_verdi[0] - 1) * 100 if osebx_verdi else 0
 
-                c1, c2, c3, c4 = st.columns(4)
+                c1, c2, c3, c4, c5 = st.columns(5)
                 c1.metric("Screener avkastning",  f"{port_ret:.1f}%",  f"{port_ret - osebx_ret:.1f}% vs OSEBX")
                 c2.metric("OSEBX avkastning",     f"{osebx_ret:.1f}%")
-                c3.metric("Rebalanseringer",       len(datoer) - 1)
-                c4.metric("Slutt verdi",          f"{portefolje_verdi[-1]:,.0f} kr")
+                c3.metric("Kjøp / salg",          f"{antall_kjøp_sb} / {antall_salg_sb}")
+                c4.metric("Måneder simulert",     len(datoer) - 1)
+                c5.metric("Slutt verdi",          f"{portefolje_verdi[-1]:,.0f} kr")
 
                 # Equity curve
                 fig_sb = go.Figure()

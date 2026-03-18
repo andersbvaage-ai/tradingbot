@@ -60,12 +60,12 @@
       "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 16.2% \u00b7 rel.styrke 16.9% \u00b7 RSI 50"
     }
   ],
-  "sist_analysert": "2026-03-18 11:13:33.580394",
+  "sist_analysert": "2026-03-18 16:20:26.544606",
   "regime": "Sideways",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
-      "total_verdi": 9872.0
+      "total_verdi": 9812.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -78,10 +78,13 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 33.2,
-      "rel_styrke": 31.6,
-      "rsi": 46.0,
-      "kurs": 258.6
+      "mom": 32.0,
+      "rel_styrke": 30.4,
+      "rsi": 45.0,
+      "kurs": 256.2,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Aker Solutions",
@@ -89,10 +92,13 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 37.2,
-      "rel_styrke": 33.9,
+      "mom": 36.9,
+      "rel_styrke": 33.6,
       "rsi": 58.0,
-      "kurs": 41.42
+      "kurs": 41.34,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Scatec",
@@ -100,10 +106,41 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 16.2,
-      "rel_styrke": 16.9,
-      "rsi": 50.0,
-      "kurs": 119.2
+      "mom": 13.9,
+      "rel_styrke": 14.6,
+      "rsi": 46.0,
+      "kurs": 116.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Nel Hydrogen",
+      "ticker": "NEL.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 13.6,
+      "rel_styrke": 0.7,
+      "rsi": 72.0,
+      "kurs": 2.4,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Nordic Semiconductor",
+      "ticker": "NOD.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 3.5,
+      "rel_styrke": 22.3,
+      "rsi": 71.0,
+      "kurs": 160.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "TGS",
@@ -111,10 +148,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 66.4,
-      "rel_styrke": 29.6,
-      "rsi": 67.0,
-      "kurs": 117.1
+      "mom": 67.2,
+      "rel_styrke": 30.2,
+      "rsi": 68.0,
+      "kurs": 117.7,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "BW Offshore",
@@ -122,10 +162,13 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 49.6,
-      "rel_styrke": 33.0,
-      "rsi": 52.0,
-      "kurs": 52.1
+      "mom": 48.8,
+      "rel_styrke": 32.3,
+      "rsi": 50.0,
+      "kurs": 51.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "MPC Container Ships",
@@ -133,32 +176,13 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 2,
-      "mom": 36.6,
-      "rel_styrke": 36.9,
-      "rsi": 65.0,
-      "kurs": 23.7
-    },
-    {
-      "navn": "Wallenius Wilhelmsen",
-      "ticker": "WAWI.OL",
-      "ensemble": 2,
-      "ensemble_tekst": "Trend \u00b7 Mom",
-      "score": 3,
-      "mom": 33.4,
-      "rel_styrke": 20.2,
-      "rsi": 45.0,
-      "kurs": 124.2
-    },
-    {
-      "navn": "Kitron",
-      "ticker": "KIT.OL",
-      "ensemble": 2,
-      "ensemble_tekst": "Trend \u00b7 Mom",
-      "score": 3,
-      "mom": 64.7,
-      "rel_styrke": 51.6,
-      "rsi": 44.0,
-      "kurs": 103.1
+      "mom": 38.3,
+      "rel_styrke": 38.6,
+      "rsi": 67.0,
+      "kurs": 24.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ]
 }

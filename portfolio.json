@@ -1,12 +1,36 @@
 {
-  "kasse": 10000,
+  "kasse": 6054.0,
   "start_kapital": 10000,
-  "posisjoner": {},
+  "posisjoner": {
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 15,
+      "snittpris": 257.79998779296875,
+      "kj\u00f8psdato": "2026-03-18"
+    }
+  },
   "ventende_handler": [],
-  "historikk": [],
-  "sist_analysert": null,
-  "regime": null,
-  "verdi_historikk": [],
+  "historikk": [
+    {
+      "dato": "2026-03-18 09:32:51.327878",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 15,
+      "kurs": 257.79998779296875,
+      "bel\u00f8p": 3867.0,
+      "kurtasje": 79,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 32.8% \u00b7 rel.styrke 31.2% \u00b7 RSI 46"
+    }
+  ],
+  "sist_analysert": "2026-03-18 09:32:51.327907",
+  "regime": "Sideways",
+  "verdi_historikk": [
+    {
+      "dato": "2026-03-18",
+      "total_verdi": 9921.0
+    }
+  ],
   "stop_loss_pct": 0.07,
   "kurtasje_pct": 0.001,
   "kurtasje_min_kr": 79,

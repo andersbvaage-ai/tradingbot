@@ -53,6 +53,7 @@ jobs:
         env:
           NORDNET_API_KEY:  ${{ secrets.NORDNET_API_KEY }}
           NORDNET_PRIV_KEY: ${{ secrets.NORDNET_PRIV_KEY }}
+          NTFY_TOPIC:       ${{ secrets.NTFY_TOPIC }}
         run: python scheduler.py ${{ steps.modus.outputs.args }}
 
       - name: Lagre oppdatert portefølje

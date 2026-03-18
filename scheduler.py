@@ -8,8 +8,7 @@ import yfinance as yf
 import pandas as pd
 import json
 import os
-import smtplib
-from email.mime.text import MIMEText
+import requests
 from datetime import datetime
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "portfolio.json")
@@ -733,10 +732,53 @@ def sjekk_stop_loss() -> list:
     return utforte
 
 
+def send_varsel(utforte: list, modus: str = "full") -> None:
+    """
+    Send push-varsel via ntfy.sh når boten har kjøpt eller solgt.
+    Krever env-variabel NTFY_TOPIC (sett i GitHub Secrets).
+    Ingen konto nødvendig — installer ntfy-appen og abonner på topic-et.
+    """
+    topic = os.environ.get("NTFY_TOPIC")
+    if not topic or not utforte:
+        return
+
+    kjøp  = [h for h in utforte if h["handling"] == "KJØP"]
+    salg  = [h for h in utforte if h["handling"] == "SELG"]
+    linjer = []
+
+    for h in kjøp:
+        linjer.append(f"KJ: {h['navn']} — {h['antall']} stk à {h['kurs']:.2f} kr "
+                      f"= {h['beløp']:,.0f} kr")
+    for h in salg:
+        linjer.append(f"SL: {h['navn']} — {h['antall']} stk à {h['kurs']:.2f} kr "
+                      f"= {h['beløp']:,.0f} kr")
+
+    tittel = f"Trading Bot — {len(kjøp)} kjøp, {len(salg)} salg"
+    if modus == "stop-loss":
+        tittel = f"Trading Bot — Stop-loss: {len(salg)} salg"
+
+    try:
+        requests.post(
+            f"https://ntfy.sh/{topic}",
+            data="\n".join(linjer).encode("utf-8"),
+            headers={
+                "Title":    tittel,
+                "Priority": "high" if salg else "default",
+                "Tags":     "chart_with_upwards_trend",
+            },
+            timeout=10,
+        )
+        print(f"Varsel sendt: {tittel}")
+    except Exception as e:
+        print(f"Varsel feilet: {e}")
+
+
 if __name__ == "__main__":
     import sys
     if "--only-stop-loss" in sys.argv:
         resultat = sjekk_stop_loss()
+        send_varsel(resultat, modus="stop-loss")
     else:
         resultat = kjor_analyse()
+        send_varsel(resultat, modus="full")
     utfør_nordnet_handler(resultat)

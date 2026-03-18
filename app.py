@@ -1533,6 +1533,12 @@ with tab_bt:
             "Simulerer hva som ville skjedd om boten kjøpte topp-aksjene hver måned og rebalanserte. "
             "Tester om screener-logikken faktisk gir meravkastning over tid."
         )
+        st.warning(
+            "⚠️ **Survivorship bias:** Backtesten bruker kun aksjer som fortsatt er notert i dag. "
+            "Selskaper som gikk konkurs eller ble avnotert i perioden er ikke med — "
+            "dette gir urealistisk høye resultater, spesielt over lange perioder.",
+            icon=None,
+        )
 
         _sb_modus = st.radio(
             "Antall aksjer",
@@ -1668,14 +1674,14 @@ with tab_bt:
                             sluttkurs = float(fremtid["Close"].iloc[-1])
                             total_verdi += pos["antall"] * sluttkurs
 
-                    # Rebalanser: selg det som ikke er i topp
+                    # Rebalanser: selg det som ikke er i topp (til dato-kurs, samme dag som kjøp)
                     ny_kasse = kasse_sb
                     for navn in list(nåværende_aksjer.keys()):
                         if navn not in topp:
-                            df      = all_data[navn][1]
-                            fremtid = df[(df.index > dato) & (df.index <= neste)]
-                            if not fremtid.empty:
-                                kurs    = float(fremtid["Close"].iloc[-1])
+                            df        = all_data[navn][1]
+                            hist_sell = df[df.index <= dato]
+                            if not hist_sell.empty:
+                                kurs     = float(hist_sell["Close"].iloc[-1])
                                 inntekt  = kurs * nåværende_aksjer[navn]["antall"]
                                 kurt_sb  = max(inntekt * sb_kommisjon, _sb_kurt_min)
                                 ny_kasse += inntekt - kurt_sb

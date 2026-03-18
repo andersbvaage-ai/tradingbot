@@ -1663,6 +1663,7 @@ with tab_bt:
                                 "navn": navn, "ticker": ticker,
                                 "score": ind["score"] + ind["oppside_score"],
                                 "mom": ind["mom"],
+                                "ensemble": ind["ensemble"],
                             })
                         except Exception:
                             continue

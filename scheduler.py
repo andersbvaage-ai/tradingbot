@@ -936,6 +936,14 @@ def utfør_saxo_handler(utforte: list) -> None:
         if klient.refresh_token:
             _oppdater_saxo_refresh_token(klient.refresh_token)
 
+        # Build set of UICs we actually hold in Saxo
+        saxo_posisjoner = klient.hent_posisjoner()
+        holdte_uic = {
+            p.get("NetPositionBase", {}).get("Uic")
+            or p.get("PositionBase", {}).get("Uic")
+            for p in saxo_posisjoner
+        } - {None}
+
         for handel in utforte:
             ticker   = handel["ticker"]          # e.g. "EQNR.OL"
             symbol   = ticker.replace(".OL", "") # e.g. "EQNR"
@@ -950,6 +958,9 @@ def utfør_saxo_handler(utforte: list) -> None:
             if handling == "KJØP":
                 klient.kjop(uic, antall)
             elif handling == "SELG":
+                if uic not in holdte_uic:
+                    print(f"SAXO: {symbol} ikke i Saxo-portefølje — hopper over salg")
+                    continue
                 klient.selg(uic, antall)
 
     except Exception as e:

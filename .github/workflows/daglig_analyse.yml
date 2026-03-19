@@ -22,6 +22,9 @@ jobs:
   analyser:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: write
+      secrets: write
     steps:
       - name: Hent kode
         uses: actions/checkout@v4

@@ -1,5 +1,5 @@
 {
-  "kasse": 1979.0,
+  "kasse": 1910.0,
   "start_kapital": 10000,
   "posisjoner": {
     "SUBC.OL": {
@@ -23,12 +23,12 @@
       "kj\u00f8psdato": "2026-03-19",
       "h\u00f8yeste_kurs": 53.0
     },
-    "AKBM.OL": {
-      "navn": "Aker BioMarine",
-      "antall": 13,
-      "snittpris": 106.19999694824219,
+    "MORG.OL": {
+      "navn": "Sparebanken M\u00f8re",
+      "antall": 12,
+      "snittpris": 115.72000122070312,
       "kj\u00f8psdato": "2026-03-19",
-      "h\u00f8yeste_kurs": 106.19999694824219
+      "h\u00f8yeste_kurs": 115.72000122070312
     }
   },
   "ventende_handler": [],
@@ -98,9 +98,32 @@
       "bel\u00f8p": 1381.0,
       "kurtasje": 29,
       "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 20.1% \u00b7 rel.styrke 17.0% \u00b7 RSI 59 \u00b7 P/E 25 \u00b7 P/B 5.6"
+    },
+    {
+      "dato": "2026-03-19 15:01:36.506709",
+      "handling": "SELG",
+      "ticker": "AKBM.OL",
+      "navn": "Aker BioMarine",
+      "antall": 13,
+      "kurs": 106.0,
+      "snittpris": 106.19999694824219,
+      "bel\u00f8p": 1378.0,
+      "kurtasje": 29,
+      "begrunnelse": "Ikke lenger blant topp-kandidater"
+    },
+    {
+      "dato": "2026-03-19 15:01:38.293683",
+      "handling": "KJ\u00d8P",
+      "ticker": "MORG.OL",
+      "navn": "Sparebanken M\u00f8re",
+      "antall": 12,
+      "kurs": 115.72000122070312,
+      "bel\u00f8p": 1389.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 7.2% \u00b7 rel.styrke 10.2% \u00b7 RSI 58 \u00b7 P/E 6 \u00b7 P/B 0.7"
     }
   ],
-  "sist_analysert": "2026-03-19 12:14:58.176650",
+  "sist_analysert": "2026-03-19 15:01:38.293696",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -109,7 +132,7 @@
     },
     {
       "dato": "2026-03-19",
-      "total_verdi": 9825.0
+      "total_verdi": 9793.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -122,26 +145,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 52.6,
-      "rel_styrke": 47.7,
-      "rsi": 63.0,
-      "kurs": 57.3,
-      "pe": 11.6,
-      "pb": 1.54,
-      "yield": null
-    },
-    {
-      "navn": "Aker BioMarine",
-      "ticker": "AKBM.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 20.1,
-      "rel_styrke": 17.0,
-      "rsi": 59.0,
-      "kurs": 106.2,
-      "pe": 24.7,
-      "pb": 5.64,
+      "mom": 55.3,
+      "rel_styrke": 50.3,
+      "rsi": 65.0,
+      "kurs": 58.3,
+      "pe": 11.8,
+      "pb": 1.56,
       "yield": null
     },
     {
@@ -149,14 +158,47 @@
       "ticker": "EIOF.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 17.8,
-      "rel_styrke": 22.6,
-      "rsi": 63.0,
-      "kurs": 15.2,
-      "pe": 16.3,
-      "pb": 0.67,
+      "score": 3,
+      "mom": 19.0,
+      "rel_styrke": 23.8,
+      "rsi": 66.0,
+      "kurs": 15.35,
+      "pe": 16.5,
+      "pb": 0.68,
       "yield": 2.0
+    },
+    {
+      "navn": "Sparebanken M\u00f8re",
+      "ticker": "MORG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 7.2,
+      "rel_styrke": 10.2,
+      "rsi": 58.0,
+      "kurs": 115.72,
+      "pe": 5.9,
+      "pb": 0.67,
+      "yield": 6.0
     }
-  ]
+  ],
+  "r\u00e5vare_trender": {
+    "Energi": 1,
+    "Shipping": -1
+  },
+  "insider_kj\u00f8p": [
+    "BWLPG.OL",
+    "SMCRT.OL"
+  ],
+  "short_interest": {
+    "NEL.OL": 3.79,
+    "NOD.OL": 4.31,
+    "AUTO.OL": 2.2,
+    "TGS.OL": 2.3,
+    "GSF.OL": 2.2,
+    "HEX.OL": 7.45,
+    "NAS.OL": 2.17,
+    "BAKKA.OL": 3.28,
+    "LINK.OL": 11.38
+  }
 }

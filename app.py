@@ -1002,15 +1002,19 @@ with tab_dash:
 
         _logg_rader = []
         for _h in _filtrert:
+            _gevinst = None
+            if _h.get("handling") == "SELG" and "snittpris" in _h and "antall" in _h:
+                _gevinst = round((_h["kurs"] - _h["snittpris"]) * _h["antall"] - _h.get("kurtasje", 0), 0)
             _logg_rader.append({
-                "Dato":          str(_h.get("dato", ""))[:16].replace("T", " "),
-                "Handling":      _h.get("handling", ""),
-                "Aksje":         _h.get("navn", ""),
-                "Antall":        _h.get("antall", ""),
-                "Kurs (kr)":     round(_h["kurs"], 2)     if "kurs"     in _h else None,
-                "Beløp (kr)":    round(_h["beløp"], 0)    if "beløp"    in _h else None,
-                "Kurtasje (kr)": round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
-                "Begrunnelse":   _h.get("begrunnelse", "–"),
+                "Dato":           str(_h.get("dato", ""))[:16].replace("T", " "),
+                "Handling":       _h.get("handling", ""),
+                "Aksje":          _h.get("navn", ""),
+                "Antall":         _h.get("antall", ""),
+                "Kurs (kr)":      round(_h["kurs"], 2)     if "kurs"     in _h else None,
+                "Beløp (kr)":     round(_h["beløp"], 0)    if "beløp"    in _h else None,
+                "Kurtasje (kr)":  round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
+                "Gevinst/Tap":    _gevinst,
+                "Begrunnelse":    _h.get("begrunnelse", "–"),
             })
 
         st.dataframe(
@@ -1024,8 +1028,9 @@ with tab_dash:
                 "Antall":        st.column_config.NumberColumn("Antall",     width="small"),
                 "Kurs (kr)":     st.column_config.NumberColumn("Kurs",       format="%.2f kr",  width="medium"),
                 "Beløp (kr)":    st.column_config.NumberColumn("Beløp",      format="%,.0f kr", width="medium"),
-                "Kurtasje (kr)": st.column_config.NumberColumn("Kurtasje",   format="%,.0f kr", width="small"),
-                "Begrunnelse":   st.column_config.TextColumn("Begrunnelse",  width="large"),
+                "Kurtasje (kr)":  st.column_config.NumberColumn("Kurtasje",    format="%,.0f kr", width="small"),
+                "Gevinst/Tap":    st.column_config.NumberColumn("Gevinst/Tap", format="%+,.0f kr", width="medium"),
+                "Begrunnelse":    st.column_config.TextColumn("Begrunnelse",   width="large"),
             },
         )
         _total_kurtasje = sum(_h.get("kurtasje", 0) for _h in _historikk)

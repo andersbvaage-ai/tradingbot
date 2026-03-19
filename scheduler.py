@@ -506,12 +506,12 @@ def kjor_analyse():
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             print(f"  TRAILING SL: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
@@ -536,12 +536,12 @@ def kjor_analyse():
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             print(f"  ENSEMBLE=0: solgt {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr")
@@ -564,12 +564,12 @@ def kjor_analyse():
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr "
@@ -795,12 +795,12 @@ def sjekk_stop_loss() -> list:
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
             })
             print(f"  TRAILING SL: solgt {pos['navn']} à {kurs:.2f} kr "

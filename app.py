@@ -710,6 +710,11 @@ with tab_dash:
             for _sek, _trend in _råvare_trender.items():
                 _råvare_linjer.append(f"{_ikoner.get(_trend,'–')} **{_navn_map.get(_sek, _sek)}** ({_sek})")
             st.caption("  ·  ".join(_råvare_linjer))
+        _insider_kjøp = _pf.get("insider_kjøp", [])
+        if _insider_kjøp:
+            _ticker_navn = {v: k for k, v in {**OSLO_BORS}.items()}
+            _navn_liste = [_ticker_navn.get(t, t) for t in _insider_kjøp]
+            st.caption(f"Insiderkjøp (30d): **{', '.join(_navn_liste)}**")
 
     _topp_kand = _pf.get("topp_kandidater", [])
     with _kand_col:

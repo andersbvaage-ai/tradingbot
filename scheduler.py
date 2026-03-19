@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "portfolio.json")
 
@@ -268,6 +268,42 @@ def hent_råvare_trend(råvare_ticker):
     except Exception:
         return 0
 
+def hent_innsidekjøp(univers_tickers, dager=14):
+    """
+    Henter tickers med insiderkjøp siste N dager fra Oslo Børs OAM-system.
+    Itererer over hverdager siden fromDate=YYYY-MM-DD er eksakt dato, ikke range.
+    Returnerer set av tickers (format: TICKER.OL).
+    """
+    kjøp_tickers = set()
+    univers_sign = {t.replace(".OL", "") for t in univers_tickers}
+    today = datetime.utcnow().date()
+    try:
+        for dag in range(dager):
+            dato = today - timedelta(days=dag)
+            if dato.weekday() >= 5:   # hopp over helg
+                continue
+            resp = requests.get(
+                "https://api3.oslo.oslobors.no/v1/newsreader/list",
+                params={"category": 1102, "fromDate": dato.isoformat()},
+                timeout=15,
+            )
+            messages = resp.json()["data"]["messages"]
+            for msg in messages:
+                sign = msg.get("issuerSign", "")
+                if sign not in univers_sign or sign + ".OL" in kjøp_tickers:
+                    continue
+                detail = requests.get(
+                    "https://api3.oslo.oslobors.no/v1/newsreader/message",
+                    params={"messageId": msg["messageId"]},
+                    timeout=10,
+                )
+                body = detail.json().get("data", {}).get("message", {}).get("body", "").lower()
+                if "has bought" in body or "has purchased" in body or "har kjøpt" in body:
+                    kjøp_tickers.add(sign + ".OL")
+    except Exception as e:
+        print(f"  Insider-data feilet: {e}")
+    return kjøp_tickers
+
 def hent_fundamentals(ticker):
     """Henter P/E, P/B og dividendYield fra yfinance. Returnerer dict — felt er None hvis ukjent."""
     try:
@@ -488,6 +524,14 @@ def kjor_analyse():
         retning = "↑ uptrend" if trend == 1 else ("↓ downtrend" if trend == -1 else "– ukjent")
         print(f"  {sektor} ({råvare_ticker}): {retning}")
 
+    # Hent innsidekjøp siste 30 dager fra Oslo Børs OAM
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter innsidekjøp...")
+    insider_kjøp = hent_innsidekjøp(set(UNIVERS.values()))
+    if insider_kjøp:
+        print(f"  Insiderkjøp siste 30 dager: {', '.join(sorted(insider_kjøp))}")
+    else:
+        print(f"  Ingen insiderkjøp funnet i universet")
+
     # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
     kandidater    = []
     alle_ensemble = {}   # ticker → ensemble-count for posisjonssjekk
@@ -497,14 +541,21 @@ def kjor_analyse():
             k = analyser_aksje(navn, ticker, osebx_ret3m)
             if k:
                 sektor = SEKTORER.get(ticker, "Annet")
-                k["råvare_score"] = råvare_trender.get(sektor, 0) * 0.5
+                k["råvare_score"]  = råvare_trender.get(sektor, 0) * 0.5
+                k["insider_score"] = 0.75 if ticker in insider_kjøp else 0.0
                 alle_ensemble[ticker] = k["ensemble"]
                 if k["ensemble"] >= min_ensemble:
                     kandidater.append(k)
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
 
-    kandidater.sort(key=lambda x: (x["ensemble"], x["score"] + x["oppside_score"] + x.get("råvare_score", 0)), reverse=True)
+    kandidater.sort(
+        key=lambda x: (
+            x["ensemble"],
+            x["score"] + x["oppside_score"] + x.get("råvare_score", 0) + x.get("insider_score", 0)
+        ),
+        reverse=True,
+    )
     topp = kandidater[:maks_pos]
 
     # Utfør handler automatisk
@@ -701,6 +752,7 @@ def kjor_analyse():
     pf["sist_analysert"]    = str(datetime.now())
     pf["regime"]            = regime
     pf["råvare_trender"]    = råvare_trender
+    pf["insider_kjøp"]      = sorted(insider_kjøp)
 
     # ── Lagre topp-kandidater for visning i Dashboard ────────────────────────
     pf["topp_kandidater"] = [

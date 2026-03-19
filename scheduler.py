@@ -268,6 +268,53 @@ def hent_råvare_trend(råvare_ticker):
     except Exception:
         return 0
 
+def _norm_navn(s):
+    """Normaliserer selskapsnavn for matching mot Finanstilsynet-data."""
+    s = s.upper()
+    for suffix in [" ASA", " SA", " S.A.", " AB", " PLC", " LTD", " INC",
+                   " CORP", " SE", " NV", " HOLDING", " HOLDINGS", " GROUP",
+                   " LIMITED", " AS", " BIOTECH"]:
+        s = s.replace(suffix, "")
+    return __import__("re").sub(r"[^A-Z0-9 ]", "", s).strip()
+
+def hent_short_interest(univers):
+    """
+    Henter netto short-posisjoner fra Finanstilsynet SSR.
+    Returnerer dict {ticker: short_pct} for tickers i universet.
+    """
+    short_map = {}
+    try:
+        resp = requests.get(
+            "https://ssr.finanstilsynet.no/api/v2/instruments",
+            timeout=20,
+        )
+        # Build lookup: normalized_name → short_pct
+        ft_map = {}
+        for inst in resp.json():
+            if inst["events"] and inst["events"][0]["shortPercent"] > 0:
+                ft_map[_norm_navn(inst["issuerName"])] = inst["events"][0]["shortPercent"]
+
+        # Match universe names to Finanstilsynet names
+        for navn, ticker in univers.items():
+            n = _norm_navn(navn)
+            pct = None
+            if n in ft_map:
+                pct = ft_map[n]
+            else:
+                # Substring match i begge retninger
+                for ft_n, ft_pct in ft_map.items():
+                    if n in ft_n or ft_n in n or (
+                        len(n) >= 4 and n.split()[0] == ft_n.split()[0] and
+                        len(set(n.split()) & set(ft_n.split())) >= 2
+                    ):
+                        pct = ft_pct
+                        break
+            if pct is not None:
+                short_map[ticker] = pct
+    except Exception as e:
+        print(f"  Short-interest-data feilet: {e}")
+    return short_map
+
 def hent_innsidekjøp(univers_tickers, dager=14):
     """
     Henter tickers med insiderkjøp siste N dager fra Oslo Børs OAM-system.
@@ -524,13 +571,20 @@ def kjor_analyse():
         retning = "↑ uptrend" if trend == 1 else ("↓ downtrend" if trend == -1 else "– ukjent")
         print(f"  {sektor} ({råvare_ticker}): {retning}")
 
-    # Hent innsidekjøp siste 30 dager fra Oslo Børs OAM
+    # Hent innsidekjøp siste 14 dager fra Oslo Børs OAM
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter innsidekjøp...")
     insider_kjøp = hent_innsidekjøp(set(UNIVERS.values()))
     if insider_kjøp:
-        print(f"  Insiderkjøp siste 30 dager: {', '.join(sorted(insider_kjøp))}")
+        print(f"  Insiderkjøp siste 14 dager: {', '.join(sorted(insider_kjøp))}")
     else:
         print(f"  Ingen insiderkjøp funnet i universet")
+
+    # Hent short interest fra Finanstilsynet
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter short interest...")
+    short_interest = hent_short_interest(UNIVERS)
+    høy_short = {t: p for t, p in short_interest.items() if p >= 2.0}
+    if høy_short:
+        print(f"  Short ≥2%: " + ", ".join(f"{t} {p:.1f}%" for t, p in sorted(høy_short.items(), key=lambda x: -x[1])))
 
     # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
     kandidater    = []
@@ -543,6 +597,9 @@ def kjor_analyse():
                 sektor = SEKTORER.get(ticker, "Annet")
                 k["råvare_score"]  = råvare_trender.get(sektor, 0) * 0.5
                 k["insider_score"] = 0.75 if ticker in insider_kjøp else 0.0
+                short_pct = short_interest.get(ticker, 0.0)
+                k["short_pct"]   = short_pct
+                k["short_score"] = -0.75 if short_pct >= 5.0 else (-0.4 if short_pct >= 2.0 else 0.0)
                 alle_ensemble[ticker] = k["ensemble"]
                 if k["ensemble"] >= min_ensemble:
                     kandidater.append(k)
@@ -552,7 +609,8 @@ def kjor_analyse():
     kandidater.sort(
         key=lambda x: (
             x["ensemble"],
-            x["score"] + x["oppside_score"] + x.get("råvare_score", 0) + x.get("insider_score", 0)
+            x["score"] + x["oppside_score"] + x.get("råvare_score", 0)
+            + x.get("insider_score", 0) + x.get("short_score", 0)
         ),
         reverse=True,
     )
@@ -753,6 +811,7 @@ def kjor_analyse():
     pf["regime"]            = regime
     pf["råvare_trender"]    = råvare_trender
     pf["insider_kjøp"]      = sorted(insider_kjøp)
+    pf["short_interest"]    = {t: round(p, 2) for t, p in short_interest.items() if p >= 2.0}
 
     # ── Lagre topp-kandidater for visning i Dashboard ────────────────────────
     pf["topp_kandidater"] = [

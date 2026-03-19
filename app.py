@@ -714,7 +714,11 @@ with tab_dash:
         if _insider_kjøp:
             _ticker_navn = {v: k for k, v in {**OSLO_BORS}.items()}
             _navn_liste = [_ticker_navn.get(t, t) for t in _insider_kjøp]
-            st.caption(f"Insiderkjøp (30d): **{', '.join(_navn_liste)}**")
+            st.caption(f"Insiderkjøp (14d): **{', '.join(_navn_liste)}**")
+        _short_int = _pf.get("short_interest", {})
+        if _short_int:
+            _short_str = ", ".join(f"{t.replace('.OL','')} {p:.1f}%" for t, p in sorted(_short_int.items(), key=lambda x: -x[1]))
+            st.caption(f"Høy short interest: **{_short_str}**")
 
     _topp_kand = _pf.get("topp_kandidater", [])
     with _kand_col:

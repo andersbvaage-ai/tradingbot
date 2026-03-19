@@ -253,7 +253,7 @@ def hent_fundamentals(ticker):
         info = yf.Ticker(ticker).info
         pe    = info.get("trailingPE") or info.get("forwardPE")
         pb    = info.get("priceToBook")
-        yield_ = info.get("dividendYield")   # f.eks. 0.045 = 4,5%
+        yield_ = info.get("dividendYield")   # allerede i %, f.eks. 4.5 = 4,5%
         return {"pe": pe, "pb": pb, "yield": yield_}
     except Exception:
         return {"pe": None, "pb": None, "yield": None}
@@ -683,7 +683,7 @@ def kjor_analyse():
             "kurs":           round(k["kurs"], 2),
             "pe":             round(k["pe"], 1) if k.get("pe") else None,
             "pb":             round(k["pb"], 2) if k.get("pb") else None,
-            "yield":          round(k["yield"] * 100, 1) if k.get("yield") else None,
+            "yield":          round(k["yield"], 1) if k.get("yield") else None,
         }
         for k in topp[:8]   # topp 8, uavhengig av om de ble kjøpt
     ]

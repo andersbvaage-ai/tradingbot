@@ -857,56 +857,103 @@ def kjor_analyse():
 
     return utforte
 
-# ── Nordnet live-utførelse ────────────────────────────────────────────────────
+# ── Saxo live-utførelse ───────────────────────────────────────────────────────
 
-def utfør_nordnet_handler(utforte: list) -> None:
-    """
-    Kjør de samme handlene som scheduler bestemte, men nå mot Nordnet API.
-    Kalles kun hvis NORDNET_API_KEY og NORDNET_PRIV_KEY er satt i miljøet.
+def _oppdater_saxo_refresh_token(nytt_token: str) -> None:
+    """Update SAXO_REFRESH_TOKEN in GitHub Actions secrets after rotation."""
+    import base64
+    repo  = os.environ.get("GITHUB_REPOSITORY", "")
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if not (repo and token):
+        return
+    try:
+        import requests as _req
+        from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey
+        from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+        # Fetch repo public key
+        r = _req.get(
+            f"https://api.github.com/repos/{repo}/actions/secrets/public-key",
+            headers={"Authorization": f"token {token}", "Accept": "application/vnd.github+json"},
+        )
+        if not r.ok:
+            print(f"SAXO: Kunne ikke hente GitHub public key: {r.status_code}")
+            return
+        key_data = r.json()
+        key_id   = key_data["key_id"]
+        pub_key  = base64.b64decode(key_data["key"])
 
-    Ticker-mapping: yfinance bruker "EQNR.OL" — Nordnet vil ha "EQNR" (uten .OL).
+        from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey
+        from cryptography.hazmat.primitives.asymmetric import x25519
+        recipient_key = x25519.X25519PublicKey.from_public_bytes(pub_key)
+        # PyNaCl sealed box
+        from nacl.encoding import Base64Encoder
+        from nacl.public import PublicKey, SealedBox
+        box       = SealedBox(PublicKey(pub_key))
+        encrypted = base64.b64encode(box.encrypt(nytt_token.encode())).decode()
+
+        r2 = _req.put(
+            f"https://api.github.com/repos/{repo}/actions/secrets/SAXO_REFRESH_TOKEN",
+            headers={"Authorization": f"token {token}", "Accept": "application/vnd.github+json"},
+            json={"encrypted_value": encrypted, "key_id": key_id},
+        )
+        if r2.status_code in (201, 204):
+            print("SAXO: SAXO_REFRESH_TOKEN oppdatert i GitHub Secrets")
+        else:
+            print(f"SAXO: Kunne ikke oppdatere GitHub Secret: {r2.status_code}")
+    except Exception as e:
+        print(f"SAXO: Feil ved oppdatering av refresh token: {e}")
+
+
+def utfør_saxo_handler(utforte: list) -> None:
     """
-    if not (os.environ.get("NORDNET_API_KEY") and os.environ.get("NORDNET_PRIV_KEY")):
-        return  # Nordnet ikke konfigurert — hopp over
+    Execute trades via Saxo Bank OpenAPI.
+    Only runs if SAXO_CLIENT_ID and SAXO_REFRESH_TOKEN are set in environment.
+    Rotates SAXO_REFRESH_TOKEN in GitHub Secrets after each run.
+
+    Ticker-mapping: yfinance uses "EQNR.OL" — Saxo wants "EQNR" (no .OL suffix).
+    """
+    if not (os.environ.get("SAXO_CLIENT_ID") and os.environ.get("SAXO_REFRESH_TOKEN")):
+        return  # Saxo not configured — skip
 
     try:
-        from nordnet_client import NordnetClient
+        from saxo_client import SaxoClient
     except ImportError:
-        print("NORDNET: nordnet_client.py ikke funnet — hopper over live-utførelse")
+        print("SAXO: saxo_client.py ikke funnet — hopper over live-utførelse")
         return
 
     if not utforte:
-        print("NORDNET: Ingen handler å utføre")
+        print("SAXO: Ingen handler å utføre")
         return
 
-    print("\n── Nordnet live-utførelse ──────────────────────────")
+    print("\n── Saxo live-utførelse ──────────────────────────────")
     try:
-        with NordnetClient() as klient:
-            kontoer = klient.hent_kontoer()
-            if not kontoer:
-                print("NORDNET: Ingen kontoer funnet")
-                return
-            konto = kontoer[0]
-            print(f"NORDNET: Bruker konto {konto.get('accno') or konto.get('accid')}")
+        klient = SaxoClient()
+        if not klient.logg_inn():
+            print("SAXO: Innlogging feilet — hopper over live-utførelse")
+            return
 
-            for handel in utforte:
-                ticker   = handel["ticker"]          # e.g. "EQNR.OL"
-                symbol   = ticker.replace(".OL", "") # e.g. "EQNR"
-                antall   = handel["antall"]
-                handling = handel["handling"]
+        # Rotate refresh token in GitHub Secrets
+        if klient.refresh_token:
+            _oppdater_saxo_refresh_token(klient.refresh_token)
 
-                instrument_id = klient.finn_instrument_id(symbol)
-                if not instrument_id:
-                    print(f"NORDNET: Fant ikke instrument for {symbol} — hopper over")
-                    continue
+        for handel in utforte:
+            ticker   = handel["ticker"]          # e.g. "EQNR.OL"
+            symbol   = ticker.replace(".OL", "") # e.g. "EQNR"
+            antall   = handel["antall"]
+            handling = handel["handling"]
 
-                if handling == "KJØP":
-                    klient.kjøp(konto, instrument_id, antall)
-                elif handling == "SELG":
-                    klient.selg(konto, instrument_id, antall)
+            uic = klient.finn_uic(symbol)
+            if not uic:
+                print(f"SAXO: Fant ikke UIC for {symbol} — hopper over")
+                continue
+
+            if handling == "KJØP":
+                klient.kjop(uic, antall)
+            elif handling == "SELG":
+                klient.selg(uic, antall)
 
     except Exception as e:
-        print(f"NORDNET: Feil under live-utførelse: {e}")
+        print(f"SAXO: Feil under live-utførelse: {e}")
 
 
 def sjekk_stop_loss() -> list:
@@ -1084,4 +1131,4 @@ if __name__ == "__main__":
     else:
         resultat = kjor_analyse()
         send_varsel(resultat, modus="full")
-        utfør_nordnet_handler(resultat)
+        utfør_saxo_handler(resultat)

@@ -63,11 +63,18 @@ jobs:
             echo "label=Full analyse" >> $GITHUB_OUTPUT
           fi
 
+      - name: Installer Saxo-avhengigheter
+        run: pip install requests PyNaCl
+
       - name: Kjør analyse (${{ steps.modus.outputs.label }})
         env:
-          NORDNET_API_KEY:  ${{ secrets.NORDNET_API_KEY }}
-          NORDNET_PRIV_KEY: ${{ secrets.NORDNET_PRIV_KEY }}
-          NTFY_TOPIC:       ${{ secrets.NTFY_TOPIC }}
+          SAXO_CLIENT_ID:     ${{ secrets.SAXO_CLIENT_ID }}
+          SAXO_CLIENT_SECRET: ${{ secrets.SAXO_CLIENT_SECRET }}
+          SAXO_REFRESH_TOKEN: ${{ secrets.SAXO_REFRESH_TOKEN }}
+          SAXO_ACCOUNT_KEY:   ${{ secrets.SAXO_ACCOUNT_KEY }}
+          NTFY_TOPIC:         ${{ secrets.NTFY_TOPIC }}
+          GITHUB_REPOSITORY:  ${{ github.repository }}
+          GITHUB_TOKEN:       ${{ secrets.GITHUB_TOKEN }}
         run: python scheduler.py ${{ steps.modus.outputs.args }}
 
       - name: Lagre oppdatert portefølje

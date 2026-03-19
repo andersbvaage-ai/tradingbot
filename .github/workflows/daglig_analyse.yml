@@ -24,7 +24,6 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
-      secrets: write
     steps:
       - name: Hent kode
         uses: actions/checkout@v4

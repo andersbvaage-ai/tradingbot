@@ -621,6 +621,22 @@ def kjor_analyse():
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     topp_tickers  = {k["ticker"] for k in topp}
 
+    def _salg_felt(pos: dict, kurs: float, begrunnelse: str) -> dict:
+        """Bygg felles felt for historikk- og utforte-oppføringer ved salg."""
+        kjøpsdato = pos.get("kjøpsdato", "")
+        try:
+            holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
+        except Exception:
+            holdingstid = None
+        avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
+        return {
+            "snittpris":       pos["snittpris"],
+            "avkastning_pct":  avkastning_pct,
+            "holdingstid":     holdingstid,
+            "begrunnelse":     begrunnelse,
+            "signaler":        pos.get("signaler"),
+        }
+
     # Hold-sone: behold posisjoner i topp 2×maks_pos med ensemble≥1 (hindrer unødvendig churning)
     hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 3] if k["ensemble"] >= 1}
 
@@ -641,19 +657,20 @@ def kjor_analyse():
             inntekt     = brutto - kurtasje
             begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
                            f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
+            ekstra = _salg_felt(pos, kurs, begrunnelse)
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             topp_tickers.discard(ticker)
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             print(f"  TRAILING SL: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
                   f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr) = {brutto:,.0f} kr "
@@ -671,19 +688,20 @@ def kjor_analyse():
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje
             begrunnelse = "Ensemble snudd (0/3 — Trend, MACD og Momentum alle negative)"
+            ekstra = _salg_felt(pos, kurs, begrunnelse)
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             topp_tickers.discard(ticker)
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             print(f"  ENSEMBLE=0: solgt {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr")
 
@@ -700,18 +718,19 @@ def kjor_analyse():
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje
             begrunnelse = "Ikke lenger blant topp-kandidater"
+            ekstra = _salg_felt(pos, kurs, begrunnelse)
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+                "kurtasje": kurtasje, **ekstra,
             })
             print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr "
                   f"(kurtasje {kurtasje:,.0f} kr)")
@@ -789,6 +808,14 @@ def kjor_analyse():
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
             "høyeste_kurs": k["kurs"],
+            "signaler": {
+                "ensemble":       k["ensemble"],
+                "ensemble_tekst": k["ensemble_tekst"],
+                "insider":        k.get("insider_score", 0) > 0,
+                "short_score":    round(k.get("short_score", 0), 2),
+                "råvare_score":   round(k.get("råvare_score", 0), 2),
+                "regime":         regime,
+            },
         }
         pf["kasse"] -= totalt
         sektor_teller[sektor] = sektor_teller.get(sektor, 0) + 1
@@ -797,6 +824,7 @@ def kjor_analyse():
             "ticker": k["ticker"], "navn": k["navn"],
             "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
             "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+            "signaler": pf["posisjoner"][k["ticker"]]["signaler"],
         })
         utforte.append({
             "handling": "KJØP", "navn": k["navn"], "ticker": k["ticker"],
@@ -992,18 +1020,27 @@ def sjekk_stop_loss() -> list:
             inntekt     = brutto - kurtasje
             begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
                            f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
+            kjøpsdato = pos.get("kjøpsdato", "")
+            try:
+                holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
+            except Exception:
+                holdingstid = None
+            avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
             pf["historikk"].append({
                 "dato": str(datetime.now()), "handling": "SELG",
                 "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
+                "holdingstid": holdingstid, "signaler": pos.get("signaler"),
             })
             utforte.append({
                 "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "snittpris": pos["snittpris"], "beløp": brutto,
+                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+                "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
             })
             print(f"  TRAILING SL: solgt {pos['navn']} à {kurs:.2f} kr "
                   f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr)")

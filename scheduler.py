@@ -376,7 +376,7 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     sma_vote  = sma10 > sma50
     macd_vote = macd_v > sig_v
     mom_vote  = mom > 0
-    rsi_ok    = 30 < rsi < 72
+    rsi_ok    = 30 < rsi < 70
     ensemble  = sum([sma_vote, macd_vote, mom_vote])
 
     if not rsi_ok:
@@ -472,7 +472,7 @@ def kjor_analyse():
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
 
-    kandidater.sort(key=lambda x: x["score"] + x["oppside_score"], reverse=True)
+    kandidater.sort(key=lambda x: (x["ensemble"], x["score"] + x["oppside_score"]), reverse=True)
     topp = kandidater[:maks_pos]
 
     # Utfør handler automatisk

@@ -1,5 +1,5 @@
 {
-  "kasse": 3395.0,
+  "kasse": 3389.0,
   "start_kapital": 10000,
   "posisjoner": {
     "SUBC.OL": {
@@ -19,9 +19,9 @@
     "BWO.OL": {
       "navn": "BW Offshore",
       "antall": 26,
-      "snittpris": 52.900001525878906,
+      "snittpris": 53.0,
       "kj\u00f8psdato": "2026-03-19",
-      "h\u00f8yeste_kurs": 52.900001525878906
+      "h\u00f8yeste_kurs": 53.0
     }
   },
   "ventende_handler": [],
@@ -60,29 +60,29 @@
       "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 16.2% \u00b7 rel.styrke 16.9% \u00b7 RSI 50"
     },
     {
-      "dato": "2026-03-19 10:26:26.932855",
+      "dato": "2026-03-19 11:18:33.953570",
       "handling": "SELG",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
       "antall": 34,
-      "kurs": 45.619998931884766,
-      "bel\u00f8p": 1551.0,
+      "kurs": 45.52000045776367,
+      "bel\u00f8p": 1548.0,
       "kurtasje": 29,
       "begrunnelse": "Ikke lenger blant topp-kandidater"
     },
     {
-      "dato": "2026-03-19 10:26:27.319072",
+      "dato": "2026-03-19 11:18:35.285787",
       "handling": "KJ\u00d8P",
       "ticker": "BWO.OL",
       "navn": "BW Offshore",
       "antall": 26,
-      "kurs": 52.900001525878906,
-      "bel\u00f8p": 1375.0,
+      "kurs": 53.0,
+      "bel\u00f8p": 1378.0,
       "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 50.9% \u00b7 rel.styrke 35.1% \u00b7 RSI 58 \u00b7 P/E 7 \u00b7 P/B 0.9"
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 51.1% \u00b7 rel.styrke 35.3% \u00b7 RSI 59 \u00b7 P/E 7 \u00b7 P/B 0.9"
     }
   ],
-  "sist_analysert": "2026-03-19 10:26:27.319085",
+  "sist_analysert": "2026-03-19 11:18:35.285799",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -91,7 +91,7 @@
     },
     {
       "dato": "2026-03-19",
-      "total_verdi": 9862.0
+      "total_verdi": 9857.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -132,10 +132,10 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 50.9,
-      "rel_styrke": 35.1,
-      "rsi": 58.0,
-      "kurs": 52.9,
+      "mom": 51.1,
+      "rel_styrke": 35.3,
+      "rsi": 59.0,
+      "kurs": 53.0,
       "pe": 7.4,
       "pb": 0.87,
       "yield": 1371.0

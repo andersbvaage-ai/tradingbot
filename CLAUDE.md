@@ -174,6 +174,6 @@ Auth: Ed25519 challenge-response, session-levetid 30 min — re-autentiserer hve
 ## Neste mulige steg
 
 - **Nordnet live-trading** — aktiveres med 3 steg over
-- **Fundamentale filtre** — P/E, P/B via yfinance for bedre aksjevalg
+- ~~**Fundamentale filtre**~~ — implementert i scheduler.py (P/E, P/B, yield-filter)
 - **Posisjonsstørrelse basert på volatilitet** — Kelly-kriteriet eller vol-skalering
-- **Ukentlig rapport** — fredag-oppsummering via ntfy eller e-post
+- ~~**Ukentlig rapport**~~ — implementert, kjører fredag 16:00 via ntfy (NTFY_TOPIC secret)

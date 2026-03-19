@@ -247,6 +247,27 @@ KURTASJE_STANDARD = "Mini"  # Standard-modell
 
 SYKLISKE_SEKTORER = {"Energi", "Shipping"}  # sektorer der utbytte er et kvalitetstegn
 
+# Råvarer som leder aksjer i sine sektorer
+RÅVARE_MAP = {
+    "Energi":   "BZ=F",   # Brent crude
+    "Shipping": "^BDI",   # Baltic Dry Index
+}
+
+def hent_råvare_trend(råvare_ticker):
+    """Returnerer 1 (uptrend), -1 (downtrend) eller 0 (ukjent) basert på SMA10 vs SMA50."""
+    try:
+        df = yf.download(råvare_ticker, period="6mo", progress=False, timeout=15)
+        if df.empty or len(df) < 50:
+            return 0
+        close = df["Close"]
+        if hasattr(close, "columns"):
+            close = close.iloc[:, 0]
+        sma10 = float(close.rolling(10).mean().iloc[-1])
+        sma50 = float(close.rolling(50).mean().iloc[-1])
+        return 1 if sma10 > sma50 else -1
+    except Exception:
+        return 0
+
 def hent_fundamentals(ticker):
     """Henter P/E, P/B og dividendYield fra yfinance. Returnerer dict — felt er None hvis ukjent."""
     try:
@@ -458,6 +479,15 @@ def kjor_analyse():
           f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos, "
           f"maks {maks_per_sektor}/sektor)")
 
+    # Hent råvaretrender — brukes som sektorboost i rangering
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter råvaretrender...")
+    råvare_trender = {}
+    for sektor, råvare_ticker in RÅVARE_MAP.items():
+        trend = hent_råvare_trend(råvare_ticker)
+        råvare_trender[sektor] = trend
+        retning = "↑ uptrend" if trend == 1 else ("↓ downtrend" if trend == -1 else "– ukjent")
+        print(f"  {sektor} ({råvare_ticker}): {retning}")
+
     # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
     kandidater    = []
     alle_ensemble = {}   # ticker → ensemble-count for posisjonssjekk
@@ -466,13 +496,15 @@ def kjor_analyse():
         try:
             k = analyser_aksje(navn, ticker, osebx_ret3m)
             if k:
+                sektor = SEKTORER.get(ticker, "Annet")
+                k["råvare_score"] = råvare_trender.get(sektor, 0) * 0.5
                 alle_ensemble[ticker] = k["ensemble"]
                 if k["ensemble"] >= min_ensemble:
                     kandidater.append(k)
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
 
-    kandidater.sort(key=lambda x: (x["ensemble"], x["score"] + x["oppside_score"]), reverse=True)
+    kandidater.sort(key=lambda x: (x["ensemble"], x["score"] + x["oppside_score"] + x.get("råvare_score", 0)), reverse=True)
     topp = kandidater[:maks_pos]
 
     # Utfør handler automatisk
@@ -665,9 +697,10 @@ def kjor_analyse():
         print(f"  KJØPT: {antall} × {k['navn']} à {k['kurs']:.2f} kr = {kostnad:,.0f} kr "
               f"(kurtasje {kurtasje:,.0f} kr)")
 
-    pf["ventende_handler"] = []
-    pf["sist_analysert"]   = str(datetime.now())
-    pf["regime"]           = regime
+    pf["ventende_handler"]  = []
+    pf["sist_analysert"]    = str(datetime.now())
+    pf["regime"]            = regime
+    pf["råvare_trender"]    = råvare_trender
 
     # ── Lagre topp-kandidater for visning i Dashboard ────────────────────────
     pf["topp_kandidater"] = [

@@ -702,6 +702,14 @@ with tab_dash:
     with _reg_col:
         st.markdown(f"**{_rcfg['ikon']} Markedssituasjon — {_regime}**")
         st.markdown(_REGIME_BESKRIVELSE.get(_regime, ""))
+        _råvare_trender = _pf.get("råvare_trender", {})
+        if _råvare_trender:
+            _råvare_linjer = []
+            _ikoner = {1: "↑", -1: "↓", 0: "–"}
+            _navn_map = {"Energi": "Brent crude", "Shipping": "Baltic Dry"}
+            for _sek, _trend in _råvare_trender.items():
+                _råvare_linjer.append(f"{_ikoner.get(_trend,'–')} **{_navn_map.get(_sek, _sek)}** ({_sek})")
+            st.caption("  ·  ".join(_råvare_linjer))
 
     _topp_kand = _pf.get("topp_kandidater", [])
     with _kand_col:

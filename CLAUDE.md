@@ -48,6 +48,17 @@ Kjøp krever minimum 2/3 (eller 3/3 i Bear-regime):
 2. **MACD** — MACD-linje > Signal-linje
 3. **Momentum** — 6-månedersmom > 0%
 
+**RSI-filter:** 30 < RSI < 70 — overbought/oversold ekskluderes alltid.
+
+### Unike signaler (score-boost i rangering)
+Rangering: `(ensemble, score + oppside_score + råvare_score + insider_score + short_score)`
+
+| Signal | Kilde | Boost |
+|---|---|---|
+| Råvare-overlay | Brent `BZ=F` (Energi), `BDRY` (Shipping) | ±0.5 |
+| Innsiderkjøp | Oslo Børs OAM API, siste 14 hverdager | +0.75 |
+| Short interest | Finanstilsynet SSR, short≥2% / ≥5% | -0.4 / -0.75 |
+
 ### Regime-deteksjon (OSEBX vs SMA200)
 | Regime | Kriterier | Maks pos | Allokering | Min ensemble |
 |---|---|---|---|---|
@@ -91,7 +102,10 @@ Kurtasje-ratio-sjekk: hopper over kjøp der kurtasje > `kurtasje_ratio_maks` (st
   "sist_analysert": "2026-03-18 09:32:51",
   "stop_loss_pct": 0.07,
   "kurtasje_modell": "Mini",
-  "kurtasje_ratio_maks": 0.02
+  "kurtasje_ratio_maks": 0.02,
+  "råvare_trender": {"Energi": 1, "Shipping": -1},
+  "insider_kjøp": ["BWLPG.OL"],
+  "short_interest": {"LINK.OL": 11.4, "HEX.OL": 7.3}
 }
 ```
 
@@ -171,9 +185,26 @@ Auth: Ed25519 challenge-response, session-levetid 30 min — re-autentiserer hve
 
 ---
 
+## Klar for produksjon
+
+Før push til main — gå gjennom denne listen:
+
+- [ ] Tester passerer (`py -m pytest`)
+- [ ] `scheduler.py` kjørt manuelt med `--dry-run` hvis signallogikk er endret
+- [ ] Ingen endringer i `portfolio.json`-struktur uten migrering
+- [ ] `git pull --rebase origin main` kjørt før push
+
+---
+
 ## Neste mulige steg
 
 - **Nordnet live-trading** — aktiveres med 3 steg over
-- ~~**Fundamentale filtre**~~ — implementert i scheduler.py (P/E, P/B, yield-filter)
-- **Posisjonsstørrelse basert på volatilitet** — Kelly-kriteriet eller vol-skalering
-- ~~**Ukentlig rapport**~~ — implementert, kjører fredag 16:00 via ntfy (NTFY_TOPIC secret)
+- ~~**Fundamentale filtre**~~ — implementert (P/E, P/B, yield-filter)
+- ~~**Posisjonsstørrelse basert på volatilitet**~~ — implementert (vol-basert + ensemble-boost)
+- ~~**Ukentlig rapport**~~ — implementert, kjører fredag 16:00 via ntfy
+- ~~**Råvare-overlay**~~ — implementert (Brent + Dry Bulk BDRY)
+- ~~**Innsidekjøp-signal**~~ — implementert (Oslo Børs OAM API)
+- ~~**Short interest-signal**~~ — implementert (Finanstilsynet SSR)
+- **Laksepris-signal** — Fish Pool-data for Sjømat-sektoren (AKBM, AUSS, NRS)
+- **Kelly-posisjonsstørrelse** — når ~20 round-trips i historikk
+- **Evaluere signalkvalitet** — etter noen ukers live-kjøring

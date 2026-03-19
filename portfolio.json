@@ -28,7 +28,7 @@
       "antall": 12,
       "snittpris": 115.95999908447266,
       "kj\u00f8psdato": "2026-03-19",
-      "h\u00f8yeste_kurs": 116.44000244140625
+      "h\u00f8yeste_kurs": 116.69999694824219
     }
   },
   "ventende_handler": [],
@@ -123,7 +123,7 @@
       "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 7.4% \u00b7 rel.styrke 10.4% \u00b7 RSI 59 \u00b7 P/E 6 \u00b7 P/B 0.7"
     }
   ],
-  "sist_analysert": "2026-03-19 14:35:17.946603",
+  "sist_analysert": "2026-03-19 15:19:18.615425",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -132,7 +132,7 @@
     },
     {
       "dato": "2026-03-19",
-      "total_verdi": 9748.0
+      "total_verdi": 9805.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -140,31 +140,17 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker Solutions",
-      "ticker": "AKSO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 49.3,
-      "rel_styrke": 45.2,
-      "rsi": 69.0,
-      "kurs": 44.62,
-      "pe": 8.5,
-      "pb": 1.89,
-      "yield": 8.0
-    },
-    {
       "navn": "BW Energy",
       "ticker": "BWE.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 53.1,
-      "rel_styrke": 48.2,
-      "rsi": 64.0,
-      "kurs": 57.5,
-      "pe": 11.6,
-      "pb": 1.55,
+      "mom": 55.0,
+      "rel_styrke": 50.0,
+      "rsi": 65.0,
+      "kurs": 58.2,
+      "pe": 11.8,
+      "pb": 1.56,
       "yield": null
     },
     {
@@ -180,6 +166,20 @@
       "pe": 16.5,
       "pb": 0.68,
       "yield": 2.0
+    },
+    {
+      "navn": "Sparebanken M\u00f8re",
+      "ticker": "MORG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 8.1,
+      "rel_styrke": 11.1,
+      "rsi": 61.0,
+      "kurs": 116.7,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -196,7 +196,8 @@
     "AUTO.OL": 2.2,
     "TGS.OL": 2.3,
     "GSF.OL": 2.2,
-    "HEX.OL": 7.34,
+    "HEX.OL": 7.45,
+    "NAS.OL": 2.17,
     "BAKKA.OL": 3.28,
     "LINK.OL": 11.38
   }

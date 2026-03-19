@@ -589,8 +589,9 @@ def kjor_analyse():
         if not ok:
             print(f"  FUNDAMENTAL-FILTER: hopper over {k['navn']} — {grunn}")
             continue
-        k["pe"] = fund["pe"]
-        k["pb"] = fund["pb"]
+        k["pe"]    = fund["pe"]
+        k["pb"]    = fund["pb"]
+        k["yield"] = fund["yield"]
         topp_med_fund.append(k)
     topp = topp_med_fund
 
@@ -684,7 +685,7 @@ def kjor_analyse():
             "pb":             round(k["pb"], 2) if k.get("pb") else None,
             "yield":          round(k["yield"] * 100, 1) if k.get("yield") else None,
         }
-        for k in kandidater[:8]   # topp 8, uavhengig av om de ble kjøpt
+        for k in topp[:8]   # topp 8, uavhengig av om de ble kjøpt
     ]
 
     # ── Daglig snapshot av porteføljeverdi ───────────────────────────────────

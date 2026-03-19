@@ -250,7 +250,7 @@ SYKLISKE_SEKTORER = {"Energi", "Shipping"}  # sektorer der utbytte er et kvalite
 # Råvarer som leder aksjer i sine sektorer
 RÅVARE_MAP = {
     "Energi":   "BZ=F",   # Brent crude
-    "Shipping": "^BDI",   # Baltic Dry Index
+    "Shipping": "BDRY",   # Breakwave Dry Bulk ETF — tracker BDI-futures
 }
 
 def hent_råvare_trend(råvare_ticker):

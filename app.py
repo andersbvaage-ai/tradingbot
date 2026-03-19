@@ -706,7 +706,7 @@ with tab_dash:
         if _råvare_trender:
             _råvare_linjer = []
             _ikoner = {1: "↑", -1: "↓", 0: "–"}
-            _navn_map = {"Energi": "Brent crude", "Shipping": "Baltic Dry"}
+            _navn_map = {"Energi": "Brent crude", "Shipping": "Dry Bulk (BDRY)"}
             for _sek, _trend in _råvare_trender.items():
                 _råvare_linjer.append(f"{_ikoner.get(_trend,'–')} **{_navn_map.get(_sek, _sek)}** ({_sek})")
             st.caption("  ·  ".join(_råvare_linjer))

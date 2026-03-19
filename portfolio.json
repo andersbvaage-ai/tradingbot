@@ -1,5 +1,5 @@
 {
-  "kasse": 3389.0,
+  "kasse": 1979.0,
   "start_kapital": 10000,
   "posisjoner": {
     "SUBC.OL": {
@@ -22,6 +22,13 @@
       "snittpris": 53.0,
       "kj\u00f8psdato": "2026-03-19",
       "h\u00f8yeste_kurs": 53.0
+    },
+    "AKBM.OL": {
+      "navn": "Aker BioMarine",
+      "antall": 13,
+      "snittpris": 106.19999694824219,
+      "kj\u00f8psdato": "2026-03-19",
+      "h\u00f8yeste_kurs": 106.19999694824219
     }
   },
   "ventende_handler": [],
@@ -80,9 +87,20 @@
       "bel\u00f8p": 1378.0,
       "kurtasje": 29,
       "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 51.1% \u00b7 rel.styrke 35.3% \u00b7 RSI 59 \u00b7 P/E 7 \u00b7 P/B 0.9"
+    },
+    {
+      "dato": "2026-03-19 12:14:58.176637",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKBM.OL",
+      "navn": "Aker BioMarine",
+      "antall": 13,
+      "kurs": 106.19999694824219,
+      "bel\u00f8p": 1381.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 20.1% \u00b7 rel.styrke 17.0% \u00b7 RSI 59 \u00b7 P/E 25 \u00b7 P/B 5.6"
     }
   ],
-  "sist_analysert": "2026-03-19 11:18:35.285799",
+  "sist_analysert": "2026-03-19 12:14:58.176650",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -91,7 +109,7 @@
     },
     {
       "dato": "2026-03-19",
-      "total_verdi": 9857.0
+      "total_verdi": 9825.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -99,46 +117,46 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
-      "ensemble": 2,
-      "ensemble_tekst": "Trend \u00b7 Mom",
-      "score": 2,
-      "mom": 30.8,
-      "rel_styrke": 30.3,
-      "rsi": 36.0,
-      "kurs": 254.8,
-      "pe": null,
-      "pb": null,
+      "navn": "BW Energy",
+      "ticker": "BWE.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 52.6,
+      "rel_styrke": 47.7,
+      "rsi": 63.0,
+      "kurs": 57.3,
+      "pe": 11.6,
+      "pb": 1.54,
       "yield": null
     },
     {
-      "navn": "Scatec",
-      "ticker": "SCATC.OL",
-      "ensemble": 2,
-      "ensemble_tekst": "Trend \u00b7 Mom",
-      "score": 2,
-      "mom": 12.6,
-      "rel_styrke": 11.2,
-      "rsi": 37.0,
-      "kurs": 115.2,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW Offshore",
-      "ticker": "BWO.OL",
-      "ensemble": 2,
-      "ensemble_tekst": "Trend \u00b7 Mom",
-      "score": 3,
-      "mom": 51.1,
-      "rel_styrke": 35.3,
+      "navn": "Aker BioMarine",
+      "ticker": "AKBM.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 20.1,
+      "rel_styrke": 17.0,
       "rsi": 59.0,
-      "kurs": 53.0,
-      "pe": 7.4,
-      "pb": 0.87,
-      "yield": 1371.0
+      "kurs": 106.2,
+      "pe": 24.7,
+      "pb": 5.64,
+      "yield": null
+    },
+    {
+      "navn": "Eidesvik Offshore",
+      "ticker": "EIOF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 17.8,
+      "rel_styrke": 22.6,
+      "rsi": 63.0,
+      "kurs": 15.2,
+      "pe": 16.3,
+      "pb": 0.67,
+      "yield": 2.0
     }
   ]
 }

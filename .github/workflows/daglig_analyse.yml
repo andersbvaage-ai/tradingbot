@@ -49,6 +49,9 @@ jobs:
           elif [ "$INPUT" = "ukentlig-rapport" ]; then
             echo "args=--ukentlig-rapport" >> $GITHUB_OUTPUT
             echo "label=Ukentlig rapport" >> $GITHUB_OUTPUT
+          elif [ "$INPUT" = "full" ]; then
+            echo "args=" >> $GITHUB_OUTPUT
+            echo "label=Full analyse" >> $GITHUB_OUTPUT
           elif [ "$HOUR" = "12" ]; then
             echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
             echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT

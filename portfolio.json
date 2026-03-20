@@ -123,7 +123,7 @@
       "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 7.4% \u00b7 rel.styrke 10.4% \u00b7 RSI 59 \u00b7 P/E 6 \u00b7 P/B 0.7"
     }
   ],
-  "sist_analysert": "2026-03-20 10:08:41.952531",
+  "sist_analysert": "2026-03-20 17:21:07.642489",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -136,7 +136,7 @@
     },
     {
       "dato": "2026-03-20",
-      "total_verdi": 9813.0
+      "total_verdi": 9700.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -149,40 +149,26 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 45.9,
-      "rel_styrke": 46.6,
-      "rsi": 64.0,
-      "kurs": 43.76,
-      "pe": 8.3,
-      "pb": 1.85,
-      "yield": 7.3
+      "mom": 43.7,
+      "rel_styrke": 44.5,
+      "rsi": 63.0,
+      "kurs": 43.12,
+      "pe": 8.2,
+      "pb": 1.83,
+      "yield": 732.0
     },
     {
       "navn": "BW Energy",
       "ticker": "BWE.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 47.7,
-      "rel_styrke": 50.0,
-      "rsi": 57.0,
-      "kurs": 56.7,
-      "pe": 11.6,
-      "pb": 1.52,
-      "yield": null
-    },
-    {
-      "navn": "Sparebanken M\u00f8re",
-      "ticker": "MORG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 8.3,
-      "rel_styrke": 8.1,
-      "rsi": 64.0,
-      "kurs": 115.7,
-      "pe": null,
-      "pb": null,
+      "score": 3,
+      "mom": 49.2,
+      "rel_styrke": 51.6,
+      "rsi": 65.0,
+      "kurs": 57.3,
+      "pe": 11.7,
+      "pb": 1.54,
       "yield": null
     }
   ],
@@ -191,18 +177,19 @@
     "Shipping": -1
   },
   "insider_kj\u00f8p": [
+    "BWLPG.OL",
     "PARB.OL",
     "SMCRT.OL"
   ],
   "short_interest": {
     "NEL.OL": 3.79,
-    "NOD.OL": 4.31,
+    "NOD.OL": 4.48,
     "AUTO.OL": 2.2,
     "TGS.OL": 2.3,
     "GSF.OL": 2.2,
     "HEX.OL": 7.45,
-    "NAS.OL": 2.17,
+    "NAS.OL": 2.77,
     "BAKKA.OL": 3.28,
-    "LINK.OL": 11.38
+    "LINK.OL": 11.88
   }
 }

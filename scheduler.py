@@ -442,6 +442,26 @@ def hent_siste_kurs(ticker):
         except Exception:
             return None
 
+def hent_ensemble_for_posisjon(ticker: str) -> int:
+    """Beregn ensemble-score uten RSI/rel_styrke-filter — brukes for eksisterende posisjoner."""
+    try:
+        raw = yf.download(ticker, period="1y", progress=False, timeout=15)
+        if raw.empty or len(raw) < 60:
+            return 1  # fail-safe: behold posisjon ved utilstrekkelig data
+        raw.columns = raw.columns.get_level_values(0)
+        close  = raw["Close"]
+        sma10  = float(close.rolling(10).mean().iloc[-1])
+        sma50  = float(close.rolling(50).mean().iloc[-1])
+        ema12  = close.ewm(span=12).mean()
+        ema26  = close.ewm(span=26).mean()
+        macd_v = float((ema12 - ema26).iloc[-1])
+        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+        mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
+        return sum([sma10 > sma50, macd_v > sig_v, mom > 0])
+    except Exception:
+        return 1  # fail-safe: behold posisjon ved datafeil
+
+
 def analyser_aksje(navn, ticker, osebx_ret3m):
     raw = yf.download(ticker, period="1y", progress=False, timeout=15)
     if raw.empty or len(raw) < 60:
@@ -605,6 +625,14 @@ def kjor_analyse():
                     kandidater.append(k)
         except Exception as e:
             print(f"  Feil for {navn}: {e}")
+
+    # Fyll inn ensemble for posisjoner filtrert bort av RSI/rel_styrke-sjekken
+    # slik at ensemble=0-salgslogikken fungerer korrekt for disse
+    for ticker in pf["posisjoner"]:
+        if ticker not in alle_ensemble:
+            ens = hent_ensemble_for_posisjon(ticker)
+            alle_ensemble[ticker] = ens
+            print(f"  Ensemble (RSI-filtrert posisjon): {ticker} = {ens}/3")
 
     kandidater.sort(
         key=lambda x: (

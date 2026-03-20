@@ -2,9 +2,12 @@ name: Daglig børsanalyse
 
 on:
   schedule:
-    - cron: "15 8 * * 1-5"   # 09:15 norsk tid — full analyse + kjøp
-    - cron: "30 12 * * 1-5"  # 13:30 norsk tid — kun stop-loss-sjekk
-    - cron: "0 15 * * 5"     # 16:00 norsk tid — ukentlig rapport (fredag)
+    - cron: "15 8 * * 1-5"   # 09:15 norsk vintertid (UTC+1)
+    - cron: "30 12 * * 1-5"  # 13:30 norsk vintertid (UTC+1)
+    - cron: "0 15 * * 5"     # 16:00 norsk vintertid (UTC+1, fredag)
+    - cron: "15 7 * * 1-5"   # 09:15 norsk sommertid (UTC+2)
+    - cron: "30 11 * * 1-5"  # 13:30 norsk sommertid (UTC+2)
+    - cron: "0 14 * * 5"     # 16:00 norsk sommertid (UTC+2, fredag)
   workflow_dispatch:
     inputs:
       modus:
@@ -54,10 +57,10 @@ jobs:
           elif [ "$INPUT" = "full" ]; then
             echo "args=" >> $GITHUB_OUTPUT
             echo "label=Full analyse" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "12" ]; then
+          elif [ "$HOUR" = "12" ] || [ "$HOUR" = "11" ]; then
             echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
             echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "15" ] && [ "$DAY" = "5" ]; then
+          elif ([ "$HOUR" = "15" ] || [ "$HOUR" = "14" ]) && [ "$DAY" = "5" ]; then
             echo "args=--ukentlig-rapport" >> $GITHUB_OUTPUT
             echo "label=Ukentlig rapport" >> $GITHUB_OUTPUT
           else

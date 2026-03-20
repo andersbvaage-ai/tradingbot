@@ -1217,5 +1217,5 @@ if __name__ == "__main__":
         send_varsel(resultat, modus="stop-loss")
     else:
         resultat = kjor_analyse()
-        send_varsel(resultat, modus="full")
         utfør_saxo_handler(resultat)
+        send_varsel(resultat, modus="full")

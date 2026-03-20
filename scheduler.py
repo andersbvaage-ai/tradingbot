@@ -18,7 +18,11 @@ DEFAULT_PORTEFOLJE = {
     "start_kapital": 100000,
     "posisjoner": {},
     "ventende_handler": [],
-    "historikk": []
+    "historikk": [],
+    "stop_loss_pct": 0.07,
+    "kurtasje_modell": "Mini",
+    "kurtasje_ratio_maks": 0.02,
+    "regime": "Sideways",
 }
 
 OSLO_BORS = {
@@ -671,7 +675,7 @@ def kjor_analyse():
             "signaler":        pos.get("signaler"),
         }
 
-    # Hold-sone: behold posisjoner i topp 2×maks_pos med ensemble≥1 (hindrer unødvendig churning)
+    # Hold-sone: behold posisjoner i topp 3×maks_pos med ensemble≥1 (hindrer unødvendig churning)
     hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 3] if k["ensemble"] >= 1}
 
     # ── Trailing stop-loss: oppdater høyeste kurs, selg ved brudd ────────────
@@ -742,7 +746,7 @@ def kjor_analyse():
     # ── Selg posisjoner som har falt ut av hold-sonen (topp 2×N, ensemble≥1) ──
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker in hold_tickers:
-            print(f"  HOLDER: {pos['navn']} — fortsatt i hold-sone (topp {maks_pos * 2})")
+            print(f"  HOLDER: {pos['navn']} — fortsatt i hold-sone (topp {maks_pos * 3})")
             continue
         if ticker not in topp_tickers:
             kurs = hent_siste_kurs(ticker)

@@ -1153,7 +1153,7 @@ def send_ukentlig_rapport() -> None:
             f"https://ntfy.sh/{topic}",
             data="\n".join(linjer).encode("utf-8"),
             headers={
-                "Title":    f"Trading Bot — Ukesrapport {avkastning_pct:+.1f}%",
+                "Title":    f"Trading Bot - Ukesrapport {avkastning_pct:+.1f}%",
                 "Priority": "default",
                 "Tags":     "bar_chart",
             },

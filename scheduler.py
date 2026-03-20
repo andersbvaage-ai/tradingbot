@@ -288,6 +288,7 @@ def hent_short_interest(univers):
             "https://ssr.finanstilsynet.no/api/v2/instruments",
             timeout=20,
         )
+        resp.raise_for_status()
         # Build lookup: normalized_name → short_pct
         ft_map = {}
         for inst in resp.json():
@@ -325,10 +326,14 @@ def hent_innsidekjøp(univers_tickers, dager=14):
     univers_sign = {t.replace(".OL", "") for t in univers_tickers}
     today = datetime.utcnow().date()
     try:
-        for dag in range(dager):
+        hverdager_sett = 0
+        for dag in range(dager * 2):  # buffer for helgedager — sikrer N hverdager
             dato = today - timedelta(days=dag)
             if dato.weekday() >= 5:   # hopp over helg
                 continue
+            if hverdager_sett >= dager:
+                break
+            hverdager_sett += 1
             resp = requests.get(
                 "https://api3.oslo.oslobors.no/v1/newsreader/list",
                 params={"category": 1102, "fromDate": dato.isoformat()},
@@ -357,7 +362,8 @@ def hent_fundamentals(ticker):
         info = yf.Ticker(ticker).info
         pe    = info.get("trailingPE") or info.get("forwardPE")
         pb    = info.get("priceToBook")
-        yield_ = info.get("dividendYield")   # allerede i %, f.eks. 4.5 = 4,5%
+        raw_yield = info.get("dividendYield")  # yfinance returnerer desimal, f.eks. 0.045 = 4,5%
+        yield_ = round(raw_yield * 100, 2) if raw_yield is not None else None
         return {"pe": pe, "pb": pb, "yield": yield_}
     except Exception:
         return {"pe": None, "pb": None, "yield": None}
@@ -474,8 +480,8 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     sma10  = float(close.rolling(10).mean().iloc[-1])
     sma50  = float(close.rolling(50).mean().iloc[-1])
     delta  = close.diff()
-    gain   = delta.clip(lower=0).rolling(14).mean()
-    loss   = (-delta.clip(upper=0)).rolling(14).mean()
+    gain   = delta.clip(lower=0).ewm(com=13, adjust=False).mean()
+    loss   = (-delta.clip(upper=0)).ewm(com=13, adjust=False).mean()
     rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
     ema12  = close.ewm(span=12).mean()
     ema26  = close.ewm(span=26).mean()
@@ -1203,6 +1209,7 @@ if __name__ == "__main__":
         send_ukentlig_rapport()
     elif "--only-stop-loss" in sys.argv:
         resultat = sjekk_stop_loss()
+        utfør_saxo_handler(resultat)
         send_varsel(resultat, modus="stop-loss")
     else:
         resultat = kjor_analyse()

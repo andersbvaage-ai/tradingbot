@@ -914,6 +914,17 @@ def kjor_analyse():
     historikk_verdi = historikk_verdi[-365:]   # behold maks 1 år
     pf["verdi_historikk"] = historikk_verdi
 
+    # ── Daglig snapshot av urealisert P&L ────────────────────────────────────
+    urealisert_kr = sum(
+        (hent_siste_kurs(t) or pos["snittpris"]) * pos["antall"] - pos["snittpris"] * pos["antall"]
+        for t, pos in pf["posisjoner"].items()
+    )
+    u_snapshot = {"dato": str(datetime.now().date()), "verdi": round(urealisert_kr, 0)}
+    u_hist = pf.get("urealisert_historikk", [])
+    u_hist = [s for s in u_hist if s["dato"] != u_snapshot["dato"]]
+    u_hist.append(u_snapshot)
+    pf["urealisert_historikk"] = u_hist[-365:]
+
     lagre_portefolje(pf)
 
     kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])

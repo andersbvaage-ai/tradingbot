@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import yfinance as yf
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover
@@ -102,6 +103,21 @@ def hent_aksje_historikk(ticker, period="1y"):
         return raw
     except Exception:
         return None
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def hent_obx_data():
+    """Henter daglig %-endring og 3-måneders snittvolum for OBX_TICKERS. TTL 1 time."""
+    result = []
+    for navn, ticker in OBX_TICKERS:
+        try:
+            info = yf.Ticker(ticker).fast_info
+            pct = (info["last_price"] / info["previous_close"] - 1) * 100
+            vol = getattr(info, "three_month_average_volume", 0) or 0
+            result.append({"navn": navn, "ticker": ticker, "pct": round(pct, 2), "volum": vol})
+        except Exception:
+            result.append({"navn": navn, "ticker": ticker, "pct": 0.0, "volum": 0})
+    result.sort(key=lambda x: x["volum"], reverse=True)
+    return result
 
 st.set_page_config(page_title="Nordic Trading Bot", layout="wide")
 
@@ -509,6 +525,19 @@ STORE_CAP_TICKERS = {
 
 MID_SMALL_CAP = {k: v for k, v in OSLO_BORS.items() if v not in STORE_CAP_TICKERS}
 
+OBX_TICKERS = [
+    ("Equinor",       "EQNR.OL"),   ("DNB Bank",     "DNB.OL"),
+    ("Mowi",          "MOWI.OL"),   ("Telenor",      "TEL.OL"),
+    ("Norsk Hydro",   "NHY.OL"),    ("Orkla",        "ORK.OL"),
+    ("Yara",          "YAR.OL"),    ("Aker BP",      "AKERBP.OL"),
+    ("SalMar",        "SALM.OL"),   ("Subsea 7",     "SUBC.OL"),
+    ("Storebrand",    "STB.OL"),    ("Gjensidige",   "GJF.OL"),
+    ("Kongsberg",     "KOG.OL"),    ("Var Energi",   "VAR.OL"),
+    ("Lerøy Seafood", "LSG.OL"),    ("Tomra",        "TOM.OL"),
+    ("BW LPG",        "BWLPG.OL"),  ("Frontline",    "FRO.OL"),
+    ("Golden Ocean",  "GOGL.OL"),   ("PGS",          "PGS.OL"),
+]
+
 # Sektor per ticker — brukes for spredningsanalyse og sektorkap i bot
 SEKTORER = {
     "EQNR.OL":"Energi",    "DNB.OL":"Finans",     "MOWI.OL":"Sjømat",    "TEL.OL":"Telekom",
@@ -662,83 +691,91 @@ tab_dash, tab_analyse, tab_bt, tab_pf, tab_info = st.tabs([
 
 # ─── TAB DASHBOARD ────────────────────────────────────────────────────────────
 with tab_dash:
-    _pf        = les_portefolje()
-    _idag      = str(datetime.now().date())
-    _historikk = _pf.get("historikk", [])
+    _pf         = les_portefolje()
+    _idag       = str(datetime.now().date())
+    _historikk  = _pf.get("historikk", [])
     _posisjoner = _pf.get("posisjoner", {})
     _kasse      = _pf.get("kasse", 0)
     _start      = _pf.get("start_kapital", _kasse)
     _stop_loss_pct = _pf.get("stop_loss_pct", 0.15)
 
-    # ── Statuslinje og regime-beskrivelse ─────────────────────────────────────
+    # ── Hent OBX-data ─────────────────────────────────────────────────────────
+    _obx_data = hent_obx_data()
+
+    # ── 1. Ticker-stripe ──────────────────────────────────────────────────────
+    _ticker_items = ""
+    for _d in _obx_data * 2:
+        _cls   = "pos" if _d["pct"] > 0 else ("neg" if _d["pct"] < 0 else "neu")
+        _arrow = "&#9650;" if _d["pct"] > 0 else ("&#9660;" if _d["pct"] < 0 else "&#9632;")
+        _ticker_items += (
+            f'<div class="ti"><span class="tn">{_d["ticker"].replace(".OL","")}</span>'
+            f'<span class="ta {_cls}">{_arrow}</span>'
+            f'<span class="tc {_cls}">{_d["pct"]:+.1f}%</span></div>'
+        )
+    components.html(f"""<style>
+      body{{margin:0;padding:0;overflow:hidden;background:#111827;}}
+      .tw{{overflow:hidden;background:#111827;border-bottom:1px solid #1f2535;position:relative;}}
+      .tw::before,.tw::after{{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none;}}
+      .tw::before{{left:0;background:linear-gradient(to right,#111827,transparent);}}
+      .tw::after{{right:0;background:linear-gradient(to left,#111827,transparent);}}
+      .tt{{display:flex;width:max-content;animation:scroll 55s linear infinite;}}
+      .tt:hover{{animation-play-state:paused;}}
+      @keyframes scroll{{0%{{transform:translateX(0)}}100%{{transform:translateX(-50%)}}}}
+      .ti{{display:flex;align-items:center;gap:4px;padding:7px 14px;border-right:1px solid #1f2535;white-space:nowrap;font-family:sans-serif;}}
+      .tn{{font-size:11px;font-weight:700;color:#ccc;}}
+      .ta,.tc{{font-size:11px;font-weight:600;}}
+      .pos{{color:#4ade80;}}.neg{{color:#f87171;}}.neu{{color:#888;}}
+    </style>
+    <div class="tw"><div class="tt">{_ticker_items}</div></div>""", height=36, scrolling=False)
+
+    # ── 2. Statuslinje + nedtelling ───────────────────────────────────────────
     _regime = _pf.get("regime") or "Sideways"
     _rcfg   = REGIME_CONFIG.get(_regime, REGIME_CONFIG["Sideways"])
     _sist   = (_pf.get("sist_analysert") or "")[:16].replace("T", " ")
-    _kurs_status = "🟢 Markedet åpent (~15 min forsinket)" if _er_markedstid() else "⚫ Markedet stengt (sluttkurs)"
-    st.caption(
-        f"{_rcfg['ikon']} Regime: **{_regime}**"
-        + (f"  ·  Sist analysert: **{_sist}**" if _sist else "")
-        + f"  ·  {_kurs_status}"
-    )
+    _kurs_status = "🟢 Åpent" if _er_markedstid() else "⚫ Stengt"
 
-    _REGIME_BESKRIVELSE = {
-        "Bull": (
-            "Oslo Børs er i **oppgang** — OSEBX over 200-dagers snitt med positiv 3-måneders trend. "
-            "Boten er i offensiv modus og kjøper opp til **6 posisjoner** med 15% allokering per aksje. "
-            "Fokus på aksjer med sterk momentum, relativ styrke mot OSEBX og volum-bekreftelse."
-        ),
-        "Sideways": (
-            "Oslo Børs er i **nøytralt terreng** — OSEBX nær 200-dagers snitt uten klar retning. "
-            "Boten er i forsiktig modus med maks **4 posisjoner** og 12% allokering. "
-            "Favoriserer aksjer med klare momentum-signaler og lav volatilitet."
-        ),
-        "Bear": (
-            "Oslo Børs er i **nedgang** — OSEBX under 200-dagers snitt med negativ trend. "
-            "Boten er i defensiv modus: maks **2 posisjoner**, 10% allokering, og krever "
-            "alle 3 ensemble-signaler (3/3) for å kjøpe. Kapital bevares primært i cash."
-        ),
-    }
-    _reg_col, _kand_col = st.columns([1, 1])
-    with _reg_col:
-        st.markdown(f"**{_rcfg['ikon']} Markedssituasjon — {_regime}**")
-        st.markdown(_REGIME_BESKRIVELSE.get(_regime, ""))
-        _råvare_trender = _pf.get("råvare_trender", {})
-        if _råvare_trender:
-            _råvare_linjer = []
-            _ikoner = {1: "↑", -1: "↓", 0: "–"}
-            _navn_map = {"Energi": "Brent crude", "Shipping": "Dry Bulk (BDRY)"}
-            for _sek, _trend in _råvare_trender.items():
-                _råvare_linjer.append(f"{_ikoner.get(_trend,'–')} **{_navn_map.get(_sek, _sek)}** ({_sek})")
-            st.caption("  ·  ".join(_råvare_linjer))
-        _insider_kjøp = _pf.get("insider_kjøp", [])
-        if _insider_kjøp:
-            _ticker_navn = {v: k for k, v in {**OSLO_BORS}.items()}
-            _navn_liste = [_ticker_navn.get(t, t) for t in _insider_kjøp]
-            st.caption(f"Insiderkjøp (14d): **{', '.join(_navn_liste)}**")
-        _short_int = _pf.get("short_interest", {})
-        if _short_int:
-            _short_str = ", ".join(f"{t.replace('.OL','')} {p:.1f}%" for t, p in sorted(_short_int.items(), key=lambda x: -x[1]))
-            st.caption(f"Høy short interest: **{_short_str}**")
+    _sb_left = f"{_rcfg['ikon']} **{_regime}**"
+    if _sist:
+        _sb_left += f"&nbsp;&nbsp;·&nbsp;&nbsp;Sist: **{_sist}**"
+    _sb_left += f"&nbsp;&nbsp;·&nbsp;&nbsp;{_kurs_status}"
 
-    _topp_kand = _pf.get("topp_kandidater", [])
-    with _kand_col:
-        if _topp_kand:
-            st.markdown("**Aksjer boten vurderer nå**")
-            for _k in _topp_kand[:5]:
-                _eier = _k["ticker"] in _pf.get("posisjoner", {})
-                _eid_tekst = " · **eier**" if _eier else ""
-                _pe_tekst    = f" · P/E {_k['pe']:.0f}" if _k.get("pe") else ""
-                _pb_tekst    = f" · P/B {_k['pb']:.1f}" if _k.get("pb") else ""
-                _yield_tekst = f" · {_k['yield']:.1f}% utb." if _k.get("yield") else ""
-                st.markdown(
-                    f"**{_k['navn']}** &nbsp; `{_k['ensemble']}/3` &nbsp; "
-                    f"mom {_k['mom']:+.1f}% · RSI {int(_k['rsi'])}{_pe_tekst}{_pb_tekst}{_yield_tekst}{_eid_tekst}",
-                    unsafe_allow_html=True,
-                )
-        else:
-            st.caption("Ingen kandidatdata ennå — kjør analyse for å se.")
-
-    st.divider()
+    _sl_col, _cd_col = st.columns([5, 1])
+    with _sl_col:
+        st.markdown(_sb_left, unsafe_allow_html=True)
+    with _cd_col:
+        components.html("""<style>
+          body{margin:0;background:transparent;font-family:sans-serif;}
+          .cb{text-align:right;}
+          .cl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#555;}
+          .ct{font-size:17px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;}
+          .cd{font-size:10px;color:#555;margin-top:1px;}
+        </style>
+        <div class="cb">
+          <div class="cl">Neste kjoring</div>
+          <div class="ct" id="ct">--:--:--</div>
+          <div class="cd" id="cd"></div>
+        </div>
+        <script>
+          function nr(){
+            var o=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Oslo'}));
+            var s=o.getHours()*3600+o.getMinutes()*60+o.getSeconds();
+            var t1=9*3600+15*60,t2=13*3600+30*60;
+            var diff,label;
+            if(s<t1){diff=t1-s;label='Full analyse 09:15';}
+            else if(s<t2){diff=t2-s;label='Stop-loss 13:30';}
+            else{diff=86400-s+t1;label='Full analyse 09:15';}
+            return{diff:diff,label:label};
+          }
+          function upd(){
+            var r=nr();
+            var h=String(Math.floor(r.diff/3600)).padStart(2,'0');
+            var m=String(Math.floor(r.diff%3600/60)).padStart(2,'0');
+            var s=String(r.diff%60).padStart(2,'0');
+            document.getElementById('ct').textContent=h+':'+m+':'+s;
+            document.getElementById('cd').textContent=r.label;
+          }
+          upd();setInterval(upd,1000);
+        </script>""", height=52, scrolling=False)
 
     # ── Hent live kurser og bygg posisjonsdata ────────────────────────────────
     _total_verdi = _kasse
@@ -764,7 +801,7 @@ with tab_dash:
                 "Avstand til SL": _sl_avstand,
             })
 
-    _pos_verdi = _total_verdi - _kasse   # verdi kun i aksjer
+    _pos_verdi = _total_verdi - _kasse
     _avk_pct   = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
     _avk_kr    = _total_verdi - _start
 
@@ -778,223 +815,365 @@ with tab_dash:
         if _h.get("handling") == "SELG" and _h.get("ticker", "") in _kjøp_map:
             _avk_r = (_h["kurs"] / _kjøp_map[_h["ticker"]]["kurs"] - 1) * 100
             _realisert.append(_avk_r)
-    _ant_kjøp  = len([h for h in _historikk if h.get("handling") == "KJØP"])
-    _ant_salg  = len([h for h in _historikk if h.get("handling") == "SELG"])
-    _hit_rate  = (len([r for r in _realisert if r > 0]) / len(_realisert) * 100) if _realisert else None
-    _snitt_avk = sum(_realisert) / len(_realisert) if _realisert else None
+    _ant_kjøp = len([h for h in _historikk if h.get("handling") == "KJØP"])
+    _ant_salg = len([h for h in _historikk if h.get("handling") == "SELG"])
+    _hit_rate = (len([r for r in _realisert if r > 0]) / len(_realisert) * 100) if _realisert else None
 
-    # ── Rad 1: Nøkkeltall ─────────────────────────────────────────────────────
+    # ── 3. Nøkkeltall ─────────────────────────────────────────────────────────
     _cm1, _cm2, _cm3, _cm4, _cm5 = st.columns(5)
-    _cm1.metric("Aksjer (verdi)",     f"{_pos_verdi:,.0f} kr")
-    _cm2.metric("Cash",               f"{_kasse:,.0f} kr")
-    _cm3.metric("Total avkastning",   f"{_avk_pct:+.1f}%" if _start > 0 else "–",
+    _cm1.metric("Aksjer (verdi)",   f"{_pos_verdi:,.0f} kr")
+    _cm2.metric("Cash",             f"{_kasse:,.0f} kr")
+    _cm3.metric("Total avkastning", f"{_avk_pct:+.1f}%" if _start > 0 else "–",
                 delta=f"{_avk_kr:+,.0f} kr" if _start > 0 else None)
-    _cm4.metric("Åpne posisjoner",    len(_posisjoner))
-    _cm5.metric("Utførte handler",    _ant_kjøp + _ant_salg)
+    _cm4.metric("Hit rate",         f"{_hit_rate:.0f}%" if _hit_rate is not None else "–",
+                help="Andel lukkede handler med positiv avkastning")
+    _cm5.metric("Utførte handler",  _ant_kjøp + _ant_salg)
 
-    st.divider()
+    # Allokeringsbar
+    _pos_farger = ["#4C8BF5", "#7c3aed", "#059669", "#d97706", "#dc2626", "#0891b2"]
+    _cash_pct   = round(_kasse / _total_verdi * 100) if _total_verdi > 0 else 100
+    _alloc_segs = f'<div style="flex:{_cash_pct};background:#374151;border-radius:3px 0 0 3px" title="Cash {_cash_pct}%"></div>'
+    _alloc_leg  = f'<span style="color:#9ca3af">&#9646; Cash {_cash_pct}%</span>'
+    for _i, _pr in enumerate(_pos_rader):
+        _pct_pos = round(_pr["Verdi (kr)"] / _total_verdi * 100) if _total_verdi > 0 else 0
+        _fg = _pos_farger[_i % len(_pos_farger)]
+        _br = "border-radius:0 3px 3px 0" if _i == len(_pos_rader) - 1 else ""
+        _alloc_segs += f'<div style="flex:{_pct_pos};background:{_fg};{_br}" title="{_pr["Aksje"].split()[0]} {_pct_pos}%"></div>'
+        _alloc_leg  += f' &nbsp;<span style="color:{_fg}">&#9646; {_pr["Aksje"].split()[0]} {_pct_pos}%</span>'
+    st.markdown(
+        f'<div style="display:flex;height:12px;border-radius:3px;overflow:hidden;gap:1px;margin:4px 0 2px">{_alloc_segs}</div>'
+        f'<div style="font-size:11px;color:#6b7280">{_alloc_leg}</div>',
+        unsafe_allow_html=True,
+    )
 
-    # ── Rad 2: Graf + statistikk side om side ─────────────────────────────────
-    _graf_col, _stat_col = st.columns([2, 1])
+    # ── 4. Børsometer ─────────────────────────────────────────────────────────
+    def _heat_style(pct):
+        if pct >  1.5: return "background:#14532d;color:#4ade80"
+        if pct >  0.5: return "background:#166534;color:#86efac"
+        if pct >  0.1: return "background:#0d3318;color:#6ee7a0"
+        if pct > -0.1: return "background:#1f2535;color:#888"
+        if pct > -0.5: return "background:#2a1010;color:#fca5a5"
+        if pct > -1.5: return "background:#450a0a;color:#f87171"
+        return "background:#7f1d1d;color:#fca5a5"
 
-    with _graf_col:
-        st.markdown("#### Porteføljeverdi over tid")
-        _verdi_hist = _pf.get("verdi_historikk", [])
-
-        # Dagens estimerte verdi legges alltid til som siste punkt
-        _verdi_i_dag = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
-        _plot_data = [s for s in _verdi_hist if s["dato"] != _idag] + [_verdi_i_dag]
-
-        # Hvis vi bare har ett punkt, legg til startkapital som første punkt
-        if len(_plot_data) == 1 and _start > 0:
-            from datetime import timedelta
-            _start_dato = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-            _plot_data = [{"dato": _start_dato, "total_verdi": _start}] + _plot_data
-
-        if len(_plot_data) >= 2:
-            _df_graf = pd.DataFrame(_plot_data)
-            _df_graf["dato"] = pd.to_datetime(_df_graf["dato"])
-            _df_graf = _df_graf.sort_values("dato")
-
-            _siste_verdi = float(_df_graf["total_verdi"].iloc[-1])
-            _fyll_farge = "rgba(0,200,100,0.15)" if _siste_verdi >= _start else "rgba(220,50,50,0.15)"
-
-            _fig = go.Figure()
-            _fig.add_trace(go.Scatter(
-                x=_df_graf["dato"], y=_df_graf["total_verdi"],
-                mode="lines+markers", name="Portefølje",
-                line=dict(color="#4C8BF5", width=2),
-                marker=dict(size=5),
-                fill="tozeroy", fillcolor=_fyll_farge,
-            ))
-
-            # OSEBX benchmark — normaliser til startkapital ved første snapshot-dato
-            _første_dato = _df_graf["dato"].iloc[0]
-            _siste_dato  = _df_graf["dato"].iloc[-1]
-            _osebx_hist  = None
-            for _bm in ["^OSEBX", "^OSEAX", "OSEBX.OL"]:
-                _raw_bm = hent_aksje_historikk(_bm, "2y")
-                if _raw_bm is not None and not _raw_bm.empty:
-                    _osebx_hist = _raw_bm
-                    break
-            if _osebx_hist is not None:
-                _osebx_close = _osebx_hist["Close"].copy()
-                _osebx_close.index = pd.to_datetime(_osebx_close.index).tz_localize(None)
-                _osebx_close = _osebx_close[
-                    (_osebx_close.index >= _første_dato) &
-                    (_osebx_close.index <= _siste_dato + pd.Timedelta(days=1))
-                ]
-                if len(_osebx_close) >= 2:
-                    _bm_start = float(_osebx_close.iloc[0])
-                    _bm_verdi = (_osebx_close / _bm_start) * _start
-                    _fig.add_trace(go.Scatter(
-                        x=_osebx_close.index, y=_bm_verdi,
-                        mode="lines", name="OSEBX (benchmark)",
-                        line=dict(color="#f77f00", width=1.5, dash="dash"),
-                    ))
-
-            _fig.add_hline(
-                y=_start, line_dash="dot", line_color="gray",
-                annotation_text=f"Startkapital {_start:,.0f} kr",
-                annotation_position="bottom right",
-            )
-            _fig.update_layout(
-                template="plotly_dark",
-                height=280,
-                margin=dict(l=0, r=0, t=10, b=0),
-                xaxis=dict(showgrid=False),
-                yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
-                legend=dict(orientation="h", yanchor="bottom", y=1.02,
-                            xanchor="right", x=1),
-            )
-            st.plotly_chart(_fig, use_container_width=True)
-        else:
-            st.info("Trykk **📸 Ta snapshot nå** for å starte grafen.")
-
-        if st.button("📸 Ta snapshot nå", help="Lagrer dagens porteføljeverdi i grafen"):
-            _snap = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
-            _vh = [s for s in _pf.get("verdi_historikk", []) if s["dato"] != _idag]
-            _vh.append(_snap)
-            _pf["verdi_historikk"] = _vh[-365:]
-            lagre_portefolje(_pf)
-            st.success(f"Snapshot lagret: {_total_verdi:,.0f} kr ({_idag})")
-            st.rerun()
-
-    with _stat_col:
-        st.markdown("#### Statistikk")
-        st.metric("Hit rate",
-                  f"{_hit_rate:.0f}%" if _hit_rate is not None else "–",
-                  help="Andel lukkede handler med positiv avkastning")
-        st.metric("Snitt avk. (lukket)",
-                  f"{_snitt_avk:+.1f}%" if _snitt_avk is not None else "–")
-        st.metric("Kjøp utført",  _ant_kjøp)
-        st.metric("Salg utført",  _ant_salg)
-        _total_kurtasje_stat = sum(_h.get("kurtasje", 0) for _h in _historikk)
-        if _total_kurtasje_stat:
-            st.metric("Total kurtasje", f"{_total_kurtasje_stat:,.0f} kr",
-                      help="Sum av alle kurtasjer betalt hittil")
-        if _realisert:
-            _beste = max(_realisert)
-            _dårligste = min(_realisert)
-            st.metric("Beste handel",     f"{_beste:+.1f}%")
-            st.metric("Dårligste handel", f"{_dårligste:+.1f}%")
-
-    # ── Risikomål (vises under grafen når nok historikk) ─────────────────────
-    _verdi_hist_sorted = sorted(_pf.get("verdi_historikk", []), key=lambda x: x["dato"])
-    if len(_verdi_hist_sorted) >= 5:
-        _rv = pd.Series([s["total_verdi"] for s in _verdi_hist_sorted])
-        _rets = _rv.pct_change().dropna()
-        _sharpe   = float((_rets.mean() / _rets.std()) * (252 ** 0.5)) if _rets.std() > 0 else 0
-        _vol      = float(_rets.std() * (252 ** 0.5) * 100)
-        _cummax   = _rv.cummax()
-        _max_dd   = float(((_rv - _cummax) / _cummax * 100).min())
-        _rc1, _rc2, _rc3 = st.columns(3)
-        _rc1.metric("Sharpe ratio",   f"{_sharpe:.2f}",
-                    help="Risikojustert avkastning. Over 1.0 er bra, over 2.0 er meget bra.")
-        _rc2.metric("Maks drawdown",  f"{_max_dd:.1f}%",
-                    help="Største fall fra topp til bunn i porteføljeverdien.")
-        _rc3.metric("Volatilitet",    f"{_vol:.1f}%",
-                    help="Annualisert standardavvik for daglig avkastning.")
-
-    st.divider()
-
-    # ── Åpne posisjoner ───────────────────────────────────────────────────────
-    st.markdown("#### Åpne posisjoner")
-    if _pos_rader:
-        st.dataframe(
-            pd.DataFrame(_pos_rader),
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "Snittpris":      st.column_config.NumberColumn("Snittpris",      format="%.2f kr"),
-                "Nåkurs":         st.column_config.NumberColumn("Nåkurs",         format="%.2f kr"),
-                "Avkastning %":   st.column_config.NumberColumn("Avkastning",     format="%+.1f%%"),
-                "Verdi (kr)":     st.column_config.NumberColumn("Verdi",          format="%,.0f kr"),
-                "SL-kurs":        st.column_config.NumberColumn(
-                                    f"SL ({_stop_loss_pct*100:.0f}%)", format="%.2f kr",
-                                    help="Selges automatisk hvis kursen faller under dette nivået"),
-                "Avstand til SL": st.column_config.NumberColumn(
-                                    "Avstand til SL", format="%+.1f%%",
-                                    help="Hvor mye kursen kan falle før stop-loss utløses"),
-            },
+    _heat_tiles = ""
+    for _d in _obx_data:
+        _sty   = _heat_style(_d["pct"])
+        _short = _d["ticker"].replace(".OL", "")
+        _sign  = "+" if _d["pct"] > 0 else ""
+        _heat_tiles += (
+            f'<div style="{_sty};padding:5px 8px;border-radius:4px;text-align:center;min-width:62px;flex:1">'
+            f'<div style="font-size:11px;font-weight:700">{_short}</div>'
+            f'<div style="font-size:11px">{_sign}{_d["pct"]:.1f}%</div></div>'
         )
-    else:
-        st.info("Ingen åpne posisjoner for øyeblikket.")
-
-    # ── Sektorspredning ───────────────────────────────────────────────────────
-    if _pos_rader:
-        _sektor_verdi = {}
-        for _ticker, _pos in _posisjoner.items():
-            _sektor = SEKTORER.get(_ticker, "Annet")
-            _kurs_p = next((r["Nåkurs"] for r in _pos_rader if r["Aksje"] == _pos["navn"]), _pos["snittpris"])
-            _sektor_verdi[_sektor] = _sektor_verdi.get(_sektor, 0) + _kurs_p * _pos["antall"]
-
-        _sek_col, _adv_col = st.columns([1, 2])
-        with _sek_col:
-            st.markdown("**Sektorfordeling**")
-            _fig_pie = go.Figure(go.Pie(
-                labels=list(_sektor_verdi.keys()),
-                values=list(_sektor_verdi.values()),
-                hole=0.4,
-                textinfo="label+percent",
-                showlegend=False,
-            ))
-            _fig_pie.update_layout(
-                template="plotly_dark", height=220,
-                margin=dict(l=0, r=0, t=10, b=0),
-            )
-            st.plotly_chart(_fig_pie, use_container_width=True)
-
-        with _adv_col:
-            st.markdown("**Sektorkonsentrasjon**")
-            _sektor_antall = {}
-            for _ticker in _posisjoner:
-                _s = SEKTORER.get(_ticker, "Annet")
-                _sektor_antall[_s] = _sektor_antall.get(_s, 0) + 1
-            for _s, _n in sorted(_sektor_antall.items(), key=lambda x: -x[1]):
-                _advarsel = " ⚠️ Over grense" if _n >= 3 else ""
-                st.caption(f"{_s}: **{_n}** posisjon{'er' if _n > 1 else ''}{_advarsel}")
+    st.markdown(
+        '<div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin:12px 0 4px">OBX Børsometer</div>'
+        f'<div style="display:flex;flex-wrap:wrap;gap:4px">{_heat_tiles}</div>',
+        unsafe_allow_html=True,
+    )
 
     st.divider()
 
-    # ── Dagens handler ────────────────────────────────────────────────────────
-    _dagens = [h for h in _historikk if str(h.get("dato", ""))[:10] == _idag]
-    st.markdown("#### Dagens handler")
-    if _dagens:
-        for _h in _dagens:
-            _ikon = "✅" if _h["handling"] == "KJØP" else "🔴"
+    # ── 5. Hovedgrid ──────────────────────────────────────────────────────────
+    _REGIME_BESKRIVELSE = {
+        "Bull": (
+            "Oslo Børs er i **oppgang** — OSEBX over 200-dagers snitt med positiv 3-måneders trend. "
+            "Boten er i offensiv modus og kjøper opp til **6 posisjoner** med 15% allokering per aksje."
+        ),
+        "Sideways": (
+            "Oslo Børs er i **nøytralt terreng** — OSEBX nær 200-dagers snitt uten klar retning. "
+            "Boten er i forsiktig modus med maks **4 posisjoner** og 12% allokering."
+        ),
+        "Bear": (
+            "Oslo Børs er i **nedgang** — OSEBX under 200-dagers snitt med negativ trend. "
+            "Boten er i defensiv modus: maks **2 posisjoner**, 10% allokering, krever 3/3 signaler."
+        ),
+    }
+
+    _left_col, _right_col = st.columns([1, 2.5])
+
+    with _left_col:
+        st.markdown(f"**{_rcfg['ikon']} Markedssituasjon — {_regime}**")
+        st.markdown(_REGIME_BESKRIVELSE.get(_regime, ""))
+        _råvare_trender = _pf.get("råvare_trender", {})
+        if _råvare_trender:
+            _ikoner   = {1: "↑", -1: "↓", 0: "–"}
+            _navn_map = {"Energi": "Brent crude", "Shipping": "Dry Bulk (BDRY)"}
+            _rv_linjer = [f"{_ikoner.get(_v,'–')} {_navn_map.get(_k, _k)}" for _k, _v in _råvare_trender.items()]
+            st.caption("  ·  ".join(_rv_linjer))
+        _insider_kjøp = _pf.get("insider_kjøp", [])
+        if _insider_kjøp:
+            _ticker_navn = {v: k for k, v in {**OSLO_BORS}.items()}
+            st.caption(f"Insiderkjøp (14d): **{', '.join(_ticker_navn.get(t, t) for t in _insider_kjøp)}**")
+        _short_int = _pf.get("short_interest", {})
+        if _short_int:
+            _short_str = ", ".join(f"{t.replace('.OL','')} {p:.1f}%" for t, p in sorted(_short_int.items(), key=lambda x: -x[1]))
+            st.caption(f"Høy short interest: **{_short_str}**")
+
+        _topp_kand = _pf.get("topp_kandidater", [])
+        if _topp_kand:
+            st.markdown("**Topp kandidater**")
+            for _k in _topp_kand[:5]:
+                _eier        = _k["ticker"] in _pf.get("posisjoner", {})
+                _eid_tekst   = " · **eier**" if _eier else ""
+                _pe_tekst    = f" · P/E {_k['pe']:.0f}" if _k.get("pe") else ""
+                _yield_tekst = f" · {_k['yield']:.1f}% utb." if _k.get("yield") else ""
+                _dots = "🟢" * _k["ensemble"] + "⚫" * (3 - _k["ensemble"])
+                st.markdown(
+                    f"{_dots} **{_k['navn']}** — "
+                    f"mom {_k['mom']:+.1f}% · RSI {int(_k['rsi'])}{_pe_tekst}{_yield_tekst}{_eid_tekst}",
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.caption("Ingen kandidatdata ennå.")
+
+    with _right_col:
+        # Rad 1: Åpne posisjoner
+        st.markdown("**Åpne posisjoner**")
+        if _pos_rader:
+            st.dataframe(
+                pd.DataFrame(_pos_rader),
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "Snittpris":      st.column_config.NumberColumn("Snittpris",    format="%.2f kr"),
+                    "Nåkurs":         st.column_config.NumberColumn("Nåkurs",       format="%.2f kr"),
+                    "Avkastning %":   st.column_config.NumberColumn("Avkastning",   format="%+.1f%%"),
+                    "Verdi (kr)":     st.column_config.NumberColumn("Verdi",        format="%,.0f kr"),
+                    "SL-kurs":        st.column_config.NumberColumn(
+                                        f"SL ({_stop_loss_pct*100:.0f}%)", format="%.2f kr",
+                                        help="Selges automatisk hvis kursen faller under dette nivået"),
+                    "Avstand til SL": st.column_config.ProgressColumn(
+                                        "Avstand til SL", format="%+.1f%%",
+                                        min_value=0, max_value=20),
+                },
+            )
+        else:
+            st.info("Ingen åpne posisjoner for øyeblikket.")
+
+        # Rad 2: Graf + donut
+        _graf_col, _donut_col = st.columns([3, 1])
+
+        with _graf_col:
+            _verdi_hist  = _pf.get("verdi_historikk", [])
+            _verdi_i_dag = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
+            _plot_data   = [s for s in _verdi_hist if s["dato"] != _idag] + [_verdi_i_dag]
+            if len(_plot_data) == 1 and _start > 0:
+                from datetime import timedelta
+                _start_dato = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+                _plot_data = [{"dato": _start_dato, "total_verdi": _start}] + _plot_data
+            if len(_plot_data) >= 2:
+                _df_graf = pd.DataFrame(_plot_data)
+                _df_graf["dato"] = pd.to_datetime(_df_graf["dato"])
+                _df_graf = _df_graf.sort_values("dato")
+                _siste_verdi = float(_df_graf["total_verdi"].iloc[-1])
+                _fyll_farge  = "rgba(0,200,100,0.15)" if _siste_verdi >= _start else "rgba(220,50,50,0.15)"
+                _fig = go.Figure()
+                _fig.add_trace(go.Scatter(
+                    x=_df_graf["dato"], y=_df_graf["total_verdi"],
+                    mode="lines+markers", name="Portefølje",
+                    line=dict(color="#4C8BF5", width=2), marker=dict(size=5),
+                    fill="tozeroy", fillcolor=_fyll_farge,
+                ))
+                _første_dato = _df_graf["dato"].iloc[0]
+                _siste_dato  = _df_graf["dato"].iloc[-1]
+                for _bm in ["^OSEBX", "^OSEAX", "OSEBX.OL"]:
+                    _raw_bm = hent_aksje_historikk(_bm, "2y")
+                    if _raw_bm is not None and not _raw_bm.empty:
+                        _osebx_close = _raw_bm["Close"].copy()
+                        _osebx_close.index = pd.to_datetime(_osebx_close.index).tz_localize(None)
+                        _osebx_close = _osebx_close[
+                            (_osebx_close.index >= _første_dato) &
+                            (_osebx_close.index <= _siste_dato + pd.Timedelta(days=1))
+                        ]
+                        if len(_osebx_close) >= 2:
+                            _bm_verdi = (_osebx_close / float(_osebx_close.iloc[0])) * _start
+                            _fig.add_trace(go.Scatter(
+                                x=_osebx_close.index, y=_bm_verdi,
+                                mode="lines", name="OSEBX",
+                                line=dict(color="#f77f00", width=1.5, dash="dash"),
+                            ))
+                        break
+                _fig.add_hline(y=_start, line_dash="dot", line_color="gray",
+                               annotation_text=f"Start {_start:,.0f} kr",
+                               annotation_position="bottom right")
+                _fig.update_layout(
+                    template="plotly_dark", height=240,
+                    margin=dict(l=0, r=0, t=10, b=0),
+                    xaxis=dict(showgrid=False),
+                    yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
+                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+                )
+                st.plotly_chart(_fig, use_container_width=True)
+            else:
+                st.info("Trykk **📸 Ta snapshot** for å starte grafen.")
+            if st.button("📸 Ta snapshot", help="Lagrer dagens porteføljeverdi i grafen"):
+                _snap = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
+                _vh   = [s for s in _pf.get("verdi_historikk", []) if s["dato"] != _idag]
+                _vh.append(_snap)
+                _pf["verdi_historikk"] = _vh[-365:]
+                lagre_portefolje(_pf)
+                st.success(f"Snapshot lagret: {_total_verdi:,.0f} kr ({_idag})")
+                st.rerun()
+
+        with _donut_col:
+            _ant_vinn = len([r for r in _realisert if r > 0])
+            _ant_tap  = len([r for r in _realisert if r <= 0])
+            if _realisert:
+                _donut_vals   = [_ant_vinn, _ant_tap]
+                _donut_labels = ["Vinn", "Tap"]
+                _donut_colors = ["#22c55e", "#ef4444"]
+                _center_txt   = f"{_hit_rate:.0f}%"
+            else:
+                _donut_vals   = [1]
+                _donut_labels = ["Ingen data"]
+                _donut_colors = ["#374151"]
+                _center_txt   = "–"
+            _fig_donut = go.Figure(go.Pie(
+                values=_donut_vals, labels=_donut_labels, hole=0.65,
+                marker_colors=_donut_colors, textinfo="none",
+            ))
+            _fig_donut.add_annotation(text=_center_txt, showarrow=False,
+                                      font=dict(size=14, color="#fff"))
+            _fig_donut.update_layout(
+                template="plotly_dark", height=200,
+                margin=dict(l=0, r=0, t=10, b=0), showlegend=True,
+                legend=dict(orientation="v", font=dict(size=10)),
+            )
+            st.plotly_chart(_fig_donut, use_container_width=True)
+
+        # Stats under graf
+        _verdi_hist_sorted = sorted(_pf.get("verdi_historikk", []), key=lambda x: x["dato"])
+        if len(_verdi_hist_sorted) >= 5:
+            _rv    = pd.Series([s["total_verdi"] for s in _verdi_hist_sorted])
+            _rets  = _rv.pct_change().dropna()
+            _sharpe    = float((_rets.mean() / _rets.std()) * (252 ** 0.5)) if _rets.std() > 0 else 0
+            _vol       = float(_rets.std() * (252 ** 0.5) * 100)
+            _cummax    = _rv.cummax()
+            _max_dd    = float(((_rv - _cummax) / _cummax * 100).min())
+            _snitt_avk = sum(_realisert) / len(_realisert) if _realisert else None
+            _s1, _s2, _s3, _s4 = st.columns(4)
+            _s1.metric("Sharpe",        f"{_sharpe:.2f}")
+            _s2.metric("Maks drawdown", f"{_max_dd:.1f}%")
+            _s3.metric("Volatilitet",   f"{_vol:.1f}%")
+            _s4.metric("Snitt avk.",    f"{_snitt_avk:+.1f}%" if _snitt_avk else "–")
+
+    st.divider()
+
+    # ── 6. P&L-panel ──────────────────────────────────────────────────────────
+    if _pos_rader:
+        st.markdown("#### Urealisert gevinst / tap")
+        _pnl_cols = st.columns(len(_pos_rader) + 1)
+        for _i, _rad in enumerate(_pos_rader):
+            _ur_kr  = (_rad["Nåkurs"] - _rad["Snittpris"]) * _rad["Antall"]
+            _ur_pct = _rad["Avkastning %"]
+            _farge  = "#0a2414" if _ur_kr >= 0 else "#1c0808"
+            _border = "#14532d" if _ur_kr >= 0 else "#450a0a"
+            _tekst  = "#4ade80" if _ur_kr >= 0 else "#f87171"
+            with _pnl_cols[_i]:
+                st.markdown(
+                    f'<div style="background:{_farge};border:1px solid {_border};border-radius:6px;padding:10px 12px">'
+                    f'<div style="font-weight:700;color:#fff;font-size:12px">{_rad["Aksje"].split()[0]}</div>'
+                    f'<div style="font-size:18px;font-weight:700;color:{_tekst};margin:4px 0">{_ur_kr:+,.0f} kr</div>'
+                    f'<div style="font-size:12px;color:{_tekst}">{_ur_pct:+.1f}%</div>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+        _net_kr   = sum((_r["Nåkurs"] - _r["Snittpris"]) * _r["Antall"] for _r in _pos_rader)
+        _net_base = sum(_r["Snittpris"] * _r["Antall"] for _r in _pos_rader)
+        _net_pct  = _net_kr / _net_base * 100 if _net_base > 0 else 0
+        _net_fg   = "#4ade80" if _net_kr >= 0 else "#f87171"
+        with _pnl_cols[-1]:
             st.markdown(
-                f"{_ikon} **{_h['navn']}** — {_h['handling']} {_h['antall']} aksjer "
-                f"à {_h.get('kurs', 0):,.2f} kr = **{_h.get('beløp', 0):,.0f} kr**  \n"
-                f"<small style='color:gray'>{_h.get('begrunnelse', '–')}</small>",
+                f'<div style="background:#141924;border:1px solid #2a2f40;border-radius:6px;padding:10px 12px">'
+                f'<div style="font-size:12px;color:#888">Netto</div>'
+                f'<div style="font-size:18px;font-weight:700;color:{_net_fg};margin:4px 0">{_net_kr:+,.0f} kr</div>'
+                f'<div style="font-size:12px;color:{_net_fg}">{_net_pct:+.1f}%</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
-    else:
-        st.caption(f"Ingen handler i dag ({_idag}) — boten kjører neste hverdag kl 09:15.")
+
+        # P&L-tidslinje
+        _u_hist = _pf.get("urealisert_historikk", [])
+        if len(_u_hist) >= 2:
+            _df_u = pd.DataFrame(_u_hist)
+            _df_u["dato"] = pd.to_datetime(_df_u["dato"])
+            _line_color   = "#22c55e" if _net_kr >= 0 else "#ef4444"
+            _fill_color   = "rgba(34,197,94,0.12)" if _net_kr >= 0 else "rgba(239,68,68,0.12)"
+            _fig_u = go.Figure()
+            _fig_u.add_trace(go.Scatter(
+                x=_df_u["dato"], y=_df_u["verdi"],
+                mode="lines+markers", fill="tozeroy",
+                line=dict(color=_line_color, width=2),
+                fillcolor=_fill_color,
+            ))
+            _fig_u.add_hline(y=0, line_dash="dot", line_color="#444")
+            _fig_u.update_layout(
+                template="plotly_dark", height=160,
+                margin=dict(l=0, r=0, t=10, b=0),
+                xaxis=dict(showgrid=False),
+                yaxis=dict(ticksuffix=" kr"),
+                showlegend=False,
+            )
+            st.plotly_chart(_fig_u, use_container_width=True)
+
+    # ── 7. P&L-kalender ───────────────────────────────────────────────────────
+    _vh_kal = sorted(_pf.get("verdi_historikk", []), key=lambda x: x["dato"])
+    _pnl_map: dict = {}
+    for _i in range(1, len(_vh_kal)):
+        _prev_v = _vh_kal[_i - 1]["total_verdi"]
+        _curr_v = _vh_kal[_i]["total_verdi"]
+        _pnl_map[_vh_kal[_i]["dato"]] = round((_curr_v / _prev_v - 1) * 100, 2) if _prev_v else 0
+
+    from datetime import timedelta as _td
+    _cal_end    = datetime.now().date()
+    _cal_start  = _cal_end - _td(weeks=13)
+    _week_start = _cal_start - _td(days=_cal_start.weekday())
+    _weeks = []
+    _d = _week_start
+    while _d <= _cal_end:
+        _weeks.append([_d + _td(days=_wd) for _wd in range(7)])
+        _d += _td(weeks=1)
+
+    def _cal_color(date_obj):
+        if date_obj > _cal_end or date_obj < _cal_start:
+            return "background:#0e1117"
+        if date_obj.weekday() >= 5:
+            return "background:#111827"
+        ds = str(date_obj)
+        if ds not in _pnl_map:
+            return "background:#1f2535"
+        p = _pnl_map[ds]
+        if p >  1.0: return "background:#14532d"
+        if p >  0.3: return "background:#166534"
+        if p >  0.0: return "background:#0d3318"
+        if p < -1.0: return "background:#7f1d1d"
+        if p < -0.3: return "background:#450a0a"
+        return "background:#2a1010"
+
+    _cal_html = '<div style="display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px">'
+    for _week in _weeks:
+        _cal_html += '<div style="display:flex;flex-direction:column;gap:3px">'
+        for _day in _week:
+            _ds        = str(_day)
+            _sty       = _cal_color(_day)
+            _title_val = f"{_pnl_map[_ds]:+.2f}%" if _ds in _pnl_map else _ds
+            _cal_html += f'<div style="{_sty};width:14px;height:14px;border-radius:2px" title="{_title_val}"></div>'
+        _cal_html += '</div>'
+    _cal_html += '</div>'
+
+    st.markdown(
+        '<div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin:8px 0 4px">'
+        'P&L kalender — siste 13 uker</div>',
+        unsafe_allow_html=True,
+    )
+    if len(_vh_kal) < 2:
+        st.caption("Historikk bygges opp over tid — kalenderen fylles etter hvert som boten kjører.")
+    st.markdown(_cal_html, unsafe_allow_html=True)
 
     st.divider()
 
-    # ── Handelslogg ───────────────────────────────────────────────────────────
+    # ── 8. Handelslogg ────────────────────────────────────────────────────────
     st.markdown("#### Handelslogg")
     if _historikk:
         _lf1, _lf2, _lf3 = st.columns([1, 1, 2])
@@ -1023,15 +1202,15 @@ with tab_dash:
             if _h.get("handling") == "SELG" and "snittpris" in _h and "antall" in _h:
                 _gevinst = round((_h["kurs"] - _h["snittpris"]) * _h["antall"] - _h.get("kurtasje", 0), 0)
             _logg_rader.append({
-                "Dato":           str(_h.get("dato", ""))[:16].replace("T", " "),
-                "Handling":       _h.get("handling", ""),
-                "Aksje":          _h.get("navn", ""),
-                "Antall":         _h.get("antall", ""),
-                "Kurs (kr)":      round(_h["kurs"], 2)     if "kurs"     in _h else None,
-                "Beløp (kr)":     round(_h["beløp"], 0)    if "beløp"    in _h else None,
-                "Kurtasje (kr)":  round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
-                "Gevinst/Tap":    _gevinst,
-                "Begrunnelse":    _h.get("begrunnelse", "–"),
+                "Dato":          str(_h.get("dato", ""))[:16].replace("T", " "),
+                "Handling":      _h.get("handling", ""),
+                "Aksje":         _h.get("navn", ""),
+                "Antall":        _h.get("antall", ""),
+                "Kurs (kr)":     round(_h["kurs"], 2)     if "kurs"     in _h else None,
+                "Beløp (kr)":    round(_h["beløp"], 0)    if "beløp"    in _h else None,
+                "Kurtasje (kr)": round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
+                "Gevinst/Tap":   _gevinst,
+                "Begrunnelse":   _h.get("begrunnelse", "–"),
             })
 
         st.dataframe(
@@ -1039,15 +1218,15 @@ with tab_dash:
             use_container_width=True,
             hide_index=True,
             column_config={
-                "Dato":          st.column_config.TextColumn("Dato",         width="medium"),
-                "Handling":      st.column_config.TextColumn("Handling",     width="small"),
-                "Aksje":         st.column_config.TextColumn("Aksje",        width="medium"),
-                "Antall":        st.column_config.NumberColumn("Antall",     width="small"),
-                "Kurs (kr)":     st.column_config.NumberColumn("Kurs",       format="%.2f kr",  width="medium"),
-                "Beløp (kr)":    st.column_config.NumberColumn("Beløp",      format="%,.0f kr", width="medium"),
-                "Kurtasje (kr)":  st.column_config.NumberColumn("Kurtasje",    format="%,.0f kr", width="small"),
-                "Gevinst/Tap":    st.column_config.NumberColumn("Gevinst/Tap", format="%+,.0f kr", width="medium"),
-                "Begrunnelse":    st.column_config.TextColumn("Begrunnelse",   width="large"),
+                "Dato":          st.column_config.TextColumn("Dato",          width="medium"),
+                "Handling":      st.column_config.TextColumn("Handling",      width="small"),
+                "Aksje":         st.column_config.TextColumn("Aksje",         width="medium"),
+                "Antall":        st.column_config.NumberColumn("Antall",      width="small"),
+                "Kurs (kr)":     st.column_config.NumberColumn("Kurs",        format="%.2f kr",   width="medium"),
+                "Beløp (kr)":    st.column_config.NumberColumn("Beløp",       format="%,.0f kr",  width="medium"),
+                "Kurtasje (kr)": st.column_config.NumberColumn("Kurtasje",    format="%,.0f kr",  width="small"),
+                "Gevinst/Tap":   st.column_config.NumberColumn("Gevinst/Tap", format="%+,.0f kr", width="medium"),
+                "Begrunnelse":   st.column_config.TextColumn("Begrunnelse",   width="large"),
             },
         )
         _total_kurtasje = sum(_h.get("kurtasje", 0) for _h in _historikk)
@@ -1057,7 +1236,6 @@ with tab_dash:
         )
     else:
         st.info("Ingen handelshistorikk ennå. Boten kjører første gang neste hverdag kl 09:15.")
-
 # ─── TAB ANALYSE ──────────────────────────────────────────────────────────────
 with tab_analyse:
     st.subheader("Oslo Børs Screener")

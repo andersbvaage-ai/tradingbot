@@ -2,12 +2,10 @@ name: Daglig børsanalyse
 
 on:
   schedule:
-    - cron: "15 8 * * 1-5"   # 09:15 norsk vintertid (UTC+1)
-    - cron: "30 12 * * 1-5"  # 13:30 norsk vintertid (UTC+1)
-    - cron: "0 15 * * 5"     # 16:00 norsk vintertid (UTC+1, fredag)
-    - cron: "15 7 * * 1-5"   # 09:15 norsk sommertid (UTC+2)
-    - cron: "30 11 * * 1-5"  # 13:30 norsk sommertid (UTC+2)
-    - cron: "0 14 * * 5"     # 16:00 norsk sommertid (UTC+2, fredag)
+    - cron: "0 7 * * 1-5"    # Morgen-loop: 09:00 sommer / 08:00 vinter Oslo
+    - cron: "0 11 * * 1-5"   # Ettermiddag-loop: 13:00 sommer / 12:00 vinter Oslo
+    - cron: "0 14 * * 5"     # Ukentlig rapport fredag 16:00 vintertid (UTC+1)
+    - cron: "0 15 * * 5"     # Ukentlig rapport fredag 16:00 sommertid (UTC+2)
   workflow_dispatch:
     inputs:
       modus:
@@ -24,7 +22,7 @@ on:
 jobs:
   analyser:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 360
     permissions:
       contents: write
     steps:
@@ -37,41 +35,14 @@ jobs:
           python-version: "3.11"
 
       - name: Installer avhengigheter
-        run: pip install yfinance pandas cryptography
+        run: pip install yfinance pandas cryptography requests PyNaCl
 
-      - name: Bestem kjøringsmodus
-        id: modus
+      - name: Git-konfigurasjon
         run: |
-          HOUR=$(date -u +%H)
-          DAY=$(date -u +%u)   # 1=Man ... 5=Fre
-          INPUT="${{ github.event.inputs.modus }}"
-          if [ "$INPUT" = "test-varsel" ]; then
-            echo "args=--test-varsel" >> $GITHUB_OUTPUT
-            echo "label=Test varsel" >> $GITHUB_OUTPUT
-          elif [ "$INPUT" = "only-stop-loss" ]; then
-            echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
-            echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
-          elif [ "$INPUT" = "ukentlig-rapport" ]; then
-            echo "args=--ukentlig-rapport" >> $GITHUB_OUTPUT
-            echo "label=Ukentlig rapport" >> $GITHUB_OUTPUT
-          elif [ "$INPUT" = "full" ]; then
-            echo "args=" >> $GITHUB_OUTPUT
-            echo "label=Full analyse" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "12" ] || [ "$HOUR" = "11" ]; then
-            echo "args=--only-stop-loss" >> $GITHUB_OUTPUT
-            echo "label=Stop-loss-sjekk" >> $GITHUB_OUTPUT
-          elif ([ "$HOUR" = "15" ] || [ "$HOUR" = "14" ]) && [ "$DAY" = "5" ]; then
-            echo "args=--ukentlig-rapport" >> $GITHUB_OUTPUT
-            echo "label=Ukentlig rapport" >> $GITHUB_OUTPUT
-          else
-            echo "args=" >> $GITHUB_OUTPUT
-            echo "label=Full analyse" >> $GITHUB_OUTPUT
-          fi
+          git config user.name  "Trading Bot"
+          git config user.email "bot@tradingbot"
 
-      - name: Installer Saxo-avhengigheter
-        run: pip install requests PyNaCl
-
-      - name: Kjør analyse (${{ steps.modus.outputs.label }})
+      - name: Kjør analyse
         env:
           SAXO_CLIENT_ID:     ${{ secrets.SAXO_CLIENT_ID }}
           SAXO_CLIENT_SECRET: ${{ secrets.SAXO_CLIENT_SECRET }}
@@ -80,13 +51,84 @@ jobs:
           NTFY_TOPIC:         ${{ secrets.NTFY_TOPIC }}
           GITHUB_REPOSITORY:  ${{ github.repository }}
           GITHUB_TOKEN:       ${{ secrets.GITHUB_TOKEN }}
-        run: python scheduler.py ${{ steps.modus.outputs.args }}
-
-      - name: Lagre oppdatert portefølje
         run: |
-          git config user.name  "Trading Bot"
-          git config user.email "bot@tradingbot"
-          git pull --rebase --autostash origin main
-          git add portfolio.json
-          git diff --staged --quiet || git commit -m "[${{ steps.modus.outputs.label }}] $(date +'%Y-%m-%d %H:%M')"
-          git push
+          INPUT="${{ github.event.inputs.modus }}"
+          HOUR_UTC=$(date -u +%H)
+          DAY_UTC=$(date -u +%u)   # 1=Man ... 5=Fre
+
+          # ── Manuell enkelt-kjøring ───────────────────────────────────────────
+          if [ "$INPUT" = "test-varsel" ]; then
+            python scheduler.py --test-varsel; exit 0
+          elif [ "$INPUT" = "only-stop-loss" ]; then
+            python scheduler.py --only-stop-loss; exit 0
+          elif [ "$INPUT" = "ukentlig-rapport" ]; then
+            python scheduler.py --ukentlig-rapport; exit 0
+          elif [ "$INPUT" = "full" ]; then
+            python scheduler.py; exit 0
+          fi
+
+          # ── Fredag ukentlig rapport (kl 14 eller 15 UTC) ─────────────────────
+          if [ "$DAY_UTC" = "5" ] && { [ "$HOUR_UTC" = "14" ] || [ "$HOUR_UTC" = "15" ]; }; then
+            python scheduler.py --ukentlig-rapport
+            git pull --rebase --autostash origin main
+            git add portfolio.json
+            git diff --staged --quiet || git commit -m "[Ukentlig rapport] $(date -u +'%Y-%m-%d %H:%M')"
+            git push
+            exit 0
+          fi
+
+          # ── Loop-modus (ordinær schedule-trigger hverdag) ────────────────────
+          # Kjøres i maks 5t 20min — trygt under GitHub Actions 6t-grense
+          START_EPOCH=$(date +%s)
+          MAX_SECONDS=$(( 5 * 3600 + 20 * 60 ))
+          FIRST_RUN=true
+
+          while true; do
+            # Sjekk maks kjøretid
+            NOW_EPOCH=$(date +%s)
+            if [ $(( NOW_EPOCH - START_EPOCH )) -ge $MAX_SECONDS ]; then
+              echo "Maks kjøretid nådd — avslutter."
+              break
+            fi
+
+            # Hent Oslo-tid i minutter siden midnatt
+            OSLO_HHMM=$(TZ=Europe/Oslo date +%H%M)
+            OSLO_H=${OSLO_HHMM:0:2}
+            OSLO_M=${OSLO_HHMM:2:2}
+            OSLO_TOD=$(( 10#$OSLO_H * 60 + 10#$OSLO_M ))
+
+            # Vent til markedet åpner (09:00 = 540)
+            if [ $OSLO_TOD -lt 540 ]; then
+              WAIT=$(( (540 - OSLO_TOD) * 60 ))
+              echo "Venter $(( WAIT / 60 )) min til markedet åpner (09:00 Oslo)..."
+              sleep $WAIT
+              continue
+            fi
+
+            # Markedet stengt (etter 16:30 = 990)
+            if [ $OSLO_TOD -ge 990 ]; then
+              echo "Markedet stengt ($(TZ=Europe/Oslo date +'%H:%M') Oslo) — avslutter."
+              break
+            fi
+
+            # Bestem kjøringsmodus:
+            # Full analyse kun første gang i morgenvinduet (09:00–09:30)
+            if [ "$FIRST_RUN" = "true" ] && [ $OSLO_TOD -le 570 ]; then
+              echo "=== Full analyse ($(TZ=Europe/Oslo date +'%H:%M') Oslo) ==="
+              python scheduler.py
+            else
+              echo "=== Stop-loss sjekk ($(TZ=Europe/Oslo date +'%H:%M') Oslo) ==="
+              python scheduler.py --only-stop-loss
+            fi
+            FIRST_RUN=false
+
+            # Commit og push portfolio.json
+            git pull --rebase --autostash origin main
+            git add portfolio.json
+            git diff --staged --quiet || git commit -m "[Loop $(TZ=Europe/Oslo date +'%H:%M')] $(date -u +'%Y-%m-%d')"
+            git push
+
+            # Sov 30 minutter
+            echo "Sover 30 min..."
+            sleep 1800
+          done

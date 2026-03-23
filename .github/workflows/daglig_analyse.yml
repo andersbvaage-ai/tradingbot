@@ -2,7 +2,7 @@ name: Daglig børsanalyse
 
 on:
   schedule:
-    - cron: "0 7 * * 1-5"    # Morgen-loop: 09:00 sommer / 08:00 vinter Oslo
+    - cron: "0 5 * * 1-5"    # Morgen-loop: 07:00 sommer / 06:00 vinter Oslo — tidlig start gir buffer mot GitHub-forsinkelse
     - cron: "0 11 * * 1-5"   # Ettermiddag-loop: 13:00 sommer / 12:00 vinter Oslo
     - cron: "0 14 * * 5"     # Ukentlig rapport fredag 16:00 vintertid (UTC+1)
     - cron: "0 15 * * 5"     # Ukentlig rapport fredag 16:00 sommertid (UTC+2)
@@ -112,8 +112,8 @@ jobs:
             fi
 
             # Bestem kjøringsmodus:
-            # Full analyse kun første gang i morgenvinduet (09:00–09:30)
-            if [ "$FIRST_RUN" = "true" ] && [ $OSLO_TOD -le 570 ]; then
+            # Full analyse første gang loopen starter (uansett tidspunkt)
+            if [ "$FIRST_RUN" = "true" ]; then
               echo "=== Full analyse ($(TZ=Europe/Oslo date +'%H:%M') Oslo) ==="
               python scheduler.py
             else

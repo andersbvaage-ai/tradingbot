@@ -7,9 +7,34 @@ og sender e-post hvis det er nye kjøps- eller salgsforslag.
 import yfinance as yf
 import pandas as pd
 import json
+import logging
 import os
 import requests
+import signal
+import time
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%H:%M:%S",
+)
+log = logging.getLogger("scheduler")
+
+ANALYSE_TIMEOUT_SEC = 600  # 10 min maks for hele kjor_analyse()
+PER_TICKER_TIMEOUT  = 30   # 30 sek maks per aksje-analyse
+
+
+def _run_with_timeout(fn, timeout_sec, label="operasjon"):
+    """Run fn() in a thread with hard timeout. Returns None on timeout."""
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(fn)
+        try:
+            return future.result(timeout=timeout_sec)
+        except FuturesTimeout:
+            log.error("TIMEOUT: %s tok mer enn %ds — hopper over", label, timeout_sec)
+            return None
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "portfolio.json")
 
@@ -270,6 +295,7 @@ def hent_råvare_trend(råvare_ticker):
         sma50 = float(close.rolling(50).mean().iloc[-1])
         return 1 if sma10 > sma50 else -1
     except Exception:
+        log.warning("Råvaretrend feilet for %s", råvare_ticker, exc_info=True)
         return 0
 
 def _norm_navn(s):
@@ -317,7 +343,7 @@ def hent_short_interest(univers):
             if pct is not None:
                 short_map[ticker] = pct
     except Exception as e:
-        print(f"  Short-interest-data feilet: {e}")
+        log.error("Short-interest-data feilet: %s", e, exc_info=True)
     return short_map
 
 def hent_innsidekjøp(univers_tickers, dager=14):
@@ -357,7 +383,7 @@ def hent_innsidekjøp(univers_tickers, dager=14):
                 if "has bought" in body or "has purchased" in body or "har kjøpt" in body:
                     kjøp_tickers.add(sign + ".OL")
     except Exception as e:
-        print(f"  Insider-data feilet: {e}")
+        log.error("Insider-data feilet: %s", e, exc_info=True)
     return kjøp_tickers
 
 def hent_fundamentals(ticker):
@@ -370,6 +396,7 @@ def hent_fundamentals(ticker):
         yield_ = round(raw_yield * 100, 2) if raw_yield is not None else None
         return {"pe": pe, "pb": pb, "yield": yield_}
     except Exception:
+        log.warning("Fundamentals feilet for %s", ticker, exc_info=True)
         return {"pe": None, "pb": None, "yield": None}
 
 def fundamental_ok(fund, sektor=None):
@@ -439,17 +466,20 @@ def hent_siste_kurs(ticker):
     try:
         raw = yf.download(ticker, period="1d", interval="1m", progress=False, timeout=15)
         if raw.empty:
-            raise ValueError("tom")
+            raise ValueError("tom intraday-respons")
         raw.columns = raw.columns.get_level_values(0)
         return float(raw["Close"].dropna().iloc[-1])
-    except Exception:
+    except Exception as e:
+        log.warning("Intraday-kurs feilet for %s: %s — prøver daglig", ticker, e)
         try:
             raw = yf.download(ticker, period="2d", progress=False, timeout=10)
             if raw.empty:
+                log.error("Daglig kurs også tom for %s — returnerer None", ticker)
                 return None
             raw.columns = raw.columns.get_level_values(0)
             return float(raw["Close"].iloc[-1])
-        except Exception:
+        except Exception as e2:
+            log.error("Kurs helt utilgjengelig for %s: %s", ticker, e2)
             return None
 
 def hent_ensemble_for_posisjon(ticker: str) -> int:
@@ -469,6 +499,7 @@ def hent_ensemble_for_posisjon(ticker: str) -> int:
         mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
         return sum([sma10 > sma50, macd_v > sig_v, mom > 0])
     except Exception:
+        log.warning("Ensemble-beregning feilet for %s — beholder posisjon (fail-safe)", ticker, exc_info=True)
         return 1  # fail-safe: behold posisjon ved datafeil
 
 
@@ -563,10 +594,10 @@ def send_epost(forslag, epost_til, epost_fra, epost_passord):
         smtp.login(epost_fra, epost_passord)
         smtp.send_message(msg)
 
-    print(f"E-post sendt til {epost_til}")
+    log.info("E-post sendt til %s", epost_til)
 
 def kjor_analyse():
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Starter analyse...")
+    log.info("Starter analyse...")
     pf    = les_portefolje()
     kasse = pf["kasse"]
 
@@ -581,48 +612,50 @@ def kjor_analyse():
             osebx_ret3m = float(osebx_close.pct_change(63).iloc[-1] * 100)
         regime = detect_regime(osebx_close)
     except Exception:
-        pass
+        log.error("OSEBX-data feilet — bruker Sideways som fallback", exc_info=True)
 
     rcfg             = REGIME_CONFIG[regime]
     min_ensemble     = rcfg["min_ensemble"]
     maks_pos         = rcfg["maks_pos"]
     allok            = rcfg["allok"]
     maks_per_sektor  = rcfg["maks_per_sektor"]
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Regime: {regime} "
-          f"(ensemble≥{min_ensemble}, maks {maks_pos} pos, {allok*100:.0f}%/pos, "
-          f"maks {maks_per_sektor}/sektor)")
+    log.info("Regime: %s (ensemble≥%d, maks %d pos, %.0f%%/pos, maks %d/sektor)",
+             regime, min_ensemble, maks_pos, allok*100, maks_per_sektor)
 
     # Hent råvaretrender — brukes som sektorboost i rangering
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter råvaretrender...")
+    log.info("Henter råvaretrender...")
     råvare_trender = {}
     for sektor, råvare_ticker in RÅVARE_MAP.items():
         trend = hent_råvare_trend(råvare_ticker)
         råvare_trender[sektor] = trend
         retning = "↑ uptrend" if trend == 1 else ("↓ downtrend" if trend == -1 else "– ukjent")
-        print(f"  {sektor} ({råvare_ticker}): {retning}")
+        log.info("  %s (%s): %s", sektor, råvare_ticker, retning)
 
     # Hent innsidekjøp siste 14 dager fra Oslo Børs OAM
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter innsidekjøp...")
+    log.info("Henter innsidekjøp...")
     insider_kjøp = hent_innsidekjøp(set(UNIVERS.values()))
     if insider_kjøp:
-        print(f"  Insiderkjøp siste 14 dager: {', '.join(sorted(insider_kjøp))}")
+        log.info("  Insiderkjøp siste 14 dager: %s", ", ".join(sorted(insider_kjøp)))
     else:
-        print(f"  Ingen insiderkjøp funnet i universet")
+        log.info("  Ingen insiderkjøp funnet i universet")
 
     # Hent short interest fra Finanstilsynet
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter short interest...")
+    log.info("Henter short interest...")
     short_interest = hent_short_interest(UNIVERS)
     høy_short = {t: p for t, p in short_interest.items() if p >= 2.0}
     if høy_short:
-        print(f"  Short ≥2%: " + ", ".join(f"{t} {p:.1f}%" for t, p in sorted(høy_short.items(), key=lambda x: -x[1])))
+        log.info("  Short ≥2%%: %s", ", ".join(f"{t} {p:.1f}%" for t, p in sorted(høy_short.items(), key=lambda x: -x[1])))
 
     # Analyser alle aksjer — samle ensemble for alle (inkl. eksisterende posisjoner)
     kandidater    = []
     alle_ensemble = {}   # ticker → ensemble-count for posisjonssjekk
     for navn, ticker in UNIVERS.items():
-        print(f"  Analyserer {navn}...")
+        log.info("  Analyserer %s...", navn)
         try:
-            k = analyser_aksje(navn, ticker, osebx_ret3m)
+            k = _run_with_timeout(
+                lambda n=navn, t=ticker: analyser_aksje(n, t, osebx_ret3m),
+                PER_TICKER_TIMEOUT, label=navn,
+            )
             if k:
                 sektor = SEKTORER.get(ticker, "Annet")
                 k["råvare_score"]  = råvare_trender.get(sektor, 0) * 0.5
@@ -634,7 +667,7 @@ def kjor_analyse():
                 if k["ensemble"] >= min_ensemble:
                     kandidater.append(k)
         except Exception as e:
-            print(f"  Feil for {navn}: {e}")
+            log.error("Feil for %s: %s", navn, e)
 
     # Fyll inn ensemble for posisjoner filtrert bort av RSI/rel_styrke-sjekken
     # slik at ensemble=0-salgslogikken fungerer korrekt for disse
@@ -642,7 +675,7 @@ def kjor_analyse():
         if ticker not in alle_ensemble:
             ens = hent_ensemble_for_posisjon(ticker)
             alle_ensemble[ticker] = ens
-            print(f"  Ensemble (RSI-filtrert posisjon): {ticker} = {ens}/3")
+            log.info("  Ensemble (RSI-filtrert posisjon): %s = %d/3", ticker, ens)
 
     kandidater.sort(
         key=lambda x: (
@@ -665,6 +698,7 @@ def kjor_analyse():
         try:
             holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
         except Exception:
+            log.warning("Kunne ikke beregne holdingstid for kjøpsdato=%s", kjøpsdato)
             holdingstid = None
         avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
         return {
@@ -710,9 +744,8 @@ def kjor_analyse():
                 "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, **ekstra,
             })
-            print(f"  TRAILING SL: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr "
-                  f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr) = {brutto:,.0f} kr "
-                  f"(kurtasje {kurtasje:,.0f} kr)")
+            log.warning("TRAILING SL: %d × %s à %.2f kr (%.1f%% fra topp %.2f kr) = %.0f kr (kurtasje %.0f kr)",
+                        pos["antall"], pos["navn"], kurs, tap_fra_topp, høyeste, brutto, kurtasje)
 
     # ── Selg posisjoner der alle 3 ensemble-signaler har snudd negativt ──────
     for ticker, pos in list(pf["posisjoner"].items()):
@@ -741,12 +774,12 @@ def kjor_analyse():
                 "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, **ekstra,
             })
-            print(f"  ENSEMBLE=0: solgt {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr")
+            log.warning("ENSEMBLE=0: solgt %s à %.2f kr = %.0f kr", pos["navn"], kurs, brutto)
 
     # ── Selg posisjoner som har falt ut av hold-sonen (topp 2×N, ensemble≥1) ──
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker in hold_tickers:
-            print(f"  HOLDER: {pos['navn']} — fortsatt i hold-sone (topp {maks_pos * 3})")
+            log.info("HOLDER: %s — fortsatt i hold-sone (topp %d)", pos["navn"], maks_pos * 3)
             continue
         if ticker not in topp_tickers:
             kurs = hent_siste_kurs(ticker)
@@ -770,12 +803,12 @@ def kjor_analyse():
                 "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, **ekstra,
             })
-            print(f"  SOLGT: {pos['antall']} × {pos['navn']} à {kurs:.2f} kr = {brutto:,.0f} kr "
-                  f"(kurtasje {kurtasje:,.0f} kr)")
+            log.info("SOLGT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr)",
+                     pos["antall"], pos["navn"], kurs, brutto, kurtasje)
 
     # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
     # Hent fundamentals for topp-kandidater (kun disse — sparer tid vs alle ~150 tickers)
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Henter fundamentals for {len(topp)} topp-kandidater...")
+    log.info("Henter fundamentals for %d topp-kandidater...", len(topp))
     topp_med_fund = []
     for k in topp:
         if k["ticker"] in pf["posisjoner"]:
@@ -785,7 +818,7 @@ def kjor_analyse():
         sektor = SEKTORER.get(k["ticker"], "Annet")
         ok, grunn = fundamental_ok(fund, sektor=sektor)
         if not ok:
-            print(f"  FUNDAMENTAL-FILTER: hopper over {k['navn']} — {grunn}")
+            log.info("FUNDAMENTAL-FILTER: hopper over %s — %s", k["navn"], grunn)
             continue
         k["pe"]    = fund["pe"]
         k["pb"]    = fund["pb"]
@@ -805,7 +838,7 @@ def kjor_analyse():
         # Sektorkap — hopp over hvis sektoren allerede er fullt
         sektor = SEKTORER.get(k["ticker"], "Annet")
         if sektor_teller.get(sektor, 0) >= maks_per_sektor:
-            print(f"  SEKTOR-KAP: hopper over {k['navn']} ({sektor} har allerede {sektor_teller[sektor]} pos)")
+            log.info("SEKTOR-KAP: hopper over %s (%s har allerede %d pos)", k["navn"], sektor, sektor_teller[sektor])
             continue
         # Volatilitetsbasert posisjonsstørrelse — stabile aksjer får mer, volatile mindre
         vol_60d    = k.get("vol_60d", TARGET_VOL)
@@ -826,8 +859,8 @@ def kjor_analyse():
             beløp    = min(min_beløp, pf["kasse"] * 0.5)
             kurtasje = beregn_kurtasje(beløp, pf)
             if kurtasje / beløp > kurtasje_ratio_maks:
-                print(f"  KURTASJE-KAP: hopper over {k['navn']} — "
-                      f"kassen ({pf['kasse']:,.0f} kr) er for liten for lønnsom handel")
+                log.info("KURTASJE-KAP: hopper over %s — kassen (%.0f kr) er for liten for lønnsom handel",
+                         k["navn"], pf["kasse"])
                 continue
 
         antall   = int((beløp - kurtasje) / k["kurs"])
@@ -869,8 +902,8 @@ def kjor_analyse():
             "antall": antall, "kurs": k["kurs"], "beløp": kostnad,
             "kurtasje": kurtasje, "begrunnelse": begrunnelse,
         })
-        print(f"  KJØPT: {antall} × {k['navn']} à {k['kurs']:.2f} kr = {kostnad:,.0f} kr "
-              f"(kurtasje {kurtasje:,.0f} kr)")
+        log.info("KJØPT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr)",
+                 antall, k["navn"], k["kurs"], kostnad, kurtasje)
 
     pf["ventende_handler"]  = []
     pf["sist_analysert"]    = str(datetime.now())
@@ -929,8 +962,8 @@ def kjor_analyse():
 
     kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])
     selg_antall = len([f for f in utforte if f["handling"] == "SELG"])
-    print(f"Analyse ferdig: {kjop_antall} kjøp utført, {selg_antall} salg utført "
-          f"— porteføljeverdi {total_verdi:,.0f} kr")
+    log.info("Analyse ferdig: %d kjøp utført, %d salg utført — porteføljeverdi %.0f kr",
+             kjop_antall, selg_antall, total_verdi)
 
     return utforte
 
@@ -953,7 +986,7 @@ def _oppdater_saxo_refresh_token(nytt_token: str) -> None:
             headers={"Authorization": f"token {token}", "Accept": "application/vnd.github+json"},
         )
         if not r.ok:
-            print(f"SAXO: Kunne ikke hente GitHub public key: {r.status_code}")
+            log.error("SAXO: Kunne ikke hente GitHub public key: %s", r.status_code)
             return
         key_data = r.json()
         key_id   = key_data["key_id"]
@@ -974,11 +1007,11 @@ def _oppdater_saxo_refresh_token(nytt_token: str) -> None:
             json={"encrypted_value": encrypted, "key_id": key_id},
         )
         if r2.status_code in (201, 204):
-            print("SAXO: SAXO_REFRESH_TOKEN oppdatert i GitHub Secrets")
+            log.info("SAXO: SAXO_REFRESH_TOKEN oppdatert i GitHub Secrets")
         else:
-            print(f"SAXO: Kunne ikke oppdatere GitHub Secret: {r2.status_code}")
+            log.error("SAXO: Kunne ikke oppdatere GitHub Secret: %s", r2.status_code)
     except Exception as e:
-        print(f"SAXO: Feil ved oppdatering av refresh token: {e}")
+        log.error("SAXO: Feil ved oppdatering av refresh token: %s", e, exc_info=True)
 
 
 def utfør_saxo_handler(utforte: list) -> None:
@@ -995,18 +1028,18 @@ def utfør_saxo_handler(utforte: list) -> None:
     try:
         from saxo_client import SaxoClient
     except ImportError:
-        print("SAXO: saxo_client.py ikke funnet — hopper over live-utførelse")
+        log.warning("SAXO: saxo_client.py ikke funnet — hopper over live-utførelse")
         return
 
     if not utforte:
-        print("SAXO: Ingen handler å utføre")
+        log.info("SAXO: Ingen handler å utføre")
         return
 
-    print("\n── Saxo live-utførelse ──────────────────────────────")
+    log.info("── Saxo live-utførelse ──────────────────────────────")
     try:
         klient = SaxoClient()
         if not klient.logg_inn():
-            print("SAXO: Innlogging feilet — hopper over live-utførelse")
+            log.error("SAXO: Innlogging feilet — hopper over live-utførelse")
             return
 
         # Rotate refresh token in GitHub Secrets
@@ -1029,19 +1062,19 @@ def utfør_saxo_handler(utforte: list) -> None:
 
             uic = klient.finn_uic(symbol)
             if not uic:
-                print(f"SAXO: Fant ikke UIC for {symbol} — hopper over")
+                log.warning("SAXO: Fant ikke UIC for %s — hopper over", symbol)
                 continue
 
             if handling == "KJØP":
                 klient.kjop(uic, antall)
             elif handling == "SELG":
                 if uic not in holdte_uic:
-                    print(f"SAXO: {symbol} ikke i Saxo-portefølje — hopper over salg")
+                    log.warning("SAXO: %s ikke i Saxo-portefølje — hopper over salg", symbol)
                     continue
                 klient.selg(uic, antall)
 
     except Exception as e:
-        print(f"SAXO: Feil under live-utførelse: {e}")
+        log.error("SAXO: Feil under live-utførelse: %s", e, exc_info=True)
 
 
 def sjekk_stop_loss() -> list:
@@ -1053,7 +1086,7 @@ def sjekk_stop_loss() -> list:
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     utforte       = []
 
-    print(f"[{datetime.now().strftime('%H:%M')}] Stop-loss-sjekk — {len(pf['posisjoner'])} posisjoner")
+    log.info("Stop-loss-sjekk — %d posisjoner", len(pf["posisjoner"]))
 
     for ticker, pos in list(pf["posisjoner"].items()):
         kurs = hent_siste_kurs(ticker)
@@ -1073,6 +1106,7 @@ def sjekk_stop_loss() -> list:
             try:
                 holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
             except Exception:
+                log.warning("Kunne ikke beregne holdingstid for kjøpsdato=%s", kjøpsdato)
                 holdingstid = None
             avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
             del pf["posisjoner"][ticker]
@@ -1091,11 +1125,11 @@ def sjekk_stop_loss() -> list:
                 "kurtasje": kurtasje, "begrunnelse": begrunnelse,
                 "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
             })
-            print(f"  TRAILING SL: solgt {pos['navn']} à {kurs:.2f} kr "
-                  f"({tap_fra_topp:.1f}% fra topp {høyeste:.2f} kr)")
+            log.warning("TRAILING SL: solgt %s à %.2f kr (%.1f%% fra topp %.2f kr)",
+                        pos["navn"], kurs, tap_fra_topp, høyeste)
 
     lagre_portefolje(pf)
-    print(f"Stop-loss-sjekk ferdig: {len(utforte)} salg utført")
+    log.info("Stop-loss-sjekk ferdig: %d salg utført", len(utforte))
     return utforte
 
 
@@ -1124,20 +1158,26 @@ def send_varsel(utforte: list, modus: str = "full") -> None:
     if modus == "stop-loss":
         tittel = f"Trading Bot - Stop-loss: {len(salg)} salg"
 
-    try:
-        requests.post(
-            f"https://ntfy.sh/{topic}",
-            data="\n".join(linjer).encode("utf-8"),
-            headers={
-                "Title":    tittel,
-                "Priority": "high" if salg else "default",
-                "Tags":     "chart_with_upwards_trend",
-            },
-            timeout=10,
-        )
-        print(f"Varsel sendt: {tittel}")
-    except Exception as e:
-        print(f"Varsel feilet: {e}")
+    for forsøk in range(3):
+        try:
+            resp = requests.post(
+                f"https://ntfy.sh/{topic}",
+                data="\n".join(linjer).encode("utf-8"),
+                headers={
+                    "Title":    tittel,
+                    "Priority": "high" if salg else "default",
+                    "Tags":     "chart_with_upwards_trend",
+                },
+                timeout=10,
+            )
+            resp.raise_for_status()
+            log.info("Varsel sendt: %s", tittel)
+            return
+        except Exception as e:
+            log.warning("Varsel forsøk %d/3 feilet: %s", forsøk + 1, e)
+            if forsøk < 2:
+                time.sleep(2 ** forsøk)
+    log.error("Varsel feilet etter 3 forsøk — tittel: %s", tittel)
 
 
 def send_ukentlig_rapport() -> None:
@@ -1147,7 +1187,7 @@ def send_ukentlig_rapport() -> None:
     """
     topic = os.environ.get("NTFY_TOPIC")
     if not topic:
-        print("Ukentlig rapport: NTFY_TOPIC ikke satt — hopper over")
+        log.warning("Ukentlig rapport: NTFY_TOPIC ikke satt — hopper over")
         return
 
     pf = les_portefolje()
@@ -1197,20 +1237,55 @@ def send_ukentlig_rapport() -> None:
         linjer.append("")
         linjer.append("Ingen handler denne uken")
 
+    for forsøk in range(3):
+        try:
+            resp = requests.post(
+                f"https://ntfy.sh/{topic}",
+                data="\n".join(linjer).encode("utf-8"),
+                headers={
+                    "Title":    f"Trading Bot - Ukesrapport {avkastning_pct:+.1f}%",
+                    "Priority": "default",
+                    "Tags":     "bar_chart",
+                },
+                timeout=10,
+            )
+            resp.raise_for_status()
+            log.info("Ukentlig rapport sendt: %.0f kr (%+.1f%%)", total_verdi, avkastning_pct)
+            return
+        except Exception as e:
+            log.warning("Ukentlig rapport forsøk %d/3 feilet: %s", forsøk + 1, e)
+            if forsøk < 2:
+                time.sleep(2 ** forsøk)
+    log.error("Ukentlig rapport feilet etter 3 forsøk")
+
+
+def validate_startup():
+    """Fail fast if critical dependencies are unavailable."""
+    errors = []
+
+    if not os.environ.get("NTFY_TOPIC"):
+        log.warning("NTFY_TOPIC ikke satt — varsler vil bli hoppet over")
+
+    # Test yfinance-tilgang med en enkel download
     try:
-        requests.post(
-            f"https://ntfy.sh/{topic}",
-            data="\n".join(linjer).encode("utf-8"),
-            headers={
-                "Title":    f"Trading Bot - Ukesrapport {avkastning_pct:+.1f}%",
-                "Priority": "default",
-                "Tags":     "bar_chart",
-            },
-            timeout=10,
-        )
-        print(f"Ukentlig rapport sendt: {total_verdi:,.0f} kr ({avkastning_pct:+.1f}%)")
+        test = yf.download("EQNR.OL", period="1d", progress=False, timeout=15)
+        if test.empty:
+            errors.append("yfinance returnerer tom data for EQNR.OL — mulig nettverksproblem eller rate-limit")
     except Exception as e:
-        print(f"Ukentlig rapport feilet: {e}")
+        errors.append(f"yfinance utilgjengelig: {e}")
+
+    # Sjekk at portfolio.json er lesbar
+    try:
+        les_portefolje()
+    except Exception as e:
+        errors.append(f"portfolio.json kan ikke leses: {e}")
+
+    if errors:
+        for err in errors:
+            log.error("STARTUP-FEIL: %s", err)
+        raise SystemExit(1)
+
+    log.info("Startup-validering OK")
 
 
 if __name__ == "__main__":
@@ -1223,10 +1298,15 @@ if __name__ == "__main__":
     elif "--ukentlig-rapport" in sys.argv:
         send_ukentlig_rapport()
     elif "--only-stop-loss" in sys.argv:
+        validate_startup()
         resultat = sjekk_stop_loss()
         utfør_saxo_handler(resultat)
         send_varsel(resultat, modus="stop-loss")
     else:
-        resultat = kjor_analyse()
+        validate_startup()
+        resultat = _run_with_timeout(kjor_analyse, ANALYSE_TIMEOUT_SEC, label="kjor_analyse")
+        if resultat is None:
+            log.error("Full analyse timed out etter %ds — ingen handler utført", ANALYSE_TIMEOUT_SEC)
+            resultat = []
         utfør_saxo_handler(resultat)
         send_varsel(resultat, modus="full")

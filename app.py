@@ -361,24 +361,22 @@ OSLO_BORS = {
     "Subsea 7":                 "SUBC.OL",
     "Storebrand":               "STB.OL",
     "Gjensidige":               "GJF.OL",
-    "SpareBank 1 SR-Bank":      "SRBANK.OL",
+    "SpareBank 1 SR-Bank":      "SRBNK.OL",
     "Kongsberg Gruppen":        "KOG.OL",
     "Aker Solutions":           "AKSO.OL",
     "Scatec":                   "SCATC.OL",
     "Nel Hydrogen":             "NEL.OL",
     "Nordic Semiconductor":     "NOD.OL",
-    "Kahoot":                   "KAHOT.OL",
     "AutoStore":                "AUTO.OL",
     "REC Silicon":              "RECSI.OL",
     "TGS":                      "TGS.OL",
-    "PGS":                      "PGS.OL",
     "BW Offshore":              "BWO.OL",
-    "Golden Ocean":             "GOGL.OL",
+    "CMB.TECH":                 "CMBT.OL",
     "Flex LNG":                 "FLNG.OL",
     "MPC Container Ships":      "MPCC.OL",
     "Borr Drilling":            "BORR.OL",
     "AF Gruppen":               "AFG.OL",
-    "Bouvet":                   "BOUVET.OL",
+    "Bouvet":                   "BOUV.OL",
     "Odfjell":                  "ODF.OL",
     "Aker":                     "AKER.OL",
     "Wallenius Wilhelmsen":     "WAWI.OL",
@@ -392,7 +390,7 @@ OSLO_BORS = {
     # ── Olje, gass og energitjenester ────────────────────────────────────────
     "DNO":                      "DNO.OL",
     "Okea":                     "OKEA.OL",
-    "Archer":                   "ARCHER.OL",
+    "Archer":                   "ARCH.OL",
     "BW Energy":                "BWE.OL",
     "Seadrill":                 "SDRL.OL",
     "Odfjell Drilling":         "ODL.OL",
@@ -535,7 +533,7 @@ OBX_TICKERS = [
     ("Kongsberg",     "KOG.OL"),    ("Var Energi",   "VAR.OL"),
     ("Lerøy Seafood", "LSG.OL"),    ("Tomra",        "TOM.OL"),
     ("BW LPG",        "BWLPG.OL"),  ("Frontline",    "FRO.OL"),
-    ("Golden Ocean",  "GOGL.OL"),   ("PGS",          "PGS.OL"),
+    ("CMB.TECH",      "CMBT.OL"),
 ]
 
 # Sektor per ticker — brukes for spredningsanalyse og sektorkap i bot
@@ -543,14 +541,14 @@ SEKTORER = {
     "EQNR.OL":"Energi",    "DNB.OL":"Finans",     "MOWI.OL":"Sjømat",    "TEL.OL":"Telekom",
     "NHY.OL":"Industri",   "ORK.OL":"Forbruker",  "YAR.OL":"Industri",   "AKERBP.OL":"Energi",
     "SALM.OL":"Sjømat",    "SUBC.OL":"Energi",    "STB.OL":"Finans",     "GJF.OL":"Finans",
-    "SRBANK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
-    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "KAHOT.OL":"Teknologi","AUTO.OL":"Teknologi",
-    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",     "PGS.OL":"Energi",     "BWO.OL":"Energi",
-    "GOGL.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
-    "AFG.OL":"Industri",   "BOUVET.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
+    "SRBNK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
+    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "AUTO.OL":"Teknologi",
+    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",          "BWO.OL":"Energi",
+    "CMBT.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
+    "AFG.OL":"Industri",   "BOUV.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
     "WAWI.OL":"Shipping",  "KIT.OL":"Teknologi",  "TOM.OL":"Industri",   "ELK.OL":"Industri",
     "VAR.OL":"Energi",     "VEI.OL":"Industri",   "LSG.OL":"Sjømat",     "GSF.OL":"Sjømat",
-    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCHER.OL":"Energi",  "BWE.OL":"Energi",
+    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCH.OL":"Energi",  "BWE.OL":"Energi",
     "SDRL.OL":"Energi",    "ODL.OL":"Energi",     "NORECO.OL":"Energi",  "AGAS.OL":"Energi",
     "EMGS.OL":"Energi",    "REACH.OL":"Energi",   "AMSC.OL":"Shipping",  "ACC.OL":"Fornybar",
     "AKH.OL":"Industri",   "AKBM.OL":"Sjømat",    "IOX.OL":"Energi",     "PRS.OL":"Energi",
@@ -977,7 +975,7 @@ with tab_dash:
                 ))
                 _første_dato = _df_graf["dato"].iloc[0]
                 _siste_dato  = _df_graf["dato"].iloc[-1]
-                for _bm in ["^OSEBX", "^OSEAX", "OSEBX.OL"]:
+                for _bm in ["OSEBX.OL", "^OSEBX", "^OSEAX"]:
                     _raw_bm = hent_aksje_historikk(_bm, "2y")
                     if _raw_bm is not None and not _raw_bm.empty:
                         _osebx_close = _raw_bm["Close"].copy()
@@ -1802,7 +1800,7 @@ with tab_bt:
                 # Hent OSEBX for benchmark
                 # Prøv flere ticker-alternativer for Oslo Børs benchmark
                 osebx_data = None
-                for bm_ticker in ["^OSEBX", "OSEBX.OL", "^OSEAX"]:
+                for bm_ticker in ["OSEBX.OL", "^OSEBX", "^OSEAX"]:
                     osebx_data = hent_data(bm_ticker, sb_start.strftime("%Y-%m-%d"), sb_data_slutt)
                     if osebx_data is not None and len(osebx_data) > 10:
                         break
@@ -2081,7 +2079,7 @@ with tab_bt:
                 _data_start = (pd.Timestamp(_str_start) - pd.DateOffset(days=300)).strftime("%Y-%m-%d")
                 _raw_batch  = _last_batch(tuple(_alle_tickers), _data_start, str(_str_slutt))
                 _osebx_raw  = None
-                for _bm in ["^OSEBX", "^OSEAX"]:
+                for _bm in ["OSEBX.OL", "^OSEBX", "^OSEAX"]:
                     _tmp = hent_aksje_historikk(_bm, "5y")
                     if _tmp is not None and not _tmp.empty:
                         _osebx_raw = _tmp["Close"]
@@ -2406,7 +2404,7 @@ with tab_pf:
             # Hent OSEBX én gang før loopen
             osebx_ret3m = 0.0
             try:
-                osebx_raw = hent_aksje_historikk("^OSEBX", "6mo")
+                osebx_raw = hent_aksje_historikk("OSEBX.OL", "6mo")
                 if osebx_raw is not None and len(osebx_raw) >= 63:
                     osebx_ret3m = float(osebx_raw["Close"].pct_change(63).iloc[-1] * 100)
             except Exception:

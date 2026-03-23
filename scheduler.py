@@ -64,24 +64,22 @@ OSLO_BORS = {
     "Subsea 7":                 "SUBC.OL",
     "Storebrand":               "STB.OL",
     "Gjensidige":               "GJF.OL",
-    "SpareBank 1 SR-Bank":      "SRBANK.OL",
+    "SpareBank 1 SR-Bank":      "SRBNK.OL",
     "Kongsberg Gruppen":        "KOG.OL",
     "Aker Solutions":           "AKSO.OL",
     "Scatec":                   "SCATC.OL",
     "Nel Hydrogen":             "NEL.OL",
     "Nordic Semiconductor":     "NOD.OL",
-    "Kahoot":                   "KAHOT.OL",
     "AutoStore":                "AUTO.OL",
     "REC Silicon":              "RECSI.OL",
     "TGS":                      "TGS.OL",
-    "PGS":                      "PGS.OL",
     "BW Offshore":              "BWO.OL",
-    "Golden Ocean":             "GOGL.OL",
+    "CMB.TECH":                 "CMBT.OL",
     "Flex LNG":                 "FLNG.OL",
     "MPC Container Ships":      "MPCC.OL",
     "Borr Drilling":            "BORR.OL",
     "AF Gruppen":               "AFG.OL",
-    "Bouvet":                   "BOUVET.OL",
+    "Bouvet":                   "BOUV.OL",
     "Odfjell":                  "ODF.OL",
     "Aker":                     "AKER.OL",
     "Wallenius Wilhelmsen":     "WAWI.OL",
@@ -95,7 +93,7 @@ OSLO_BORS = {
     # ── Olje, gass og energitjenester ────────────────────────────────────────
     "DNO":                      "DNO.OL",
     "Okea":                     "OKEA.OL",
-    "Archer":                   "ARCHER.OL",
+    "Archer":                   "ARCH.OL",
     "BW Energy":                "BWE.OL",
     "Seadrill":                 "SDRL.OL",
     "Odfjell Drilling":         "ODL.OL",
@@ -229,14 +227,14 @@ SEKTORER = {
     "EQNR.OL":"Energi",    "DNB.OL":"Finans",     "MOWI.OL":"Sjømat",    "TEL.OL":"Telekom",
     "NHY.OL":"Industri",   "ORK.OL":"Forbruker",  "YAR.OL":"Industri",   "AKERBP.OL":"Energi",
     "SALM.OL":"Sjømat",    "SUBC.OL":"Energi",    "STB.OL":"Finans",     "GJF.OL":"Finans",
-    "SRBANK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
-    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "KAHOT.OL":"Teknologi","AUTO.OL":"Teknologi",
-    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",     "PGS.OL":"Energi",     "BWO.OL":"Energi",
-    "GOGL.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
-    "AFG.OL":"Industri",   "BOUVET.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
+    "SRBNK.OL":"Finans",  "KOG.OL":"Industri",   "AKSO.OL":"Energi",    "SCATC.OL":"Fornybar",
+    "NEL.OL":"Fornybar",   "NOD.OL":"Teknologi",  "AUTO.OL":"Teknologi",
+    "RECSI.OL":"Fornybar", "TGS.OL":"Energi",          "BWO.OL":"Energi",
+    "CMBT.OL":"Shipping",  "FLNG.OL":"Shipping",  "MPCC.OL":"Shipping",  "BORR.OL":"Energi",
+    "AFG.OL":"Industri",   "BOUV.OL":"Teknologi","ODF.OL":"Shipping",  "AKER.OL":"Industri",
     "WAWI.OL":"Shipping",  "KIT.OL":"Teknologi",  "TOM.OL":"Industri",   "ELK.OL":"Industri",
     "VAR.OL":"Energi",     "VEI.OL":"Industri",   "LSG.OL":"Sjømat",     "GSF.OL":"Sjømat",
-    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCHER.OL":"Energi",  "BWE.OL":"Energi",
+    "DNO.OL":"Energi",     "OKEA.OL":"Energi",    "ARCH.OL":"Energi",  "BWE.OL":"Energi",
     "SDRL.OL":"Energi",    "ODL.OL":"Energi",     "NORECO.OL":"Energi",  "AGAS.OL":"Energi",
     "EMGS.OL":"Energi",    "REACH.OL":"Energi",   "AMSC.OL":"Shipping",  "ACC.OL":"Fornybar",
     "AKH.OL":"Industri",   "AKBM.OL":"Sjømat",    "IOX.OL":"Energi",     "PRS.OL":"Energi",
@@ -605,7 +603,7 @@ def kjor_analyse():
     osebx_ret3m = 0.0
     regime      = "Sideways"
     try:
-        osebx = yf.download("^OSEBX", period="1y", progress=False, timeout=15)
+        osebx = yf.download("OSEBX.OL", period="1y", progress=False, timeout=15)
         osebx.columns = osebx.columns.get_level_values(0)
         osebx_close = osebx["Close"]
         if len(osebx_close) >= 63:

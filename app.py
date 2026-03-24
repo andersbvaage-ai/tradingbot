@@ -920,13 +920,15 @@ with tab_dash:
                 _df_graf = pd.DataFrame(_plot_data)
                 _df_graf["dato"] = pd.to_datetime(_df_graf["dato"])
                 _df_graf = _df_graf.sort_values("dato")
-                _siste_verdi = float(_df_graf["total_verdi"].iloc[-1])
-                _fyll_farge  = "rgba(0,200,100,0.15)" if _siste_verdi >= _start else "rgba(220,50,50,0.15)"
+                _df_graf["avk_pct"] = (_df_graf["total_verdi"] / _start - 1) * 100
+                _siste_avk = float(_df_graf["avk_pct"].iloc[-1])
+                _linje_farge = "#22c55e" if _siste_avk >= 0 else "#ef4444"
+                _fyll_farge  = "rgba(34,197,94,0.15)" if _siste_avk >= 0 else "rgba(239,68,68,0.15)"
                 _fig = go.Figure()
                 _fig.add_trace(go.Scatter(
-                    x=_df_graf["dato"], y=_df_graf["total_verdi"],
+                    x=_df_graf["dato"], y=_df_graf["avk_pct"],
                     mode="lines+markers", name="Portefølje",
-                    line=dict(color="#4C8BF5", width=2), marker=dict(size=5),
+                    line=dict(color=_linje_farge, width=2), marker=dict(size=5),
                     fill="tozeroy", fillcolor=_fyll_farge,
                 ))
                 _første_dato = _df_graf["dato"].iloc[0]
@@ -941,21 +943,19 @@ with tab_dash:
                             (_osebx_close.index <= _siste_dato + pd.Timedelta(days=1))
                         ]
                         if len(_osebx_close) >= 2:
-                            _bm_verdi = (_osebx_close / float(_osebx_close.iloc[0])) * _start
+                            _bm_avk = (_osebx_close / float(_osebx_close.iloc[0]) - 1) * 100
                             _fig.add_trace(go.Scatter(
-                                x=_osebx_close.index, y=_bm_verdi,
+                                x=_osebx_close.index, y=_bm_avk,
                                 mode="lines", name="OSEBX",
                                 line=dict(color="#f77f00", width=1.5, dash="dash"),
                             ))
                         break
-                _fig.add_hline(y=_start, line_dash="dot", line_color="gray",
-                               annotation_text=f"Start {_start:,.0f} kr",
-                               annotation_position="bottom right")
+                _fig.add_hline(y=0, line_dash="dot", line_color="gray")
                 _fig.update_layout(
                     template="plotly_dark", height=240,
                     margin=dict(l=0, r=0, t=10, b=0),
                     xaxis=dict(showgrid=False),
-                    yaxis=dict(tickformat=",.0f", ticksuffix=" kr"),
+                    yaxis=dict(tickformat="+.1f", ticksuffix="%"),
                     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
                 )
                 st.plotly_chart(_fig, use_container_width=True)

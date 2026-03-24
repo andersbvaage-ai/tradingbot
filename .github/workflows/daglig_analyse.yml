@@ -63,8 +63,6 @@ jobs:
             python scheduler.py --only-stop-loss; exit 0
           elif [ "$INPUT" = "ukentlig-rapport" ]; then
             python scheduler.py --ukentlig-rapport; exit 0
-          elif [ "$INPUT" = "full" ]; then
-            python scheduler.py; exit 0
           fi
 
           # ── Fredag ukentlig rapport (kl 14 eller 15 UTC) ─────────────────────

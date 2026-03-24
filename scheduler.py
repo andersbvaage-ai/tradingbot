@@ -741,6 +741,11 @@ def kjor_analyse():
             log.info("HOLDER: %s — fortsatt i hold-sone (topp %d)", pos["navn"], maks_pos * 3)
             continue
         if ticker not in topp_tickers:
+            kjøpsdato = datetime.strptime(pos["kjøpsdato"][:10], "%Y-%m-%d").date()
+            dager_holdt = (datetime.now().date() - kjøpsdato).days
+            if dager_holdt < 5:
+                log.info("HOLDER: %s — minimum holdingstid ikke nådd (%d/5 dager)", pos["navn"], dager_holdt)
+                continue
             kurs = hent_siste_kurs(ticker)
             if not kurs:
                 continue

@@ -2,12 +2,20 @@
 
 Prosjekt-instruksjoner for Claude Code. Les dette før du gjør noe.
 
+## Session-oppsett
+
+Ved oppstart av hver session: opprett automatisk følgende cron:
+- **Portfolio-check 16:47 hverdager** — `CronCreate` med cron `47 16 * * 1-5`, prompt: "Kjør /portfolio-check — evaluer nåværende portefølje mot signallogikken og gi en kort statusoppdatering.", recurring: true
+
+---
+
 ## Hva er dette
 
 En automatisk trading-bot for Oslo Børs, bygget i Python/Streamlit.
 - **UI:** Streamlit Cloud (auto-deploy ved push til main)
 - **Automatisering:** GitHub Actions kjører scheduler.py to ganger per børsdag
 - **Data:** yfinance for kurser og historikk
+- **Indikatorer:** `ta`-biblioteket (SMA, RSI, MACD, Bollinger Bands) — ikke manuell beregning
 - **Persistens:** portfolio.json committes til GitHub av Actions etter hver kjøring
 - **Status:** Paper money — 10 000 kr, startet 2026-03-18
 
@@ -22,21 +30,31 @@ En automatisk trading-bot for Oslo Børs, bygget i Python/Streamlit.
 |---|---|
 | `app.py` | Streamlit-app, ~2000 linjer. All UI-logikk. |
 | `scheduler.py` | Kjøres av GitHub Actions. Analyse, kjøp/salg, stop-loss. |
-| `nordnet_client.py` | Nordnet nExt API v2-klient. Klar, men ikke aktivert ennå. |
 | `portfolio.json` | Porteføljestatus. Eneste persistent lagring. |
 | `requirements.txt` | streamlit, yfinance, backtesting, pandas, plotly, requests, cryptography |
-| `.github/workflows/daglig_analyse.yml` | To cron-jobs: 09:15 (full) og 13:30 (stop-loss) |
+| `.github/workflows/daglig_analyse.yml` | Loop-basert: full analyse + stop-loss hvert 30. min |
 
 ---
 
 ## Kjøringsplan (GitHub Actions)
 
-| Tid (norsk) | Kommando | Hva |
-|---|---|---|
-| 09:15 man-fre | `python scheduler.py` | Full analyse: scan, kjøp, selg, trailing SL, snapshot |
-| 13:30 man-fre | `python scheduler.py --only-stop-loss` | Kun trailing stop-loss-sjekk |
+Workflowen bruker en **loop-modell** — én lang jobb per dag som itererer gjennom børsdagen:
 
-Workflow støtter også manuell kjøring med valg: `full`, `only-stop-loss`, `test-varsel`.
+| Cron (UTC) | Hva |
+|---|---|
+| `0 5 * * 1-5` | Morgen-loop: venter til 09:00 Oslo, kjører full analyse, deretter stop-loss hvert 30 min til 16:30 |
+| `0 11 * * 1-5` | Ettermiddag-loop: samme logikk, fanger opp hvis morgen-cron ikke trigget |
+| `0 14/15 * * 5` | Ukentlig rapport fredag 16:00 (vinter/sommertid) |
+
+Maks kjøretid per loop: 5t 20min (under GitHub Actions' 6t-grense).
+
+Workflow støtter også manuell kjøring med valg: `full`, `only-stop-loss`, `ukentlig-rapport`, `test-varsel`.
+
+### Observerbarhet
+- `scheduler.py` bruker Python `logging` (ikke print) — timestamps + nivå (INFO/WARNING/ERROR)
+- Startup-validering sjekker yfinance og portfolio.json før analyse
+- 10 min total timeout, 30s per ticker — forhindrer hengende kjøringer
+- ntfy.sh-varsling har 3x retry med backoff
 
 ---
 
@@ -156,21 +174,10 @@ Push aldri direkte uten rebase-sjekk. Actions-konflikter løses alltid med rebas
 | Secret | Formål | Status |
 |---|---|---|
 | `NTFY_TOPIC` | Push-varsler via ntfy.sh | Aktivert |
-| `NORDNET_API_KEY` | Nordnet nExt API UUID | Ikke satt ennå |
-| `NORDNET_PRIV_KEY` | Ed25519 privat nøkkel (PEM) | Ikke satt ennå |
-
----
-
-## Nordnet-integrasjon (ikke aktivert)
-
-Koden i `nordnet_client.py` er ferdig. Venter på Nordnet Trading Support-godkjenning.
-
-**3 steg for å aktivere:**
-1. E-post til `tradingsupport@nordnet.se` — be om nExt API v2-tilgang som norsk privatkunde
-2. Generer nøkkelpar: `ssh-keygen -t ed25519 -a 150 -f nordnet_ed25519`, last opp `.pub` i Nordnet
-3. Legg `NORDNET_API_KEY` (UUID) og `NORDNET_PRIV_KEY` (PEM-innhold) i GitHub Secrets
-
-Auth: Ed25519 challenge-response, session-levetid 30 min — re-autentiserer hver kjøring (ingen token-problemer).
+| `SAXO_CLIENT_ID` | Saxo Bank API klient-ID | Satt |
+| `SAXO_CLIENT_SECRET` | Saxo Bank API klient-secret | Satt |
+| `SAXO_REFRESH_TOKEN` | Saxo OAuth refresh token | Satt |
+| `SAXO_ACCOUNT_KEY` | Saxo kontonøkkel | Satt |
 
 ---
 
@@ -198,7 +205,7 @@ Før push til main — gå gjennom denne listen:
 
 ## Neste mulige steg
 
-- **Nordnet live-trading** — aktiveres med 3 steg over
+- **Saxo live-trading** — Saxo secrets er satt, gjenstår å bytte til live-endepunkter og sette SAXO_LIVE=1
 - ~~**Fundamentale filtre**~~ — implementert (P/E, P/B, yield-filter)
 - ~~**Posisjonsstørrelse basert på volatilitet**~~ — implementert (vol-basert + ensemble-boost)
 - ~~**Ukentlig rapport**~~ — implementert, kjører fredag 16:00 via ntfy

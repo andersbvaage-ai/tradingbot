@@ -713,11 +713,19 @@ with tab_dash:
           function nr(){
             var o=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Oslo'}));
             var s=o.getHours()*3600+o.getMinutes()*60+o.getSeconds();
-            var t1=9*3600+15*60,t2=13*3600+30*60;
+            var open=9*3600,close=16*3600+30*60,interval=30*60;
             var diff,label;
-            if(s<t1){diff=t1-s;label='Full analyse 09:15';}
-            else if(s<t2){diff=t2-s;label='Stop-loss 13:30';}
-            else{diff=86400-s+t1;label='Full analyse 09:15';}
+            if(s<open){diff=open-s;label='Full analyse 09:00';}
+            else if(s>=close){diff=86400-s+open;label='Full analyse 09:00';}
+            else{
+              var elapsed=s-open;
+              var nextInterval=Math.ceil((elapsed+1)/interval)*interval;
+              diff=nextInterval-(elapsed);
+              var nextAbs=open+nextInterval;
+              var hh=String(Math.floor(nextAbs/3600)%24).padStart(2,'0');
+              var mm=String(Math.floor(nextAbs%3600/60)).padStart(2,'0');
+              label=(elapsed<interval?'Full analyse ':'Stop-loss ')+hh+':'+mm;
+            }
             return{diff:diff,label:label};
           }
           function upd(){
@@ -759,16 +767,26 @@ with tab_dash:
     _avk_pct   = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
     _avk_kr    = _total_verdi - _start
 
-    # Statistikk over lukkede handler
-    _kjøp_map = {}
-    for _h in _historikk:
-        if _h.get("handling") == "KJØP":
-            _kjøp_map[_h.get("ticker", "")] = _h
+    # Statistikk over lukkede handler — match kjøp/salg sekvensielt per ticker
+    _kjøp_stack: dict = {}
     _realisert = []
+    _selg_kjøpskurs: dict = {}  # dato -> kjøpskurs for bruk i handelslogg
     for _h in _historikk:
-        if _h.get("handling") == "SELG" and _h.get("ticker", "") in _kjøp_map:
-            _avk_r = (_h["kurs"] / _kjøp_map[_h["ticker"]]["kurs"] - 1) * 100
-            _realisert.append(_avk_r)
+        _t = _h.get("ticker", "")
+        if _h.get("handling") == "KJØP":
+            _kjøp_stack.setdefault(_t, []).append(_h)
+        elif _h.get("handling") == "SELG":
+            _kjøp_ref = _kjøp_stack.get(_t, [None])[-1]
+            _kjøpskurs = (
+                _h.get("snittpris")
+                or (_kjøp_ref["kurs"] if _kjøp_ref else None)
+            )
+            if _kjøpskurs:
+                _avk_r = (_h["kurs"] / _kjøpskurs - 1) * 100
+                _realisert.append(_avk_r)
+                _selg_kjøpskurs[_h.get("dato", "")] = _kjøpskurs
+                if _kjøp_stack.get(_t):
+                    _kjøp_stack[_t].pop()
     _ant_kjøp = len([h for h in _historikk if h.get("handling") == "KJØP"])
     _ant_salg = len([h for h in _historikk if h.get("handling") == "SELG"])
     _hit_rate = (len([r for r in _realisert if r > 0]) / len(_realisert) * 100) if _realisert else None
@@ -960,15 +978,7 @@ with tab_dash:
                 )
                 st.plotly_chart(_fig, use_container_width=True)
             else:
-                st.info("Trykk **📸 Ta snapshot** for å starte grafen.")
-            if st.button("📸 Ta snapshot", help="Lagrer dagens porteføljeverdi i grafen"):
-                _snap = {"dato": _idag, "total_verdi": round(_total_verdi, 0)}
-                _vh   = [s for s in _pf.get("verdi_historikk", []) if s["dato"] != _idag]
-                _vh.append(_snap)
-                _pf["verdi_historikk"] = _vh[-365:]
-                lagre_portefolje(_pf)
-                st.success(f"Snapshot lagret: {_total_verdi:,.0f} kr ({_idag})")
-                st.rerun()
+                st.info("Grafen fylles automatisk etter hvert som boten kjører.")
 
         with _donut_col:
             _ant_vinn = len([r for r in _realisert if r > 0])
@@ -1153,8 +1163,13 @@ with tab_dash:
         _logg_rader = []
         for _h in _filtrert:
             _gevinst = None
-            if _h.get("handling") == "SELG" and "snittpris" in _h and "antall" in _h:
-                _gevinst = round((_h["kurs"] - _h["snittpris"]) * _h["antall"] - _h.get("kurtasje", 0), 0)
+            if _h.get("handling") == "SELG":
+                _ref_kurs = (
+                    _h.get("snittpris")
+                    or _selg_kjøpskurs.get(_h.get("dato", ""))
+                )
+                if _ref_kurs and "antall" in _h:
+                    _gevinst = round((_h["kurs"] - _ref_kurs) * _h["antall"] - _h.get("kurtasje", 0), 0)
             _logg_rader.append({
                 "Dato":          str(_h.get("dato", ""))[:16].replace("T", " "),
                 "Handling":      _h.get("handling", ""),
@@ -1164,6 +1179,7 @@ with tab_dash:
                 "Beløp (kr)":    round(_h["beløp"], 0)    if "beløp"    in _h else None,
                 "Kurtasje (kr)": round(_h["kurtasje"], 0) if "kurtasje" in _h else None,
                 "Gevinst/Tap":   _gevinst,
+                "Dager holdt":   _h.get("holdingstid")    if _h.get("handling") == "SELG" else None,
                 "Begrunnelse":   _h.get("begrunnelse", "–"),
             })
 
@@ -1179,8 +1195,9 @@ with tab_dash:
                 "Kurs (kr)":     st.column_config.NumberColumn("Kurs",        format="%.2f kr",   width="medium"),
                 "Beløp (kr)":    st.column_config.NumberColumn("Beløp",       format="%,.0f kr",  width="medium"),
                 "Kurtasje (kr)": st.column_config.NumberColumn("Kurtasje",    format="%,.0f kr",  width="small"),
-                "Gevinst/Tap":   st.column_config.NumberColumn("Gevinst/Tap", format="%+,.0f kr", width="medium"),
-                "Begrunnelse":   st.column_config.TextColumn("Begrunnelse",   width="large"),
+                "Gevinst/Tap":   st.column_config.NumberColumn("Gevinst/Tap",  format="%+,.0f kr", width="medium"),
+                "Dager holdt":   st.column_config.NumberColumn("Dager holdt",  width="small"),
+                "Begrunnelse":   st.column_config.TextColumn("Begrunnelse",    width="large"),
             },
         )
         _total_kurtasje = sum(_h.get("kurtasje", 0) for _h in _historikk)

@@ -14,6 +14,8 @@ import signal
 import time
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
+from ta.trend import SMAIndicator, MACD as TAmacd
+from ta.momentum import RSIIndicator
 
 logging.basicConfig(
     level=logging.INFO,
@@ -452,12 +454,11 @@ def hent_ensemble_for_posisjon(ticker: str) -> int:
             return 1  # fail-safe: behold posisjon ved utilstrekkelig data
         raw.columns = raw.columns.get_level_values(0)
         close  = raw["Close"]
-        sma10  = float(close.rolling(10).mean().iloc[-1])
-        sma50  = float(close.rolling(50).mean().iloc[-1])
-        ema12  = close.ewm(span=12).mean()
-        ema26  = close.ewm(span=26).mean()
-        macd_v = float((ema12 - ema26).iloc[-1])
-        sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+        sma10  = float(SMAIndicator(close, window=10).sma_indicator().iloc[-1])
+        sma50  = float(SMAIndicator(close, window=50).sma_indicator().iloc[-1])
+        macd_obj = TAmacd(close)
+        macd_v = float(macd_obj.macd().iloc[-1])
+        sig_v  = float(macd_obj.macd_signal().iloc[-1])
         mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
         return sum([sma10 > sma50, macd_v > sig_v, mom > 0])
     except Exception:
@@ -474,16 +475,12 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     volume = raw["Volume"]
     pris   = float(close.iloc[-1])
 
-    sma10  = float(close.rolling(10).mean().iloc[-1])
-    sma50  = float(close.rolling(50).mean().iloc[-1])
-    delta  = close.diff()
-    gain   = delta.clip(lower=0).ewm(com=13, adjust=False).mean()
-    loss   = (-delta.clip(upper=0)).ewm(com=13, adjust=False).mean()
-    rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-    ema12  = close.ewm(span=12).mean()
-    ema26  = close.ewm(span=26).mean()
-    macd_v = float((ema12 - ema26).iloc[-1])
-    sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+    sma10  = float(SMAIndicator(close, window=10).sma_indicator().iloc[-1])
+    sma50  = float(SMAIndicator(close, window=50).sma_indicator().iloc[-1])
+    rsi    = float(RSIIndicator(close, window=14).rsi().iloc[-1])
+    macd_obj = TAmacd(close)
+    macd_v = float(macd_obj.macd().iloc[-1])
+    sig_v  = float(macd_obj.macd_signal().iloc[-1])
     mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
 
     aksje_ret3m = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0

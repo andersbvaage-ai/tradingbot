@@ -6,3 +6,4 @@ plotly
 requests
 cryptography
 PyNaCl
+ta

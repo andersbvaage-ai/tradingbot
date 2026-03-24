@@ -14,6 +14,9 @@ import time
 import requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from ta.trend import SMAIndicator, MACD as TAmacd
+from ta.volatility import BollingerBands
+from ta.momentum import RSIIndicator
 
 PORTFOLIO_FIL = os.path.join(os.path.dirname(__file__), "portfolio.json")
 GITHUB_REPO   = "andersbvaage-ai/tradingbot"
@@ -121,34 +124,27 @@ def hent_obx_data():
 
 st.set_page_config(page_title="Nordic Trading Bot", layout="wide")
 
-# ── Indikatorer ────────────────────────────────────────────────────────────────
+# ── Indikatorer (ta-biblioteket) ──────────────────────────────────────────────
 def SMA(values, n):
-    return pd.Series(values).rolling(n).mean()
+    return SMAIndicator(pd.Series(values), window=n).sma_indicator()
 
 def EMA(values, n):
     return pd.Series(values).ewm(span=n, adjust=False).mean()
 
 def RSI(values, n=14):
-    delta = pd.Series(values).diff()
-    gain = delta.clip(lower=0).rolling(n).mean()
-    loss = (-delta.clip(upper=0)).rolling(n).mean()
-    rs = gain / loss
-    return 100 - (100 / (1 + rs))
+    return RSIIndicator(pd.Series(values), window=n).rsi()
 
 def MACD_line(values, fast=12, slow=26):
-    return EMA(values, fast) - EMA(values, slow)
+    return TAmacd(pd.Series(values), window_fast=fast, window_slow=slow).macd()
 
 def MACD_signal(values, fast=12, slow=26, signal=9):
-    macd = MACD_line(values, fast, slow)
-    return macd.ewm(span=signal, adjust=False).mean()
+    return TAmacd(pd.Series(values), window_fast=fast, window_slow=slow, window_sign=signal).macd_signal()
 
 def BB_upper(values, n=20, k=2):
-    s = pd.Series(values)
-    return s.rolling(n).mean() + k * s.rolling(n).std()
+    return BollingerBands(pd.Series(values), window=n, window_dev=k).bollinger_hband()
 
 def BB_lower(values, n=20, k=2):
-    s = pd.Series(values)
-    return s.rolling(n).mean() - k * s.rolling(n).std()
+    return BollingerBands(pd.Series(values), window=n, window_dev=k).bollinger_lband()
 
 def Momentum(values, n):
     return pd.Series(values).pct_change(n) * 100
@@ -158,16 +154,12 @@ def beregn_indikatorer(close, volume=None, osebx_ret3m=0.0):
     if len(close) < 60:
         return None
     pris   = float(close.iloc[-1])
-    sma10  = float(close.rolling(10).mean().iloc[-1])
-    sma50  = float(close.rolling(50).mean().iloc[-1])
-    delta  = close.diff()
-    gain   = delta.clip(lower=0).rolling(14).mean()
-    loss   = (-delta.clip(upper=0)).rolling(14).mean()
-    rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-    ema12  = close.ewm(span=12).mean()
-    ema26  = close.ewm(span=26).mean()
-    macd_v = float((ema12 - ema26).iloc[-1])
-    sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+    sma10  = float(SMAIndicator(close, window=10).sma_indicator().iloc[-1])
+    sma50  = float(SMAIndicator(close, window=50).sma_indicator().iloc[-1])
+    rsi    = float(RSIIndicator(close, window=14).rsi().iloc[-1])
+    macd_obj = TAmacd(close)
+    macd_v = float(macd_obj.macd().iloc[-1])
+    sig_v  = float(macd_obj.macd_signal().iloc[-1])
     mom    = float(close.pct_change(126).iloc[-1] * 100) if len(close) >= 126 else 0
 
     # ── Ensemble: 3 uavhengige strategistemmer ────────────────────────────────
@@ -214,7 +206,7 @@ def detect_regime(osebx_close):
     """
     if len(osebx_close) < 200:
         return "Sideways"
-    sma200 = float(osebx_close.rolling(200).mean().iloc[-1])
+    sma200 = float(SMAIndicator(osebx_close, window=200).sma_indicator().iloc[-1])
     pris   = float(osebx_close.iloc[-1])
     ret3m  = float(osebx_close.pct_change(63).iloc[-1] * 100) if len(osebx_close) >= 63 else 0
     if pris > sma200 and ret3m > 3:
@@ -1959,16 +1951,12 @@ with tab_bt:
                                 continue
                             ret = float(fremtid["Close"].iloc[-1]) / float(close.iloc[-1]) - 1
 
-                            sma10  = float(close.rolling(10).mean().iloc[-1])
-                            sma50  = float(close.rolling(50).mean().iloc[-1])
-                            delta  = close.diff()
-                            gain   = delta.clip(lower=0).rolling(14).mean()
-                            loss   = (-delta.clip(upper=0)).rolling(14).mean()
-                            rsi    = float((100 - 100 / (1 + gain / loss)).iloc[-1])
-                            ema12  = close.ewm(span=12).mean()
-                            ema26  = close.ewm(span=26).mean()
-                            macd_v = float((ema12 - ema26).iloc[-1])
-                            sig_v  = float((ema12 - ema26).ewm(span=9).mean().iloc[-1])
+                            sma10  = float(SMAIndicator(close, window=10).sma_indicator().iloc[-1])
+                            sma50  = float(SMAIndicator(close, window=50).sma_indicator().iloc[-1])
+                            rsi    = float(RSIIndicator(close, window=14).rsi().iloc[-1])
+                            macd_obj = TAmacd(close)
+                            macd_v = float(macd_obj.macd().iloc[-1])
+                            sig_v  = float(macd_obj.macd_signal().iloc[-1])
                             mom    = float(close.pct_change(63).iloc[-1] * 100) if len(close) >= 63 else 0
 
                             if sma10 > sma50:

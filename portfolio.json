@@ -1,5 +1,5 @@
 {
-  "kasse": 3103.0,
+  "kasse": 1659.0,
   "start_kapital": 10000,
   "posisjoner": {
     "SUBC.OL": {
@@ -28,6 +28,21 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "HUNT.OL": {
+      "navn": "Hunter Group",
+      "antall": 226,
+      "snittpris": 6.260000228881836,
+      "kj\u00f8psdato": "2026-03-25",
+      "h\u00f8yeste_kurs": 6.260000228881836,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }
@@ -171,9 +186,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-03-25 14:45:42.415751",
+      "handling": "KJ\u00d8P",
+      "ticker": "HUNT.OL",
+      "navn": "Hunter Group",
+      "antall": 226,
+      "kurs": 6.260000228881836,
+      "bel\u00f8p": 1415.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 441.3% \u00b7 rel.styrke 222.4% \u00b7 RSI 70 \u00b7 P/E 7 \u00b7 P/B 4.2",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-03-25 08:00:59.048823",
+  "sist_analysert": "2026-03-25 14:45:42.415859",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -198,7 +232,7 @@
     },
     {
       "dato": "2026-03-25",
-      "total_verdi": 9849.0
+      "total_verdi": 9882.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -206,15 +240,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 36.4,
+      "rel_styrke": 17.2,
+      "rsi": 63.0,
+      "kurs": 270.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 49.1,
-      "rel_styrke": 26.6,
-      "rsi": 65.0,
-      "kurs": 43.64,
+      "mom": 46.6,
+      "rel_styrke": 27.7,
+      "rsi": 66.0,
+      "kurs": 43.86,
       "pe": null,
       "pb": null,
       "yield": null
@@ -225,41 +273,55 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.1,
-      "rel_styrke": 29.4,
-      "rsi": 64.0,
-      "kurs": 57.2,
-      "pe": 11.7,
-      "pb": 1.51,
+      "mom": 25.8,
+      "rel_styrke": 23.4,
+      "rsi": 62.0,
+      "kurs": 56.6,
+      "pe": 11.6,
+      "pb": 1.5,
       "yield": null
     },
     {
-      "navn": "Eidesvik Offshore",
-      "ticker": "EIOF.OL",
+      "navn": "Hunter Group",
+      "ticker": "HUNT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 8.7,
-      "rel_styrke": 1.4,
-      "rsi": 60.0,
-      "kurs": 15.0,
-      "pe": 16.1,
-      "pb": 0.66,
-      "yield": 200.0
+      "score": 3,
+      "mom": 441.3,
+      "rel_styrke": 222.4,
+      "rsi": 70.0,
+      "kurs": 6.26,
+      "pe": 6.5,
+      "pb": 4.17,
+      "yield": 1095.0
     },
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
+      "navn": "BW Offshore",
+      "ticker": "BWO.OL",
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 38.5,
-      "rel_styrke": 19.2,
-      "rsi": 61.0,
-      "kurs": 267.4,
+      "mom": 41.7,
+      "rel_styrke": 14.0,
+      "rsi": 54.0,
+      "kurs": 51.6,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "MPC Container Ships",
+      "ticker": "MPCC.OL",
+      "ensemble": 2,
+      "ensemble_tekst": "Trend \u00b7 Mom",
+      "score": 3,
+      "mom": 37.2,
+      "rel_styrke": 17.0,
+      "rsi": 59.0,
+      "kurs": 22.78,
+      "pe": 4.5,
+      "pb": 1.12,
+      "yield": 832.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -267,6 +329,7 @@
     "Shipping": -1
   },
   "insider_kj\u00f8p": [
+    "BORR.OL",
     "BWLPG.OL",
     "PARB.OL",
     "SMCRT.OL"
@@ -275,12 +338,12 @@
     "NEL.OL": 3.79,
     "NOD.OL": 4.48,
     "AUTO.OL": 2.2,
-    "TGS.OL": 2.38,
+    "TGS.OL": 2.27,
     "GSF.OL": 2.2,
-    "HEX.OL": 7.54,
-    "NAS.OL": 3.21,
+    "HEX.OL": 6.26,
+    "NAS.OL": 3.24,
     "BAKKA.OL": 3.28,
-    "LINK.OL": 12.26
+    "LINK.OL": 12.41
   },
   "urealisert_historikk": [
     {
@@ -293,7 +356,7 @@
     },
     {
       "dato": "2026-03-25",
-      "verdi": 109.0
+      "verdi": 171.0
     }
   ]
 }

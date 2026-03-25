@@ -7,7 +7,7 @@
       "antall": 15,
       "snittpris": 257.79998779296875,
       "kj\u00f8psdato": "2026-03-18",
-      "h\u00f8yeste_kurs": 267.20001220703125
+      "h\u00f8yeste_kurs": 267.3999938964844
     },
     "BWO.OL": {
       "navn": "BW Offshore",
@@ -173,7 +173,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-03-24 14:44:49.413895",
+  "sist_analysert": "2026-03-25 08:00:59.048823",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -195,6 +195,10 @@
     {
       "dato": "2026-03-24",
       "total_verdi": 9806.0
+    },
+    {
+      "dato": "2026-03-25",
+      "total_verdi": 9849.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -206,11 +210,11 @@
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 48.7,
-      "rel_styrke": 26.7,
+      "score": 3,
+      "mom": 49.1,
+      "rel_styrke": 26.6,
       "rsi": 65.0,
-      "kurs": 43.5,
+      "kurs": 43.64,
       "pe": null,
       "pb": null,
       "yield": null
@@ -221,12 +225,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 35.1,
-      "rel_styrke": 31.0,
-      "rsi": 65.0,
-      "kurs": 57.6,
-      "pe": 11.8,
-      "pb": 1.55,
+      "mom": 34.1,
+      "rel_styrke": 29.4,
+      "rsi": 64.0,
+      "kurs": 57.2,
+      "pe": 11.7,
+      "pb": 1.51,
       "yield": null
     },
     {
@@ -235,13 +239,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 8.3,
-      "rel_styrke": 1.6,
-      "rsi": 59.0,
-      "kurs": 14.95,
+      "mom": 8.7,
+      "rel_styrke": 1.4,
+      "rsi": 60.0,
+      "kurs": 15.0,
       "pe": 16.1,
       "pb": 0.66,
-      "yield": 196.0
+      "yield": 200.0
     },
     {
       "navn": "Subsea 7",
@@ -249,10 +253,10 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 37.2,
-      "rel_styrke": 18.5,
-      "rsi": 60.0,
-      "kurs": 265.0,
+      "mom": 38.5,
+      "rel_styrke": 19.2,
+      "rsi": 61.0,
+      "kurs": 267.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -286,6 +290,10 @@
     {
       "dato": "2026-03-24",
       "verdi": 66.0
+    },
+    {
+      "dato": "2026-03-25",
+      "verdi": 109.0
     }
   ]
 }

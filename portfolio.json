@@ -1,5 +1,5 @@
 {
-  "kasse": 1659.0,
+  "kasse": 2891.0,
   "start_kapital": 10000,
   "posisjoner": {
     "SUBC.OL": {
@@ -21,28 +21,13 @@
       "antall": 32,
       "snittpris": 43.52000045776367,
       "kj\u00f8psdato": "2026-03-23",
-      "h\u00f8yeste_kurs": 44.02000045776367,
+      "h\u00f8yeste_kurs": 44.65999984741211,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      }
-    },
-    "HUNT.OL": {
-      "navn": "Hunter Group",
-      "antall": 226,
-      "snittpris": 6.260000228881836,
-      "kj\u00f8psdato": "2026-03-25",
-      "h\u00f8yeste_kurs": 6.260000228881836,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }
@@ -197,6 +182,28 @@
       "bel\u00f8p": 1415.0,
       "kurtasje": 29,
       "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 441.3% \u00b7 rel.styrke 222.4% \u00b7 RSI 70 \u00b7 P/E 7 \u00b7 P/B 4.2",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-26 08:40:29.202483",
+      "handling": "SELG",
+      "ticker": "HUNT.OL",
+      "navn": "Hunter Group",
+      "antall": 226,
+      "kurs": 5.579999923706055,
+      "bel\u00f8p": 1261.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.9% fra topp 6.26 kr \u00b7 kj\u00f8pspris 6.26 kr)",
+      "snittpris": 6.260000228881836,
+      "avkastning_pct": -10.86,
+      "holdingstid": 1,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

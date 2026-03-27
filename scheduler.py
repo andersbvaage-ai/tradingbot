@@ -230,6 +230,8 @@ SEKTORER = {
 }
 MAKS_KURTASJE_RATIO = 0.02  # kurtasje skal ikke overstige 2% av posisjonsstørrelsen
 TARGET_VOL          = 0.20  # referansevolatilitet for posisjonsstørrelse (20% annualisert)
+MOM_CAP             = 200   # Maks 6mnd momentum i % — filtrerer ut parabolske aksjer
+MOM_REDUKSJON_TERSKEL = 100 # Reduser posisjonsstørrelse ved momentum over dette
 
 # Nordnet kurtasjemodeller (Norden/Oslo Børs)
 KURTASJE_MODELLER = {
@@ -506,6 +508,9 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
     if not rsi_ok:
         return None  # RSI utenfor gyldig sone
 
+    if mom > MOM_CAP:
+        return None  # Parabolsk momentum — for høy risiko for korreksjon
+
     stemmer = " · ".join(s for s, v in [("Trend", sma_vote), ("MACD", macd_vote), ("Mom", mom_vote)] if v)
     score         = sum([sma10 > sma50, 40 < rsi < 65, macd_v > sig_v, mom > 0])
     oppside_score = (rel_styrke / 10) + (vol_økning / 50) + (nærhet_topp / 100)
@@ -680,9 +685,10 @@ def kjor_analyse():
         høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
         pf["posisjoner"][ticker]["høyeste_kurs"] = høyeste
 
-        # Utløs salg hvis kursen faller mer enn stop_loss_pct fra toppen
+        # Per-posisjon volatilitetsjustert stop-loss (fallback til portefølje-nivå)
+        pos_sl = pos.get("stop_loss_pct", stop_loss_pct)
         tap_fra_topp = (kurs / høyeste - 1) * 100
-        if tap_fra_topp <= -(stop_loss_pct * 100):
+        if tap_fra_topp <= -(pos_sl * 100):
             brutto      = round(pos["antall"] * kurs, 0)
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje
@@ -810,7 +816,9 @@ def kjor_analyse():
         vol_faktor = max(0.5, min(2.0, vol_faktor))   # clamp til [50%, 200%]
         # Ensemble-boost: 3/3 signaler = høyere konfidens → 15% større posisjon
         ensemble_boost = 1.15 if k["ensemble"] >= 3 else 1.0
-        beløp    = min(pf["kasse"] * allok * vol_faktor * ensemble_boost, pf["kasse"] * MAKS_ALLOKERING)
+        # Momentum-reduksjon: halver posisjon ved ekstrem momentum (>100%)
+        mom_faktor = 0.5 if abs(k.get("mom", 0)) > MOM_REDUKSJON_TERSKEL else 1.0
+        beløp    = min(pf["kasse"] * allok * vol_faktor * ensemble_boost * mom_faktor, pf["kasse"] * MAKS_ALLOKERING)
         kurtasje = beregn_kurtasje(beløp, pf)
 
         # Kurtasje-ratio-sjekk: skaler opp posisjonen hvis kurtasjen er for dyr
@@ -839,10 +847,12 @@ def kjor_analyse():
         begrunnelse = (f"[{regime}] Ensemble {k['ensemble']}/3 ({k['ensemble_tekst']}) · "
                        f"mom {k['mom']:.1f}% · rel.styrke {k['rel_styrke']:.1f}% · "
                        f"RSI {k['rsi']:.0f} · {pe_tekst} · {pb_tekst}")
+        vol_stop = max(0.05, min(0.10, k.get("vol_60d", TARGET_VOL) * 0.5))
         pf["posisjoner"][k["ticker"]] = {
             "navn": k["navn"], "antall": antall,
             "snittpris": k["kurs"], "kjøpsdato": str(datetime.now().date()),
             "høyeste_kurs": k["kurs"],
+            "stop_loss_pct": round(vol_stop, 4),
             "signaler": {
                 "ensemble":       k["ensemble"],
                 "ensemble_tekst": k["ensemble_tekst"],
@@ -1059,8 +1069,9 @@ def sjekk_stop_loss() -> list:
         høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
         pf["posisjoner"][ticker]["høyeste_kurs"] = høyeste
 
+        pos_sl = pos.get("stop_loss_pct", stop_loss_pct)
         tap_fra_topp = (kurs / høyeste - 1) * 100
-        if tap_fra_topp <= -(stop_loss_pct * 100):
+        if tap_fra_topp <= -(pos_sl * 100):
             brutto      = round(pos["antall"] * kurs, 0)
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje

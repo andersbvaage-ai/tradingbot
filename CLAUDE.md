@@ -67,6 +67,8 @@ Kjøp krever minimum 2/3 (eller 3/3 i Bear-regime):
 3. **Momentum** — 6-månedersmom > 0%
 
 **RSI-filter:** 30 < RSI < 70 — overbought/oversold ekskluderes alltid.
+**Momentum-cap:** >200% 6mnd-momentum filtreres bort (parabolske aksjer).
+**Momentum-reduksjon:** >100% momentum → halv posisjonsstørrelse.
 
 ### Unike signaler (score-boost i rangering)
 Rangering: `(ensemble, score + oppside_score + råvare_score + insider_score + short_score)`
@@ -85,7 +87,7 @@ Rangering: `(ensemble, score + oppside_score + råvare_score + insider_score + s
 | Bear | OSEBX < SMA200 og 3mnd < -5% | 2 | 10% | 3/3 |
 
 ### Salglogikk (prioritert rekkefølge)
-1. **Trailing stop-loss** — selg hvis kurs faller `stop_loss_pct`% fra `høyeste_kurs`
+1. **Trailing stop-loss** — per-posisjon volatilitetsjustert: `max(5%, min(10%, vol_60d × 0.5))`. Fallback til portefølje-nivå `stop_loss_pct` (7%) for eldre posisjoner.
 2. **Ensemble=0** — selg hvis alle 3 signaler snur negative
 3. **Ikke i topp** — selg hvis aksjen ikke lenger er blant topp-kandidatene
 

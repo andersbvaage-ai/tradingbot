@@ -1,20 +1,13 @@
 {
-  "kasse": 2766.0,
+  "kasse": 1842.0,
   "start_kapital": 10000,
   "posisjoner": {
-    "SUBC.OL": {
-      "navn": "Subsea 7",
-      "antall": 15,
-      "snittpris": 257.79998779296875,
-      "kj\u00f8psdato": "2026-03-18",
-      "h\u00f8yeste_kurs": 280.0
-    },
-    "AKSO.OL": {
-      "navn": "Aker Solutions",
-      "antall": 32,
-      "snittpris": 43.52000045776367,
-      "kj\u00f8psdato": "2026-03-23",
-      "h\u00f8yeste_kurs": 45.20000076293945,
+    "EIOF.OL": {
+      "navn": "Eidesvik Offshore",
+      "antall": 89,
+      "snittpris": 15.800000190734863,
+      "kj\u00f8psdato": "2026-03-26",
+      "h\u00f8yeste_kurs": 16.100000381469727,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
@@ -24,18 +17,83 @@
         "regime": "Bull"
       }
     },
-    "EIOF.OL": {
-      "navn": "Eidesvik Offshore",
-      "antall": 89,
-      "snittpris": 15.800000190734863,
-      "kj\u00f8psdato": "2026-03-26",
-      "h\u00f8yeste_kurs": 15.899999618530273,
+    "FRO.OL": {
+      "navn": "Frontline",
+      "antall": 4,
+      "snittpris": 332.70001220703125,
+      "kj\u00f8psdato": "2026-03-30",
+      "h\u00f8yeste_kurs": 332.70001220703125,
+      "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
         "insider": false,
         "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "BWLPG.OL": {
+      "navn": "BW LPG",
+      "antall": 8,
+      "snittpris": 166.39999389648438,
+      "kj\u00f8psdato": "2026-03-30",
+      "h\u00f8yeste_kurs": 166.39999389648438,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "CMBTO.OL": {
+      "navn": "CMB.TECH",
+      "antall": 11,
+      "snittpris": 124.5999984741211,
+      "kj\u00f8psdato": "2026-03-30",
+      "h\u00f8yeste_kurs": 124.5999984741211,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "BORR.OL": {
+      "navn": "Borr Drilling",
+      "antall": 23,
+      "snittpris": 59.27000045776367,
+      "kj\u00f8psdato": "2026-03-30",
+      "h\u00f8yeste_kurs": 59.27000045776367,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 MACD",
+        "insider": true,
+        "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "AKER.OL": {
+      "navn": "Aker",
+      "antall": 1,
+      "snittpris": 1088.0,
+      "kj\u00f8psdato": "2026-03-30",
+      "h\u00f8yeste_kurs": 1088.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -254,9 +312,141 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-03-30 10:00:11.530463",
+      "handling": "SELG",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 15,
+      "kurs": 287.20001220703125,
+      "bel\u00f8p": 4308.0,
+      "kurtasje": 29,
+      "snittpris": 257.79998779296875,
+      "avkastning_pct": 11.4,
+      "holdingstid": 12,
+      "begrunnelse": "Ikke lenger blant topp-kandidater",
+      "signaler": null
+    },
+    {
+      "dato": "2026-03-30 10:00:11.797743",
+      "handling": "SELG",
+      "ticker": "AKSO.OL",
+      "navn": "Aker Solutions",
+      "antall": 32,
+      "kurs": 45.459999084472656,
+      "bel\u00f8p": 1455.0,
+      "kurtasje": 29,
+      "snittpris": 43.52000045776367,
+      "avkastning_pct": 4.46,
+      "holdingstid": 7,
+      "begrunnelse": "Ikke lenger blant topp-kandidater",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-30 10:00:13.540832",
+      "handling": "KJ\u00d8P",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 4,
+      "kurs": 332.70001220703125,
+      "bel\u00f8p": 1331.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 44.9% \u00b7 rel.styrke 31.0% \u00b7 RSI 56 \u00b7 P/E 20 \u00b7 P/B 3.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-30 10:00:13.540954",
+      "handling": "KJ\u00d8P",
+      "ticker": "BWLPG.OL",
+      "navn": "BW LPG",
+      "antall": 8,
+      "kurs": 166.39999389648438,
+      "bel\u00f8p": 1331.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 9.2% \u00b7 rel.styrke 8.4% \u00b7 RSI 59 \u00b7 P/E 11 \u00b7 P/B 1.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-30 10:00:13.541044",
+      "handling": "KJ\u00d8P",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 11,
+      "kurs": 124.5999984741211,
+      "bel\u00f8p": 1371.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 2/3 (MACD \u00b7 Mom) \u00b7 mom 25.9% \u00b7 rel.styrke 7.4% \u00b7 RSI 51 \u00b7 P/E 18 \u00b7 P/B 1.4",
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-30 10:00:13.541233",
+      "handling": "KJ\u00d8P",
+      "ticker": "BORR.OL",
+      "navn": "Borr Drilling",
+      "antall": 23,
+      "kurs": 59.27000045776367,
+      "bel\u00f8p": 1363.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 2/3 (Trend \u00b7 MACD) \u00b7 mom 0.0% \u00b7 rel.styrke 27.6% \u00b7 RSI 67 \u00b7 P/E 36 \u00b7 P/B 1.5",
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 MACD",
+        "insider": true,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-03-30 10:00:13.541324",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 1,
+      "kurs": 1088.0,
+      "bel\u00f8p": 1088.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 44.8% \u00b7 rel.styrke 23.5% \u00b7 RSI 65 \u00b7 P/E 20 \u00b7 P/B 1.7",
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-03-27 08:06:59.012047",
+  "sist_analysert": "2026-03-30 10:00:13.541382",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -290,6 +480,10 @@
     {
       "dato": "2026-03-27",
       "total_verdi": 9806.0
+    },
+    {
+      "dato": "2026-03-30",
+      "total_verdi": 9759.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -297,46 +491,46 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 42.1,
-      "rel_styrke": 16.3,
-      "rsi": 69.0,
-      "kurs": 279.4,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Eidesvik Offshore",
-      "ticker": "EIOF.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 15.8,
-      "rel_styrke": 9.4,
-      "rsi": 70.0,
-      "kurs": 15.8,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Hunter Group",
-      "ticker": "HUNT.OL",
+      "navn": "Frontline",
+      "ticker": "FRO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 419.4,
-      "rel_styrke": 209.4,
-      "rsi": 63.0,
-      "kurs": 5.88,
-      "pe": 6.1,
-      "pb": 3.94,
-      "yield": 2177.0
+      "mom": 44.9,
+      "rel_styrke": 31.0,
+      "rsi": 56.0,
+      "kurs": 332.7,
+      "pe": 20.2,
+      "pb": 3.03,
+      "yield": 521.0
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 9.2,
+      "rel_styrke": 8.4,
+      "rsi": 59.0,
+      "kurs": 166.4,
+      "pe": 10.7,
+      "pb": 1.41,
+      "yield": 882.0
+    },
+    {
+      "navn": "CMB.TECH",
+      "ticker": "CMBTO.OL",
+      "ensemble": 2,
+      "ensemble_tekst": "MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 25.9,
+      "rel_styrke": 7.4,
+      "rsi": 51.0,
+      "kurs": 124.6,
+      "pe": 18.4,
+      "pb": 1.42,
+      "yield": 164.0
     },
     {
       "navn": "MPC Container Ships",
@@ -344,27 +538,41 @@
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 35.9,
-      "rel_styrke": 16.2,
-      "rsi": 58.0,
-      "kurs": 22.6,
-      "pe": 4.4,
-      "pb": 1.11,
-      "yield": 847.0
+      "mom": 36.2,
+      "rel_styrke": 9.3,
+      "rsi": 53.0,
+      "kurs": 22.15,
+      "pe": 4.3,
+      "pb": 1.09,
+      "yield": 865.0
     },
     {
-      "navn": "Wallenius Wilhelmsen",
-      "ticker": "WAWI.OL",
+      "navn": "Borr Drilling",
+      "ticker": "BORR.OL",
+      "ensemble": 2,
+      "ensemble_tekst": "Trend \u00b7 MACD",
+      "score": 2,
+      "mom": 0,
+      "rel_styrke": 27.6,
+      "rsi": 67.0,
+      "kurs": 59.27,
+      "pe": 35.9,
+      "pb": 1.53,
+      "yield": null
+    },
+    {
+      "navn": "Aker",
+      "ticker": "AKER.OL",
       "ensemble": 2,
       "ensemble_tekst": "Trend \u00b7 Mom",
       "score": 3,
-      "mom": 31.7,
-      "rel_styrke": 5.0,
-      "rsi": 49.0,
-      "kurs": 121.2,
-      "pe": 5.2,
-      "pb": 1.61,
-      "yield": 1081.0
+      "mom": 44.8,
+      "rel_styrke": 23.5,
+      "rsi": 65.0,
+      "kurs": 1088.0,
+      "pe": 20.0,
+      "pb": 1.73,
+      "yield": 759.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -379,12 +587,12 @@
   ],
   "short_interest": {
     "NEL.OL": 2.41,
-    "NOD.OL": 4.48,
+    "NOD.OL": 4.45,
     "AUTO.OL": 2.2,
-    "TGS.OL": 2.27,
+    "TGS.OL": 2.17,
     "GSF.OL": 2.2,
     "HEX.OL": 6.26,
-    "NAS.OL": 3.24,
+    "NAS.OL": 3.32,
     "BAKKA.OL": 3.28,
     "LINK.OL": 12.51
   },
@@ -408,6 +616,10 @@
     {
       "dato": "2026-03-27",
       "verdi": 374.0
+    },
+    {
+      "dato": "2026-03-30",
+      "verdi": 27.0
     }
   ]
 }

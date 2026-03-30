@@ -7,7 +7,7 @@
       "antall": 89,
       "snittpris": 15.800000190734863,
       "kj\u00f8psdato": "2026-03-26",
-      "h\u00f8yeste_kurs": 16.100000381469727,
+      "h\u00f8yeste_kurs": 16.25,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
@@ -86,7 +86,7 @@
       "antall": 1,
       "snittpris": 1088.0,
       "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 1088.0,
+      "h\u00f8yeste_kurs": 1090.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 2,

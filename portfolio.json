@@ -7,7 +7,7 @@
       "antall": 4,
       "snittpris": 332.70001220703125,
       "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 335.1000061035156,
+      "h\u00f8yeste_kurs": 338.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -23,7 +23,7 @@
       "antall": 8,
       "snittpris": 166.39999389648438,
       "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 169.3000030517578,
+      "h\u00f8yeste_kurs": 169.8000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -488,7 +488,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-03-31 08:41:43.723779",
+  "sist_analysert": "2026-04-01 08:49:07.878111",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -530,6 +530,10 @@
     {
       "dato": "2026-03-31",
       "total_verdi": 9696.0
+    },
+    {
+      "dato": "2026-04-01",
+      "total_verdi": 9696.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -542,41 +546,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 47.5,
-      "rel_styrke": 25.6,
-      "rsi": 69.0,
-      "kurs": 45.42,
-      "pe": 8.6,
-      "pb": 1.92,
-      "yield": 788.0
-    },
-    {
-      "navn": "Scatec",
-      "ticker": "SCATC.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 30.5,
-      "rel_styrke": 0.3,
-      "rsi": 70.0,
-      "kurs": 129.1,
-      "pe": 21.1,
-      "pb": 2.03,
-      "yield": null
-    },
-    {
-      "navn": "BW Energy",
-      "ticker": "BWE.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 25.2,
-      "rel_styrke": 5.6,
+      "mom": 51.3,
+      "rel_styrke": 25.7,
       "rsi": 66.0,
-      "kurs": 59.7,
-      "pe": 12.0,
-      "pb": 1.58,
+      "kurs": 45.28,
+      "pe": null,
+      "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Okea",
+      "ticker": "OKEA.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 111.0,
+      "rel_styrke": 55.5,
+      "rsi": 65.0,
+      "kurs": 40.0,
+      "pe": 6.0,
+      "pb": 7.49,
+      "yield": null
+    },
+    {
+      "navn": "Eidesvik Offshore",
+      "ticker": "EIOF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 23.1,
+      "rel_styrke": 6.9,
+      "rsi": 64.0,
+      "kurs": 16.0,
+      "pe": 17.2,
+      "pb": 0.71,
+      "yield": 181.0
     },
     {
       "navn": "Frontline",
@@ -584,10 +588,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 45.5,
-      "rel_styrke": 28.2,
-      "rsi": 56.0,
-      "kurs": 331.4,
+      "mom": 48.8,
+      "rel_styrke": 41.4,
+      "rsi": 58.0,
+      "kurs": 338.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -598,10 +602,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 13.9,
-      "rel_styrke": 5.8,
-      "rsi": 60.0,
-      "kurs": 167.1,
+      "mom": 19.8,
+      "rel_styrke": 12.4,
+      "rsi": 61.0,
+      "kurs": 169.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -618,15 +622,16 @@
     "SMCRT.OL"
   ],
   "short_interest": {
-    "NEL.OL": 2.41,
+    "NEL.OL": 2.22,
     "NOD.OL": 4.36,
     "AUTO.OL": 2.2,
-    "TGS.OL": 2.17,
+    "TGS.OL": 2.08,
     "GSF.OL": 2.2,
-    "HEX.OL": 6.26,
+    "HEX.OL": 6.35,
     "NAS.OL": 3.42,
     "BAKKA.OL": 3.28,
-    "LINK.OL": 12.62
+    "LINK.OL": 12.7,
+    "KID.OL": 2.12
   },
   "urealisert_historikk": [
     {
@@ -655,6 +660,10 @@
     },
     {
       "dato": "2026-03-31",
+      "verdi": -76.0
+    },
+    {
+      "dato": "2026-04-01",
       "verdi": -76.0
     }
   ]

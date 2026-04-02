@@ -488,7 +488,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-01 08:49:07.878111",
+  "sist_analysert": "2026-04-02 08:16:37.498551",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -534,6 +534,10 @@
     {
       "dato": "2026-04-01",
       "total_verdi": 9696.0
+    },
+    {
+      "dato": "2026-04-02",
+      "total_verdi": 9694.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -541,46 +545,60 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 47.4,
+      "rel_styrke": 20.0,
+      "rsi": 70.0,
+      "kurs": 293.2,
+      "pe": 21.8,
+      "pb": 2.03,
+      "yield": 665.0
+    },
+    {
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 51.3,
-      "rel_styrke": 25.7,
+      "mom": 51.5,
+      "rel_styrke": 26.0,
       "rsi": 66.0,
-      "kurs": 45.28,
+      "kurs": 45.32,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "DNO",
+      "ticker": "DNO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 41.9,
+      "rel_styrke": 11.4,
+      "rsi": 67.0,
+      "kurs": 20.74,
+      "pe": 5.3,
+      "pb": 1.57,
+      "yield": 723.0
     },
     {
       "navn": "Okea",
       "ticker": "OKEA.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 111.0,
-      "rel_styrke": 55.5,
-      "rsi": 65.0,
-      "kurs": 40.0,
-      "pe": 6.0,
-      "pb": 7.49,
-      "yield": null
-    },
-    {
-      "navn": "Eidesvik Offshore",
-      "ticker": "EIOF.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 23.1,
-      "rel_styrke": 6.9,
+      "mom": 109.7,
+      "rel_styrke": 54.5,
       "rsi": 64.0,
-      "kurs": 16.0,
-      "pe": 17.2,
-      "pb": 0.71,
-      "yield": 181.0
+      "kurs": 39.75,
+      "pe": 6.0,
+      "pb": 7.46,
+      "yield": null
     },
     {
       "navn": "Frontline",
@@ -588,24 +606,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.8,
-      "rel_styrke": 41.4,
-      "rsi": 58.0,
-      "kurs": 338.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW LPG",
-      "ticker": "BWLPG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 19.8,
-      "rel_styrke": 12.4,
-      "rsi": 61.0,
-      "kurs": 169.8,
+      "mom": 49.4,
+      "rel_styrke": 42.2,
+      "rsi": 59.0,
+      "kurs": 339.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -622,15 +626,14 @@
     "SMCRT.OL"
   ],
   "short_interest": {
-    "NEL.OL": 2.22,
     "NOD.OL": 4.36,
     "AUTO.OL": 2.2,
     "TGS.OL": 2.08,
     "GSF.OL": 2.2,
-    "HEX.OL": 6.35,
-    "NAS.OL": 3.42,
+    "HEX.OL": 6.25,
+    "NAS.OL": 3.5,
     "BAKKA.OL": 3.28,
-    "LINK.OL": 12.7,
+    "LINK.OL": 13.36,
     "KID.OL": 2.12
   },
   "urealisert_historikk": [
@@ -665,6 +668,10 @@
     {
       "dato": "2026-04-01",
       "verdi": -76.0
+    },
+    {
+      "dato": "2026-04-02",
+      "verdi": -78.0
     }
   ]
 }

@@ -488,7 +488,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-02 08:16:37.498551",
+  "sist_analysert": "2026-04-03 08:09:52.291438",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -538,6 +538,10 @@
     {
       "dato": "2026-04-02",
       "total_verdi": 9694.0
+    },
+    {
+      "dato": "2026-04-03",
+      "total_verdi": 9694.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -551,7 +555,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
       "mom": 47.4,
-      "rel_styrke": 20.0,
+      "rel_styrke": 19.3,
       "rsi": 70.0,
       "kurs": 293.2,
       "pe": 21.8,
@@ -565,7 +569,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
       "mom": 51.5,
-      "rel_styrke": 26.0,
+      "rel_styrke": 25.3,
       "rsi": 66.0,
       "kurs": 45.32,
       "pe": null,
@@ -579,7 +583,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
       "mom": 41.9,
-      "rel_styrke": 11.4,
+      "rel_styrke": 10.6,
       "rsi": 67.0,
       "kurs": 20.74,
       "pe": 5.3,
@@ -593,7 +597,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 109.7,
-      "rel_styrke": 54.5,
+      "rel_styrke": 53.8,
       "rsi": 64.0,
       "kurs": 39.75,
       "pe": 6.0,
@@ -607,7 +611,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 49.4,
-      "rel_styrke": 42.2,
+      "rel_styrke": 41.4,
       "rsi": 59.0,
       "kurs": 339.3,
       "pe": null,
@@ -671,6 +675,10 @@
     },
     {
       "dato": "2026-04-02",
+      "verdi": -78.0
+    },
+    {
+      "dato": "2026-04-03",
       "verdi": -78.0
     }
   ]

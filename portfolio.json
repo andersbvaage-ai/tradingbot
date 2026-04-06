@@ -1,5 +1,5 @@
 {
-  "kasse": 1880.0,
+  "kasse": 1984.0,
   "start_kapital": 10000,
   "posisjoner": {
     "FRO.OL": {
@@ -28,22 +28,6 @@
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      }
-    },
-    "CMBTO.OL": {
-      "navn": "CMB.TECH",
-      "antall": 11,
-      "snittpris": 124.5999984741211,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 124.5999984741211,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 2,
-        "ensemble_tekst": "MACD \u00b7 Mom",
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
@@ -88,6 +72,22 @@
       "snittpris": 45.41999816894531,
       "kj\u00f8psdato": "2026-03-31",
       "h\u00f8yeste_kurs": 46.31999969482422,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 4,
+      "snittpris": 293.20001220703125,
+      "kj\u00f8psdato": "2026-04-06",
+      "h\u00f8yeste_kurs": 293.20001220703125,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -486,9 +486,50 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-06 08:58:45.588644",
+      "handling": "SELG",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 11,
+      "kurs": 121.4000015258789,
+      "bel\u00f8p": 1335.0,
+      "kurtasje": 29,
+      "snittpris": 124.5999984741211,
+      "avkastning_pct": -2.57,
+      "holdingstid": 7,
+      "begrunnelse": "Ikke lenger blant topp-kandidater",
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-06 08:58:45.988706",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 4,
+      "kurs": 293.20001220703125,
+      "bel\u00f8p": 1173.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.4% \u00b7 rel.styrke 19.3% \u00b7 RSI 70 \u00b7 P/E 22 \u00b7 P/B 2.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-03 12:05:44.627791",
+  "sist_analysert": "2026-04-06 08:58:45.988878",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -542,6 +583,10 @@
     {
       "dato": "2026-04-03",
       "total_verdi": 9694.0
+    },
+    {
+      "dato": "2026-04-06",
+      "total_verdi": 9636.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -680,6 +725,10 @@
     {
       "dato": "2026-04-03",
       "verdi": -78.0
+    },
+    {
+      "dato": "2026-04-06",
+      "verdi": -42.0
     }
   ]
 }

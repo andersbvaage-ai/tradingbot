@@ -529,7 +529,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-06 08:58:45.988878",
+  "sist_analysert": "2026-04-06 14:17:09.483621",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -603,9 +603,9 @@
       "rel_styrke": 19.3,
       "rsi": 70.0,
       "kurs": 293.2,
-      "pe": 21.8,
-      "pb": 2.03,
-      "yield": 665.0
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Aker Solutions",

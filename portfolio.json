@@ -23,7 +23,7 @@
       "antall": 8,
       "snittpris": 166.39999389648438,
       "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 173.5,
+      "h\u00f8yeste_kurs": 173.89999389648438,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -71,7 +71,7 @@
       "antall": 31,
       "snittpris": 45.41999816894531,
       "kj\u00f8psdato": "2026-03-31",
-      "h\u00f8yeste_kurs": 46.880001068115234,
+      "h\u00f8yeste_kurs": 47.47999954223633,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -87,7 +87,7 @@
       "antall": 4,
       "snittpris": 293.20001220703125,
       "kj\u00f8psdato": "2026-04-06",
-      "h\u00f8yeste_kurs": 305.6000061035156,
+      "h\u00f8yeste_kurs": 316.20001220703125,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -529,7 +529,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-08 08:46:13.993303",
+  "sist_analysert": "2026-04-09 08:56:50.701755",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -595,6 +595,10 @@
     {
       "dato": "2026-04-08",
       "total_verdi": 9567.0
+    },
+    {
+      "dato": "2026-04-09",
+      "total_verdi": 9894.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -602,29 +606,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 44.8,
-      "rel_styrke": 16.1,
-      "rsi": 64.0,
-      "kurs": 291.6,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 48.7,
-      "rel_styrke": 20.3,
-      "rsi": 58.0,
-      "kurs": 44.56,
+      "score": 3,
+      "mom": 60.6,
+      "rel_styrke": 31.4,
+      "rsi": 69.0,
+      "kurs": 47.48,
       "pe": null,
       "pb": null,
       "yield": null
@@ -635,55 +625,69 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 40.6,
-      "rel_styrke": 7.3,
-      "rsi": 54.0,
-      "kurs": 125.0,
-      "pe": 5.3,
-      "pb": 1.66,
-      "yield": 1044.0
-    },
-    {
-      "navn": "DNO",
-      "ticker": "DNO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 35.5,
-      "rel_styrke": 3.0,
-      "rsi": 53.0,
-      "kurs": 19.36,
-      "pe": 5.0,
-      "pb": 1.47,
-      "yield": 723.0
+      "mom": 45.2,
+      "rel_styrke": 3.9,
+      "rsi": 62.0,
+      "kurs": 129.8,
+      "pe": 5.5,
+      "pb": 1.72,
+      "yield": 1025.0
     },
     {
       "navn": "Archer",
       "ticker": "ARCH.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 31.3,
-      "rel_styrke": 3.5,
-      "rsi": 62.0,
-      "kurs": 27.7,
-      "pe": 6.1,
-      "pb": 1.43,
-      "yield": 863.0
+      "score": 3,
+      "mom": 35.8,
+      "rel_styrke": 1.8,
+      "rsi": 67.0,
+      "kurs": 28.6,
+      "pe": 6.3,
+      "pb": 1.48,
+      "yield": 892.0
     },
     {
       "navn": "DOF Group",
       "ticker": "DOFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 49.5,
+      "rel_styrke": 25.3,
+      "rsi": 65.0,
+      "kurs": 139.6,
+      "pe": 7.6,
+      "pb": 1.74,
+      "yield": 973.0
+    },
+    {
+      "navn": "Frontline",
+      "ticker": "FRO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 42.2,
-      "rel_styrke": 20.5,
-      "rsi": 56.0,
-      "kurs": 132.5,
-      "pe": 7.2,
-      "pb": 1.65,
-      "yield": 948.0
+      "mom": 53.3,
+      "rel_styrke": 28.0,
+      "rsi": 61.0,
+      "kurs": 348.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 25.6,
+      "rel_styrke": 5.8,
+      "rsi": 63.0,
+      "kurs": 173.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -697,13 +701,13 @@
   "short_interest": {
     "NOD.OL": 4.36,
     "AUTO.OL": 2.2,
-    "TGS.OL": 2.08,
+    "TGS.OL": 2.17,
     "GSF.OL": 2.2,
     "HEX.OL": 6.25,
-    "NAS.OL": 3.5,
+    "NAS.OL": 3.63,
     "BAKKA.OL": 3.31,
-    "LINK.OL": 12.85,
-    "KID.OL": 2.12
+    "LINK.OL": 12.9,
+    "KID.OL": 2.62
   },
   "urealisert_historikk": [
     {
@@ -757,6 +761,10 @@
     {
       "dato": "2026-04-08",
       "verdi": -111.0
+    },
+    {
+      "dato": "2026-04-09",
+      "verdi": 216.0
     }
   ]
 }

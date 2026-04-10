@@ -529,7 +529,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-09 08:56:50.701755",
+  "sist_analysert": "2026-04-10 08:57:23.962271",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -599,6 +599,10 @@
     {
       "dato": "2026-04-09",
       "total_verdi": 9894.0
+    },
+    {
+      "dato": "2026-04-10",
+      "total_verdi": 9711.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -611,10 +615,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 60.6,
-      "rel_styrke": 31.4,
-      "rsi": 69.0,
-      "kurs": 47.48,
+      "mom": 57.7,
+      "rel_styrke": 27.7,
+      "rsi": 67.0,
+      "kurs": 46.98,
       "pe": null,
       "pb": null,
       "yield": null
@@ -625,41 +629,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 45.2,
-      "rel_styrke": 3.9,
-      "rsi": 62.0,
-      "kurs": 129.8,
+      "mom": 44.3,
+      "rel_styrke": 4.1,
+      "rsi": 60.0,
+      "kurs": 129.0,
       "pe": 5.5,
-      "pb": 1.72,
-      "yield": 1025.0
+      "pb": 1.71,
+      "yield": 1006.0
     },
     {
-      "navn": "Archer",
-      "ticker": "ARCH.OL",
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 35.8,
-      "rel_styrke": 1.8,
-      "rsi": 67.0,
-      "kurs": 28.6,
-      "pe": 6.3,
-      "pb": 1.48,
-      "yield": 892.0
+      "score": 4,
+      "mom": 74.6,
+      "rel_styrke": 16.7,
+      "rsi": 61.0,
+      "kurs": 104.5,
+      "pe": 42.5,
+      "pb": 6.42,
+      "yield": 68.0
     },
     {
       "navn": "DOF Group",
       "ticker": "DOFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 49.5,
-      "rel_styrke": 25.3,
-      "rsi": 65.0,
-      "kurs": 139.6,
+      "score": 4,
+      "mom": 48.6,
+      "rel_styrke": 23.5,
+      "rsi": 63.0,
+      "kurs": 138.4,
       "pe": 7.6,
       "pb": 1.74,
-      "yield": 973.0
+      "yield": 934.0
     },
     {
       "navn": "Frontline",
@@ -667,10 +671,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 53.3,
-      "rel_styrke": 28.0,
-      "rsi": 61.0,
-      "kurs": 348.9,
+      "mom": 46.7,
+      "rel_styrke": 17.5,
+      "rsi": 53.0,
+      "kurs": 333.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -681,10 +685,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 25.6,
-      "rel_styrke": 5.8,
-      "rsi": 63.0,
-      "kurs": 173.9,
+      "mom": 22.1,
+      "rel_styrke": 0.7,
+      "rsi": 57.0,
+      "kurs": 168.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -703,7 +707,7 @@
     "AUTO.OL": 2.2,
     "TGS.OL": 2.17,
     "GSF.OL": 2.2,
-    "HEX.OL": 6.25,
+    "HEX.OL": 6.15,
     "NAS.OL": 3.63,
     "BAKKA.OL": 3.31,
     "LINK.OL": 12.9,
@@ -765,6 +769,10 @@
     {
       "dato": "2026-04-09",
       "verdi": 216.0
+    },
+    {
+      "dato": "2026-04-10",
+      "verdi": 34.0
     }
   ]
 }

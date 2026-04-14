@@ -61,8 +61,8 @@ Workflow støtter også manuell kjøring med valg: `full`, `only-stop-loss`, `uk
 ## Signallogikk (scheduler.py)
 
 ### Ensemble-signaler (3 uavhengige stemmer)
-Kjøp krever minimum 2/3 (eller 3/3 i Bear-regime):
-1. **Trend** — SMA10 > SMA50
+Kjøp krever **3/3** i alle regimer. Trend er i tillegg obligatorisk (hard gate):
+1. **Trend** — SMA10 > SMA50 *(obligatorisk — blokkerer kjøp hvis mangler)*
 2. **MACD** — MACD-linje > Signal-linje
 3. **Momentum** — 6-månedersmom > 0%
 
@@ -82,8 +82,8 @@ Rangering: `(ensemble, score + oppside_score + råvare_score + insider_score + s
 ### Regime-deteksjon (OSEBX vs SMA200)
 | Regime | Kriterier | Maks pos | Allokering | Min ensemble |
 |---|---|---|---|---|
-| Bull | OSEBX > SMA200 og 3mnd > +3% | 6 | 15% | 2/3 |
-| Sideways | Verken Bull eller Bear | 4 | 12% | 2/3 |
+| Bull | OSEBX > SMA200 og 3mnd > +3% | 6 | 15% | 3/3 |
+| Sideways | Verken Bull eller Bear | 4 | 12% | 3/3 |
 | Bear | OSEBX < SMA200 og 3mnd < -5% | 2 | 10% | 3/3 |
 
 ### Salglogikk (prioritert rekkefølge)

@@ -185,7 +185,7 @@ MAKS_POSISJONER   = 6
 ALLOKERING_PCT    = 0.15   # 15% av kasse per posisjon
 MAKS_ALLOKERING   = 0.20   # aldri mer enn 20% i én aksje
 MIN_REL_STYRKE    = 0      # må slå OSEBX siste 3 mnd
-MIN_ENSEMBLE      = 2      # krever minst 2 av 3 strategier enige (Trend/MACD/Momentum)
+MIN_ENSEMBLE      = 3      # krever 3/3 strategier enige (Trend+MACD+Momentum)
 DEFAULT_STOP_LOSS  = 0.15   # selg hvis posisjon er ned >15% fra kjøpspris
 MAKS_PER_SEKTOR    = 2      # maks antall posisjoner fra samme sektor
 
@@ -396,8 +396,8 @@ def beregn_kurtasje(beløp, pf):
     return round(max(beløp * pct, min_kr), 0)
 
 REGIME_CONFIG = {
-    "Bull":     {"min_ensemble": 2, "maks_pos": 6, "allok": 0.15, "maks_per_sektor": 3},
-    "Sideways": {"min_ensemble": 2, "maks_pos": 4, "allok": 0.12, "maks_per_sektor": 2},
+    "Bull":     {"min_ensemble": 3, "maks_pos": 6, "allok": 0.15, "maks_per_sektor": 3},
+    "Sideways": {"min_ensemble": 3, "maks_pos": 4, "allok": 0.12, "maks_per_sektor": 2},
     "Bear":     {"min_ensemble": 3, "maks_pos": 2, "allok": 0.10, "maks_per_sektor": 1},
 }
 
@@ -507,6 +507,9 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
 
     if not rsi_ok:
         return None  # RSI utenfor gyldig sone
+
+    if not sma_vote:
+        return None  # Trend (SMA10>SMA50) er obligatorisk — alle vinnere hadde Trend
 
     if mom > MOM_CAP:
         return None  # Parabolsk momentum — for høy risiko for korreksjon

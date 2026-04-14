@@ -48,13 +48,13 @@ def les_portefolje():
         default = {"kasse": 0, "start_kapital": 0, "posisjoner": {},
                    "ventende_handler": [], "historikk": []}
         with open(PORTFOLIO_FIL, "w", encoding="utf-8") as f:
-            json.dump(default, f, indent=2, ensure_ascii=False)
+            json.dump(default, f, indent=2)
         return default
     with open(PORTFOLIO_FIL, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def lagre_portefolje(p):
-    innhold = json.dumps(p, indent=2, default=str, ensure_ascii=False)
+    innhold = json.dumps(p, indent=2, default=str)
     with open(PORTFOLIO_FIL, "w", encoding="utf-8") as f:
         f.write(innhold)
     ok = _push_portefolje_til_github(innhold)

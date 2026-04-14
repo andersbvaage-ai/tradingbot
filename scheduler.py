@@ -425,7 +425,7 @@ def les_portefolje():
 
 def lagre_portefolje(p):
     with open(PORTFOLIO_FIL, "w", encoding="utf-8") as f:
-        json.dump(p, f, indent=2, default=str, ensure_ascii=False)
+        json.dump(p, f, indent=2, default=str)
 
 def hent_siste_kurs(ticker):
     """Henter siste kurs via 1-minutts intraday (kjøres alltid i åpningstiden fra scheduler)."""

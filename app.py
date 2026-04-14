@@ -50,8 +50,14 @@ def les_portefolje():
         with open(PORTFOLIO_FIL, "w", encoding="utf-8") as f:
             json.dump(default, f, indent=2)
         return default
-    with open(PORTFOLIO_FIL, "r", encoding="utf-8") as f:
-        return json.load(f)
+    with open(PORTFOLIO_FIL, "rb") as f:
+        raw = f.read()
+    for enc in ("utf-8", "utf-8-sig", "latin-1"):
+        try:
+            return json.loads(raw.decode(enc))
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            continue
+    return json.loads(raw.decode("latin-1", errors="replace"))
 
 def lagre_portefolje(p):
     innhold = json.dumps(p, indent=2, default=str)

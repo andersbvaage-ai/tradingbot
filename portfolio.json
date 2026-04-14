@@ -71,7 +71,7 @@
       "antall": 31,
       "snittpris": 45.41999816894531,
       "kj\u00f8psdato": "2026-03-31",
-      "h\u00f8yeste_kurs": 47.68000030517578,
+      "h\u00f8yeste_kurs": 47.70000076293945,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -570,7 +570,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-13 10:59:34.888142",
+  "sist_analysert": "2026-04-14 10:00:35.298359",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -648,6 +648,10 @@
     {
       "dato": "2026-04-13",
       "total_verdi": 9742.0
+    },
+    {
+      "dato": "2026-04-14",
+      "total_verdi": 9671.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -660,10 +664,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 62.7,
-      "rel_styrke": 27.7,
+      "mom": 67.8,
+      "rel_styrke": 28.7,
       "rsi": 68.0,
-      "kurs": 47.56,
+      "kurs": 47.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -674,13 +678,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 55.3,
-      "rel_styrke": 4.1,
-      "rsi": 60.0,
-      "kurs": 129.1,
-      "pe": 5.6,
-      "pb": 1.71,
-      "yield": 1015.0
+      "mom": 51.3,
+      "rel_styrke": 0.5,
+      "rsi": 53.0,
+      "kurs": 125.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Kitron",
@@ -688,13 +692,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 76.4,
-      "rel_styrke": 15.8,
-      "rsi": 62.0,
-      "kurs": 105.5,
-      "pe": 42.9,
-      "pb": 6.48,
-      "yield": 67.0
+      "mom": 66.0,
+      "rel_styrke": 7.2,
+      "rsi": 50.0,
+      "kurs": 98.5,
+      "pe": 40.0,
+      "pb": 6.05,
+      "yield": 66.0
     },
     {
       "navn": "Archer",
@@ -702,41 +706,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 39.6,
-      "rel_styrke": 6.0,
+      "mom": 39.0,
+      "rel_styrke": 7.1,
       "rsi": 68.0,
       "kurs": 29.4,
       "pe": 6.3,
       "pb": 1.52,
-      "yield": 860.0
+      "yield": 844.0
     },
     {
-      "navn": "DOF Group",
-      "ticker": "DOFG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 50.6,
-      "rel_styrke": 21.5,
-      "rsi": 66.0,
-      "kurs": 140.9,
-      "pe": 7.8,
-      "pb": 1.78,
-      "yield": 945.0
-    },
-    {
-      "navn": "BW LPG",
-      "ticker": "BWLPG.OL",
+      "navn": "Odfjell Drilling",
+      "ticker": "ODL.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 29.4,
-      "rel_styrke": 5.2,
-      "rsi": 58.0,
-      "kurs": 169.8,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 38.2,
+      "rel_styrke": 2.4,
+      "rsi": 64.0,
+      "kurs": 106.8,
+      "pe": 15.5,
+      "pb": 1.89,
+      "yield": 833.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -744,7 +734,6 @@
     "Shipping": -1
   },
   "insider_kj\u00f8p": [
-    "BORR.OL",
     "ODF.OL"
   ],
   "short_interest": {
@@ -753,10 +742,10 @@
     "TGS.OL": 2.17,
     "GSF.OL": 2.2,
     "HEX.OL": 6.15,
-    "NAS.OL": 3.73,
-    "BAKKA.OL": 3.18,
-    "LINK.OL": 12.92,
-    "KID.OL": 2.62
+    "NAS.OL": 3.7,
+    "BAKKA.OL": 3.17,
+    "LINK.OL": 13.52,
+    "KID.OL": 2.12
   },
   "urealisert_historikk": [
     {
@@ -822,6 +811,10 @@
     {
       "dato": "2026-04-13",
       "verdi": 48.0
+    },
+    {
+      "dato": "2026-04-14",
+      "verdi": -22.0
     }
   ]
 }

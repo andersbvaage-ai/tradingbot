@@ -89,7 +89,7 @@ Rangering: `(ensemble, score + oppside_score + råvare_score + insider_score + s
 ### Salglogikk (prioritert rekkefølge)
 1. **Trailing stop-loss** — per-posisjon volatilitetsjustert: `max(5%, min(10%, vol_60d × 0.5))`. Fallback til portefølje-nivå `stop_loss_pct` (7%) for eldre posisjoner.
 2. **Ensemble=0** — selg hvis alle 3 signaler snur negative
-3. **Ikke i topp** — selg hvis aksjen ikke lenger er blant topp-kandidatene
+3. **Utenfor topp-liste** — selg kun hvis aksjen har vært utenfor hold-sonen i **≥3 påfølgende analyser** OG holdt **≥15 børsdager**. Streak trackes i `utenfor_topp_streak` per posisjon (nullstilles når aksjen er i hold-sonen igjen).
 
 ### Sektorspredning
 Maks 2 posisjoner per sektor (SEKTORER-dict i begge filer).

@@ -741,16 +741,22 @@ def kjor_analyse():
             })
             log.warning("ENSEMBLE=0: solgt %s à %.2f kr = %.0f kr", pos["navn"], kurs, brutto)
 
-    # ── Selg posisjoner som har falt ut av hold-sonen (topp 2×N, ensemble≥1) ──
+    # ── Oppdater utenfor-topp-streak og selg ved streak ≥ 3 + min 15 dager ──
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker in hold_tickers:
+            pos["utenfor_topp_streak"] = 0
             log.info("HOLDER: %s — fortsatt i hold-sone (topp %d)", pos["navn"], maks_pos * 3)
             continue
         if ticker not in topp_tickers:
+            streak = pos.get("utenfor_topp_streak", 0) + 1
+            pos["utenfor_topp_streak"] = streak
             kjøpsdato = datetime.strptime(pos["kjøpsdato"][:10], "%Y-%m-%d").date()
             dager_holdt = (datetime.now().date() - kjøpsdato).days
-            if dager_holdt < 5:
-                log.info("HOLDER: %s — minimum holdingstid ikke nådd (%d/5 dager)", pos["navn"], dager_holdt)
+            if dager_holdt < 15:
+                log.info("HOLDER: %s — minimum holdingstid ikke nådd (%d/15 dager)", pos["navn"], dager_holdt)
+                continue
+            if streak < 3:
+                log.info("HOLDER: %s — utenfor topp-liste %d/3 analyser", pos["navn"], streak)
                 continue
             kurs = hent_siste_kurs(ticker)
             if not kurs:
@@ -758,7 +764,7 @@ def kjor_analyse():
             brutto      = round(pos["antall"] * kurs, 0)
             kurtasje    = beregn_kurtasje(brutto, pf)
             inntekt     = brutto - kurtasje
-            begrunnelse = "Ikke lenger blant topp-kandidater"
+            begrunnelse = f"Utenfor topp-kandidater {streak} analyser på rad"
             ekstra = _salg_felt(pos, kurs, begrunnelse)
             del pf["posisjoner"][ticker]
             pf["kasse"] += inntekt
@@ -773,8 +779,8 @@ def kjor_analyse():
                 "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
                 "kurtasje": kurtasje, **ekstra,
             })
-            log.info("SOLGT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr)",
-                     pos["antall"], pos["navn"], kurs, brutto, kurtasje)
+            log.info("SOLGT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr, streak %d)",
+                     pos["antall"], pos["navn"], kurs, brutto, kurtasje, streak)
 
     # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
     # Hent fundamentals for topp-kandidater (kun disse — sparer tid vs alle ~150 tickers)

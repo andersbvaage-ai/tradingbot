@@ -420,12 +420,12 @@ def les_portefolje():
     if not os.path.exists(PORTFOLIO_FIL):
         lagre_portefolje(DEFAULT_PORTEFOLJE)
         return DEFAULT_PORTEFOLJE.copy()
-    with open(PORTFOLIO_FIL, "r") as f:
+    with open(PORTFOLIO_FIL, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def lagre_portefolje(p):
-    with open(PORTFOLIO_FIL, "w") as f:
-        json.dump(p, f, indent=2, default=str)
+    with open(PORTFOLIO_FIL, "w", encoding="utf-8") as f:
+        json.dump(p, f, indent=2, default=str, ensure_ascii=False)
 
 def hent_siste_kurs(ticker):
     """Henter siste kurs via 1-minutts intraday (kjøres alltid i åpningstiden fra scheduler)."""

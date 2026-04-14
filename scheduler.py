@@ -4,6 +4,7 @@ Analyserer Oslo Børs, oppdaterer portfolio.json med nye forslag,
 og sender e-post hvis det er nye kjøps- eller salgsforslag.
 """
 
+import re
 import yfinance as yf
 import pandas as pd
 import json
@@ -271,7 +272,7 @@ def _norm_navn(s):
                    " CORP", " SE", " NV", " HOLDING", " HOLDINGS", " GROUP",
                    " LIMITED", " AS", " BIOTECH"]:
         s = s.replace(suffix, "")
-    return __import__("re").sub(r"[^A-Z0-9 ]", "", s).strip()
+    return re.sub(r"[^A-Z0-9 ]", "", s).strip()
 
 def hent_short_interest(univers):
     """
@@ -529,44 +530,58 @@ def analyser_aksje(navn, ticker, osebx_ret3m):
         "vol_60d": vol_60d,
     }
 
-def send_epost(forslag, epost_til, epost_fra, epost_passord):
-    if not forslag:
-        return
 
-    kjop = [f for f in forslag if f["handling"] == "KJØP"]
-    selg = [f for f in forslag if f["handling"] == "SELG"]
+_kurs_cache: dict[str, float | None] = {}
 
-    linjer = [f"Nordic Trading Bot — {datetime.now().strftime('%d.%m.%Y %H:%M')}\n"]
+def _hent_kurs_cached(ticker: str) -> float | None:
+    """Hent siste kurs med cache — unngår gjentatte API-kall per kjøring."""
+    if ticker not in _kurs_cache:
+        _kurs_cache[ticker] = hent_siste_kurs(ticker)
+    return _kurs_cache[ticker]
 
-    if kjop:
-        linjer.append("KJØPSFORSLAG:")
-        for f in kjop:
-            linjer.append(f"  ✅ {f['navn']} ({f['ticker']}) — {f['antall']} aksjer à {f['kurs']:.2f} kr = {f['beløp']:,.0f} kr")
-            linjer.append(f"     {f['begrunnelse']}")
 
-    if selg:
-        linjer.append("\nSALGSFORSLAG:")
-        for f in selg:
-            linjer.append(f"  🔴 {f['navn']} ({f['ticker']}) — {f['antall']} aksjer à {f['kurs']:.2f} kr = {f['beløp']:,.0f} kr")
-            linjer.append(f"     {f['begrunnelse']}")
+def _utfor_salg(pf: dict, ticker: str, pos: dict, kurs: float,
+                begrunnelse: str, utforte: list) -> None:
+    """Felles salgslogikk — oppdaterer portefølje, historikk og utforte-liste."""
+    brutto   = round(pos["antall"] * kurs, 0)
+    kurtasje = beregn_kurtasje(brutto, pf)
+    inntekt  = brutto - kurtasje
 
-    linjer.append("\nÅpne appen for å godkjenne eller avvise forslagene.")
+    kjøpsdato = pos.get("kjøpsdato", "")
+    try:
+        holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
+    except Exception:
+        log.warning("Kunne ikke beregne holdingstid for kjøpsdato=%s", kjøpsdato)
+        holdingstid = None
+    avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
 
-    msg = MIMEText("\n".join(linjer), "plain", "utf-8")
-    msg["Subject"] = f"Trading Bot: {len(kjop)} kjøp, {len(selg)} salg foreslått"
-    msg["From"]    = epost_fra
-    msg["To"]      = epost_til
+    del pf["posisjoner"][ticker]
+    pf["kasse"] += inntekt
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(epost_fra, epost_passord)
-        smtp.send_message(msg)
+    oppføring = {
+        "dato": str(datetime.now()), "handling": "SELG",
+        "ticker": ticker, "navn": pos["navn"],
+        "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+        "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+        "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
+        "holdingstid": holdingstid, "signaler": pos.get("signaler"),
+    }
+    pf["historikk"].append(oppføring)
+    utforte.append({
+        "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
+        "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
+        "kurtasje": kurtasje, "begrunnelse": begrunnelse,
+        "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
+    })
+    log.info("SOLGT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr) — %s",
+             pos["antall"], pos["navn"], kurs, brutto, kurtasje, begrunnelse)
 
-    log.info("E-post sendt til %s", epost_til)
 
-def kjor_analyse():
-    log.info("Starter analyse...")
+def kjor_analyse(dry_run: bool = False):
+    log.info("Starter analyse%s...", " (DRY RUN)" if dry_run else "")
     pf    = les_portefolje()
     kasse = pf["kasse"]
+    _kurs_cache.clear()
 
     # Hent OSEBX — trenger 1y for SMA200 (regime) og 3mnd-retur
     osebx_ret3m = 0.0
@@ -659,131 +674,65 @@ def kjor_analyse():
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     topp_tickers  = {k["ticker"] for k in topp}
 
-    def _salg_felt(pos: dict, kurs: float, begrunnelse: str) -> dict:
-        """Bygg felles felt for historikk- og utforte-oppføringer ved salg."""
-        kjøpsdato = pos.get("kjøpsdato", "")
-        try:
-            holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
-        except Exception:
-            log.warning("Kunne ikke beregne holdingstid for kjøpsdato=%s", kjøpsdato)
-            holdingstid = None
-        avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
-        return {
-            "snittpris":       pos["snittpris"],
-            "avkastning_pct":  avkastning_pct,
-            "holdingstid":     holdingstid,
-            "begrunnelse":     begrunnelse,
-            "signaler":        pos.get("signaler"),
-        }
-
     # Hold-sone: behold posisjoner i topp 3×maks_pos med ensemble≥1 (hindrer unødvendig churning)
     hold_tickers  = {k["ticker"] for k in kandidater[:maks_pos * 3] if k["ensemble"] >= 1}
 
     # ── Trailing stop-loss: oppdater høyeste kurs, selg ved brudd ────────────
     for ticker, pos in list(pf["posisjoner"].items()):
-        kurs = hent_siste_kurs(ticker)
+        kurs = _hent_kurs_cached(ticker)
         if not kurs:
             continue
-        # Oppdater høyeste kurs siden kjøp (trailing-referanse)
         høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
         pf["posisjoner"][ticker]["høyeste_kurs"] = høyeste
 
-        # Per-posisjon volatilitetsjustert stop-loss (fallback til portefølje-nivå)
         pos_sl = pos.get("stop_loss_pct", stop_loss_pct)
         tap_fra_topp = (kurs / høyeste - 1) * 100
         if tap_fra_topp <= -(pos_sl * 100):
-            brutto      = round(pos["antall"] * kurs, 0)
-            kurtasje    = beregn_kurtasje(brutto, pf)
-            inntekt     = brutto - kurtasje
             begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
                            f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
-            ekstra = _salg_felt(pos, kurs, begrunnelse)
-            del pf["posisjoner"][ticker]
-            pf["kasse"] += inntekt
+            _utfor_salg(pf, ticker, pos, kurs, begrunnelse, utforte)
             topp_tickers.discard(ticker)
-            pf["historikk"].append({
-                "dato": str(datetime.now()), "handling": "SELG",
-                "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            utforte.append({
-                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            log.warning("TRAILING SL: %d × %s à %.2f kr (%.1f%% fra topp %.2f kr) = %.0f kr (kurtasje %.0f kr)",
-                        pos["antall"], pos["navn"], kurs, tap_fra_topp, høyeste, brutto, kurtasje)
 
     # ── Selg posisjoner der alle 3 ensemble-signaler har snudd negativt ──────
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker in topp_tickers:
-            continue   # allerede planlagt å beholde
+            continue
         if alle_ensemble.get(ticker, 1) == 0:
-            kurs = hent_siste_kurs(ticker)
+            kurs = _hent_kurs_cached(ticker)
             if not kurs:
                 continue
-            brutto      = round(pos["antall"] * kurs, 0)
-            kurtasje    = beregn_kurtasje(brutto, pf)
-            inntekt     = brutto - kurtasje
-            begrunnelse = "Ensemble snudd (0/3 — Trend, MACD og Momentum alle negative)"
-            ekstra = _salg_felt(pos, kurs, begrunnelse)
-            del pf["posisjoner"][ticker]
-            pf["kasse"] += inntekt
+            _utfor_salg(pf, ticker, pos, kurs,
+                        "Ensemble snudd (0/3 — Trend, MACD og Momentum alle negative)", utforte)
             topp_tickers.discard(ticker)
-            pf["historikk"].append({
-                "dato": str(datetime.now()), "handling": "SELG",
-                "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            utforte.append({
-                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            log.warning("ENSEMBLE=0: solgt %s à %.2f kr = %.0f kr", pos["navn"], kurs, brutto)
 
-    # ── Oppdater utenfor-topp-streak og selg ved streak ≥ 3 + min 15 dager ──
+    # ── Oppdater utenfor-topp-streak (unike datoer) og selg ved streak ≥ 3 + min 15 dager ──
+    idag = str(datetime.now().date())
     for ticker, pos in list(pf["posisjoner"].items()):
         if ticker in hold_tickers:
             pos["utenfor_topp_streak"] = 0
+            pos.pop("utenfor_topp_sist_dato", None)
             log.info("HOLDER: %s — fortsatt i hold-sone (topp %d)", pos["navn"], maks_pos * 3)
             continue
         if ticker not in topp_tickers:
-            streak = pos.get("utenfor_topp_streak", 0) + 1
-            pos["utenfor_topp_streak"] = streak
+            # Bare tell opp streak én gang per dag (unngår at 30-min loop inflater streak)
+            sist_dato = pos.get("utenfor_topp_sist_dato")
+            if sist_dato != idag:
+                pos["utenfor_topp_streak"] = pos.get("utenfor_topp_streak", 0) + 1
+                pos["utenfor_topp_sist_dato"] = idag
+            streak = pos["utenfor_topp_streak"]
             kjøpsdato = datetime.strptime(pos["kjøpsdato"][:10], "%Y-%m-%d").date()
             dager_holdt = (datetime.now().date() - kjøpsdato).days
             if dager_holdt < 15:
                 log.info("HOLDER: %s — minimum holdingstid ikke nådd (%d/15 dager)", pos["navn"], dager_holdt)
                 continue
             if streak < 3:
-                log.info("HOLDER: %s — utenfor topp-liste %d/3 analyser", pos["navn"], streak)
+                log.info("HOLDER: %s — utenfor topp-liste %d/3 dager", pos["navn"], streak)
                 continue
-            kurs = hent_siste_kurs(ticker)
+            kurs = _hent_kurs_cached(ticker)
             if not kurs:
                 continue
-            brutto      = round(pos["antall"] * kurs, 0)
-            kurtasje    = beregn_kurtasje(brutto, pf)
-            inntekt     = brutto - kurtasje
-            begrunnelse = f"Utenfor topp-kandidater {streak} analyser på rad"
-            ekstra = _salg_felt(pos, kurs, begrunnelse)
-            del pf["posisjoner"][ticker]
-            pf["kasse"] += inntekt
-            pf["historikk"].append({
-                "dato": str(datetime.now()), "handling": "SELG",
-                "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            utforte.append({
-                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, **ekstra,
-            })
-            log.info("SOLGT: %d × %s à %.2f kr = %.0f kr (kurtasje %.0f kr, streak %d)",
-                     pos["antall"], pos["navn"], kurs, brutto, kurtasje, streak)
+            _utfor_salg(pf, ticker, pos, kurs,
+                        f"Utenfor topp-kandidater {streak} dager på rad", utforte)
 
     # ── Kjøp topp-kandidater vi ikke allerede eier ───────────────────────────
     # Hent fundamentals for topp-kandidater (kun disse — sparer tid vs alle ~150 tickers)
@@ -917,7 +866,7 @@ def kjor_analyse():
     # ── Daglig snapshot av porteføljeverdi ───────────────────────────────────
     total_pos_verdi = 0
     for ticker, pos in pf["posisjoner"].items():
-        kurs = hent_siste_kurs(ticker)
+        kurs = _hent_kurs_cached(ticker)
         if kurs:
             total_pos_verdi += kurs * pos["antall"]
     total_verdi = pf["kasse"] + total_pos_verdi
@@ -932,7 +881,7 @@ def kjor_analyse():
 
     # ── Daglig snapshot av urealisert P&L ────────────────────────────────────
     urealisert_kr = sum(
-        (hent_siste_kurs(t) or pos["snittpris"]) * pos["antall"] - pos["snittpris"] * pos["antall"]
+        (_hent_kurs_cached(t) or pos["snittpris"]) * pos["antall"] - pos["snittpris"] * pos["antall"]
         for t, pos in pf["posisjoner"].items()
     )
     u_snapshot = {"dato": str(datetime.now().date()), "verdi": round(urealisert_kr, 0)}
@@ -941,12 +890,13 @@ def kjor_analyse():
     u_hist.append(u_snapshot)
     pf["urealisert_historikk"] = u_hist[-365:]
 
-    lagre_portefolje(pf)
+    if not dry_run:
+        lagre_portefolje(pf)
 
     kjop_antall = len([f for f in utforte if f["handling"] == "KJØP"])
     selg_antall = len([f for f in utforte if f["handling"] == "SELG"])
-    log.info("Analyse ferdig: %d kjøp utført, %d salg utført — porteføljeverdi %.0f kr",
-             kjop_antall, selg_antall, total_verdi)
+    log.info("Analyse ferdig: %d kjøp utført, %d salg utført — porteføljeverdi %.0f kr%s",
+             kjop_antall, selg_antall, total_verdi, " (DRY RUN — ikke lagret)" if dry_run else "")
 
     return utforte
 
@@ -1068,11 +1018,12 @@ def sjekk_stop_loss() -> list:
     pf            = les_portefolje()
     stop_loss_pct = pf.get("stop_loss_pct", DEFAULT_STOP_LOSS)
     utforte       = []
+    _kurs_cache.clear()
 
     log.info("Stop-loss-sjekk — %d posisjoner", len(pf["posisjoner"]))
 
     for ticker, pos in list(pf["posisjoner"].items()):
-        kurs = hent_siste_kurs(ticker)
+        kurs = _hent_kurs_cached(ticker)
         if not kurs:
             continue
         høyeste = max(pos.get("høyeste_kurs", pos["snittpris"]), kurs)
@@ -1081,36 +1032,9 @@ def sjekk_stop_loss() -> list:
         pos_sl = pos.get("stop_loss_pct", stop_loss_pct)
         tap_fra_topp = (kurs / høyeste - 1) * 100
         if tap_fra_topp <= -(pos_sl * 100):
-            brutto      = round(pos["antall"] * kurs, 0)
-            kurtasje    = beregn_kurtasje(brutto, pf)
-            inntekt     = brutto - kurtasje
             begrunnelse = (f"Trailing stop-loss utløst ({tap_fra_topp:.1f}% fra topp "
                            f"{høyeste:.2f} kr · kjøpspris {pos['snittpris']:.2f} kr)")
-            kjøpsdato = pos.get("kjøpsdato", "")
-            try:
-                holdingstid = (datetime.now().date() - datetime.fromisoformat(kjøpsdato).date()).days
-            except Exception:
-                log.warning("Kunne ikke beregne holdingstid for kjøpsdato=%s", kjøpsdato)
-                holdingstid = None
-            avkastning_pct = round((kurs / pos["snittpris"] - 1) * 100, 2)
-            del pf["posisjoner"][ticker]
-            pf["kasse"] += inntekt
-            pf["historikk"].append({
-                "dato": str(datetime.now()), "handling": "SELG",
-                "ticker": ticker, "navn": pos["navn"],
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
-                "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
-                "holdingstid": holdingstid, "signaler": pos.get("signaler"),
-            })
-            utforte.append({
-                "handling": "SELG", "navn": pos["navn"], "ticker": ticker,
-                "antall": pos["antall"], "kurs": kurs, "beløp": brutto,
-                "kurtasje": kurtasje, "begrunnelse": begrunnelse,
-                "snittpris": pos["snittpris"], "avkastning_pct": avkastning_pct,
-            })
-            log.warning("TRAILING SL: solgt %s à %.2f kr (%.1f%% fra topp %.2f kr)",
-                        pos["navn"], kurs, tap_fra_topp, høyeste)
+            _utfor_salg(pf, ticker, pos, kurs, begrunnelse, utforte)
 
     lagre_portefolje(pf)
     log.info("Stop-loss-sjekk ferdig: %d salg utført", len(utforte))
@@ -1286,6 +1210,13 @@ if __name__ == "__main__":
         resultat = sjekk_stop_loss()
         utfør_saxo_handler(resultat)
         send_varsel(resultat, modus="stop-loss")
+    elif "--dry-run" in sys.argv:
+        validate_startup()
+        resultat = _run_with_timeout(
+            lambda: kjor_analyse(dry_run=True),
+            ANALYSE_TIMEOUT_SEC, label="kjor_analyse (dry-run)")
+        if resultat is None:
+            log.error("Full analyse timed out etter %ds", ANALYSE_TIMEOUT_SEC)
     else:
         validate_startup()
         resultat = _run_with_timeout(kjor_analyse, ANALYSE_TIMEOUT_SEC, label="kjor_analyse")

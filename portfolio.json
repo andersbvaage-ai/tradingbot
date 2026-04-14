@@ -1,204 +1,210 @@
 {
-  "kasse": 1752.0,
-  "start_kapital": 10000,
+  "kasse": 17520.0,
+  "start_kapital": 100000,
   "posisjoner": {
     "FRO.OL": {
       "navn": "Frontline",
-      "antall": 4,
+      "antall": 40,
       "snittpris": 332.70001220703125,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 357.79998779296875,
+      "kjøpsdato": "2026-03-30",
+      "høyeste_kurs": 357.79998779296875,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
-      "antall": 8,
+      "antall": 80,
       "snittpris": 166.39999389648438,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 175.8000030517578,
+      "kjøpsdato": "2026-03-30",
+      "høyeste_kurs": 175.8000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "BORR.OL": {
       "navn": "Borr Drilling",
-      "antall": 23,
+      "antall": 230,
       "snittpris": 59.27000045776367,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 59.790000915527344,
+      "kjøpsdato": "2026-03-30",
+      "høyeste_kurs": 59.790000915527344,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 MACD",
+        "ensemble_tekst": "Trend · MACD",
         "insider": true,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "AKER.OL": {
       "navn": "Aker",
-      "antall": 1,
+      "antall": 10,
       "snittpris": 1088.0,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 1090.0,
+      "kjøpsdato": "2026-03-30",
+      "høyeste_kurs": 1090.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 Mom",
+        "ensemble_tekst": "Trend · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
+        "råvare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
-      "antall": 31,
+      "antall": 310,
       "snittpris": 45.41999816894531,
-      "kj\u00f8psdato": "2026-03-31",
-      "h\u00f8yeste_kurs": 48.02000045776367,
+      "kjøpsdato": "2026-03-31",
+      "høyeste_kurs": 48.02000045776367,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
-      "antall": 11,
+      "antall": 110,
       "snittpris": 129.10000610351562,
-      "kj\u00f8psdato": "2026-04-13",
-      "h\u00f8yeste_kurs": 129.10000610351562,
+      "kjøpsdato": "2026-04-13",
+      "høyeste_kurs": 129.10000610351562,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 1
     }
   },
   "ventende_handler": [],
   "historikk": [
     {
       "dato": "2026-03-18 09:32:51.327878",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "SUBC.OL",
       "navn": "Subsea 7",
-      "antall": 15,
+      "antall": 150,
       "kurs": 257.79998779296875,
-      "bel\u00f8p": 3867.0,
-      "kurtasje": 79,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 32.8% \u00b7 rel.styrke 31.2% \u00b7 RSI 46"
+      "beløp": 38670.0,
+      "kurtasje": 790,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend · Mom) · mom 32.8% · rel.styrke 31.2% · RSI 46"
     },
     {
       "dato": "2026-03-18 11:13:33.580364",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
-      "antall": 34,
+      "antall": 340,
       "kurs": 41.41999816894531,
-      "bel\u00f8p": 1408.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 37.2% \u00b7 rel.styrke 33.9% \u00b7 RSI 58"
+      "beløp": 14080.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend · Mom) · mom 37.2% · rel.styrke 33.9% · RSI 58"
     },
     {
       "dato": "2026-03-18 11:13:33.580385",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "SCATC.OL",
       "navn": "Scatec",
-      "antall": 11,
+      "antall": 110,
       "kurs": 119.19999694824219,
-      "bel\u00f8p": 1311.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 16.2% \u00b7 rel.styrke 16.9% \u00b7 RSI 50"
+      "beløp": 13110.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend · Mom) · mom 16.2% · rel.styrke 16.9% · RSI 50"
     },
     {
       "dato": "2026-03-19 11:18:33.953570",
       "handling": "SELG",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
-      "antall": 34,
+      "antall": 340,
       "kurs": 45.52000045776367,
-      "bel\u00f8p": 1548.0,
-      "kurtasje": 29,
+      "beløp": 15480.0,
+      "kurtasje": 290,
       "begrunnelse": "Ikke lenger blant topp-kandidater"
     },
     {
       "dato": "2026-03-19 11:18:35.285787",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "BWO.OL",
       "navn": "BW Offshore",
-      "antall": 26,
+      "antall": 260,
       "kurs": 53.0,
-      "bel\u00f8p": 1378.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 51.1% \u00b7 rel.styrke 35.3% \u00b7 RSI 59 \u00b7 P/E 7 \u00b7 P/B 0.9"
+      "beløp": 13780.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Sideways] Ensemble 2/3 (Trend · Mom) · mom 51.1% · rel.styrke 35.3% · RSI 59 · P/E 7 · P/B 0.9"
     },
     {
       "dato": "2026-03-19 12:14:58.176637",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "AKBM.OL",
       "navn": "Aker BioMarine",
-      "antall": 13,
+      "antall": 130,
       "kurs": 106.19999694824219,
-      "bel\u00f8p": 1381.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 20.1% \u00b7 rel.styrke 17.0% \u00b7 RSI 59 \u00b7 P/E 25 \u00b7 P/B 5.6"
+      "beløp": 13810.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend · MACD · Mom) · mom 20.1% · rel.styrke 17.0% · RSI 59 · P/E 25 · P/B 5.6"
     },
     {
       "dato": "2026-03-19 14:03:34.048209",
       "handling": "SELG",
       "ticker": "AKBM.OL",
       "navn": "Aker BioMarine",
-      "antall": 13,
+      "antall": 130,
       "kurs": 105.4000015258789,
       "snittpris": 106.19999694824219,
-      "bel\u00f8p": 1370.0,
-      "kurtasje": 29,
+      "beløp": 13700.0,
+      "kurtasje": 290,
       "begrunnelse": "Ikke lenger blant topp-kandidater"
     },
     {
       "dato": "2026-03-19 14:03:36.375539",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "MORG.OL",
-      "navn": "Sparebanken M\u00f8re",
-      "antall": 12,
+      "navn": "Sparebanken Møre",
+      "antall": 120,
       "kurs": 115.95999908447266,
-      "bel\u00f8p": 1392.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 7.4% \u00b7 rel.styrke 10.4% \u00b7 RSI 59 \u00b7 P/E 6 \u00b7 P/B 0.7"
+      "beløp": 13920.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend · MACD · Mom) · mom 7.4% · rel.styrke 10.4% · RSI 59 · P/E 6 · P/B 0.7"
     },
     {
       "dato": "2026-03-23 14:42:23.988797",
       "handling": "SELG",
       "ticker": "SCATC.OL",
       "navn": "Scatec",
-      "antall": 11,
+      "antall": 110,
       "kurs": 117.5999984741211,
-      "bel\u00f8p": 1294.0,
-      "kurtasje": 29,
+      "beløp": 12940.0,
+      "kurtasje": 290,
       "snittpris": 119.19999694824219,
       "avkastning_pct": -1.34,
       "holdingstid": 5,
@@ -209,11 +215,11 @@
       "dato": "2026-03-23 14:42:24.063766",
       "handling": "SELG",
       "ticker": "MORG.OL",
-      "navn": "Sparebanken M\u00f8re",
-      "antall": 12,
+      "navn": "Sparebanken Møre",
+      "antall": 120,
       "kurs": 115.86000061035156,
-      "bel\u00f8p": 1390.0,
-      "kurtasje": 29,
+      "beløp": 13900.0,
+      "kurtasje": 290,
       "snittpris": 115.95999908447266,
       "avkastning_pct": -0.09,
       "holdingstid": 4,
@@ -222,39 +228,39 @@
     },
     {
       "dato": "2026-03-23 14:42:25.415633",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
-      "antall": 32,
+      "antall": 320,
       "kurs": 43.52000045776367,
-      "bel\u00f8p": 1393.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.0% \u00b7 rel.styrke 26.1% \u00b7 RSI 65 \u00b7 P/E 8 \u00b7 P/B 1.8",
+      "beløp": 13930.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 47.0% · rel.styrke 26.1% · RSI 65 · P/E 8 · P/B 1.8",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-25 14:45:42.415751",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "HUNT.OL",
       "navn": "Hunter Group",
-      "antall": 226,
+      "antall": 2260,
       "kurs": 6.260000228881836,
-      "bel\u00f8p": 1415.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 441.3% \u00b7 rel.styrke 222.4% \u00b7 RSI 70 \u00b7 P/E 7 \u00b7 P/B 4.2",
+      "beløp": 14150.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 441.3% · rel.styrke 222.4% · RSI 70 · P/E 7 · P/B 4.2",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
@@ -263,20 +269,20 @@
       "handling": "SELG",
       "ticker": "HUNT.OL",
       "navn": "Hunter Group",
-      "antall": 226,
+      "antall": 2260,
       "kurs": 5.579999923706055,
-      "bel\u00f8p": 1261.0,
-      "kurtasje": 29,
-      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.9% fra topp 6.26 kr \u00b7 kj\u00f8pspris 6.26 kr)",
+      "beløp": 12610.0,
+      "kurtasje": 290,
+      "begrunnelse": "Trailing stop-loss utløst (-10.9% fra topp 6.26 kr · kjøpspris 6.26 kr)",
       "snittpris": 6.260000228881836,
       "avkastning_pct": -10.86,
       "holdingstid": 1,
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
@@ -285,10 +291,10 @@
       "handling": "SELG",
       "ticker": "BWO.OL",
       "navn": "BW Offshore",
-      "antall": 26,
+      "antall": 260,
       "kurs": 51.5,
-      "bel\u00f8p": 1339.0,
-      "kurtasje": 29,
+      "beløp": 13390.0,
+      "kurtasje": 290,
       "snittpris": 53.0,
       "avkastning_pct": -2.83,
       "holdingstid": 7,
@@ -297,20 +303,20 @@
     },
     {
       "dato": "2026-03-26 14:53:12.117806",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "EIOF.OL",
       "navn": "Eidesvik Offshore",
-      "antall": 89,
+      "antall": 890,
       "kurs": 15.800000190734863,
-      "bel\u00f8p": 1406.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 15.8% \u00b7 rel.styrke 9.6% \u00b7 RSI 70 \u00b7 P/E 17 \u00b7 P/B 0.7",
+      "beløp": 14060.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 15.8% · rel.styrke 9.6% · RSI 70 · P/E 17 · P/B 0.7",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
@@ -319,10 +325,10 @@
       "handling": "SELG",
       "ticker": "SUBC.OL",
       "navn": "Subsea 7",
-      "antall": 15,
+      "antall": 150,
       "kurs": 287.20001220703125,
-      "bel\u00f8p": 4308.0,
-      "kurtasje": 29,
+      "beløp": 43080.0,
+      "kurtasje": 290,
       "snittpris": 257.79998779296875,
       "avkastning_pct": 11.4,
       "holdingstid": 12,
@@ -334,115 +340,115 @@
       "handling": "SELG",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
-      "antall": 32,
+      "antall": 320,
       "kurs": 45.459999084472656,
-      "bel\u00f8p": 1455.0,
-      "kurtasje": 29,
+      "beløp": 14550.0,
+      "kurtasje": 290,
       "snittpris": 43.52000045776367,
       "avkastning_pct": 4.46,
       "holdingstid": 7,
       "begrunnelse": "Ikke lenger blant topp-kandidater",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-30 10:00:13.540832",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "FRO.OL",
       "navn": "Frontline",
-      "antall": 4,
+      "antall": 40,
       "kurs": 332.70001220703125,
-      "bel\u00f8p": 1331.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 44.9% \u00b7 rel.styrke 31.0% \u00b7 RSI 56 \u00b7 P/E 20 \u00b7 P/B 3.0",
+      "beløp": 13310.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 44.9% · rel.styrke 31.0% · RSI 56 · P/E 20 · P/B 3.0",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-30 10:00:13.540954",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "BWLPG.OL",
       "navn": "BW LPG",
-      "antall": 8,
+      "antall": 80,
       "kurs": 166.39999389648438,
-      "bel\u00f8p": 1331.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 9.2% \u00b7 rel.styrke 8.4% \u00b7 RSI 59 \u00b7 P/E 11 \u00b7 P/B 1.4",
+      "beløp": 13310.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 9.2% · rel.styrke 8.4% · RSI 59 · P/E 11 · P/B 1.4",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-30 10:00:13.541044",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "CMBTO.OL",
       "navn": "CMB.TECH",
-      "antall": 11,
+      "antall": 110,
       "kurs": 124.5999984741211,
-      "bel\u00f8p": 1371.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 2/3 (MACD \u00b7 Mom) \u00b7 mom 25.9% \u00b7 rel.styrke 7.4% \u00b7 RSI 51 \u00b7 P/E 18 \u00b7 P/B 1.4",
+      "beløp": 13710.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 2/3 (MACD · Mom) · mom 25.9% · rel.styrke 7.4% · RSI 51 · P/E 18 · P/B 1.4",
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "MACD \u00b7 Mom",
+        "ensemble_tekst": "MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-30 10:00:13.541233",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "BORR.OL",
       "navn": "Borr Drilling",
-      "antall": 23,
+      "antall": 230,
       "kurs": 59.27000045776367,
-      "bel\u00f8p": 1363.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 2/3 (Trend \u00b7 MACD) \u00b7 mom 0.0% \u00b7 rel.styrke 27.6% \u00b7 RSI 67 \u00b7 P/E 36 \u00b7 P/B 1.5",
+      "beløp": 13630.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 2/3 (Trend · MACD) · mom 0.0% · rel.styrke 27.6% · RSI 67 · P/E 36 · P/B 1.5",
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 MACD",
+        "ensemble_tekst": "Trend · MACD",
         "insider": true,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-30 10:00:13.541324",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "AKER.OL",
       "navn": "Aker",
-      "antall": 1,
+      "antall": 10,
       "kurs": 1088.0,
-      "bel\u00f8p": 1088.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 2/3 (Trend \u00b7 Mom) \u00b7 mom 44.8% \u00b7 rel.styrke 23.5% \u00b7 RSI 65 \u00b7 P/E 20 \u00b7 P/B 1.7",
+      "beløp": 10880.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 2/3 (Trend · Mom) · mom 44.8% · rel.styrke 23.5% · RSI 65 · P/E 20 · P/B 1.7",
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 Mom",
+        "ensemble_tekst": "Trend · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
+        "råvare_score": 0.0,
         "regime": "Bull"
       }
     },
@@ -451,39 +457,39 @@
       "handling": "SELG",
       "ticker": "EIOF.OL",
       "navn": "Eidesvik Offshore",
-      "antall": 89,
+      "antall": 890,
       "kurs": 16.899999618530273,
-      "bel\u00f8p": 1504.0,
-      "kurtasje": 29,
+      "beløp": 15040.0,
+      "kurtasje": 290,
       "snittpris": 15.800000190734863,
       "avkastning_pct": 6.96,
       "holdingstid": 5,
       "begrunnelse": "Ikke lenger blant topp-kandidater",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-03-31 08:41:43.723578",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "AKSO.OL",
       "navn": "Aker Solutions",
-      "antall": 31,
+      "antall": 310,
       "kurs": 45.41999816894531,
-      "bel\u00f8p": 1408.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.5% \u00b7 rel.styrke 25.6% \u00b7 RSI 69 \u00b7 P/E 9 \u00b7 P/B 1.9",
+      "beløp": 14080.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 47.5% · rel.styrke 25.6% · RSI 69 · P/E 9 · P/B 1.9",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
@@ -492,39 +498,39 @@
       "handling": "SELG",
       "ticker": "CMBTO.OL",
       "navn": "CMB.TECH",
-      "antall": 11,
+      "antall": 110,
       "kurs": 121.4000015258789,
-      "bel\u00f8p": 1335.0,
-      "kurtasje": 29,
+      "beløp": 13350.0,
+      "kurtasje": 290,
       "snittpris": 124.5999984741211,
       "avkastning_pct": -2.57,
       "holdingstid": 7,
       "begrunnelse": "Ikke lenger blant topp-kandidater",
       "signaler": {
         "ensemble": 2,
-        "ensemble_tekst": "MACD \u00b7 Mom",
+        "ensemble_tekst": "MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-04-06 08:58:45.988706",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "SUBC.OL",
       "navn": "Subsea 7",
-      "antall": 4,
+      "antall": 40,
       "kurs": 293.20001220703125,
-      "bel\u00f8p": 1173.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.4% \u00b7 rel.styrke 19.3% \u00b7 RSI 70 \u00b7 P/E 22 \u00b7 P/B 2.0",
+      "beløp": 11730.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 47.4% · rel.styrke 19.3% · RSI 70 · P/E 22 · P/B 2.0",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
@@ -533,125 +539,125 @@
       "handling": "SELG",
       "ticker": "SUBC.OL",
       "navn": "Subsea 7",
-      "antall": 4,
+      "antall": 40,
       "kurs": 311.6000061035156,
-      "bel\u00f8p": 1246.0,
-      "kurtasje": 29,
+      "beløp": 12460.0,
+      "kurtasje": 290,
       "snittpris": 293.20001220703125,
       "avkastning_pct": 6.28,
       "holdingstid": 7,
       "begrunnelse": "Ikke lenger blant topp-kandidater",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
+        "råvare_score": 0.5,
         "regime": "Bull"
       }
     },
     {
       "dato": "2026-04-13 10:59:34.887919",
-      "handling": "KJ\u00d8P",
+      "handling": "KJØP",
       "ticker": "WAWI.OL",
       "navn": "Wallenius Wilhelmsen",
-      "antall": 11,
+      "antall": 110,
       "kurs": 129.10000610351562,
-      "bel\u00f8p": 1420.0,
-      "kurtasje": 29,
-      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 55.3% \u00b7 rel.styrke 4.1% \u00b7 RSI 60 \u00b7 P/E 6 \u00b7 P/B 1.7",
+      "beløp": 14200.0,
+      "kurtasje": 290,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend · MACD · Mom) · mom 55.3% · rel.styrke 4.1% · RSI 60 · P/E 6 · P/B 1.7",
       "signaler": {
         "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "ensemble_tekst": "Trend · MACD · Mom",
         "insider": false,
         "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
+        "råvare_score": -0.5,
         "regime": "Bull"
       }
     }
   ],
-  "sist_analysert": "2026-04-14 10:00:35.298359",
+  "sist_analysert": "2026-04-14 15:51:35.917148",
   "regime": "Bull",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
-      "total_verdi": 9812.0
+      "total_verdi": 98120.0
     },
     {
       "dato": "2026-03-19",
-      "total_verdi": 9805.0
+      "total_verdi": 98050.0
     },
     {
       "dato": "2026-03-20",
-      "total_verdi": 9700.0
+      "total_verdi": 97000.0
     },
     {
       "dato": "2026-03-23",
-      "total_verdi": 9795.0
+      "total_verdi": 97950.0
     },
     {
       "dato": "2026-03-24",
-      "total_verdi": 9806.0
+      "total_verdi": 98060.0
     },
     {
       "dato": "2026-03-25",
-      "total_verdi": 9882.0
+      "total_verdi": 98820.0
     },
     {
       "dato": "2026-03-26",
-      "total_verdi": 9804.0
+      "total_verdi": 98040.0
     },
     {
       "dato": "2026-03-27",
-      "total_verdi": 9806.0
+      "total_verdi": 98060.0
     },
     {
       "dato": "2026-03-30",
-      "total_verdi": 9759.0
+      "total_verdi": 97590.0
     },
     {
       "dato": "2026-03-31",
-      "total_verdi": 9696.0
+      "total_verdi": 96960.0
     },
     {
       "dato": "2026-04-01",
-      "total_verdi": 9696.0
+      "total_verdi": 96960.0
     },
     {
       "dato": "2026-04-02",
-      "total_verdi": 9694.0
+      "total_verdi": 96940.0
     },
     {
       "dato": "2026-04-03",
-      "total_verdi": 9694.0
+      "total_verdi": 96940.0
     },
     {
       "dato": "2026-04-06",
-      "total_verdi": 9636.0
+      "total_verdi": 96360.0
     },
     {
       "dato": "2026-04-07",
-      "total_verdi": 9800.0
+      "total_verdi": 98000.0
     },
     {
       "dato": "2026-04-08",
-      "total_verdi": 9567.0
+      "total_verdi": 95670.0
     },
     {
       "dato": "2026-04-09",
-      "total_verdi": 9894.0
+      "total_verdi": 98940.0
     },
     {
       "dato": "2026-04-10",
-      "total_verdi": 9711.0
+      "total_verdi": 97110.0
     },
     {
       "dato": "2026-04-13",
-      "total_verdi": 9742.0
+      "total_verdi": 97420.0
     },
     {
       "dato": "2026-04-14",
-      "total_verdi": 9671.0
+      "total_verdi": 95440.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -662,26 +668,12 @@
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "ensemble_tekst": "Trend · MACD · Mom",
       "score": 3,
-      "mom": 67.8,
-      "rel_styrke": 28.7,
-      "rsi": 68.0,
-      "kurs": 47.7,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Wallenius Wilhelmsen",
-      "ticker": "WAWI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 51.3,
-      "rel_styrke": 0.5,
-      "rsi": 53.0,
-      "kurs": 125.9,
+      "mom": 66.7,
+      "rel_styrke": 28.5,
+      "rsi": 66.0,
+      "kurs": 47.38,
       "pe": null,
       "pb": null,
       "yield": null
@@ -690,50 +682,64 @@
       "navn": "Kitron",
       "ticker": "KIT.OL",
       "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "ensemble_tekst": "Trend · MACD · Mom",
       "score": 4,
-      "mom": 66.0,
-      "rel_styrke": 7.2,
+      "mom": 65.4,
+      "rel_styrke": 7.5,
       "rsi": 50.0,
-      "kurs": 98.5,
-      "pe": 40.0,
-      "pb": 6.05,
+      "kurs": 98.15,
+      "pe": 39.9,
+      "pb": 6.03,
       "yield": 66.0
     },
     {
       "navn": "Archer",
       "ticker": "ARCH.OL",
       "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 39.0,
-      "rel_styrke": 7.1,
-      "rsi": 68.0,
-      "kurs": 29.4,
-      "pe": 6.3,
-      "pb": 1.52,
+      "ensemble_tekst": "Trend · MACD · Mom",
+      "score": 4,
+      "mom": 37.6,
+      "rel_styrke": 6.6,
+      "rsi": 65.0,
+      "kurs": 29.1,
+      "pe": 6.2,
+      "pb": 1.5,
       "yield": 844.0
     },
     {
       "navn": "Odfjell Drilling",
       "ticker": "ODL.OL",
       "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "ensemble_tekst": "Trend · MACD · Mom",
       "score": 4,
-      "mom": 38.2,
-      "rel_styrke": 2.4,
-      "rsi": 64.0,
-      "kurs": 106.8,
+      "mom": 37.4,
+      "rel_styrke": 2.5,
+      "rsi": 62.0,
+      "kurs": 106.2,
       "pe": 15.5,
-      "pb": 1.89,
+      "pb": 1.87,
       "yield": 833.0
+    },
+    {
+      "navn": "Eidesvik Offshore",
+      "ticker": "EIOF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend · MACD · Mom",
+      "score": 3,
+      "mom": 24.5,
+      "rel_styrke": 10.1,
+      "rsi": 68.0,
+      "kurs": 16.5,
+      "pe": 17.7,
+      "pb": 0.73,
+      "yield": 180.0
     }
   ],
-  "r\u00e5vare_trender": {
+  "råvare_trender": {
     "Energi": 1,
     "Shipping": -1
   },
-  "insider_kj\u00f8p": [
+  "insider_kjøp": [
     "ODF.OL"
   ],
   "short_interest": {
@@ -742,79 +748,79 @@
     "TGS.OL": 2.17,
     "GSF.OL": 2.2,
     "HEX.OL": 6.15,
-    "NAS.OL": 3.7,
+    "NAS.OL": 3.85,
     "BAKKA.OL": 3.17,
-    "LINK.OL": 13.52,
-    "KID.OL": 2.12
+    "LINK.OL": 13.02,
+    "KID.OL": 2.76
   },
   "urealisert_historikk": [
     {
       "dato": "2026-03-23",
-      "verdi": 55.0
+      "verdi": 550.0
     },
     {
       "dato": "2026-03-24",
-      "verdi": 66.0
+      "verdi": 660.0
     },
     {
       "dato": "2026-03-25",
-      "verdi": 171.0
+      "verdi": 1710.0
     },
     {
       "dato": "2026-03-26",
-      "verdi": 373.0
+      "verdi": 3730.0
     },
     {
       "dato": "2026-03-27",
-      "verdi": 374.0
+      "verdi": 3740.0
     },
     {
       "dato": "2026-03-30",
-      "verdi": 27.0
+      "verdi": 270.0
     },
     {
       "dato": "2026-03-31",
-      "verdi": -76.0
+      "verdi": -760.0
     },
     {
       "dato": "2026-04-01",
-      "verdi": -76.0
+      "verdi": -760.0
     },
     {
       "dato": "2026-04-02",
-      "verdi": -78.0
+      "verdi": -780.0
     },
     {
       "dato": "2026-04-03",
-      "verdi": -78.0
+      "verdi": -780.0
     },
     {
       "dato": "2026-04-06",
-      "verdi": -42.0
+      "verdi": -420.0
     },
     {
       "dato": "2026-04-07",
-      "verdi": 122.0
+      "verdi": 1220.0
     },
     {
       "dato": "2026-04-08",
-      "verdi": -111.0
+      "verdi": -1110.0
     },
     {
       "dato": "2026-04-09",
-      "verdi": 216.0
+      "verdi": 2160.0
     },
     {
       "dato": "2026-04-10",
-      "verdi": 34.0
+      "verdi": 340.0
     },
     {
       "dato": "2026-04-13",
-      "verdi": 48.0
+      "verdi": 480.0
     },
     {
       "dato": "2026-04-14",
-      "verdi": -22.0
+      "verdi": -1490.0
     }
   ]
 }

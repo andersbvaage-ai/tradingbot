@@ -1,5 +1,5 @@
 {
-  "kasse": 14295.0,
+  "kasse": 21652.0,
   "start_kapital": 100000,
   "posisjoner": {
     "FRO.OL": {
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-15"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -36,23 +37,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "BORR.OL": {
-      "navn": "Borr Drilling",
-      "antall": 230,
-      "snittpris": 59.27000045776367,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 59.790000915527344,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 MACD",
-        "insider": true,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1
-    },
     "AKER.OL": {
       "navn": "Aker",
       "antall": 10,
@@ -68,7 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-15"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -102,14 +87,15 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-04-15"
     },
     "KIT.OL": {
       "navn": "Kitron",
       "antall": 15,
       "snittpris": 98.69999694824219,
       "kj\u00f8psdato": "2026-04-14",
-      "h\u00f8yeste_kurs": 98.69999694824219,
+      "h\u00f8yeste_kurs": 100.69999694824219,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -118,7 +104,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -133,6 +120,39 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 8,
+      "snittpris": 305.6000061035156,
+      "kj\u00f8psdato": "2026-04-15",
+      "h\u00f8yeste_kurs": 305.6000061035156,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "AFK.OL": {
+      "navn": "Arendals Fossekompani",
+      "antall": 14,
+      "snittpris": 177.5,
+      "kj\u00f8psdato": "2026-04-15",
+      "h\u00f8yeste_kurs": 177.5,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -644,9 +664,69 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-15 10:01:52.743793",
+      "handling": "SELG",
+      "ticker": "BORR.OL",
+      "navn": "Borr Drilling",
+      "antall": 230,
+      "kurs": 53.79999923706055,
+      "bel\u00f8p": 12374.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.0% fra topp 59.79 kr \u00b7 kj\u00f8pspris 59.27 kr)",
+      "snittpris": 59.27000045776367,
+      "avkastning_pct": -9.23,
+      "holdingstid": 16,
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 MACD",
+        "insider": true,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-15 10:01:53.464882",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 8,
+      "kurs": 305.6000061035156,
+      "bel\u00f8p": 2445.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 50.0% \u00b7 rel.styrke 21.6% \u00b7 RSI 68 \u00b7 P/E 23 \u00b7 P/B 2.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-15 10:01:53.464976",
+      "handling": "KJ\u00d8P",
+      "ticker": "AFK.OL",
+      "navn": "Arendals Fossekompani",
+      "antall": 14,
+      "kurs": 177.5,
+      "bel\u00f8p": 2485.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 36.5% \u00b7 rel.styrke 11.0% \u00b7 RSI 68 \u00b7 P/E 55 \u00b7 P/B 2.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-14 16:45:27.209611",
+  "sist_analysert": "2026-04-15 10:01:53.465021",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -728,6 +808,10 @@
     {
       "dato": "2026-04-14",
       "total_verdi": 95635.0
+    },
+    {
+      "dato": "2026-04-15",
+      "total_verdi": 94877.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -735,15 +819,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 50.0,
+      "rel_styrke": 21.6,
+      "rsi": 68.0,
+      "kurs": 305.6,
+      "pe": 23.5,
+      "pb": 2.12,
+      "yield": 626.0
+    },
+    {
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 65.9,
-      "rel_styrke": 27.8,
-      "rsi": 65.0,
-      "kurs": 47.16,
+      "score": 3,
+      "mom": 67.1,
+      "rel_styrke": 26.0,
+      "rsi": 66.0,
+      "kurs": 47.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -754,13 +852,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 66.3,
-      "rel_styrke": 8.2,
-      "rsi": 50.0,
-      "kurs": 98.7,
-      "pe": 40.1,
-      "pb": 6.07,
-      "yield": 66.0
+      "mom": 70.0,
+      "rel_styrke": 12.5,
+      "rsi": 53.0,
+      "kurs": 100.7,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Archer",
@@ -768,27 +866,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 35.2,
-      "rel_styrke": 4.4,
-      "rsi": 61.0,
-      "kurs": 28.6,
-      "pe": 6.1,
-      "pb": 1.48,
-      "yield": 844.0
-    },
-    {
-      "navn": "Odfjell Drilling",
-      "ticker": "ODL.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 37.4,
-      "rel_styrke": 2.4,
-      "rsi": 62.0,
-      "kurs": 106.2,
-      "pe": 15.5,
-      "pb": 1.87,
-      "yield": 833.0
+      "mom": 31.8,
+      "rel_styrke": 3.1,
+      "rsi": 58.0,
+      "kurs": 28.25,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "BW LPG",
@@ -796,22 +880,34 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 30.9,
-      "rel_styrke": 5.7,
-      "rsi": 57.0,
-      "kurs": 169.4,
+      "mom": 29.5,
+      "rel_styrke": 1.7,
+      "rsi": 56.0,
+      "kurs": 169.2,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Arendals Fossekompani",
+      "ticker": "AFK.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 36.5,
+      "rel_styrke": 11.0,
+      "rsi": 68.0,
+      "kurs": 177.5,
+      "pe": 55.5,
+      "pb": 2.0,
+      "yield": 230.0
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
     "Shipping": -1
   },
-  "insider_kj\u00f8p": [
-    "ODF.OL"
-  ],
+  "insider_kj\u00f8p": [],
   "short_interest": {
     "NOD.OL": 3.86,
     "AUTO.OL": 2.2,
@@ -891,6 +987,10 @@
     {
       "dato": "2026-04-14",
       "verdi": -1241.0
+    },
+    {
+      "dato": "2026-04-15",
+      "verdi": -654.0
     }
   ]
 }

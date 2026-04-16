@@ -68,7 +68,11 @@ jobs:
           # ── Fredag ukentlig rapport (kl 14 eller 15 UTC) ─────────────────────
           if [ "$DAY_UTC" = "5" ] && { [ "$HOUR_UTC" = "14" ] || [ "$HOUR_UTC" = "15" ]; }; then
             python scheduler.py --ukentlig-rapport
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash origin main || true
+            if grep -q '<<<<<<' portfolio.json 2>/dev/null; then
+              echo "MERGE-KONFLIKT i portfolio.json — resetter til remote"
+              git checkout origin/main -- portfolio.json
+            fi
             git add portfolio.json
             git diff --staged --quiet || git commit -m "[Ukentlig rapport] $(date -u +'%Y-%m-%d %H:%M')"
             git push
@@ -120,8 +124,13 @@ jobs:
             fi
             FIRST_RUN=false
 
-            # Commit og push portfolio.json
-            git pull --rebase --autostash origin main
+            # Commit og push portfolio.json — abort if merge conflict corrupts the file
+            git pull --rebase --autostash origin main || true
+            if grep -q '<<<<<<' portfolio.json 2>/dev/null; then
+              echo "MERGE-KONFLIKT i portfolio.json — resetter til remote-versjon"
+              git checkout --theirs portfolio.json 2>/dev/null || git checkout origin/main -- portfolio.json
+              python scheduler.py --only-stop-loss || true  # re-run to update with clean file
+            fi
             git add portfolio.json
             git diff --staged --quiet || git commit -m "[Loop $(TZ=Europe/Oslo date +'%H:%M')] $(date -u +'%Y-%m-%d')"
             git push

@@ -1,25 +1,7 @@
 {
-  "kasse": 21652.0,
+  "kasse": 41283.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "FRO.OL": {
-      "navn": "Frontline",
-      "antall": 40,
-      "snittpris": 332.70001220703125,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 357.79998779296875,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-04-15"
-    },
     "BWLPG.OL": {
       "navn": "BW LPG",
       "antall": 80,
@@ -36,24 +18,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "AKER.OL": {
-      "navn": "Aker",
-      "antall": 10,
-      "snittpris": 1088.0,
-      "kj\u00f8psdato": "2026-03-30",
-      "h\u00f8yeste_kurs": 1090.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 2,
-        "ensemble_tekst": "Trend \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-04-15"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -87,15 +51,15 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-04-15"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-04-16"
     },
     "KIT.OL": {
       "navn": "Kitron",
       "antall": 15,
       "snittpris": 98.69999694824219,
       "kj\u00f8psdato": "2026-04-14",
-      "h\u00f8yeste_kurs": 100.80000305175781,
+      "h\u00f8yeste_kurs": 101.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -122,7 +86,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-16"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -138,14 +103,33 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
       "antall": 14,
       "snittpris": 177.5,
       "kj\u00f8psdato": "2026-04-15",
-      "h\u00f8yeste_kurs": 177.5,
+      "h\u00f8yeste_kurs": 185.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-16"
+    },
+    "AKVA.OL": {
+      "navn": "AKVA Group",
+      "antall": 29,
+      "snittpris": 130.0,
+      "kj\u00f8psdato": "2026-04-16",
+      "h\u00f8yeste_kurs": 130.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -724,9 +708,72 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-16 10:01:16.001831",
+      "handling": "SELG",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 40,
+      "kurs": 325.70001220703125,
+      "bel\u00f8p": 13028.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 332.70001220703125,
+      "avkastning_pct": -2.1,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-16 10:01:16.002029",
+      "handling": "SELG",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 10,
+      "kurs": 1046.0,
+      "bel\u00f8p": 10460.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 1088.0,
+      "avkastning_pct": -3.86,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 2,
+        "ensemble_tekst": "Trend \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-16 10:01:16.228269",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKVA.OL",
+      "navn": "AKVA Group",
+      "antall": 29,
+      "kurs": 130.0,
+      "bel\u00f8p": 3770.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 40.0% \u00b7 rel.styrke 39.4% \u00b7 RSI 69 \u00b7 P/E 26 \u00b7 P/B 3.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-15 10:01:53.465021",
+  "sist_analysert": "2026-04-16 10:01:16.228447",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -812,6 +859,10 @@
     {
       "dato": "2026-04-15",
       "total_verdi": 94877.0
+    },
+    {
+      "dato": "2026-04-16",
+      "total_verdi": 94946.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -824,13 +875,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 50.0,
-      "rel_styrke": 21.6,
-      "rsi": 68.0,
-      "kurs": 305.6,
-      "pe": 23.5,
-      "pb": 2.12,
-      "yield": 626.0
+      "mom": 55.1,
+      "rel_styrke": 23.1,
+      "rsi": 69.0,
+      "kurs": 308.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Aker Solutions",
@@ -838,10 +889,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 67.1,
-      "rel_styrke": 26.0,
-      "rsi": 66.0,
-      "kurs": 47.4,
+      "mom": 73.6,
+      "rel_styrke": 28.9,
+      "rsi": 67.0,
+      "kurs": 47.92,
       "pe": null,
       "pb": null,
       "yield": null
@@ -852,24 +903,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 70.0,
-      "rel_styrke": 12.5,
+      "mom": 72.2,
+      "rel_styrke": 12.8,
       "rsi": 53.0,
-      "kurs": 100.7,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Archer",
-      "ticker": "ARCH.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 31.8,
-      "rel_styrke": 3.1,
-      "rsi": 58.0,
-      "kurs": 28.25,
+      "kurs": 101.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -880,27 +917,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 29.5,
-      "rel_styrke": 1.7,
-      "rsi": 56.0,
-      "kurs": 169.2,
+      "mom": 29.2,
+      "rel_styrke": 1.2,
+      "rsi": 55.0,
+      "kurs": 168.4,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Arendals Fossekompani",
-      "ticker": "AFK.OL",
+      "navn": "AKVA Group",
+      "ticker": "AKVA.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 36.5,
-      "rel_styrke": 11.0,
-      "rsi": 68.0,
-      "kurs": 177.5,
-      "pe": 55.5,
-      "pb": 2.0,
-      "yield": 230.0
+      "mom": 40.0,
+      "rel_styrke": 39.4,
+      "rsi": 69.0,
+      "kurs": 130.0,
+      "pe": 25.6,
+      "pb": 3.45,
+      "yield": 145.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -909,14 +946,14 @@
   },
   "insider_kj\u00f8p": [],
   "short_interest": {
-    "NOD.OL": 3.86,
+    "NOD.OL": 3.35,
     "AUTO.OL": 2.2,
-    "TGS.OL": 2.17,
+    "TGS.OL": 2.08,
     "GSF.OL": 2.2,
     "HEX.OL": 6.15,
     "NAS.OL": 3.85,
     "BAKKA.OL": 3.17,
-    "LINK.OL": 13.02,
+    "LINK.OL": 13.12,
     "KID.OL": 2.76
   },
   "urealisert_historikk": [
@@ -991,6 +1028,10 @@
     {
       "dato": "2026-04-15",
       "verdi": -654.0
+    },
+    {
+      "dato": "2026-04-16",
+      "verdi": 202.0
     }
   ]
 }

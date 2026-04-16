@@ -1174,13 +1174,26 @@ def validate_startup():
     if not os.environ.get("NTFY_TOPIC"):
         log.warning("NTFY_TOPIC ikke satt — varsler vil bli hoppet over")
 
-    # Test yfinance-tilgang med en enkel download
-    try:
-        test = yf.download("EQNR.OL", period="1d", progress=False, timeout=15)
-        if test.empty:
-            errors.append("yfinance returnerer tom data for EQNR.OL — mulig nettverksproblem eller rate-limit")
-    except Exception as e:
-        errors.append(f"yfinance utilgjengelig: {e}")
+    # Test yfinance with multiple tickers and retry — single ticker can temporarily fail
+    test_tickers = ["EQNR.OL", "DNB.OL", "NHY.OL"]
+    yf_ok = False
+    for attempt in range(3):
+        for ticker in test_tickers:
+            try:
+                test = yf.download(ticker, period="1d", progress=False, timeout=15)
+                if not test.empty:
+                    yf_ok = True
+                    break
+            except Exception:
+                continue
+        if yf_ok:
+            break
+        if attempt < 2:
+            log.warning("yfinance-test forsøk %d/3 feilet — prøver igjen om 10s", attempt + 1)
+            time.sleep(10)
+
+    if not yf_ok:
+        errors.append("yfinance utilgjengelig etter 3 forsøk med flere tickers")
 
     # Sjekk at portfolio.json er lesbar
     try:

@@ -138,7 +138,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -773,7 +774,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-16 10:01:16.228447",
+  "sist_analysert": "2026-04-16 10:03:40.191437",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -862,7 +863,7 @@
     },
     {
       "dato": "2026-04-16",
-      "total_verdi": 94946.0
+      "total_verdi": 94949.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -875,10 +876,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 55.1,
-      "rel_styrke": 23.1,
+      "mom": 54.9,
+      "rel_styrke": 22.8,
       "rsi": 69.0,
-      "kurs": 308.0,
+      "kurs": 307.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -889,10 +890,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 73.6,
+      "mom": 73.7,
       "rel_styrke": 28.9,
-      "rsi": 67.0,
-      "kurs": 47.92,
+      "rsi": 68.0,
+      "kurs": 47.94,
       "pe": null,
       "pb": null,
       "yield": null
@@ -904,7 +905,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 72.2,
-      "rel_styrke": 12.8,
+      "rel_styrke": 12.7,
       "rsi": 53.0,
       "kurs": 101.0,
       "pe": null,
@@ -918,7 +919,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 29.2,
-      "rel_styrke": 1.2,
+      "rel_styrke": 1.1,
       "rsi": 55.0,
       "kurs": 168.4,
       "pe": null,
@@ -932,12 +933,12 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
       "mom": 40.0,
-      "rel_styrke": 39.4,
+      "rel_styrke": 39.3,
       "rsi": 69.0,
       "kurs": 130.0,
-      "pe": 25.6,
-      "pb": 3.45,
-      "yield": 145.0
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1031,7 +1032,7 @@
     },
     {
       "dato": "2026-04-16",
-      "verdi": 202.0
+      "verdi": 205.0
     }
   ]
 }

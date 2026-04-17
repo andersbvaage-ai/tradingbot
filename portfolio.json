@@ -1,5 +1,5 @@
 {
-  "kasse": 41283.0,
+  "kasse": 44041.0,
   "start_kapital": 100000,
   "posisjoner": {
     "BWLPG.OL": {
@@ -19,23 +19,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "AKSO.OL": {
-      "navn": "Aker Solutions",
-      "antall": 310,
-      "snittpris": 45.41999816894531,
-      "kj\u00f8psdato": "2026-03-31",
-      "h\u00f8yeste_kurs": 48.02000045776367,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
-    },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
       "antall": 110,
@@ -51,8 +34,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-04-16"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-04-17"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -86,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-16"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-17"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -111,7 +94,7 @@
       "antall": 14,
       "snittpris": 177.5,
       "kj\u00f8psdato": "2026-04-15",
-      "h\u00f8yeste_kurs": 186.5,
+      "h\u00f8yeste_kurs": 187.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -121,8 +104,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-16"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-17"
     },
     "AKVA.OL": {
       "navn": "AKVA Group",
@@ -139,7 +122,40 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-17"
+    },
+    "AKSO.OL": {
+      "navn": "Aker Solutions",
+      "antall": 131,
+      "snittpris": 38.900001525878906,
+      "kj\u00f8psdato": "2026-04-17",
+      "h\u00f8yeste_kurs": 38.900001525878906,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "NORBT.OL": {
+      "navn": "Norbit",
+      "antall": 18,
+      "snittpris": 228.8000030517578,
+      "kj\u00f8psdato": "2026-04-17",
+      "h\u00f8yeste_kurs": 228.8000030517578,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -772,9 +788,69 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-17 07:00:57.441077",
+      "handling": "SELG",
+      "ticker": "AKSO.OL",
+      "navn": "Aker Solutions",
+      "antall": 310,
+      "kurs": 38.900001525878906,
+      "bel\u00f8p": 12059.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-19.0% fra topp 48.02 kr \u00b7 kj\u00f8pspris 45.42 kr)",
+      "snittpris": 45.41999816894531,
+      "avkastning_pct": -14.35,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-17 07:01:00.778207",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKSO.OL",
+      "navn": "Aker Solutions",
+      "antall": 131,
+      "kurs": 38.900001525878906,
+      "bel\u00f8p": 5096.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 72.1% \u00b7 rel.styrke 27.3% \u00b7 RSI 66 \u00b7 P/E 9 \u00b7 P/B 2.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-17 07:01:00.778343",
+      "handling": "KJ\u00d8P",
+      "ticker": "NORBT.OL",
+      "navn": "Norbit",
+      "antall": 18,
+      "kurs": 228.8000030517578,
+      "bel\u00f8p": 4118.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 25.2% \u00b7 rel.styrke 13.5% \u00b7 RSI 68 \u00b7 P/E 36 \u00b7 P/B 12.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-16 13:21:18.374290",
+  "sist_analysert": "2026-04-17 07:01:00.778405",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -864,6 +940,10 @@
     {
       "dato": "2026-04-16",
       "total_verdi": 95111.0
+    },
+    {
+      "dato": "2026-04-17",
+      "total_verdi": 92228.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -875,11 +955,11 @@
       "ticker": "SUBC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 53.6,
-      "rel_styrke": 21.6,
-      "rsi": 67.0,
-      "kurs": 305.0,
+      "score": 4,
+      "mom": 52.6,
+      "rel_styrke": 20.4,
+      "rsi": 65.0,
+      "kurs": 303.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -890,13 +970,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 73.8,
-      "rel_styrke": 28.9,
-      "rsi": 68.0,
-      "kurs": 47.96,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 72.1,
+      "rel_styrke": 27.3,
+      "rsi": 66.0,
+      "kurs": 38.9,
+      "pe": 9.0,
+      "pb": 2.02,
+      "yield": 758.0
     },
     {
       "navn": "Kitron",
@@ -904,10 +984,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 73.9,
-      "rel_styrke": 13.9,
-      "rsi": 55.0,
-      "kurs": 102.0,
+      "mom": 72.0,
+      "rel_styrke": 12.3,
+      "rsi": 53.0,
+      "kurs": 100.9,
       "pe": null,
       "pb": null,
       "yield": null
@@ -918,27 +998,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 29.9,
-      "rel_styrke": 1.7,
-      "rsi": 56.0,
-      "kurs": 169.4,
+      "mom": 29.4,
+      "rel_styrke": 1.0,
+      "rsi": 55.0,
+      "kurs": 168.7,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "AKVA Group",
-      "ticker": "AKVA.OL",
+      "navn": "Norbit",
+      "ticker": "NORBT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 40.6,
-      "rel_styrke": 39.8,
-      "rsi": 70.0,
-      "kurs": 130.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 25.2,
+      "rel_styrke": 13.5,
+      "rsi": 68.0,
+      "kurs": 228.8,
+      "pe": 36.3,
+      "pb": 12.07,
+      "yield": 219.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -1033,6 +1113,10 @@
     {
       "dato": "2026-04-16",
       "verdi": 367.0
+    },
+    {
+      "dato": "2026-04-17",
+      "verdi": -408.0
     }
   ]
 }

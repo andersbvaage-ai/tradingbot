@@ -87,7 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-17"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -139,7 +140,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "NORBT.OL": {
       "navn": "Norbit",
@@ -155,7 +157,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -850,7 +853,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-17 07:01:00.778405",
+  "sist_analysert": "2026-04-17 11:42:46.038530",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -943,7 +946,7 @@
     },
     {
       "dato": "2026-04-17",
-      "total_verdi": 92228.0
+      "total_verdi": 92255.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -951,32 +954,18 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 52.6,
-      "rel_styrke": 20.4,
-      "rsi": 65.0,
-      "kurs": 303.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "Aker Solutions",
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 72.1,
-      "rel_styrke": 27.3,
-      "rsi": 66.0,
-      "kurs": 38.9,
-      "pe": 9.0,
-      "pb": 2.02,
-      "yield": 758.0
+      "mom": 78.6,
+      "rel_styrke": 33.1,
+      "rsi": 68.0,
+      "kurs": 39.4,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Kitron",
@@ -984,13 +973,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 72.0,
-      "rel_styrke": 12.3,
-      "rsi": 53.0,
-      "kurs": 100.9,
+      "mom": 74.9,
+      "rel_styrke": 13.7,
+      "rsi": 54.0,
+      "kurs": 101.2,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Odfjell Drilling",
+      "ticker": "ODL.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 40.0,
+      "rel_styrke": 2.1,
+      "rsi": 56.0,
+      "kurs": 104.0,
+      "pe": 15.3,
+      "pb": 1.85,
+      "yield": 871.0
     },
     {
       "navn": "BW LPG",
@@ -998,10 +1001,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 29.4,
-      "rel_styrke": 1.0,
+      "mom": 31.2,
+      "rel_styrke": 2.6,
       "rsi": 55.0,
-      "kurs": 168.7,
+      "kurs": 168.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1012,13 +1015,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 25.2,
-      "rel_styrke": 13.5,
-      "rsi": 68.0,
-      "kurs": 228.8,
-      "pe": 36.3,
-      "pb": 12.07,
-      "yield": 219.0
+      "mom": 25.9,
+      "rel_styrke": 9.8,
+      "rsi": 66.0,
+      "kurs": 226.2,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1116,7 +1119,7 @@
     },
     {
       "dato": "2026-04-17",
-      "verdi": -408.0
+      "verdi": -381.0
     }
   ]
 }

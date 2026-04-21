@@ -1,5 +1,5 @@
 {
-  "kasse": 44041.0,
+  "kasse": 37058.0,
   "start_kapital": 100000,
   "posisjoner": {
     "BWLPG.OL": {
@@ -105,8 +105,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-04-21"
+      "utenfor_topp_streak": 0
     },
     "AKVA.OL": {
       "navn": "AKVA Group",
@@ -159,6 +158,38 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
+    },
+    "HEX.OL": {
+      "navn": "Hexagon Composites",
+      "antall": 355,
+      "snittpris": 10.600000381469727,
+      "kj\u00f8psdato": "2026-04-21",
+      "h\u00f8yeste_kurs": 10.600000381469727,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.75,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    "FRO.OL": {
+      "navn": "Frontline",
+      "antall": 9,
+      "snittpris": 351.29998779296875,
+      "kj\u00f8psdato": "2026-04-21",
+      "h\u00f8yeste_kurs": 351.29998779296875,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -851,9 +882,47 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-21 11:54:35.516794",
+      "handling": "KJ\u00d8P",
+      "ticker": "HEX.OL",
+      "navn": "Hexagon Composites",
+      "antall": 355,
+      "kurs": 10.600000381469727,
+      "bel\u00f8p": 3763.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 5.0% \u00b7 rel.styrke 15.7% \u00b7 RSI 67 \u00b7 P/E 14 \u00b7 P/B 1.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.75,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-21 11:54:35.516912",
+      "handling": "KJ\u00d8P",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 9,
+      "kurs": 351.29998779296875,
+      "bel\u00f8p": 3162.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 53.2% \u00b7 rel.styrke 18.4% \u00b7 RSI 60 \u00b7 P/E 22 \u00b7 P/B 3.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-21 07:01:24.487285",
+  "sist_analysert": "2026-04-21 11:54:35.516977",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -954,7 +1023,7 @@
     },
     {
       "dato": "2026-04-21",
-      "total_verdi": 92193.0
+      "total_verdi": 92243.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -967,13 +1036,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 76.5,
-      "rel_styrke": 13.0,
-      "rsi": 56.0,
-      "kurs": 103.0,
+      "mom": 70.3,
+      "rel_styrke": 8.2,
+      "rsi": 50.0,
+      "kurs": 99.2,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Hexagon Composites",
+      "ticker": "HEX.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 5.0,
+      "rel_styrke": 15.7,
+      "rsi": 67.0,
+      "kurs": 10.6,
+      "pe": 14.0,
+      "pb": 0.97,
+      "yield": null
+    },
+    {
+      "navn": "Frontline",
+      "ticker": "FRO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 53.2,
+      "rel_styrke": 18.4,
+      "rsi": 60.0,
+      "kurs": 351.3,
+      "pe": 22.0,
+      "pb": 3.3,
+      "yield": 503.0
     },
     {
       "navn": "BW LPG",
@@ -981,10 +1078,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 38.9,
-      "rel_styrke": 3.5,
-      "rsi": 58.0,
-      "kurs": 171.6,
+      "mom": 39.3,
+      "rel_styrke": 6.0,
+      "rsi": 59.0,
+      "kurs": 173.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -995,24 +1092,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 25.6,
-      "rel_styrke": 10.1,
-      "rsi": 65.0,
-      "kurs": 227.4,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "AKVA Group",
-      "ticker": "AKVA.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 35.1,
-      "rel_styrke": 37.6,
-      "rsi": 65.0,
-      "kurs": 127.0,
+      "mom": 23.1,
+      "rel_styrke": 11.4,
+      "rsi": 66.0,
+      "kurs": 228.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1120,7 +1203,7 @@
     },
     {
       "dato": "2026-04-21",
-      "verdi": -443.0
+      "verdi": -335.0
     }
   ]
 }

@@ -17,8 +17,7 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 0
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -35,8 +34,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 0
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -61,7 +59,7 @@
       "antall": 8,
       "snittpris": 305.6000061035156,
       "kj\u00f8psdato": "2026-04-15",
-      "h\u00f8yeste_kurs": 309.20001220703125,
+      "h\u00f8yeste_kurs": 308.79998779296875,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -113,7 +111,7 @@
       "antall": 131,
       "snittpris": 38.900001525878906,
       "kj\u00f8psdato": "2026-04-17",
-      "h\u00f8yeste_kurs": 40.459999084472656,
+      "h\u00f8yeste_kurs": 40.47999954223633,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -123,7 +121,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-04-22"
     },
     "NORBT.OL": {
       "navn": "Norbit",
@@ -157,8 +156,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 0
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -931,7 +929,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-22 11:52:30.237368",
+  "sist_analysert": "2026-04-22 07:01:10.951603",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1036,7 +1034,7 @@
     },
     {
       "dato": "2026-04-22",
-      "total_verdi": 91460.0
+      "total_verdi": 92069.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1044,15 +1042,43 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker Solutions",
-      "ticker": "AKSO.OL",
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 67.4,
+      "rel_styrke": 5.9,
+      "rsi": 47.0,
+      "kurs": 97.5,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Hexagon Composites",
+      "ticker": "HEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 85.4,
-      "rel_styrke": 35.0,
-      "rsi": 68.0,
-      "kurs": 40.42,
+      "mom": 5.0,
+      "rel_styrke": 15.7,
+      "rsi": 67.0,
+      "kurs": 10.61,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 39.2,
+      "rel_styrke": 5.8,
+      "rsi": 59.0,
+      "kurs": 173.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1062,11 +1088,11 @@
       "ticker": "NORBT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 24.6,
-      "rel_styrke": 11.0,
-      "rsi": 66.0,
-      "kurs": 229.8,
+      "score": 4,
+      "mom": 22.2,
+      "rel_styrke": 10.4,
+      "rsi": 64.0,
+      "kurs": 226.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1077,24 +1103,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 49.2,
-      "rel_styrke": 13.6,
-      "rsi": 69.0,
-      "kurs": 195.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "AKVA Group",
-      "ticker": "AKVA.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 36.2,
-      "rel_styrke": 35.0,
-      "rsi": 64.0,
-      "kurs": 127.0,
+      "mom": 43.2,
+      "rel_styrke": 9.4,
+      "rsi": 65.0,
+      "kurs": 189.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1206,7 +1218,7 @@
     },
     {
       "dato": "2026-04-22",
-      "verdi": 385.0
+      "verdi": -509.0
     }
   ]
 }

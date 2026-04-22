@@ -34,8 +34,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-04-21"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-04-22"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-04-21"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-04-22"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -87,8 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-04-21"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-04-22"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -139,8 +139,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-04-21"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-04-22"
     },
     "NORBT.OL": {
       "navn": "Norbit",
@@ -173,7 +173,8 @@
         "short_score": -0.75,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -189,7 +190,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-22"
     }
   },
   "ventende_handler": [],
@@ -922,7 +925,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-21 11:54:35.516977",
+  "sist_analysert": "2026-04-22 07:01:10.951603",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1024,6 +1027,10 @@
     {
       "dato": "2026-04-21",
       "total_verdi": 92243.0
+    },
+    {
+      "dato": "2026-04-22",
+      "total_verdi": 92069.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1036,10 +1043,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 70.3,
-      "rel_styrke": 8.2,
-      "rsi": 50.0,
-      "kurs": 99.2,
+      "mom": 67.4,
+      "rel_styrke": 5.9,
+      "rsi": 47.0,
+      "kurs": 97.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1053,24 +1060,10 @@
       "mom": 5.0,
       "rel_styrke": 15.7,
       "rsi": 67.0,
-      "kurs": 10.6,
-      "pe": 14.0,
-      "pb": 0.97,
+      "kurs": 10.61,
+      "pe": null,
+      "pb": null,
       "yield": null
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 53.2,
-      "rel_styrke": 18.4,
-      "rsi": 60.0,
-      "kurs": 351.3,
-      "pe": 22.0,
-      "pb": 3.3,
-      "yield": 503.0
     },
     {
       "navn": "BW LPG",
@@ -1078,10 +1071,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 39.3,
-      "rel_styrke": 6.0,
+      "mom": 39.2,
+      "rel_styrke": 5.8,
       "rsi": 59.0,
-      "kurs": 173.4,
+      "kurs": 173.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1091,11 +1084,25 @@
       "ticker": "NORBT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 22.2,
+      "rel_styrke": 10.4,
+      "rsi": 64.0,
+      "kurs": 226.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Arendals Fossekompani",
+      "ticker": "AFK.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 23.1,
-      "rel_styrke": 11.4,
-      "rsi": 66.0,
-      "kurs": 228.4,
+      "mom": 43.2,
+      "rel_styrke": 9.4,
+      "rsi": 65.0,
+      "kurs": 189.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1111,9 +1118,9 @@
     "AUTO.OL": 2.2,
     "GSF.OL": 2.71,
     "HEX.OL": 5.56,
-    "NAS.OL": 3.91,
+    "NAS.OL": 3.93,
     "BAKKA.OL": 3.17,
-    "LINK.OL": 13.2,
+    "LINK.OL": 13.3,
     "KID.OL": 2.83
   },
   "urealisert_historikk": [
@@ -1204,6 +1211,10 @@
     {
       "dato": "2026-04-21",
       "verdi": -335.0
+    },
+    {
+      "dato": "2026-04-22",
+      "verdi": -509.0
     }
   ]
 }

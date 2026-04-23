@@ -1,5 +1,5 @@
 {
-  "kasse": 52575.0,
+  "kasse": 56026.0,
   "start_kapital": 100000,
   "posisjoner": {
     "BWLPG.OL": {
@@ -80,23 +80,6 @@
       "snittpris": 177.5,
       "kj\u00f8psdato": "2026-04-15",
       "h\u00f8yeste_kurs": 204.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
-    },
-    "AKVA.OL": {
-      "navn": "AKVA Group",
-      "antall": 29,
-      "snittpris": 130.0,
-      "kj\u00f8psdato": "2026-04-16",
-      "h\u00f8yeste_kurs": 134.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -931,6 +914,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-23 09:02:45.883494",
+      "handling": "SELG",
+      "ticker": "AKVA.OL",
+      "navn": "AKVA Group",
+      "antall": 29,
+      "kurs": 120.0,
+      "bel\u00f8p": 3480.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.4% fra topp 134.00 kr \u00b7 kj\u00f8pspris 130.00 kr)",
+      "snittpris": 130.0,
+      "avkastning_pct": -7.69,
+      "holdingstid": 7,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }

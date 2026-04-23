@@ -1,5 +1,5 @@
 {
-  "kasse": 49756.0,
+  "kasse": 52575.0,
   "start_kapital": 100000,
   "posisjoner": {
     "BWLPG.OL": {
@@ -17,8 +17,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-23"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -35,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-23"
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -53,8 +53,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-04-23"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -71,8 +71,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-04-23"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -157,26 +157,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
-    },
-    "FRO.OL": {
-      "navn": "Frontline",
-      "antall": 9,
-      "snittpris": 351.29998779296875,
-      "kj\u00f8psdato": "2026-04-21",
-      "h\u00f8yeste_kurs": 352.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-22"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-23"
     }
   },
   "ventende_handler": [],
@@ -929,9 +911,31 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-23 07:02:30.571462",
+      "handling": "SELG",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 9,
+      "kurs": 316.3999938964844,
+      "bel\u00f8p": 2848.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.1% fra topp 352.00 kr \u00b7 kj\u00f8pspris 351.30 kr)",
+      "snittpris": 351.29998779296875,
+      "avkastning_pct": -9.93,
+      "holdingstid": 2,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-22 11:52:30.237368",
+  "sist_analysert": "2026-04-23 07:02:30.572713",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1037,6 +1041,10 @@
     {
       "dato": "2026-04-22",
       "total_verdi": 91460.0
+    },
+    {
+      "dato": "2026-04-23",
+      "total_verdi": 91023.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1049,10 +1057,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 85.4,
-      "rel_styrke": 35.0,
+      "mom": 85.1,
+      "rel_styrke": 35.3,
       "rsi": 68.0,
-      "kurs": 40.42,
+      "kurs": 40.36,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1062,11 +1070,11 @@
       "ticker": "NORBT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 24.6,
-      "rel_styrke": 11.0,
-      "rsi": 66.0,
-      "kurs": 229.8,
+      "score": 4,
+      "mom": 23.0,
+      "rel_styrke": 9.9,
+      "rsi": 64.0,
+      "kurs": 226.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1077,10 +1085,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 49.2,
-      "rel_styrke": 13.6,
-      "rsi": 69.0,
-      "kurs": 195.5,
+      "mom": 45.8,
+      "rel_styrke": 11.1,
+      "rsi": 66.0,
+      "kurs": 191.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1091,10 +1099,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 36.2,
-      "rel_styrke": 35.0,
-      "rsi": 64.0,
-      "kurs": 127.0,
+      "mom": 33.6,
+      "rel_styrke": 32.6,
+      "rsi": 60.0,
+      "kurs": 124.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1108,7 +1116,7 @@
   "short_interest": {
     "NOD.OL": 3.35,
     "AUTO.OL": 2.2,
-    "GSF.OL": 2.71,
+    "GSF.OL": 2.88,
     "HEX.OL": 5.56,
     "NAS.OL": 3.93,
     "BAKKA.OL": 3.17,
@@ -1207,6 +1215,10 @@
     {
       "dato": "2026-04-22",
       "verdi": 385.0
+    },
+    {
+      "dato": "2026-04-23",
+      "verdi": 291.0
     }
   ]
 }

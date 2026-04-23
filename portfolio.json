@@ -1,5 +1,5 @@
 {
-  "kasse": 56026.0,
+  "kasse": 51247.0,
   "start_kapital": 100000,
   "posisjoner": {
     "BWLPG.OL": {
@@ -142,6 +142,22 @@
       },
       "utenfor_topp_streak": 2,
       "utenfor_topp_sist_dato": "2026-04-23"
+    },
+    "AKVA.OL": {
+      "navn": "AKVA Group",
+      "antall": 38,
+      "snittpris": 125.0,
+      "kj\u00f8psdato": "2026-04-23",
+      "h\u00f8yeste_kurs": 125.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -938,9 +954,28 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-23 11:53:48.683640",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKVA.OL",
+      "navn": "AKVA Group",
+      "antall": 38,
+      "kurs": 125.0,
+      "bel\u00f8p": 4750.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 34.1% \u00b7 rel.styrke 33.4% \u00b7 RSI 61 \u00b7 P/E 25 \u00b7 P/B 3.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-23 07:02:30.572713",
+  "sist_analysert": "2026-04-23 11:53:48.683775",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1049,7 +1084,7 @@
     },
     {
       "dato": "2026-04-23",
-      "total_verdi": 91023.0
+      "total_verdi": 91081.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1062,10 +1097,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 85.1,
-      "rel_styrke": 35.3,
-      "rsi": 68.0,
-      "kurs": 40.36,
+      "mom": 88.6,
+      "rel_styrke": 32.1,
+      "rsi": 66.0,
+      "kurs": 40.12,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1075,11 +1110,11 @@
       "ticker": "NORBT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 23.0,
-      "rel_styrke": 9.9,
-      "rsi": 64.0,
-      "kurs": 226.8,
+      "score": 3,
+      "mom": 27.7,
+      "rel_styrke": 14.0,
+      "rsi": 70.0,
+      "kurs": 236.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1090,10 +1125,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 45.8,
-      "rel_styrke": 11.1,
-      "rsi": 66.0,
-      "kurs": 191.0,
+      "mom": 47.7,
+      "rel_styrke": 11.6,
+      "rsi": 67.0,
+      "kurs": 192.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1104,13 +1139,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 33.6,
-      "rel_styrke": 32.6,
-      "rsi": 60.0,
-      "kurs": 124.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 34.1,
+      "rel_styrke": 33.4,
+      "rsi": 61.0,
+      "kurs": 125.0,
+      "pe": 24.7,
+      "pb": 3.3,
+      "yield": 161.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -1223,7 +1258,7 @@
     },
     {
       "dato": "2026-04-23",
-      "verdi": 291.0
+      "verdi": 697.0
     }
   ]
 }

@@ -17,8 +17,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-04-24"
+      "utenfor_topp_streak": 0
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -105,7 +104,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-24"
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
@@ -122,8 +122,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-04-24"
+      "utenfor_topp_streak": 0
     },
     "AKVA.OL": {
       "navn": "AKVA Group",
@@ -980,7 +979,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-24 07:05:20.505128",
+  "sist_analysert": "2026-04-24 11:53:13.477898",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1093,7 +1092,7 @@
     },
     {
       "dato": "2026-04-24",
-      "total_verdi": 91366.0
+      "total_verdi": 91598.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1106,24 +1105,38 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 89.0,
-      "rel_styrke": 32.4,
-      "rsi": 67.0,
-      "kurs": 40.22,
+      "mom": 88.2,
+      "rel_styrke": 32.6,
+      "rsi": 66.0,
+      "kurs": 40.14,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Norbit",
-      "ticker": "NORBT.OL",
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 73.8,
+      "rel_styrke": 13.6,
+      "rsi": 60.0,
+      "kurs": 106.3,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Hexagon Composites",
+      "ticker": "HEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 27.8,
-      "rel_styrke": 14.0,
-      "rsi": 70.0,
-      "kurs": 236.6,
+      "mom": 12.7,
+      "rel_styrke": 16.5,
+      "rsi": 68.0,
+      "kurs": 11.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1134,10 +1147,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 46.9,
-      "rel_styrke": 10.8,
-      "rsi": 66.0,
-      "kurs": 191.0,
+      "mom": 43.9,
+      "rel_styrke": 6.8,
+      "rsi": 65.0,
+      "kurs": 190.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1148,10 +1161,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 35.2,
-      "rel_styrke": 34.5,
-      "rsi": 62.0,
-      "kurs": 126.0,
+      "mom": 37.5,
+      "rel_styrke": 38.6,
+      "rsi": 65.0,
+      "kurs": 129.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1272,7 +1285,7 @@
     },
     {
       "dato": "2026-04-24",
-      "verdi": 707.0
+      "verdi": 939.0
     }
   ]
 }

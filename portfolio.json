@@ -34,15 +34,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-04-24"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-04-27"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
       "antall": 8,
       "snittpris": 305.6000061035156,
       "kj\u00f8psdato": "2026-04-15",
-      "h\u00f8yeste_kurs": 316.3999938964844,
+      "h\u00f8yeste_kurs": 317.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -52,8 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-04-24"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-04-27"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -87,7 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-27"
     },
     "NORBT.OL": {
       "navn": "Norbit",
@@ -104,8 +105,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-24"
+      "utenfor_topp_streak": 0
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
@@ -139,7 +139,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-27"
     }
   },
   "ventende_handler": [],
@@ -979,7 +980,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-24 11:53:13.477898",
+  "sist_analysert": "2026-04-27 07:35:07.699990",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1093,6 +1094,10 @@
     {
       "dato": "2026-04-24",
       "total_verdi": 91598.0
+    },
+    {
+      "dato": "2026-04-27",
+      "total_verdi": 91454.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1100,29 +1105,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker Solutions",
-      "ticker": "AKSO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 88.2,
-      "rel_styrke": 32.6,
-      "rsi": 66.0,
-      "kurs": 40.14,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "Kitron",
       "ticker": "KIT.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 73.8,
-      "rel_styrke": 13.6,
-      "rsi": 60.0,
-      "kurs": 106.3,
+      "mom": 75.6,
+      "rel_styrke": 12.5,
+      "rsi": 58.0,
+      "kurs": 105.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1132,11 +1123,25 @@
       "ticker": "HEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 16.7,
+      "rel_styrke": 15.3,
+      "rsi": 65.0,
+      "kurs": 10.89,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Norbit",
+      "ticker": "NORBT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 12.7,
-      "rel_styrke": 16.5,
+      "mom": 26.8,
+      "rel_styrke": 14.3,
       "rsi": 68.0,
-      "kurs": 11.0,
+      "kurs": 235.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1146,25 +1151,11 @@
       "ticker": "AFK.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 43.9,
-      "rel_styrke": 6.8,
-      "rsi": 65.0,
-      "kurs": 190.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "AKVA Group",
-      "ticker": "AKVA.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 37.5,
-      "rel_styrke": 38.6,
-      "rsi": 65.0,
-      "kurs": 129.5,
+      "mom": 46.3,
+      "rel_styrke": 8.3,
+      "rsi": 63.0,
+      "kurs": 189.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1176,14 +1167,14 @@
   },
   "insider_kj\u00f8p": [],
   "short_interest": {
-    "NOD.OL": 3.35,
+    "NOD.OL": 3.29,
     "AUTO.OL": 2.2,
     "BORR.OL": 2.72,
     "GSF.OL": 2.95,
     "HEX.OL": 5.56,
     "NAS.OL": 3.41,
     "BAKKA.OL": 3.1,
-    "LINK.OL": 13.3,
+    "LINK.OL": 13.56,
     "KID.OL": 2.93
   },
   "urealisert_historikk": [
@@ -1286,6 +1277,10 @@
     {
       "dato": "2026-04-24",
       "verdi": 939.0
+    },
+    {
+      "dato": "2026-04-27",
+      "verdi": 795.0
     }
   ]
 }

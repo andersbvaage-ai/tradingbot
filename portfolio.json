@@ -1,5 +1,5 @@
 {
-  "kasse": 64834.0,
+  "kasse": 67374.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -54,23 +54,6 @@
       },
       "utenfor_topp_streak": 7,
       "utenfor_topp_sist_dato": "2026-04-27"
-    },
-    "AFK.OL": {
-      "navn": "Arendals Fossekompani",
-      "antall": 14,
-      "snittpris": 177.5,
-      "kj\u00f8psdato": "2026-04-15",
-      "h\u00f8yeste_kurs": 204.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -976,6 +959,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-27 10:35:25.421766",
+      "handling": "SELG",
+      "ticker": "AFK.OL",
+      "navn": "Arendals Fossekompani",
+      "antall": 14,
+      "kurs": 183.5,
+      "bel\u00f8p": 2569.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.0% fra topp 204.00 kr \u00b7 kj\u00f8pspris 177.50 kr)",
+      "snittpris": 177.5,
+      "avkastning_pct": 3.38,
+      "holdingstid": 12,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }

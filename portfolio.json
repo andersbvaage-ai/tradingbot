@@ -130,7 +130,7 @@
       "antall": 33,
       "snittpris": 184.0,
       "kj\u00f8psdato": "2026-04-27",
-      "h\u00f8yeste_kurs": 186.0,
+      "h\u00f8yeste_kurs": 186.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -156,7 +156,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -172,7 +173,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -1091,7 +1093,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-28 07:32:10.275052",
+  "sist_analysert": "2026-04-28 12:21:00.888417",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1212,7 +1214,7 @@
     },
     {
       "dato": "2026-04-28",
-      "total_verdi": 91139.0
+      "total_verdi": 91442.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1225,10 +1227,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 69.2,
-      "rel_styrke": 14.1,
-      "rsi": 56.0,
-      "kurs": 103.7,
+      "mom": 67.0,
+      "rel_styrke": 12.1,
+      "rsi": 54.0,
+      "kurs": 102.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1239,13 +1241,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 18.0,
-      "rel_styrke": 17.6,
-      "rsi": 66.0,
-      "kurs": 10.95,
+      "mom": 17.9,
+      "rel_styrke": 17.2,
+      "rsi": 65.0,
+      "kurs": 10.94,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Eidesvik Offshore",
+      "ticker": "EIOF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 39.2,
+      "rel_styrke": 22.3,
+      "rsi": 69.0,
+      "kurs": 17.2,
+      "pe": 18.9,
+      "pb": 0.78,
+      "yield": 116.0
     },
     {
       "navn": "BW LPG",
@@ -1253,13 +1269,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 47.2,
-      "rel_styrke": 16.6,
-      "rsi": 63.0,
-      "kurs": 179.6,
-      "pe": 12.1,
-      "pb": 1.59,
-      "yield": 846.0
+      "mom": 49.7,
+      "rel_styrke": 18.5,
+      "rsi": 65.0,
+      "kurs": 182.7,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Zaptec",
@@ -1267,38 +1283,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 19.9,
-      "rel_styrke": 41.8,
-      "rsi": 68.0,
-      "kurs": 36.2,
-      "pe": 59.3,
-      "pb": 4.18,
-      "yield": null
-    },
-    {
-      "navn": "Norbit",
-      "ticker": "NORBT.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 23.5,
-      "rel_styrke": 13.3,
-      "rsi": 61.0,
-      "kurs": 229.6,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Arendals Fossekompani",
-      "ticker": "AFK.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 39.4,
-      "rel_styrke": 1.9,
-      "rsi": 58.0,
-      "kurs": 184.0,
+      "mom": 21.2,
+      "rel_styrke": 43.2,
+      "rsi": 69.0,
+      "kurs": 36.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1427,7 +1415,7 @@
     },
     {
       "dato": "2026-04-28",
-      "verdi": 511.0
+      "verdi": 814.0
     }
   ]
 }

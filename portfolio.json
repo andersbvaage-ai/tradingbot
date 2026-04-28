@@ -1,5 +1,5 @@
 {
-  "kasse": 61273.0,
+  "kasse": 51229.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -34,8 +34,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-04-27"
+      "utenfor_topp_streak": 9,
+      "utenfor_topp_sist_dato": "2026-04-28"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -52,8 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-04-27"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-04-28"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -70,8 +70,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-27"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-28"
     },
     "NORBT.OL": {
       "navn": "Norbit",
@@ -88,8 +88,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-27"
+      "utenfor_topp_streak": 0
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
@@ -123,8 +122,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-04-27"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-04-28"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -132,6 +131,39 @@
       "snittpris": 184.0,
       "kj\u00f8psdato": "2026-04-27",
       "h\u00f8yeste_kurs": 185.5,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "BWLPG.OL": {
+      "navn": "BW LPG",
+      "antall": 29,
+      "snittpris": 179.60000610351562,
+      "kj\u00f8psdato": "2026-04-28",
+      "h\u00f8yeste_kurs": 179.60000610351562,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "ZAP.OL": {
+      "navn": "Zaptec",
+      "antall": 132,
+      "snittpris": 36.20000076293945,
+      "kj\u00f8psdato": "2026-04-28",
+      "h\u00f8yeste_kurs": 36.20000076293945,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -1019,9 +1051,47 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-04-28 07:32:10.274886",
+      "handling": "KJ\u00d8P",
+      "ticker": "BWLPG.OL",
+      "navn": "BW LPG",
+      "antall": 29,
+      "kurs": 179.60000610351562,
+      "bel\u00f8p": 5208.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.2% \u00b7 rel.styrke 16.6% \u00b7 RSI 63 \u00b7 P/E 12 \u00b7 P/B 1.6",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-04-28 07:32:10.275010",
+      "handling": "KJ\u00d8P",
+      "ticker": "ZAP.OL",
+      "navn": "Zaptec",
+      "antall": 132,
+      "kurs": 36.20000076293945,
+      "bel\u00f8p": 4778.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 19.9% \u00b7 rel.styrke 41.8% \u00b7 RSI 68 \u00b7 P/E 59 \u00b7 P/B 4.2",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-04-27 12:16:04.260705",
+  "sist_analysert": "2026-04-28 07:32:10.275052",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1139,6 +1209,10 @@
     {
       "dato": "2026-04-27",
       "total_verdi": 91357.0
+    },
+    {
+      "dato": "2026-04-28",
+      "total_verdi": 91139.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1151,10 +1225,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 79.3,
-      "rel_styrke": 14.6,
-      "rsi": 61.0,
-      "kurs": 107.4,
+      "mom": 69.2,
+      "rel_styrke": 14.1,
+      "rsi": 56.0,
+      "kurs": 103.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1164,11 +1238,53 @@
       "ticker": "HEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 18.0,
+      "rel_styrke": 17.6,
+      "rsi": 66.0,
+      "kurs": 10.95,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 15.8,
-      "rel_styrke": 13.7,
-      "rsi": 64.0,
-      "kurs": 10.8,
+      "mom": 47.2,
+      "rel_styrke": 16.6,
+      "rsi": 63.0,
+      "kurs": 179.6,
+      "pe": 12.1,
+      "pb": 1.59,
+      "yield": 846.0
+    },
+    {
+      "navn": "Zaptec",
+      "ticker": "ZAP.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 19.9,
+      "rel_styrke": 41.8,
+      "rsi": 68.0,
+      "kurs": 36.2,
+      "pe": 59.3,
+      "pb": 4.18,
+      "yield": null
+    },
+    {
+      "navn": "Norbit",
+      "ticker": "NORBT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 23.5,
+      "rel_styrke": 13.3,
+      "rsi": 61.0,
+      "kurs": 229.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1179,13 +1295,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 42.1,
-      "rel_styrke": 4.3,
+      "mom": 39.4,
+      "rel_styrke": 1.9,
       "rsi": 58.0,
       "kurs": 184.0,
-      "pe": 57.5,
-      "pb": 2.07,
-      "yield": 214.0
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1194,14 +1310,14 @@
   },
   "insider_kj\u00f8p": [],
   "short_interest": {
-    "NOD.OL": 3.29,
+    "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 2.72,
+    "BORR.OL": 2.65,
     "GSF.OL": 2.95,
     "HEX.OL": 5.56,
-    "NAS.OL": 3.41,
+    "NAS.OL": 4.02,
     "BAKKA.OL": 3.1,
-    "LINK.OL": 13.56,
+    "LINK.OL": 13.53,
     "KID.OL": 2.93
   },
   "urealisert_historikk": [
@@ -1308,6 +1424,10 @@
     {
       "dato": "2026-04-27",
       "verdi": 672.0
+    },
+    {
+      "dato": "2026-04-28",
+      "verdi": 511.0
     }
   ]
 }

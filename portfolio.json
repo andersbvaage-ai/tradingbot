@@ -34,7 +34,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-04-29"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -1097,7 +1098,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-04-29 07:25:05.533964",
+  "sist_analysert": "2026-04-29 12:11:17.048675",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1222,7 +1223,7 @@
     },
     {
       "dato": "2026-04-29",
-      "total_verdi": 91494.0
+      "total_verdi": 91721.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1230,18 +1231,18 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Subsea 7",
-      "ticker": "SUBC.OL",
+      "navn": "Aker",
+      "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 75.7,
-      "rel_styrke": 23.4,
-      "rsi": 70.0,
-      "kurs": 327.4,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "score": 4,
+      "mom": 43.6,
+      "rel_styrke": 10.2,
+      "rsi": 61.0,
+      "kurs": 1062.0,
+      "pe": 19.5,
+      "pb": 1.69,
+      "yield": 787.0
     },
     {
       "navn": "Kitron",
@@ -1249,10 +1250,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.1,
-      "rel_styrke": 8.9,
-      "rsi": 55.0,
-      "kurs": 103.4,
+      "mom": 46.9,
+      "rel_styrke": 7.7,
+      "rsi": 54.0,
+      "kurs": 102.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1263,10 +1264,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 46.3,
-      "rel_styrke": 16.4,
-      "rsi": 66.0,
-      "kurs": 183.9,
+      "mom": 49.6,
+      "rel_styrke": 19.2,
+      "rsi": 68.0,
+      "kurs": 188.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1277,10 +1278,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 23.2,
-      "rel_styrke": 46.6,
-      "rsi": 70.0,
-      "kurs": 36.95,
+      "mom": 22.5,
+      "rel_styrke": 45.7,
+      "rsi": 69.0,
+      "kurs": 36.75,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1291,24 +1292,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 17.5,
-      "rel_styrke": 10.3,
-      "rsi": 60.0,
-      "kurs": 228.2,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Arendals Fossekompani",
-      "ticker": "AFK.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 40.5,
-      "rel_styrke": 0.2,
-      "rsi": 57.0,
-      "kurs": 184.0,
+      "mom": 17.1,
+      "rel_styrke": 9.8,
+      "rsi": 59.0,
+      "kurs": 227.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1441,7 +1428,7 @@
     },
     {
       "dato": "2026-04-29",
-      "verdi": 904.0
+      "verdi": 1130.0
     }
   ]
 }

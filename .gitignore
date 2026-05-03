@@ -1,0 +1,25 @@
+.superpowers/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+saxo_tokens.json
+saxo_auth_output.txt
+saxo_network.txt
+*output.txt
+*.pem
+*.key
+
+# Local tool / agent state
+.claude/
+.playwright-mcp/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db

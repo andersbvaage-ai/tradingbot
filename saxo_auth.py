@@ -23,8 +23,8 @@ import webbrowser
 
 import requests
 
-CLIENT_ID     = "59c803cd418b4d04a1b7ebb69c4ee619"
-CLIENT_SECRET = "3ad08c5bcacf401eb253868067cd51ce"
+CLIENT_ID     = os.environ["SAXO_CLIENT_ID"]
+CLIENT_SECRET = os.environ["SAXO_CLIENT_SECRET"]
 REDIRECT_URI  = "http://localhost:8080"
 AUTH_URL      = "https://sim.logonvalidation.net/authorize"
 TOKEN_URL     = "https://sim.logonvalidation.net/token"

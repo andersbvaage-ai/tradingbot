@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-05"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -34,8 +35,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-04"
+      "utenfor_topp_streak": 0
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-05-04"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-05-05"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -87,8 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-04"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-05"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -122,7 +122,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-05"
     },
     "DNO.OL": {
       "navn": "DNO",
@@ -1179,7 +1180,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-04 12:18:00.815280",
+  "sist_analysert": "2026-05-05 07:19:03.050325",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1317,6 +1318,10 @@
     {
       "dato": "2026-05-04",
       "total_verdi": 91956.0
+    },
+    {
+      "dato": "2026-05-05",
+      "total_verdi": 91797.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1324,15 +1329,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Kitron",
-      "ticker": "KIT.OL",
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 37.5,
-      "rel_styrke": 12.1,
-      "rsi": 54.0,
-      "kurs": 102.8,
+      "score": 3,
+      "mom": 80.9,
+      "rel_styrke": 19.0,
+      "rsi": 69.0,
+      "kurs": 330.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1343,10 +1348,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 57.2,
-      "rel_styrke": 8.6,
-      "rsi": 57.0,
-      "kurs": 19.79,
+      "mom": 59.9,
+      "rel_styrke": 10.3,
+      "rsi": 58.0,
+      "kurs": 19.9,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1357,10 +1362,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.4,
-      "rel_styrke": 10.5,
-      "rsi": 64.0,
-      "kurs": 29.45,
+      "mom": 33.6,
+      "rel_styrke": 2.2,
+      "rsi": 62.0,
+      "kurs": 29.15,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1371,12 +1376,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 44.5,
-      "rel_styrke": 8.5,
-      "rsi": 58.0,
-      "kurs": 58.1,
-      "pe": 12.2,
-      "pb": 1.61,
+      "mom": 46.9,
+      "rel_styrke": 8.4,
+      "rsi": 55.0,
+      "kurs": 57.3,
+      "pe": 12.1,
+      "pb": 1.58,
       "yield": null
     },
     {
@@ -1385,24 +1390,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 14.7,
-      "rel_styrke": 30.8,
+      "mom": 19.5,
+      "rel_styrke": 31.0,
       "rsi": 69.0,
-      "kurs": 11.39,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW LPG",
-      "ticker": "BWLPG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 48.0,
-      "rel_styrke": 10.4,
-      "rsi": 66.0,
-      "kurs": 186.2,
+      "kurs": 11.41,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1421,7 +1412,7 @@
     "HEX.OL": 5.56,
     "NAS.OL": 4.59,
     "BAKKA.OL": 3.1,
-    "LINK.OL": 14.12,
+    "LINK.OL": 14.22,
     "KID.OL": 3.12
   },
   "urealisert_historikk": [
@@ -1548,6 +1539,10 @@
     {
       "dato": "2026-05-04",
       "verdi": 1068.0
+    },
+    {
+      "dato": "2026-05-05",
+      "verdi": 908.0
     }
   ]
 }

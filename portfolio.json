@@ -1,5 +1,5 @@
 {
-  "kasse": 51150.0,
+  "kasse": 42358.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -122,7 +122,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-06"
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -139,7 +140,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-06"
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -154,6 +156,39 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "AUTO.OL": {
+      "navn": "AutoStore",
+      "antall": 342,
+      "snittpris": 12.789999961853027,
+      "kj\u00f8psdato": "2026-05-06",
+      "h\u00f8yeste_kurs": 12.789999961853027,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    "AKER.OL": {
+      "navn": "Aker",
+      "antall": 4,
+      "snittpris": 1090.0,
+      "kj\u00f8psdato": "2026-05-06",
+      "h\u00f8yeste_kurs": 1090.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -1217,9 +1252,47 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-06 12:24:03.663642",
+      "handling": "KJ\u00d8P",
+      "ticker": "AUTO.OL",
+      "navn": "AutoStore",
+      "antall": 342,
+      "kurs": 12.789999961853027,
+      "bel\u00f8p": 4374.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 28.2% \u00b7 rel.styrke 2.8% \u00b7 RSI 67 \u00b7 P/E 38 \u00b7 P/B 3.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-05-06 12:24:03.663736",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 4,
+      "kurs": 1090.0,
+      "bel\u00f8p": 4360.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 47.9% \u00b7 rel.styrke 12.1% \u00b7 RSI 61 \u00b7 P/E 20 \u00b7 P/B 1.7",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-06 07:36:27.071329",
+  "sist_analysert": "2026-05-06 12:24:03.663771",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1364,7 +1437,7 @@
     },
     {
       "dato": "2026-05-06",
-      "total_verdi": 92707.0
+      "total_verdi": 91595.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1376,14 +1449,70 @@
       "ticker": "SUBC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 79.9,
-      "rel_styrke": 17.5,
-      "rsi": 68.0,
-      "kurs": 330.8,
+      "score": 4,
+      "mom": 77.4,
+      "rel_styrke": 17.6,
+      "rsi": 64.0,
+      "kurs": 326.2,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Aker Solutions",
+      "ticker": "AKSO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 87.2,
+      "rel_styrke": 37.1,
+      "rsi": 69.0,
+      "kurs": 43.62,
+      "pe": 8.3,
+      "pb": 1.73,
+      "yield": 800.0
+    },
+    {
+      "navn": "AutoStore",
+      "ticker": "AUTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 28.2,
+      "rel_styrke": 2.8,
+      "rsi": 67.0,
+      "kurs": 12.79,
+      "pe": 37.7,
+      "pb": 3.02,
+      "yield": null
+    },
+    {
+      "navn": "TGS",
+      "ticker": "TGS.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 76.9,
+      "rel_styrke": 35.2,
+      "rsi": 62.0,
+      "kurs": 149.1,
+      "pe": 17.7,
+      "pb": 1.53,
+      "yield": 381.0
+    },
+    {
+      "navn": "Aker",
+      "ticker": "AKER.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 47.9,
+      "rel_styrke": 12.1,
+      "rsi": 61.0,
+      "kurs": 1090.0,
+      "pe": 20.0,
+      "pb": 1.73,
+      "yield": 726.0
     },
     {
       "navn": "Kitron",
@@ -1391,69 +1520,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 39.4,
-      "rel_styrke": 12.1,
+      "mom": 38.8,
+      "rel_styrke": 13.6,
       "rsi": 58.0,
-      "kurs": 105.5,
+      "kurs": 105.1,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "DNO",
-      "ticker": "DNO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 53.2,
-      "rel_styrke": 6.7,
-      "rsi": 52.0,
-      "kurs": 19.3,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Archer",
-      "ticker": "ARCH.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 32.6,
-      "rel_styrke": 3.2,
-      "rsi": 64.0,
-      "kurs": 29.55,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Hexagon Composites",
-      "ticker": "HEX.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 18.3,
-      "rel_styrke": 32.8,
-      "rsi": 67.0,
-      "kurs": 11.37,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 43.5,
-      "rel_styrke": 14.0,
-      "rsi": 61.0,
-      "kurs": 354.6,
-      "pe": 22.4,
-      "pb": 3.37,
-      "yield": 486.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -1603,7 +1676,7 @@
     },
     {
       "dato": "2026-05-06",
-      "verdi": 1848.0
+      "verdi": 908.0
     }
   ]
 }

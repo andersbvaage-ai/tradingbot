@@ -1379,7 +1379,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-12 07:43:40.798994",
+  "sist_analysert": "2026-05-12 13:00:59.730799",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1540,7 +1540,7 @@
     },
     {
       "dato": "2026-05-12",
-      "total_verdi": 92301.0
+      "total_verdi": 92111.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1553,10 +1553,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 76.1,
-      "rel_styrke": 29.2,
-      "rsi": 65.0,
-      "kurs": 43.44,
+      "mom": 76.4,
+      "rel_styrke": 29.5,
+      "rsi": 66.0,
+      "kurs": 43.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1566,11 +1566,11 @@
       "ticker": "AUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 39.4,
-      "rel_styrke": 8.7,
-      "rsi": 69.0,
-      "kurs": 13.36,
+      "score": 4,
+      "mom": 36.2,
+      "rel_styrke": 6.0,
+      "rsi": 65.0,
+      "kurs": 13.05,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1580,11 +1580,11 @@
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 50.5,
-      "rel_styrke": 5.8,
-      "rsi": 65.0,
-      "kurs": 137.6,
+      "score": 4,
+      "mom": 49.8,
+      "rel_styrke": 5.3,
+      "rsi": 64.0,
+      "kurs": 137.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1594,13 +1594,13 @@
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 47.7,
-      "rel_styrke": 24.3,
-      "rsi": 68.0,
-      "kurs": 24.21,
-      "pe": 5.0,
-      "pb": 1.24,
+      "score": 4,
+      "mom": 45.1,
+      "rel_styrke": 21.9,
+      "rsi": 65.0,
+      "kurs": 23.78,
+      "pe": 4.9,
+      "pb": 1.22,
       "yield": 802.0
     },
     {
@@ -1609,10 +1609,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 50.3,
-      "rel_styrke": 21.1,
-      "rsi": 67.0,
-      "kurs": 1136.0,
+      "mom": 52.4,
+      "rel_styrke": 23.0,
+      "rsi": 70.0,
+      "kurs": 1152.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1783,7 +1783,7 @@
     },
     {
       "dato": "2026-05-12",
-      "verdi": 1313.0
+      "verdi": 1123.0
     }
   ]
 }

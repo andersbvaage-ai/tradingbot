@@ -1,5 +1,5 @@
 {
-  "kasse": 41451.0,
+  "kasse": 47692.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -18,24 +18,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "AFK.OL": {
-      "navn": "Arendals Fossekompani",
-      "antall": 33,
-      "snittpris": 184.0,
-      "kj\u00f8psdato": "2026-04-27",
-      "h\u00f8yeste_kurs": 193.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-05-11"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -69,8 +51,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-05-11"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-05-12"
     },
     "DNO.OL": {
       "navn": "DNO",
@@ -87,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-05-11"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-05-12"
     },
     "ARCH.OL": {
       "navn": "Archer",
@@ -105,8 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-05-11"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-05-12"
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -181,7 +163,7 @@
       "antall": 106,
       "snittpris": 42.52000045776367,
       "kj\u00f8psdato": "2026-05-11",
-      "h\u00f8yeste_kurs": 42.84000015258789,
+      "h\u00f8yeste_kurs": 43.439998626708984,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -1373,9 +1355,31 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-12 07:43:40.217961",
+      "handling": "SELG",
+      "ticker": "AFK.OL",
+      "navn": "Arendals Fossekompani",
+      "antall": 33,
+      "kurs": 190.0,
+      "bel\u00f8p": 6270.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 7 dager p\u00e5 rad",
+      "snittpris": 184.0,
+      "avkastning_pct": 3.26,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-11 13:36:40.844892",
+  "sist_analysert": "2026-05-12 07:43:40.798994",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1533,6 +1537,10 @@
     {
       "dato": "2026-05-11",
       "total_verdi": 92319.0
+    },
+    {
+      "dato": "2026-05-12",
+      "total_verdi": 92301.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1544,11 +1552,11 @@
       "ticker": "AKSO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 76.5,
-      "rel_styrke": 38.0,
-      "rsi": 63.0,
-      "kurs": 42.76,
+      "score": 3,
+      "mom": 76.1,
+      "rel_styrke": 29.2,
+      "rsi": 65.0,
+      "kurs": 43.44,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1559,10 +1567,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 33.8,
-      "rel_styrke": 11.1,
-      "rsi": 70.0,
-      "kurs": 13.31,
+      "mom": 39.4,
+      "rel_styrke": 8.7,
+      "rsi": 69.0,
+      "kurs": 13.36,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1573,10 +1581,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 48.0,
-      "rel_styrke": 5.9,
-      "rsi": 66.0,
-      "kurs": 139.0,
+      "mom": 50.5,
+      "rel_styrke": 5.8,
+      "rsi": 65.0,
+      "kurs": 137.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1587,13 +1595,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 44.9,
-      "rel_styrke": 23.5,
-      "rsi": 69.0,
-      "kurs": 24.34,
-      "pe": 4.9,
-      "pb": 1.25,
-      "yield": 818.0
+      "mom": 47.7,
+      "rel_styrke": 24.3,
+      "rsi": 68.0,
+      "kurs": 24.21,
+      "pe": 5.0,
+      "pb": 1.24,
+      "yield": 802.0
+    },
+    {
+      "navn": "Aker",
+      "ticker": "AKER.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 50.3,
+      "rel_styrke": 21.1,
+      "rsi": 67.0,
+      "kurs": 1136.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1758,6 +1780,10 @@
     {
       "dato": "2026-05-11",
       "verdi": 1500.0
+    },
+    {
+      "dato": "2026-05-12",
+      "verdi": 1313.0
     }
   ]
 }

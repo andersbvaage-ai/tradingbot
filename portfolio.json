@@ -24,7 +24,7 @@
       "antall": 29,
       "snittpris": 179.60000610351562,
       "kj\u00f8psdato": "2026-04-28",
-      "h\u00f8yeste_kurs": 197.6999969482422,
+      "h\u00f8yeste_kurs": 198.3000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -1427,7 +1427,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-18 08:46:17.473387",
+  "sist_analysert": "2026-05-18 14:25:45.182976",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1604,7 +1604,7 @@
     },
     {
       "dato": "2026-05-18",
-      "total_verdi": 92700.0
+      "total_verdi": 92837.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1617,12 +1617,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 92.2,
-      "rel_styrke": 29.4,
-      "rsi": 69.0,
-      "kurs": 350.4,
-      "pe": 23.0,
-      "pb": 2.43,
+      "mom": 89.2,
+      "rel_styrke": 26.8,
+      "rsi": 67.0,
+      "kurs": 345.0,
+      "pe": 22.7,
+      "pb": 2.39,
       "yield": 564.0
     },
     {
@@ -1631,10 +1631,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 48.9,
-      "rel_styrke": 4.0,
-      "rsi": 67.0,
-      "kurs": 139.4,
+      "mom": 49.3,
+      "rel_styrke": 3.8,
+      "rsi": 68.0,
+      "kurs": 139.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1645,12 +1645,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 38.1,
-      "rel_styrke": 17.4,
-      "rsi": 58.0,
-      "kurs": 23.36,
-      "pe": 4.8,
-      "pb": 1.2,
+      "mom": 40.9,
+      "rel_styrke": 19.5,
+      "rsi": 63.0,
+      "kurs": 23.84,
+      "pe": 4.9,
+      "pb": 1.22,
       "yield": 809.0
     },
     {
@@ -1659,10 +1659,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 55.0,
-      "rel_styrke": 18.4,
-      "rsi": 57.0,
-      "kurs": 106.5,
+      "mom": 53.7,
+      "rel_styrke": 16.7,
+      "rsi": 55.0,
+      "kurs": 105.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1673,13 +1673,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 42.0,
-      "rel_styrke": 20.0,
-      "rsi": 60.0,
-      "kurs": 19.76,
+      "mom": 40.4,
+      "rel_styrke": 18.0,
+      "rsi": 58.0,
+      "kurs": 19.53,
       "pe": 4.8,
-      "pb": 1.58,
+      "pb": 1.54,
       "yield": 778.0
+    },
+    {
+      "navn": "DOF Group",
+      "ticker": "DOFG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 59.4,
+      "rel_styrke": 16.3,
+      "rsi": 66.0,
+      "kurs": 143.3,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1695,10 +1709,10 @@
     "AUTO.OL": 2.2,
     "BORR.OL": 2.62,
     "GSF.OL": 3.49,
-    "HEX.OL": 6.91,
-    "NAS.OL": 3.59,
+    "HEX.OL": 6.26,
+    "NAS.OL": 3.58,
     "BAKKA.OL": 3.06,
-    "LINK.OL": 13.03,
+    "LINK.OL": 12.46,
     "KID.OL": 3.83
   },
   "urealisert_historikk": [
@@ -1864,7 +1878,7 @@
     },
     {
       "dato": "2026-05-18",
-      "verdi": 1150.0
+      "verdi": 1288.0
     }
   ]
 }

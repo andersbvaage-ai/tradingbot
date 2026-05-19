@@ -52,7 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-19"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -157,7 +158,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -1467,7 +1469,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-19 08:29:15.571745",
+  "sist_analysert": "2026-05-19 13:49:19.323790",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1648,7 +1650,7 @@
     },
     {
       "dato": "2026-05-19",
-      "total_verdi": 93148.0
+      "total_verdi": 92909.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1661,13 +1663,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 87.6,
-      "rel_styrke": 25.0,
+      "mom": 87.1,
+      "rel_styrke": 24.4,
       "rsi": 67.0,
-      "kurs": 345.8,
-      "pe": 22.4,
-      "pb": 2.4,
-      "yield": 563.0
+      "kurs": 344.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "MPC Container Ships",
@@ -1675,12 +1677,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 39.1,
-      "rel_styrke": 18.0,
-      "rsi": 63.0,
-      "kurs": 23.84,
+      "mom": 37.0,
+      "rel_styrke": 15.8,
+      "rsi": 59.0,
+      "kurs": 23.48,
       "pe": 4.8,
-      "pb": 1.22,
+      "pb": 1.2,
       "yield": 806.0
     },
     {
@@ -1689,10 +1691,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 54.6,
-      "rel_styrke": 11.4,
-      "rsi": 57.0,
-      "kurs": 107.2,
+      "mom": 51.8,
+      "rel_styrke": 9.0,
+      "rsi": 54.0,
+      "kurs": 105.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1703,26 +1705,26 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 42.9,
-      "rel_styrke": 19.3,
-      "rsi": 62.0,
-      "kurs": 19.94,
+      "mom": 42.4,
+      "rel_styrke": 18.6,
+      "rsi": 61.0,
+      "kurs": 19.87,
       "pe": 4.9,
       "pb": 1.57,
       "yield": 764.0
     },
     {
-      "navn": "DOF Group",
-      "ticker": "DOFG.OL",
+      "navn": "Prosafe",
+      "ticker": "PRS.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 54.5,
-      "rel_styrke": 13.7,
-      "rsi": 59.0,
-      "kurs": 140.7,
-      "pe": null,
-      "pb": null,
+      "score": 3,
+      "mom": 39.8,
+      "rel_styrke": 8.5,
+      "rsi": 69.0,
+      "kurs": 4.45,
+      "pe": 0.6,
+      "pb": 0.86,
       "yield": null
     }
   ],
@@ -1740,9 +1742,10 @@
     "BORR.OL": 2.62,
     "GSF.OL": 3.49,
     "HEX.OL": 6.26,
-    "NAS.OL": 3.58,
+    "2020.OL": 2.12,
+    "NAS.OL": 3.59,
     "BAKKA.OL": 3.06,
-    "LINK.OL": 12.46,
+    "LINK.OL": 11.17,
     "KID.OL": 3.83
   },
   "urealisert_historikk": [
@@ -1912,7 +1915,7 @@
     },
     {
       "dato": "2026-05-19",
-      "verdi": 2037.0
+      "verdi": 1799.0
     }
   ]
 }

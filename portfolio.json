@@ -1,5 +1,5 @@
 {
-  "kasse": 64961.0,
+  "kasse": 59388.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -95,6 +95,23 @@
       "snittpris": 19.3700008392334,
       "kj\u00f8psdato": "2026-05-22",
       "h\u00f8yeste_kurs": 19.43000030517578,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "OKEA.OL": {
+      "navn": "Okea",
+      "antall": 140,
+      "snittpris": 39.599998474121094,
+      "kj\u00f8psdato": "2026-05-22",
+      "h\u00f8yeste_kurs": 39.599998474121094,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -1600,9 +1617,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-22 13:23:03.353765",
+      "handling": "KJ\u00d8P",
+      "ticker": "OKEA.OL",
+      "navn": "Okea",
+      "antall": 140,
+      "kurs": 39.599998474121094,
+      "bel\u00f8p": 5544.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 81.2% \u00b7 rel.styrke 44.1% \u00b7 RSI 53 \u00b7 P/E 5 \u00b7 P/B 7.7",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-22 08:22:55.539541",
+  "sist_analysert": "2026-05-22 13:23:03.353881",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1795,7 +1831,7 @@
     },
     {
       "dato": "2026-05-22",
-      "total_verdi": 92176.0
+      "total_verdi": 92174.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1808,10 +1844,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 76.1,
-      "rel_styrke": 32.3,
-      "rsi": 64.0,
-      "kurs": 44.76,
+      "mom": 76.0,
+      "rel_styrke": 32.5,
+      "rsi": 63.0,
+      "kurs": 44.74,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1822,10 +1858,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 45.4,
-      "rel_styrke": 12.9,
-      "rsi": 56.0,
-      "kurs": 23.55,
+      "mom": 44.6,
+      "rel_styrke": 12.5,
+      "rsi": 55.0,
+      "kurs": 23.43,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1836,13 +1872,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 36.9,
-      "rel_styrke": 16.8,
-      "rsi": 54.0,
-      "kurs": 19.37,
-      "pe": 4.7,
-      "pb": 1.53,
-      "yield": 756.0
+      "mom": 36.2,
+      "rel_styrke": 16.4,
+      "rsi": 53.0,
+      "kurs": 19.27,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Okea",
@@ -1850,12 +1886,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 83.1,
-      "rel_styrke": 45.4,
-      "rsi": 55.0,
-      "kurs": 40.0,
+      "mom": 81.2,
+      "rel_styrke": 44.1,
+      "rsi": 53.0,
+      "kurs": 39.6,
       "pe": 5.0,
-      "pb": 7.8,
+      "pb": 7.73,
       "yield": null
     },
     {
@@ -1864,12 +1900,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.1,
-      "rel_styrke": 12.8,
+      "mom": 47.4,
+      "rel_styrke": 12.4,
       "rsi": 61.0,
-      "kurs": 59.4,
-      "pe": 20.0,
-      "pb": 1.64,
+      "kurs": 59.1,
+      "pe": 19.9,
+      "pb": 1.63,
       "yield": null
     }
   ],
@@ -2073,7 +2109,7 @@
     },
     {
       "dato": "2026-05-22",
-      "verdi": 19.0
+      "verdi": 530.0
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "kasse": 55917.0,
+  "kasse": 60950.0,
   "start_kapital": 100000,
   "posisjoner": {
     "KIT.OL": {
@@ -17,8 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-21"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-22"
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -37,24 +37,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "CMBTO.OL": {
-      "navn": "CMB.TECH",
-      "antall": 27,
-      "snittpris": 138.0,
-      "kj\u00f8psdato": "2026-05-07",
-      "h\u00f8yeste_kurs": 162.39999389648438,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-05-21"
-    },
     "AKSO.OL": {
       "navn": "Aker Solutions",
       "antall": 106,
@@ -70,26 +52,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-05-21"
-    },
-    "DOFG.OL": {
-      "navn": "DOF Group",
-      "antall": 51,
-      "snittpris": 140.0,
-      "kj\u00f8psdato": "2026-05-15",
-      "h\u00f8yeste_kurs": 143.60000610351562,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-21"
+      "utenfor_topp_streak": 0
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -106,15 +69,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-21"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-22"
     },
     "ELK.OL": {
       "navn": "Elkem",
       "antall": 166,
       "snittpris": 29.440000534057617,
       "kj\u00f8psdato": "2026-05-20",
-      "h\u00f8yeste_kurs": 30.420000076293945,
+      "h\u00f8yeste_kurs": 30.940000534057617,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -124,8 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-21"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-22"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -143,6 +106,22 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
+    },
+    "DNO.OL": {
+      "navn": "DNO",
+      "antall": 295,
+      "snittpris": 19.3700008392334,
+      "kj\u00f8psdato": "2026-05-22",
+      "h\u00f8yeste_kurs": 19.3700008392334,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -1554,9 +1533,72 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-22 08:22:54.695422",
+      "handling": "SELG",
+      "ticker": "DOFG.OL",
+      "navn": "DOF Group",
+      "antall": 51,
+      "kurs": 129.0,
+      "bel\u00f8p": 6579.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.2% fra topp 143.60 kr \u00b7 kj\u00f8pspris 140.00 kr)",
+      "snittpris": 140.0,
+      "avkastning_pct": -7.86,
+      "holdingstid": 7,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-05-22 08:22:54.920555",
+      "handling": "SELG",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 27,
+      "kurs": 157.60000610351562,
+      "bel\u00f8p": 4255.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 4 dager p\u00e5 rad",
+      "snittpris": 138.0,
+      "avkastning_pct": 14.2,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-05-22 08:22:55.539380",
+      "handling": "KJ\u00d8P",
+      "ticker": "DNO.OL",
+      "navn": "DNO",
+      "antall": 295,
+      "kurs": 19.3700008392334,
+      "bel\u00f8p": 5714.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 36.9% \u00b7 rel.styrke 16.8% \u00b7 RSI 54 \u00b7 P/E 5 \u00b7 P/B 1.5",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-21 13:54:48.796516",
+  "sist_analysert": "2026-05-22 08:22:55.539541",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1746,6 +1788,10 @@
     {
       "dato": "2026-05-21",
       "total_verdi": 93138.0
+    },
+    {
+      "dato": "2026-05-22",
+      "total_verdi": 92176.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1753,15 +1799,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Aker Solutions",
+      "ticker": "AKSO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 76.1,
+      "rel_styrke": 32.3,
+      "rsi": 64.0,
+      "kurs": 44.76,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
       "navn": "MPC Container Ships",
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 46.0,
-      "rel_styrke": 14.0,
-      "rsi": 64.0,
-      "kurs": 24.04,
+      "mom": 45.4,
+      "rel_styrke": 12.9,
+      "rsi": 56.0,
+      "kurs": 23.55,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1772,13 +1832,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 40.8,
-      "rel_styrke": 20.9,
-      "rsi": 62.0,
-      "kurs": 19.99,
-      "pe": 4.9,
-      "pb": 1.58,
-      "yield": 752.0
+      "mom": 36.9,
+      "rel_styrke": 16.8,
+      "rsi": 54.0,
+      "kurs": 19.37,
+      "pe": 4.7,
+      "pb": 1.53,
+      "yield": 756.0
     },
     {
       "navn": "Okea",
@@ -1786,40 +1846,26 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 82.5,
-      "rel_styrke": 47.7,
-      "rsi": 60.0,
-      "kurs": 41.25,
-      "pe": 5.2,
-      "pb": 8.05,
+      "mom": 83.1,
+      "rel_styrke": 45.4,
+      "rsi": 55.0,
+      "kurs": 40.0,
+      "pe": 5.0,
+      "pb": 7.8,
       "yield": null
     },
     {
-      "navn": "Prosafe",
-      "ticker": "PRS.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 39.2,
-      "rel_styrke": 15.7,
-      "rsi": 67.0,
-      "kurs": 4.53,
-      "pe": 0.6,
-      "pb": 0.87,
-      "yield": null
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
+      "navn": "BW Energy",
+      "ticker": "BWE.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 45.5,
-      "rel_styrke": 10.6,
-      "rsi": 62.0,
-      "kurs": 362.4,
-      "pe": null,
-      "pb": null,
+      "mom": 48.1,
+      "rel_styrke": 12.8,
+      "rsi": 61.0,
+      "kurs": 59.4,
+      "pe": 20.0,
+      "pb": 1.64,
       "yield": null
     }
   ],
@@ -1827,7 +1873,11 @@
     "Energi": 1,
     "Shipping": 1
   },
-  "insider_kj\u00f8p": [],
+  "insider_kj\u00f8p": [
+    "BOUV.OL",
+    "PEXIP.OL",
+    "SPOL.OL"
+  ],
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
@@ -2016,6 +2066,10 @@
     {
       "dato": "2026-05-21",
       "verdi": 862.0
+    },
+    {
+      "dato": "2026-05-22",
+      "verdi": 19.0
     }
   ]
 }

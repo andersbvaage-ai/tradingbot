@@ -1,25 +1,7 @@
 {
-  "kasse": 59388.0,
+  "kasse": 60976.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "KIT.OL": {
-      "navn": "Kitron",
-      "antall": 15,
-      "snittpris": 98.69999694824219,
-      "kj\u00f8psdato": "2026-04-14",
-      "h\u00f8yeste_kurs": 110.19999694824219,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-05-22"
-    },
     "FRO.OL": {
       "navn": "Frontline",
       "antall": 12,
@@ -35,7 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-25"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -52,7 +35,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-25"
     },
     "ELK.OL": {
       "navn": "Elkem",
@@ -69,8 +53,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-05-22"
+      "utenfor_topp_streak": 0
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -120,7 +103,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -1636,9 +1620,31 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-25 08:58:09.867398",
+      "handling": "SELG",
+      "ticker": "KIT.OL",
+      "navn": "Kitron",
+      "antall": 15,
+      "kurs": 107.80000305175781,
+      "bel\u00f8p": 1617.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 98.69999694824219,
+      "avkastning_pct": 9.22,
+      "holdingstid": 41,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-22 13:23:03.353881",
+  "sist_analysert": "2026-05-25 08:58:10.206881",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1832,6 +1838,10 @@
     {
       "dato": "2026-05-22",
       "total_verdi": 92174.0
+    },
+    {
+      "dato": "2026-05-25",
+      "total_verdi": 91874.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1839,29 +1849,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker Solutions",
-      "ticker": "AKSO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 76.0,
-      "rel_styrke": 32.5,
-      "rsi": 63.0,
-      "kurs": 44.74,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "MPC Container Ships",
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 44.6,
-      "rel_styrke": 12.5,
-      "rsi": 55.0,
-      "kurs": 23.43,
+      "mom": 43.8,
+      "rel_styrke": 12.0,
+      "rsi": 53.0,
+      "kurs": 23.29,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Elkem",
+      "ticker": "ELK.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 20.1,
+      "rel_styrke": 0.5,
+      "rsi": 67.0,
+      "kurs": 31.76,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1872,10 +1882,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 36.2,
-      "rel_styrke": 16.4,
+      "mom": 35.9,
+      "rel_styrke": 16.3,
       "rsi": 53.0,
-      "kurs": 19.27,
+      "kurs": 19.23,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1886,12 +1896,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 81.2,
-      "rel_styrke": 44.1,
-      "rsi": 53.0,
-      "kurs": 39.6,
-      "pe": 5.0,
-      "pb": 7.73,
+      "mom": 79.4,
+      "rel_styrke": 42.7,
+      "rsi": 51.0,
+      "kurs": 39.2,
+      "pe": null,
+      "pb": null,
       "yield": null
     },
     {
@@ -1900,12 +1910,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 47.4,
-      "rel_styrke": 12.4,
-      "rsi": 61.0,
-      "kurs": 59.1,
+      "mom": 46.6,
+      "rel_styrke": 11.9,
+      "rsi": 59.0,
+      "kurs": 58.8,
       "pe": 19.9,
-      "pb": 1.63,
+      "pb": 1.64,
       "yield": null
     }
   ],
@@ -1921,13 +1931,13 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 2.85,
+    "BORR.OL": 3.46,
     "GSF.OL": 3.49,
     "HEX.OL": 6.32,
-    "2020.OL": 2.61,
-    "NAS.OL": 3.58,
+    "2020.OL": 3.15,
+    "NAS.OL": 3.41,
     "BAKKA.OL": 2.49,
-    "LINK.OL": 10.99,
+    "LINK.OL": 11.01,
     "KID.OL": 3.64
   },
   "urealisert_historikk": [
@@ -2110,6 +2120,10 @@
     {
       "dato": "2026-05-22",
       "verdi": 530.0
+    },
+    {
+      "dato": "2026-05-25",
+      "verdi": 122.0
     }
   ]
 }

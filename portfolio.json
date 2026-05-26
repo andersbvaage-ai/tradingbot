@@ -1,5 +1,5 @@
 {
-  "kasse": 55726.0,
+  "kasse": 50980.0,
   "start_kapital": 100000,
   "posisjoner": {
     "FRO.OL": {
@@ -113,7 +113,7 @@
       "antall": 26,
       "snittpris": 200.8000030517578,
       "kj\u00f8psdato": "2026-05-26",
-      "h\u00f8yeste_kurs": 200.8000030517578,
+      "h\u00f8yeste_kurs": 201.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -121,6 +121,23 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "KIT.OL": {
+      "navn": "Kitron",
+      "antall": 42,
+      "snittpris": 112.30000305175781,
+      "kj\u00f8psdato": "2026-05-26",
+      "h\u00f8yeste_kurs": 112.30000305175781,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -1679,9 +1696,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-26 13:46:16.020226",
+      "handling": "KJ\u00d8P",
+      "ticker": "KIT.OL",
+      "navn": "Kitron",
+      "antall": 42,
+      "kurs": 112.30000305175781,
+      "bel\u00f8p": 4717.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 69.7% \u00b7 rel.styrke 0.9% \u00b7 RSI 63 \u00b7 P/E 39 \u00b7 P/B 7.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-26 08:31:59.163070",
+  "sist_analysert": "2026-05-26 13:46:16.020481",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -1882,7 +1918,7 @@
     },
     {
       "dato": "2026-05-26",
-      "total_verdi": 91498.0
+      "total_verdi": 91536.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -1890,15 +1926,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 69.7,
+      "rel_styrke": 0.9,
+      "rsi": 63.0,
+      "kurs": 112.3,
+      "pe": 38.6,
+      "pb": 7.08,
+      "yield": 65.0
+    },
+    {
       "navn": "Elkem",
       "ticker": "ELK.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 18.5,
-      "rel_styrke": 0.9,
-      "rsi": 64.0,
-      "kurs": 31.32,
+      "score": 3,
+      "mom": 19.7,
+      "rel_styrke": 1.9,
+      "rsi": 66.0,
+      "kurs": 31.64,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1909,10 +1959,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 32.3,
-      "rel_styrke": 12.4,
-      "rsi": 49.0,
-      "kurs": 18.93,
+      "mom": 33.4,
+      "rel_styrke": 13.3,
+      "rsi": 51.0,
+      "kurs": 19.08,
       "pe": null,
       "pb": null,
       "yield": null
@@ -1923,26 +1973,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 43.5,
-      "rel_styrke": 6.2,
-      "rsi": 52.0,
-      "kurs": 56.6,
-      "pe": 19.1,
-      "pb": 1.58,
-      "yield": null
-    },
-    {
-      "navn": "Prosafe",
-      "ticker": "PRS.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 27.6,
-      "rel_styrke": 5.3,
-      "rsi": 59.0,
-      "kurs": 4.18,
-      "pe": 0.5,
-      "pb": 1.12,
+      "mom": 50.3,
+      "rel_styrke": 11.6,
+      "rsi": 61.0,
+      "kurs": 59.3,
+      "pe": 20.0,
+      "pb": 1.65,
       "yield": null
     },
     {
@@ -1951,13 +1987,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 56.3,
-      "rel_styrke": 11.9,
-      "rsi": 63.0,
-      "kurs": 200.8,
-      "pe": 13.5,
-      "pb": 1.79,
-      "yield": 711.0
+      "mom": 56.9,
+      "rel_styrke": 12.2,
+      "rsi": 64.0,
+      "kurs": 201.6,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -1972,11 +2008,11 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 3.46,
+    "BORR.OL": 3.58,
     "GSF.OL": 3.49,
     "HEX.OL": 6.32,
-    "2020.OL": 3.15,
-    "NAS.OL": 3.41,
+    "2020.OL": 3.07,
+    "NAS.OL": 3.21,
     "BAKKA.OL": 2.49,
     "LINK.OL": 11.01,
     "KID.OL": 3.64
@@ -2168,7 +2204,7 @@
     },
     {
       "dato": "2026-05-26",
-      "verdi": -225.0
+      "verdi": -157.0
     }
   ]
 }

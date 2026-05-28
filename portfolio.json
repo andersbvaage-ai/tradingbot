@@ -95,7 +95,7 @@
       "antall": 42,
       "snittpris": 112.30000305175781,
       "kj\u00f8psdato": "2026-05-26",
-      "h\u00f8yeste_kurs": 113.30000305175781,
+      "h\u00f8yeste_kurs": 113.5999984741211,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -105,8 +105,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-05-28"
+      "utenfor_topp_streak": 0
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -191,7 +190,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -1908,7 +1908,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-28 08:42:46.706477",
+  "sist_analysert": "2026-05-28 14:28:32.588522",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2117,7 +2117,7 @@
     },
     {
       "dato": "2026-05-28",
-      "total_verdi": 90447.0
+      "total_verdi": 90601.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2130,10 +2130,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 50.5,
-      "rel_styrke": 2.9,
-      "rsi": 58.0,
-      "kurs": 146.2,
+      "mom": 49.3,
+      "rel_styrke": 1.9,
+      "rsi": 56.0,
+      "kurs": 145.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2144,10 +2144,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 43.3,
-      "rel_styrke": 13.0,
-      "rsi": 59.0,
-      "kurs": 24.06,
+      "mom": 44.3,
+      "rel_styrke": 13.8,
+      "rsi": 60.0,
+      "kurs": 24.23,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2157,11 +2157,25 @@
       "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 66.1,
+      "rel_styrke": 34.6,
+      "rsi": 66.0,
+      "kurs": 1266.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 64.5,
-      "rel_styrke": 33.3,
+      "mom": 75.5,
+      "rel_styrke": 0.1,
       "rsi": 64.0,
-      "kurs": 1254.0,
+      "kurs": 113.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2172,40 +2186,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 19.7,
-      "rel_styrke": 2.3,
-      "rsi": 67.0,
-      "kurs": 32.1,
+      "mom": 21.3,
+      "rel_styrke": 3.7,
+      "rsi": 69.0,
+      "kurs": 32.52,
       "pe": null,
       "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW Energy",
-      "ticker": "BWE.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 51.3,
-      "rel_styrke": 13.2,
-      "rsi": 60.0,
-      "kurs": 59.1,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Aker BioMarine",
-      "ticker": "AKBM.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 37.6,
-      "rel_styrke": 1.4,
-      "rsi": 66.0,
-      "kurs": 110.8,
-      "pe": 27.3,
-      "pb": 7.41,
       "yield": null
     }
   ],
@@ -2220,11 +2206,11 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 3.67,
-    "GSF.OL": 3.49,
+    "BORR.OL": 3.77,
+    "GSF.OL": 3.55,
     "HEX.OL": 6.31,
-    "2020.OL": 3.15,
-    "NAS.OL": 3.14,
+    "2020.OL": 2.92,
+    "NAS.OL": 2.84,
     "BAKKA.OL": 2.49,
     "LINK.OL": 10.81,
     "KID.OL": 3.64
@@ -2424,7 +2410,7 @@
     },
     {
       "dato": "2026-05-28",
-      "verdi": -910.0
+      "verdi": -756.0
     }
   ]
 }

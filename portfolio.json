@@ -148,7 +148,7 @@
       "antall": 3,
       "snittpris": 1268.0,
       "kj\u00f8psdato": "2026-05-27",
-      "h\u00f8yeste_kurs": 1276.0,
+      "h\u00f8yeste_kurs": 1278.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -165,7 +165,7 @@
       "antall": 66,
       "snittpris": 59.20000076293945,
       "kj\u00f8psdato": "2026-05-27",
-      "h\u00f8yeste_kurs": 59.20000076293945,
+      "h\u00f8yeste_kurs": 59.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,

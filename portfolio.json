@@ -1,5 +1,5 @@
 {
-  "kasse": 42063.0,
+  "kasse": 37934.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -7,7 +7,7 @@
       "antall": 166,
       "snittpris": 29.440000534057617,
       "kj\u00f8psdato": "2026-05-20",
-      "h\u00f8yeste_kurs": 32.0,
+      "h\u00f8yeste_kurs": 32.099998474121094,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -51,8 +51,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-27"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-28"
     },
     "OKEA.OL": {
       "navn": "Okea",
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-05-27"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-05-28"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -87,14 +87,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-05-28"
     },
     "KIT.OL": {
       "navn": "Kitron",
       "antall": 42,
       "snittpris": 112.30000305175781,
       "kj\u00f8psdato": "2026-05-26",
-      "h\u00f8yeste_kurs": 113.0999984741211,
+      "h\u00f8yeste_kurs": 113.30000305175781,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -104,8 +105,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-27"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-28"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -122,8 +123,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-27"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-05-28"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -172,6 +173,23 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "AKBM.OL": {
+      "navn": "Aker BioMarine",
+      "antall": 37,
+      "snittpris": 110.80000305175781,
+      "kj\u00f8psdato": "2026-05-28",
+      "h\u00f8yeste_kurs": 110.80000305175781,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -1869,9 +1887,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-05-28 08:42:46.706352",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKBM.OL",
+      "navn": "Aker BioMarine",
+      "antall": 37,
+      "kurs": 110.80000305175781,
+      "bel\u00f8p": 4100.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 37.6% \u00b7 rel.styrke 1.4% \u00b7 RSI 66 \u00b7 P/E 27 \u00b7 P/B 7.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-05-27 14:18:19.599736",
+  "sist_analysert": "2026-05-28 08:42:46.706477",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2077,6 +2114,10 @@
     {
       "dato": "2026-05-27",
       "total_verdi": 90704.0
+    },
+    {
+      "dato": "2026-05-28",
+      "total_verdi": 90447.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2089,10 +2130,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.3,
-      "rel_styrke": 4.9,
-      "rsi": 60.0,
-      "kurs": 148.0,
+      "mom": 50.5,
+      "rel_styrke": 2.9,
+      "rsi": 58.0,
+      "kurs": 146.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2103,10 +2144,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 44.2,
-      "rel_styrke": 15.4,
-      "rsi": 62.0,
-      "kurs": 24.39,
+      "mom": 43.3,
+      "rel_styrke": 13.0,
+      "rsi": 59.0,
+      "kurs": 24.06,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2116,11 +2157,11 @@
       "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 61.7,
-      "rel_styrke": 31.7,
-      "rsi": 66.0,
-      "kurs": 1264.0,
+      "score": 4,
+      "mom": 64.5,
+      "rel_styrke": 33.3,
+      "rsi": 64.0,
+      "kurs": 1254.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2131,10 +2172,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 20.1,
-      "rel_styrke": 2.6,
+      "mom": 19.7,
+      "rel_styrke": 2.3,
       "rsi": 67.0,
-      "kurs": 31.86,
+      "kurs": 32.1,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2145,23 +2186,36 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.2,
-      "rel_styrke": 12.6,
+      "mom": 51.3,
+      "rel_styrke": 13.2,
       "rsi": 60.0,
-      "kurs": 59.2,
-      "pe": 20.0,
-      "pb": 1.65,
+      "kurs": 59.1,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Aker BioMarine",
+      "ticker": "AKBM.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 37.6,
+      "rel_styrke": 1.4,
+      "rsi": 66.0,
+      "kurs": 110.8,
+      "pe": 27.3,
+      "pb": 7.41,
       "yield": null
     }
   ],
   "r\u00e5vare_trender": {
-    "Energi": 1,
+    "Energi": -1,
     "Shipping": 1
   },
   "insider_kj\u00f8p": [
     "BOUV.OL",
-    "PEXIP.OL",
-    "SPOL.OL"
+    "PEXIP.OL"
   ],
   "short_interest": {
     "NOD.OL": 2.65,
@@ -2367,6 +2421,10 @@
     {
       "dato": "2026-05-27",
       "verdi": -682.0
+    },
+    {
+      "dato": "2026-05-28",
+      "verdi": -910.0
     }
   ]
 }

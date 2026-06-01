@@ -1,5 +1,5 @@
 {
-  "kasse": 42632.0,
+  "kasse": 46154.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -144,23 +144,6 @@
       },
       "utenfor_topp_streak": 1,
       "utenfor_topp_sist_dato": "2026-06-01"
-    },
-    "BWE.OL": {
-      "navn": "BW Energy",
-      "antall": 66,
-      "snittpris": 59.20000076293945,
-      "kj\u00f8psdato": "2026-05-27",
-      "h\u00f8yeste_kurs": 59.79999923706055,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
     },
     "AKBM.OL": {
       "navn": "Aker BioMarine",
@@ -1907,6 +1890,28 @@
       "snittpris": 200.8000030517578,
       "avkastning_pct": -9.46,
       "holdingstid": 3,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-01 13:22:37.478013",
+      "handling": "SELG",
+      "ticker": "BWE.OL",
+      "navn": "BW Energy",
+      "antall": 66,
+      "kurs": 53.79999923706055,
+      "bel\u00f8p": 3551.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.0% fra topp 59.80 kr \u00b7 kj\u00f8pspris 59.20 kr)",
+      "snittpris": 59.20000076293945,
+      "avkastning_pct": -9.12,
+      "holdingstid": 5,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

@@ -7,7 +7,7 @@
       "antall": 166,
       "snittpris": 29.440000534057617,
       "kj\u00f8psdato": "2026-05-20",
-      "h\u00f8yeste_kurs": 32.79999923706055,
+      "h\u00f8yeste_kurs": 33.91999816894531,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -51,8 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-05-29"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "OKEA.OL": {
       "navn": "Okea",
@@ -69,8 +70,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-05-29"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -87,7 +88,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -104,8 +106,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-05-29"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -122,8 +124,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-05-29"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -140,7 +142,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-01"
     },
     "BWE.OL": {
       "navn": "BW Energy",
@@ -174,7 +177,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-01"
     }
   },
   "ventende_handler": [],
@@ -1913,7 +1917,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-05-29 13:52:53.256383",
+  "sist_analysert": "2026-06-01 10:22:22.181062",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2127,6 +2131,10 @@
     {
       "dato": "2026-05-29",
       "total_verdi": 90143.0
+    },
+    {
+      "dato": "2026-06-01",
+      "total_verdi": 90346.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2139,52 +2147,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 40.8,
-      "rel_styrke": 14.6,
-      "rsi": 60.0,
-      "kurs": 24.16,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Aker",
-      "ticker": "AKER.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 65.9,
-      "rel_styrke": 34.3,
+      "mom": 50.1,
+      "rel_styrke": 8.4,
       "rsi": 64.0,
-      "kurs": 1258.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Kitron",
-      "ticker": "KIT.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 78.5,
-      "rel_styrke": 1.3,
-      "rsi": 66.0,
-      "kurs": 115.3,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Elkem",
-      "ticker": "ELK.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 20.7,
-      "rel_styrke": 0.9,
-      "rsi": 66.0,
-      "kurs": 32.2,
+      "kurs": 24.75,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2195,26 +2161,26 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 59.2,
-      "rel_styrke": 13.8,
-      "rsi": 55.0,
-      "kurs": 58.1,
+      "mom": 45.3,
+      "rel_styrke": 6.7,
+      "rsi": 46.0,
+      "kurs": 55.5,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Aker BioMarine",
-      "ticker": "AKBM.OL",
+      "navn": "Prosafe",
+      "ticker": "PRS.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 39.1,
-      "rel_styrke": 2.9,
-      "rsi": 68.0,
-      "kurs": 112.0,
-      "pe": null,
-      "pb": null,
+      "score": 4,
+      "mom": 42.3,
+      "rel_styrke": 13.8,
+      "rsi": 63.0,
+      "kurs": 4.46,
+      "pe": 0.3,
+      "pb": 1.2,
       "yield": null
     }
   ],
@@ -2438,6 +2404,10 @@
     {
       "dato": "2026-05-29",
       "verdi": -692.0
+    },
+    {
+      "dato": "2026-06-01",
+      "verdi": -488.0
     }
   ]
 }

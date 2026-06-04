@@ -746,28 +746,35 @@ with tab_dash:
         </script>""", height=52, scrolling=False)
 
     # ── Hent live kurser og bygg posisjonsdata ────────────────────────────────
-    _total_verdi = _kasse
-    _pos_rader   = []
+    # Faller live-kursen ut (yfinance nede/rate-limitet) brukes kjøpskurs som
+    # sist kjente verdi, slik at posisjonen fortsatt telles med — ellers ville
+    # total verdi kollapset til ren cash og vist falsk stort tap.
+    _total_verdi  = _kasse
+    _pos_rader    = []
+    _antall_stale = 0
     for _ticker, _pos in _posisjoner.items():
-        _kurs = hent_siste_kurs(_ticker)
-        if _kurs:
-            _verdi       = _kurs * _pos["antall"]
-            _gevinst_pct = (_kurs / _pos["snittpris"] - 1) * 100
-            _høyeste     = _pos.get("høyeste_kurs", _pos["snittpris"])
-            _sl_kurs     = round(_høyeste * (1 - _stop_loss_pct), 2)
-            _sl_avstand  = round((_kurs / _sl_kurs - 1) * 100, 1)
-            _total_verdi += _verdi
-            _pos_rader.append({
-                "Aksje":          _pos["navn"],
-                "Kjøpsdato":      _pos.get("kjøpsdato", "–"),
-                "Antall":         _pos["antall"],
-                "Snittpris":      round(_pos["snittpris"], 2),
-                "Nåkurs":         round(_kurs, 2),
-                "Avkastning %":   round(_gevinst_pct, 1),
-                "Verdi (kr)":     round(_verdi, 0),
-                "SL-kurs":        _sl_kurs,
-                "Avstand til SL": _sl_avstand,
-            })
+        _kurs  = hent_siste_kurs(_ticker)
+        _stale = _kurs is None
+        if _stale:
+            _kurs = _pos["snittpris"]
+            _antall_stale += 1
+        _verdi       = _kurs * _pos["antall"]
+        _gevinst_pct = (_kurs / _pos["snittpris"] - 1) * 100
+        _høyeste     = _pos.get("høyeste_kurs", _pos["snittpris"])
+        _sl_kurs     = round(_høyeste * (1 - _stop_loss_pct), 2)
+        _sl_avstand  = round((_kurs / _sl_kurs - 1) * 100, 1)
+        _total_verdi += _verdi
+        _pos_rader.append({
+            "Aksje":          _pos["navn"] + (" ⚠" if _stale else ""),
+            "Kjøpsdato":      _pos.get("kjøpsdato", "–"),
+            "Antall":         _pos["antall"],
+            "Snittpris":      round(_pos["snittpris"], 2),
+            "Nåkurs":         round(_kurs, 2),
+            "Avkastning %":   round(_gevinst_pct, 1),
+            "Verdi (kr)":     round(_verdi, 0),
+            "SL-kurs":        _sl_kurs,
+            "Avstand til SL": _sl_avstand,
+        })
 
     _pos_verdi = _total_verdi - _kasse
     _avk_pct   = (_total_verdi / _start - 1) * 100 if _start > 0 else 0
@@ -806,6 +813,13 @@ with tab_dash:
     _cm4.metric("Hit rate",         f"{_hit_rate:.0f}%" if _hit_rate is not None else "–",
                 help="Andel lukkede handler med positiv avkastning")
     _cm5.metric("Utførte handler",  _ant_kjøp + _ant_salg)
+
+    if _antall_stale:
+        st.warning(
+            f"⚠️ Kunne ikke hente live-kurs for {_antall_stale} av {len(_posisjoner)} posisjoner "
+            "(yfinance utilgjengelig akkurat nå). Disse verdsettes til kjøpskurs og er markert med ⚠ — "
+            "tallene normaliseres ved neste vellykkede henting."
+        )
 
     # Allokeringsbar
     _pos_farger = ["#4C8BF5", "#7c3aed", "#059669", "#d97706", "#dc2626", "#0891b2"]
@@ -2300,26 +2314,35 @@ with tab_pf:
     if pf["posisjoner"]:
         pos_rader = []
         total_verdi = kasse
+        antall_stale = 0
         for ticker, pos in pf["posisjoner"].items():
-            kurs = hent_siste_kurs(ticker)
-            if kurs:
-                verdi    = kurs * pos["antall"]
-                gevinst  = (kurs - pos["snittpris"]) * pos["antall"]
-                gevinst_pct = (kurs / pos["snittpris"] - 1) * 100
-                total_verdi += verdi
-                pos_rader.append({
-                    "Aksje":      pos["navn"],
-                    "Ticker":     ticker,
-                    "Antall":     pos["antall"],
-                    "Snittpris":  round(pos["snittpris"], 2),
-                    "Kurs nå":    round(kurs, 2),
-                    "Verdi (kr)": round(verdi, 0),
-                    "Gevinst (kr)": round(gevinst, 0),
-                    "Gevinst %":  round(gevinst_pct, 1),
-                })
+            kurs  = hent_siste_kurs(ticker)
+            stale = kurs is None
+            if stale:
+                kurs = pos["snittpris"]
+                antall_stale += 1
+            verdi    = kurs * pos["antall"]
+            gevinst  = (kurs - pos["snittpris"]) * pos["antall"]
+            gevinst_pct = (kurs / pos["snittpris"] - 1) * 100
+            total_verdi += verdi
+            pos_rader.append({
+                "Aksje":      pos["navn"] + (" ⚠" if stale else ""),
+                "Ticker":     ticker,
+                "Antall":     pos["antall"],
+                "Snittpris":  round(pos["snittpris"], 2),
+                "Kurs nå":    round(kurs, 2),
+                "Verdi (kr)": round(verdi, 0),
+                "Gevinst (kr)": round(gevinst, 0),
+                "Gevinst %":  round(gevinst_pct, 1),
+            })
 
         df_pos = pd.DataFrame(pos_rader)
         st.dataframe(df_pos, use_container_width=True, hide_index=True)
+        if antall_stale:
+            st.warning(
+                f"⚠️ Live-kurs utilgjengelig for {antall_stale} posisjon(er) — verdsatt til "
+                "kjøpskurs (markert med ⚠)."
+            )
 
         c1, c2, c3 = st.columns(3)
         c1.metric("Kasse",         f"{kasse:,.0f} kr")

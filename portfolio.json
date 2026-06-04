@@ -1,5 +1,5 @@
 {
-  "kasse": 44221.0,
+  "kasse": 47892.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -125,24 +125,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-06-04"
-    },
-    "AKBM.OL": {
-      "navn": "Aker BioMarine",
-      "antall": 37,
-      "snittpris": 110.80000305175781,
-      "kj\u00f8psdato": "2026-05-28",
-      "h\u00f8yeste_kurs": 112.4000015258789,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
       "utenfor_topp_sist_dato": "2026-06-04"
     },
     "PRS.OL": {
@@ -1988,6 +1970,28 @@
       "bel\u00f8p": 1950.0,
       "kurtasje": 29,
       "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 123.7% \u00b7 rel.styrke 54.2% \u00b7 RSI 64 \u00b7 P/E 57 \u00b7 P/B 5.8",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-04 14:22:52.228733",
+      "handling": "SELG",
+      "ticker": "AKBM.OL",
+      "navn": "Aker BioMarine",
+      "antall": 37,
+      "kurs": 100.0,
+      "bel\u00f8p": 3700.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-11.0% fra topp 112.40 kr \u00b7 kj\u00f8pspris 110.80 kr)",
+      "snittpris": 110.80000305175781,
+      "avkastning_pct": -9.75,
+      "holdingstid": 7,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

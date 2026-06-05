@@ -1,5 +1,5 @@
 {
-  "kasse": 43768.0,
+  "kasse": 48295.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -24,7 +24,7 @@
       "antall": 243,
       "snittpris": 24.149999618530273,
       "kj\u00f8psdato": "2026-05-21",
-      "h\u00f8yeste_kurs": 25.770000457763672,
+      "h\u00f8yeste_kurs": 25.950000762939453,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -89,24 +89,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-05"
-    },
-    "AUTO.OL": {
-      "navn": "AutoStore",
-      "antall": 371,
-      "snittpris": 13.75,
-      "kj\u00f8psdato": "2026-05-27",
-      "h\u00f8yeste_kurs": 13.75,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": -0.4,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 8,
       "utenfor_topp_sist_dato": "2026-06-05"
     },
     "AKER.OL": {
@@ -2033,6 +2015,28 @@
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
         "insider": false,
         "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-05 14:17:17.868272",
+      "handling": "SELG",
+      "ticker": "AUTO.OL",
+      "navn": "AutoStore",
+      "antall": 371,
+      "kurs": 12.279999732971191,
+      "bel\u00f8p": 4556.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.7% fra topp 13.75 kr \u00b7 kj\u00f8pspris 13.75 kr)",
+      "snittpris": 13.75,
+      "avkastning_pct": -10.69,
+      "holdingstid": 9,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }

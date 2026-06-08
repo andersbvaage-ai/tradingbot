@@ -1,5 +1,5 @@
 {
-  "kasse": 48295.0,
+  "kasse": 45194.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -24,7 +24,7 @@
       "antall": 243,
       "snittpris": 24.149999618530273,
       "kj\u00f8psdato": "2026-05-21",
-      "h\u00f8yeste_kurs": 25.950000762939453,
+      "h\u00f8yeste_kurs": 25.989999771118164,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -34,44 +34,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-05"
-    },
-    "DNO.OL": {
-      "navn": "DNO",
-      "antall": 295,
-      "snittpris": 19.3700008392334,
-      "kj\u00f8psdato": "2026-05-22",
-      "h\u00f8yeste_kurs": 19.43000030517578,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-06-05"
-    },
-    "OKEA.OL": {
-      "navn": "Okea",
-      "antall": 140,
-      "snittpris": 39.599998474121094,
-      "kj\u00f8psdato": "2026-05-22",
-      "h\u00f8yeste_kurs": 40.25,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-06-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-08"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -88,15 +52,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-08"
     },
     "AKER.OL": {
       "navn": "Aker",
       "antall": 3,
       "snittpris": 1268.0,
       "kj\u00f8psdato": "2026-05-27",
-      "h\u00f8yeste_kurs": 1278.0,
+      "h\u00f8yeste_kurs": 1280.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -106,8 +70,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-06-05"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-06-08"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -141,8 +105,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-08"
     },
     "NRC.OL": {
       "navn": "NRC Group",
@@ -157,6 +121,56 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-08"
+    },
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 15,
+      "snittpris": 332.20001220703125,
+      "kj\u00f8psdato": "2026-06-08",
+      "h\u00f8yeste_kurs": 332.20001220703125,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "BWE.OL": {
+      "navn": "BW Energy",
+      "antall": 78,
+      "snittpris": 59.79999923706055,
+      "kj\u00f8psdato": "2026-06-08",
+      "h\u00f8yeste_kurs": 59.79999923706055,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "HAUTO.OL": {
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 31,
+      "snittpris": 145.6999969482422,
+      "kj\u00f8psdato": "2026-06-08",
+      "h\u00f8yeste_kurs": 145.6999969482422,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
     }
@@ -2040,9 +2054,110 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-08 09:23:40.251574",
+      "handling": "SELG",
+      "ticker": "DNO.OL",
+      "navn": "DNO",
+      "antall": 295,
+      "kurs": 19.31999969482422,
+      "bel\u00f8p": 5699.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 9 dager p\u00e5 rad",
+      "snittpris": 19.3700008392334,
+      "avkastning_pct": -0.26,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-08 09:23:40.251652",
+      "handling": "SELG",
+      "ticker": "OKEA.OL",
+      "navn": "Okea",
+      "antall": 140,
+      "kurs": 39.349998474121094,
+      "bel\u00f8p": 5509.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 10 dager p\u00e5 rad",
+      "snittpris": 39.599998474121094,
+      "avkastning_pct": -0.63,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-08 09:23:41.104807",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 15,
+      "kurs": 332.20001220703125,
+      "bel\u00f8p": 4983.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 78.8% \u00b7 rel.styrke 34.1% \u00b7 RSI 62 \u00b7 P/E 21 \u00b7 P/B 2.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-08 09:23:41.104895",
+      "handling": "KJ\u00d8P",
+      "ticker": "BWE.OL",
+      "navn": "BW Energy",
+      "antall": 78,
+      "kurs": 59.79999923706055,
+      "bel\u00f8p": 4664.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 52.7% \u00b7 rel.styrke 9.2% \u00b7 RSI 58 \u00b7 P/E 20 \u00b7 P/B 1.6",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-08 09:23:41.104967",
+      "handling": "KJ\u00d8P",
+      "ticker": "HAUTO.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 31,
+      "kurs": 145.6999969482422,
+      "bel\u00f8p": 4517.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 76.8% \u00b7 rel.styrke 2.6% \u00b7 RSI 62 \u00b7 P/E 6 \u00b7 P/B 2.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-06-05 13:47:15.065906",
+  "sist_analysert": "2026-06-08 09:23:41.105009",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2276,6 +2391,10 @@
     {
       "dato": "2026-06-05",
       "total_verdi": 89855.0
+    },
+    {
+      "dato": "2026-06-08",
+      "total_verdi": 89375.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2283,15 +2402,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 78.8,
+      "rel_styrke": 34.1,
+      "rsi": 62.0,
+      "kurs": 332.2,
+      "pe": 21.5,
+      "pb": 2.3,
+      "yield": 593.0
+    },
+    {
       "navn": "Elkem",
       "ticker": "ELK.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 22.5,
-      "rel_styrke": 4.4,
-      "rsi": 65.0,
-      "kurs": 33.22,
+      "score": 4,
+      "mom": 18.1,
+      "rel_styrke": 4.3,
+      "rsi": 61.0,
+      "kurs": 32.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2302,12 +2435,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 55.4,
-      "rel_styrke": 7.8,
-      "rsi": 61.0,
-      "kurs": 60.6,
-      "pe": 20.4,
-      "pb": 1.59,
+      "mom": 52.7,
+      "rel_styrke": 9.2,
+      "rsi": 58.0,
+      "kurs": 59.8,
+      "pe": 20.1,
+      "pb": 1.57,
       "yield": null
     },
     {
@@ -2316,27 +2449,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 46.5,
-      "rel_styrke": 35.5,
-      "rsi": 62.0,
-      "kurs": 4.54,
+      "mom": 40.1,
+      "rel_styrke": 35.4,
+      "rsi": 59.0,
+      "kurs": 4.43,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "NRC Group",
-      "ticker": "NRC.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "ticker": "HAUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 21.2,
-      "rel_styrke": 1.4,
-      "rsi": 53.0,
-      "kurs": 8.34,
-      "pe": 46.3,
-      "pb": 0.94,
-      "yield": null
+      "mom": 76.8,
+      "rel_styrke": 2.6,
+      "rsi": 62.0,
+      "kurs": 145.7,
+      "pe": 6.5,
+      "pb": 2.33,
+      "yield": 1253.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -2579,6 +2712,10 @@
     {
       "dato": "2026-06-05",
       "verdi": 455.0
+    },
+    {
+      "dato": "2026-06-08",
+      "verdi": 744.0
     }
   ]
 }

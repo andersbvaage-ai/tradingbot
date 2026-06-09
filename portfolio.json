@@ -34,8 +34,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-08"
+      "utenfor_topp_streak": 0
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -52,8 +51,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-08"
+      "utenfor_topp_streak": 0
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -70,8 +68,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-06-08"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-06-09"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -105,8 +103,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-08"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-06-09"
     },
     "NRC.OL": {
       "navn": "NRC Group",
@@ -123,8 +121,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-08"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-09"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -140,7 +138,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "BWE.OL": {
       "navn": "BW Energy",
@@ -156,7 +155,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "HAUTO.OL": {
       "navn": "H\u00f6egh Autoliners",
@@ -172,7 +172,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -2157,7 +2158,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-08 09:23:41.105009",
+  "sist_analysert": "2026-06-09 08:31:39.263136",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2395,6 +2396,10 @@
     {
       "dato": "2026-06-08",
       "total_verdi": 89375.0
+    },
+    {
+      "dato": "2026-06-09",
+      "total_verdi": 89242.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2407,13 +2412,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 78.8,
-      "rel_styrke": 34.1,
+      "mom": 77.9,
+      "rel_styrke": 32.8,
+      "rsi": 63.0,
+      "kurs": 333.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "MPC Container Ships",
+      "ticker": "MPCC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 51.6,
+      "rel_styrke": 8.0,
+      "rsi": 70.0,
+      "kurs": 25.87,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 90.3,
+      "rel_styrke": 0.2,
       "rsi": 62.0,
-      "kurs": 332.2,
-      "pe": 21.5,
-      "pb": 2.3,
-      "yield": 593.0
+      "kurs": 114.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Elkem",
@@ -2421,10 +2454,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 18.1,
-      "rel_styrke": 4.3,
-      "rsi": 61.0,
-      "kurs": 32.7,
+      "mom": 17.0,
+      "rel_styrke": 0.7,
+      "rsi": 58.0,
+      "kurs": 32.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2435,12 +2468,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 52.7,
-      "rel_styrke": 9.2,
-      "rsi": 58.0,
-      "kurs": 59.8,
-      "pe": 20.1,
-      "pb": 1.57,
+      "mom": 58.6,
+      "rel_styrke": 9.8,
+      "rsi": 55.0,
+      "kurs": 58.7,
+      "pe": null,
+      "pb": null,
       "yield": null
     },
     {
@@ -2449,27 +2482,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 40.1,
-      "rel_styrke": 35.4,
-      "rsi": 59.0,
-      "kurs": 4.43,
+      "mom": 36.0,
+      "rel_styrke": 40.3,
+      "rsi": 60.0,
+      "kurs": 4.5,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "H\u00f6egh Autoliners",
-      "ticker": "HAUTO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 76.8,
-      "rel_styrke": 2.6,
-      "rsi": 62.0,
-      "kurs": 145.7,
-      "pe": 6.5,
-      "pb": 2.33,
-      "yield": 1253.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -2483,13 +2502,13 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 4.75,
+    "BORR.OL": 4.98,
     "GSF.OL": 3.51,
-    "HEX.OL": 6.32,
-    "2020.OL": 4.17,
-    "NAS.OL": 3.16,
+    "HEX.OL": 5.69,
+    "2020.OL": 4.93,
+    "NAS.OL": 3.13,
     "BAKKA.OL": 2.49,
-    "LINK.OL": 10.14,
+    "LINK.OL": 10.03,
     "KID.OL": 3.73
   },
   "urealisert_historikk": [
@@ -2716,6 +2735,10 @@
     {
       "dato": "2026-06-08",
       "verdi": 744.0
+    },
+    {
+      "dato": "2026-06-09",
+      "verdi": 611.0
     }
   ]
 }

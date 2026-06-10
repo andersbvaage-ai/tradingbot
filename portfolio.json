@@ -1,5 +1,5 @@
 {
-  "kasse": 45194.0,
+  "kasse": 38224.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ELK.OL": {
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -34,8 +35,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-09"
+      "utenfor_topp_streak": 0
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -52,7 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -69,8 +70,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-06-09"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -87,7 +88,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -104,8 +106,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-06-09"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "NRC.OL": {
       "navn": "NRC Group",
@@ -122,8 +124,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-09"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -157,7 +159,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-10"
     },
     "HAUTO.OL": {
       "navn": "H\u00f6egh Autoliners",
@@ -175,6 +178,22 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
+    },
+    "EPR.OL": {
+      "navn": "Europris",
+      "antall": 74,
+      "snittpris": 93.80000305175781,
+      "kj\u00f8psdato": "2026-06-10",
+      "h\u00f8yeste_kurs": 93.80000305175781,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -2157,9 +2176,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-10 08:50:09.837238",
+      "handling": "KJ\u00d8P",
+      "ticker": "EPR.OL",
+      "navn": "Europris",
+      "antall": 74,
+      "kurs": 93.80000305175781,
+      "bel\u00f8p": 6941.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 7.4% \u00b7 rel.styrke 4.0% \u00b7 RSI 57 \u00b7 P/E 17 \u00b7 P/B 3.6",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-06-09 13:37:32.491103",
+  "sist_analysert": "2026-06-10 08:50:09.837347",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2401,6 +2439,10 @@
     {
       "dato": "2026-06-09",
       "total_verdi": 89639.0
+    },
+    {
+      "dato": "2026-06-10",
+      "total_verdi": 88627.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2413,66 +2455,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 79.7,
-      "rel_styrke": 33.9,
-      "rsi": 64.0,
-      "kurs": 337.2,
+      "mom": 79.0,
+      "rel_styrke": 32.8,
+      "rsi": 62.0,
+      "kurs": 332.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Kitron",
-      "ticker": "KIT.OL",
+      "navn": "MPC Container Ships",
+      "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 91.5,
-      "rel_styrke": 0.4,
-      "rsi": 64.0,
-      "kurs": 114.7,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Elkem",
-      "ticker": "ELK.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 19.7,
-      "rel_styrke": 2.8,
-      "rsi": 61.0,
-      "kurs": 33.04,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW Energy",
-      "ticker": "BWE.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 57.6,
-      "rel_styrke": 8.6,
-      "rsi": 53.0,
-      "kurs": 58.3,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Prosafe",
-      "ticker": "PRS.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 36.6,
-      "rel_styrke": 40.5,
-      "rsi": 61.0,
-      "kurs": 4.52,
+      "score": 3,
+      "mom": 50.6,
+      "rel_styrke": 12.7,
+      "rsi": 68.0,
+      "kurs": 25.95,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2483,18 +2483,32 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 78.4,
-      "rel_styrke": 6.1,
+      "mom": 76.4,
+      "rel_styrke": 11.6,
       "rsi": 64.0,
-      "kurs": 148.2,
+      "kurs": 148.5,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Europris",
+      "ticker": "EPR.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 7.4,
+      "rel_styrke": 4.0,
+      "rsi": 57.0,
+      "kurs": 93.8,
+      "pe": 17.2,
+      "pb": 3.57,
+      "yield": 399.0
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": -1,
-    "Shipping": 1
+    "Shipping": -1
   },
   "insider_kj\u00f8p": [
     "DOFG.OL",
@@ -2740,6 +2754,10 @@
     {
       "dato": "2026-06-09",
       "verdi": 1008.0
+    },
+    {
+      "dato": "2026-06-10",
+      "verdi": 25.0
     }
   ]
 }

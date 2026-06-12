@@ -1,61 +1,7 @@
 {
-  "kasse": 42599.0,
+  "kasse": 58930.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "ELK.OL": {
-      "navn": "Elkem",
-      "antall": 166,
-      "snittpris": 29.440000534057617,
-      "kj\u00f8psdato": "2026-05-20",
-      "h\u00f8yeste_kurs": 34.5,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-11"
-    },
-    "MPCC.OL": {
-      "navn": "MPC Container Ships",
-      "antall": 243,
-      "snittpris": 24.149999618530273,
-      "kj\u00f8psdato": "2026-05-21",
-      "h\u00f8yeste_kurs": 27.15999984741211,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-11"
-    },
-    "KIT.OL": {
-      "navn": "Kitron",
-      "antall": 42,
-      "snittpris": 112.30000305175781,
-      "kj\u00f8psdato": "2026-05-26",
-      "h\u00f8yeste_kurs": 115.9000015258789,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-11"
-    },
     "PRS.OL": {
       "navn": "Prosafe",
       "antall": 890,
@@ -71,8 +17,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-11"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-06-12"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -89,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-06-11"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-06-12"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -124,7 +70,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-12"
     },
     "HAUTO.OL": {
       "navn": "H\u00f6egh Autoliners",
@@ -141,8 +88,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-11"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-12"
     },
     "EPR.OL": {
       "navn": "Europris",
@@ -159,8 +106,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-11"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-06-12"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -2242,9 +2189,75 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-12 08:58:22.266901",
+      "handling": "SELG",
+      "ticker": "ELK.OL",
+      "navn": "Elkem",
+      "antall": 166,
+      "kurs": 32.41999816894531,
+      "bel\u00f8p": 5382.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 29.440000534057617,
+      "avkastning_pct": 10.12,
+      "holdingstid": 23,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-12 08:58:22.267050",
+      "handling": "SELG",
+      "ticker": "MPCC.OL",
+      "navn": "MPC Container Ships",
+      "antall": 243,
+      "kurs": 26.75,
+      "bel\u00f8p": 6500.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 24.149999618530273,
+      "avkastning_pct": 10.77,
+      "holdingstid": 22,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-12 08:58:22.267145",
+      "handling": "SELG",
+      "ticker": "KIT.OL",
+      "navn": "Kitron",
+      "antall": 42,
+      "kurs": 108.0,
+      "bel\u00f8p": 4536.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 112.30000305175781,
+      "avkastning_pct": -3.83,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-06-11 14:29:03.078616",
+  "sist_analysert": "2026-06-12 08:58:22.267735",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -2494,6 +2507,10 @@
     {
       "dato": "2026-06-11",
       "total_verdi": 89682.0
+    },
+    {
+      "dato": "2026-06-12",
+      "total_verdi": 89104.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2506,24 +2523,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 89.4,
-      "rel_styrke": 38.3,
-      "rsi": 67.0,
-      "kurs": 344.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "BW Energy",
-      "ticker": "BWE.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 70.2,
-      "rel_styrke": 4.8,
-      "rsi": 57.0,
-      "kurs": 59.9,
+      "mom": 86.6,
+      "rel_styrke": 33.0,
+      "rsi": 66.0,
+      "kurs": 343.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2534,10 +2537,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 73.4,
-      "rel_styrke": 19.5,
-      "rsi": 62.0,
-      "kurs": 204.2,
+      "mom": 57.2,
+      "rel_styrke": 15.8,
+      "rsi": 54.0,
+      "kurs": 196.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2549,6 +2552,7 @@
   },
   "insider_kj\u00f8p": [
     "DOFG.OL",
+    "LINK.OL",
     "PEXIP.OL"
   ],
   "short_interest": {
@@ -2799,6 +2803,10 @@
     {
       "dato": "2026-06-11",
       "verdi": 1499.0
+    },
+    {
+      "dato": "2026-06-12",
+      "verdi": 62.0
     }
   ]
 }

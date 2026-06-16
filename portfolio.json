@@ -1,5 +1,5 @@
 {
-  "kasse": 44925.0,
+  "kasse": 49077.0,
   "start_kapital": 100000,
   "posisjoner": {
     "PRS.OL": {
@@ -17,8 +17,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-06-15"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-06-16"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -35,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-06-15"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-06-16"
     },
     "SUBC.OL": {
       "navn": "Subsea 7",
@@ -53,26 +53,7 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-15"
-    },
-    "BWE.OL": {
-      "navn": "BW Energy",
-      "antall": 78,
-      "snittpris": 59.79999923706055,
-      "kj\u00f8psdato": "2026-06-08",
-      "h\u00f8yeste_kurs": 60.099998474121094,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-15"
+      "utenfor_topp_streak": 0
     },
     "HAUTO.OL": {
       "navn": "H\u00f6egh Autoliners",
@@ -106,8 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-06-15"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-06-16"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -124,7 +105,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-16"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -157,7 +139,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-16"
     }
   },
   "ventende_handler": [],
@@ -2326,10 +2310,32 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-16 10:09:14.606014",
+      "handling": "SELG",
+      "ticker": "BWE.OL",
+      "navn": "BW Energy",
+      "antall": 78,
+      "kurs": 53.599998474121094,
+      "bel\u00f8p": 4181.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.8% fra topp 60.10 kr \u00b7 kj\u00f8pspris 59.80 kr)",
+      "snittpris": 59.79999923706055,
+      "avkastning_pct": -10.37,
+      "holdingstid": 8,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-06-15 10:55:37.503528",
-  "regime": "Bull",
+  "sist_analysert": "2026-06-16 10:09:16.077373",
+  "regime": "Sideways",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
@@ -2586,6 +2592,10 @@
     {
       "dato": "2026-06-15",
       "total_verdi": 88882.0
+    },
+    {
+      "dato": "2026-06-16",
+      "total_verdi": 88611.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2593,32 +2603,32 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "MPC Container Ships",
-      "ticker": "MPCC.OL",
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 50.3,
-      "rel_styrke": 12.1,
-      "rsi": 65.0,
-      "kurs": 26.2,
+      "score": 3,
+      "mom": 82.3,
+      "rel_styrke": 39.3,
+      "rsi": 70.0,
+      "kurs": 351.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "AF Gruppen",
-      "ticker": "AFG.OL",
+      "navn": "MPC Container Ships",
+      "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 7.6,
-      "rel_styrke": 4.0,
-      "rsi": 63.0,
-      "kurs": 188.2,
-      "pe": 17.9,
-      "pb": 6.07,
-      "yield": 347.0
+      "score": 3,
+      "mom": 53.3,
+      "rel_styrke": 16.8,
+      "rsi": 67.0,
+      "kurs": 26.6,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Wallenius Wilhelmsen",
@@ -2626,27 +2636,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 41.6,
-      "rel_styrke": 5.3,
-      "rsi": 63.0,
-      "kurs": 134.8,
-      "pe": 5.9,
-      "pb": 2.0,
-      "yield": 948.0
-    },
-    {
-      "navn": "BW LPG",
-      "ticker": "BWLPG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 58.9,
-      "rel_styrke": 16.6,
-      "rsi": 56.0,
-      "kurs": 198.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 41.0,
+      "rel_styrke": 6.0,
+      "rsi": 61.0,
+      "kurs": 133.9,
+      "pe": 5.8,
+      "pb": 1.98,
+      "yield": 983.0
     },
     {
       "navn": "H\u00f6egh Autoliners",
@@ -2655,26 +2651,12 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 80.8,
-      "rel_styrke": 15.4,
-      "rsi": 64.0,
-      "kurs": 154.6,
+      "rel_styrke": 19.1,
+      "rsi": 63.0,
+      "kurs": 155.1,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "Solstad Offshore",
-      "ticker": "SOFF.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 54.1,
-      "rel_styrke": 8.0,
-      "rsi": 50.0,
-      "kurs": 63.8,
-      "pe": 4.0,
-      "pb": 1.28,
-      "yield": 221.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -2688,13 +2670,13 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 5.6,
+    "BORR.OL": 5.69,
     "GSF.OL": 3.39,
     "HEX.OL": 4.1,
-    "2020.OL": 5.53,
-    "NAS.OL": 3.73,
+    "2020.OL": 5.74,
+    "NAS.OL": 3.45,
     "BAKKA.OL": 2.49,
-    "LINK.OL": 10.27,
+    "LINK.OL": 10.9,
     "KID.OL": 3.73
   },
   "urealisert_historikk": [
@@ -2941,6 +2923,10 @@
     {
       "dato": "2026-06-15",
       "verdi": -102.0
+    },
+    {
+      "dato": "2026-06-16",
+      "verdi": 140.0
     }
   ]
 }

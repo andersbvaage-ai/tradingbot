@@ -122,7 +122,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-17"
     }
   },
   "ventende_handler": [],
@@ -2378,7 +2380,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-17 09:51:42.805406",
+  "sist_analysert": "2026-06-17 14:23:27.506184",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2643,7 +2645,7 @@
     },
     {
       "dato": "2026-06-17",
-      "total_verdi": 87573.0
+      "total_verdi": 87552.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2655,11 +2657,11 @@
       "ticker": "SUBC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 78.6,
-      "rel_styrke": 42.2,
-      "rsi": 65.0,
-      "kurs": 347.0,
+      "score": 3,
+      "mom": 81.3,
+      "rel_styrke": 44.2,
+      "rsi": 67.0,
+      "kurs": 352.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2670,27 +2672,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.6,
-      "rel_styrke": 5.2,
-      "rsi": 57.0,
-      "kurs": 131.5,
+      "mom": 30.9,
+      "rel_styrke": 4.5,
+      "rsi": 56.0,
+      "kurs": 130.8,
       "pe": 5.7,
-      "pb": 1.95,
+      "pb": 1.94,
       "yield": 986.0
-    },
-    {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 15.0,
-      "rel_styrke": 0.3,
-      "rsi": 65.0,
-      "kurs": 184.2,
-      "pe": 15.6,
-      "pb": 6.74,
-      "yield": 615.0
     },
     {
       "navn": "Frontline",
@@ -2698,18 +2686,32 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 55.3,
-      "rel_styrke": 22.1,
+      "mom": 56.1,
+      "rel_styrke": 22.5,
       "rsi": 69.0,
-      "kurs": 371.3,
-      "pe": 9.6,
-      "pb": 3.06,
+      "kurs": 373.3,
+      "pe": 9.7,
+      "pb": 3.08,
+      "yield": null
+    },
+    {
+      "navn": "H\u00f6egh Autoliners",
+      "ticker": "HAUTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 68.5,
+      "rel_styrke": 17.6,
+      "rsi": 58.0,
+      "kurs": 151.0,
+      "pe": null,
+      "pb": null,
       "yield": null
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": -1,
-    "Shipping": -1
+    "Shipping": 1
   },
   "insider_kj\u00f8p": [
     "DOFG.OL",
@@ -2718,14 +2720,14 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 5.81,
+    "BORR.OL": 6,
     "GSF.OL": 3.39,
     "HEX.OL": 4.1,
-    "2020.OL": 5.84,
-    "NAS.OL": 3.34,
-    "BAKKA.OL": 2.49,
-    "LINK.OL": 10.71,
-    "KID.OL": 3.73
+    "2020.OL": 5.67,
+    "NAS.OL": 3.3,
+    "BAKKA.OL": 2.6,
+    "LINK.OL": 10.61,
+    "KID.OL": 3.83
   },
   "urealisert_historikk": [
     {
@@ -2978,7 +2980,7 @@
     },
     {
       "dato": "2026-06-17",
-      "verdi": -218.0
+      "verdi": -239.0
     }
   ]
 }

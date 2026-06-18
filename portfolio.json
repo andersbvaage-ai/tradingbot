@@ -1,5 +1,5 @@
 {
-  "kasse": 53279.0,
+  "kasse": 57748.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ZAP.OL": {
@@ -36,24 +36,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "HAUTO.OL": {
-      "navn": "H\u00f6egh Autoliners",
-      "antall": 31,
-      "snittpris": 145.6999969482422,
-      "kj\u00f8psdato": "2026-06-08",
-      "h\u00f8yeste_kurs": 162.1999969482422,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-18"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -2380,6 +2362,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-06-18 10:14:49.535834",
+      "handling": "SELG",
+      "ticker": "HAUTO.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 31,
+      "kurs": 145.10000610351562,
+      "bel\u00f8p": 4498.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.5% fra topp 162.20 kr \u00b7 kj\u00f8pspris 145.70 kr)",
+      "snittpris": 145.6999969482422,
+      "avkastning_pct": -0.41,
+      "holdingstid": 10,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
     }

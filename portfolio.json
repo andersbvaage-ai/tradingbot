@@ -1,25 +1,7 @@
 {
-  "kasse": 55905.0,
+  "kasse": 61033.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "SUBC.OL": {
-      "navn": "Subsea 7",
-      "antall": 15,
-      "snittpris": 332.20001220703125,
-      "kj\u00f8psdato": "2026-06-08",
-      "h\u00f8yeste_kurs": 357.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-06-23"
-    },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
       "antall": 221,
@@ -35,8 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-06-23"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-06-24"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -60,7 +42,7 @@
       "antall": 47,
       "snittpris": 184.1999969482422,
       "kj\u00f8psdato": "2026-06-17",
-      "h\u00f8yeste_kurs": 186.39999389648438,
+      "h\u00f8yeste_kurs": 187.0,
       "stop_loss_pct": 0.0872,
       "signaler": {
         "ensemble": 3,
@@ -70,14 +52,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-24"
     },
     "FRO.OL": {
       "navn": "Frontline",
       "antall": 10,
       "snittpris": 365.5,
       "kj\u00f8psdato": "2026-06-18",
-      "h\u00f8yeste_kurs": 408.3999938964844,
+      "h\u00f8yeste_kurs": 422.1000061035156,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -87,8 +70,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-06-23"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-06-24"
     }
   },
   "ventende_handler": [],
@@ -2427,9 +2410,31 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-24 08:23:12.213832",
+      "handling": "SELG",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 15,
+      "kurs": 343.79998779296875,
+      "bel\u00f8p": 5157.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 332.20001220703125,
+      "avkastning_pct": 3.49,
+      "holdingstid": 16,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-06-23 13:35:58.711892",
+  "sist_analysert": "2026-06-24 08:23:13.008266",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2711,6 +2716,10 @@
     {
       "dato": "2026-06-23",
       "total_verdi": 87533.0
+    },
+    {
+      "dato": "2026-06-24",
+      "total_verdi": 87901.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2722,14 +2731,14 @@
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 51.2,
-      "rel_styrke": 24.1,
-      "rsi": 62.0,
-      "kurs": 149.8,
-      "pe": 8.9,
-      "pb": 1.52,
-      "yield": 586.0
+      "score": 3,
+      "mom": 59.1,
+      "rel_styrke": 32.7,
+      "rsi": 68.0,
+      "kurs": 156.4,
+      "pe": 9.3,
+      "pb": 1.59,
+      "yield": 562.0
     },
     {
       "navn": "AF Gruppen",
@@ -2738,35 +2747,33 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 5.0,
-      "rel_styrke": 11.6,
+      "rel_styrke": 14.7,
       "rsi": 62.0,
-      "kurs": 189.2,
+      "kurs": 189.0,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
+      "navn": "Wallenius Wilhelmsen",
+      "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 14.3,
-      "rel_styrke": 4.4,
-      "rsi": 68.0,
-      "kurs": 185.8,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "score": 4,
+      "mom": 33.4,
+      "rel_styrke": 13.5,
+      "rsi": 63.0,
+      "kurs": 136.8,
+      "pe": 5.8,
+      "pb": 1.95,
+      "yield": 972.0
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": -1,
     "Shipping": -1
   },
-  "insider_kj\u00f8p": [
-    "LINK.OL"
-  ],
+  "insider_kj\u00f8p": [],
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
@@ -3047,6 +3054,10 @@
     {
       "dato": "2026-06-23",
       "verdi": 385.0
+    },
+    {
+      "dato": "2026-06-24",
+      "verdi": 608.0
     }
   ]
 }

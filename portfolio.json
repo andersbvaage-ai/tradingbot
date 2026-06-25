@@ -1,5 +1,5 @@
 {
-  "kasse": 61033.0,
+  "kasse": 51563.0,
   "start_kapital": 100000,
   "posisjoner": {
     "MPCC.OL": {
@@ -17,15 +17,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-06-24"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-06-25"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
       "antall": 43,
       "snittpris": 188.1999969482422,
       "kj\u00f8psdato": "2026-06-15",
-      "h\u00f8yeste_kurs": 190.8000030517578,
+      "h\u00f8yeste_kurs": 193.60000610351562,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -42,7 +42,7 @@
       "antall": 47,
       "snittpris": 184.1999969482422,
       "kj\u00f8psdato": "2026-06-17",
-      "h\u00f8yeste_kurs": 188.1999969482422,
+      "h\u00f8yeste_kurs": 190.1999969482422,
       "stop_loss_pct": 0.0872,
       "signaler": {
         "ensemble": 3,
@@ -52,8 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-24"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-25"
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -70,8 +70,24 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-06-24"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-06-25"
+    },
+    "NONG.OL": {
+      "navn": "SpareBank 1 Nord-Norge",
+      "antall": 62,
+      "snittpris": 152.27999877929688,
+      "kj\u00f8psdato": "2026-06-25",
+      "h\u00f8yeste_kurs": 152.27999877929688,
+      "stop_loss_pct": 0.0883,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -2432,9 +2448,28 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-06-25 08:24:00.399422",
+      "handling": "KJ\u00d8P",
+      "ticker": "NONG.OL",
+      "navn": "SpareBank 1 Nord-Norge",
+      "antall": 62,
+      "kurs": 152.27999877929688,
+      "bel\u00f8p": 9441.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 9.2% \u00b7 rel.styrke 6.0% \u00b7 RSI 56 \u00b7 P/E 10 \u00b7 P/B 0.9",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-06-24 13:11:38.198647",
+  "sist_analysert": "2026-06-25 08:24:00.399555",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2720,6 +2755,10 @@
     {
       "dato": "2026-06-24",
       "total_verdi": 87855.0
+    },
+    {
+      "dato": "2026-06-25",
+      "total_verdi": 87808.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2731,42 +2770,56 @@
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 56.1,
-      "rel_styrke": 30.4,
-      "rsi": 65.0,
-      "kurs": 153.4,
-      "pe": 9.1,
-      "pb": 1.56,
-      "yield": 562.0
+      "score": 4,
+      "mom": 49.2,
+      "rel_styrke": 28.2,
+      "rsi": 57.0,
+      "kurs": 148.0,
+      "pe": 8.8,
+      "pb": 1.51,
+      "yield": 560.0
     },
     {
       "navn": "AF Gruppen",
       "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 5.1,
-      "rel_styrke": 15.0,
-      "rsi": 62.0,
-      "kurs": 189.2,
+      "score": 3,
+      "mom": 9.0,
+      "rel_styrke": 18.3,
+      "rsi": 70.0,
+      "kurs": 193.6,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Wallenius Wilhelmsen",
-      "ticker": "WAWI.OL",
+      "navn": "SpareBank 1 Nord-Norge",
+      "ticker": "NONG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 32.1,
-      "rel_styrke": 12.5,
-      "rsi": 61.0,
-      "kurs": 135.4,
-      "pe": 5.8,
-      "pb": 1.93,
-      "yield": 972.0
+      "mom": 9.2,
+      "rel_styrke": 6.0,
+      "rsi": 56.0,
+      "kurs": 152.28,
+      "pe": 10.2,
+      "pb": 0.85,
+      "yield": 556.0
+    },
+    {
+      "navn": "AKVA Group",
+      "ticker": "AKVA.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 51.8,
+      "rel_styrke": 30.8,
+      "rsi": 69.0,
+      "kurs": 135.5,
+      "pe": 24.9,
+      "pb": 3.56,
+      "yield": 149.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -2782,10 +2835,10 @@
     "BORR.OL": 6.02,
     "GSF.OL": 2.81,
     "HEX.OL": 4.1,
-    "2020.OL": 5.57,
+    "2020.OL": 5.58,
     "NAS.OL": 2.68,
     "BAKKA.OL": 2.6,
-    "LINK.OL": 10.5,
+    "LINK.OL": 10.09,
     "KID.OL": 3.83
   },
   "urealisert_historikk": [
@@ -3060,6 +3113,10 @@
     {
       "dato": "2026-06-24",
       "verdi": 563.0
+    },
+    {
+      "dato": "2026-06-25",
+      "verdi": 545.0
     }
   ]
 }

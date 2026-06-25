@@ -25,7 +25,7 @@
       "antall": 43,
       "snittpris": 188.1999969482422,
       "kj\u00f8psdato": "2026-06-15",
-      "h\u00f8yeste_kurs": 194.39999389648438,
+      "h\u00f8yeste_kurs": 194.60000610351562,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -35,8 +35,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-25"
+      "utenfor_topp_streak": 0
     },
     "VEI.OL": {
       "navn": "Veidekke",
@@ -88,8 +87,7 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 0
+      }
     }
   },
   "ventende_handler": [],
@@ -2471,7 +2469,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-25 13:10:18.553680",
+  "sist_analysert": "2026-06-25 08:24:00.399555",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2760,7 +2758,7 @@
     },
     {
       "dato": "2026-06-25",
-      "total_verdi": 87852.0
+      "total_verdi": 87808.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2773,13 +2771,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 49.6,
-      "rel_styrke": 28.7,
-      "rsi": 58.0,
-      "kurs": 148.4,
+      "mom": 49.2,
+      "rel_styrke": 28.2,
+      "rsi": 57.0,
+      "kurs": 148.0,
       "pe": 8.8,
       "pb": 1.51,
       "yield": 560.0
+    },
+    {
+      "navn": "AF Gruppen",
+      "ticker": "AFG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 9.0,
+      "rel_styrke": 18.3,
+      "rsi": 70.0,
+      "kurs": 193.6,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "SpareBank 1 Nord-Norge",
@@ -2787,13 +2799,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 9.0,
-      "rel_styrke": 5.9,
-      "rsi": 55.0,
-      "kurs": 152.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 9.2,
+      "rel_styrke": 6.0,
+      "rsi": 56.0,
+      "kurs": 152.28,
+      "pe": 10.2,
+      "pb": 0.85,
+      "yield": 556.0
     },
     {
       "navn": "AKVA Group",
@@ -2801,12 +2813,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 50.1,
-      "rel_styrke": 29.5,
-      "rsi": 67.0,
-      "kurs": 134.0,
-      "pe": 24.6,
-      "pb": 3.52,
+      "mom": 51.8,
+      "rel_styrke": 30.8,
+      "rsi": 69.0,
+      "kurs": 135.5,
+      "pe": 24.9,
+      "pb": 3.56,
       "yield": 149.0
     }
   ],
@@ -3104,7 +3116,7 @@
     },
     {
       "dato": "2026-06-25",
-      "verdi": 589.0
+      "verdi": 545.0
     }
   ]
 }

@@ -86,7 +86,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -2509,7 +2510,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-26 08:30:38.318688",
+  "sist_analysert": "2026-06-26 13:02:55.294600",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2802,7 +2803,7 @@
     },
     {
       "dato": "2026-06-26",
-      "total_verdi": 87843.0
+      "total_verdi": 87692.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2815,41 +2816,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 46.5,
-      "rel_styrke": 20.9,
-      "rsi": 49.0,
-      "kurs": 142.2,
-      "pe": 8.4,
-      "pb": 1.43,
-      "yield": 580.0
+      "mom": 45.0,
+      "rel_styrke": 20.1,
+      "rsi": 48.0,
+      "kurs": 140.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "AF Gruppen",
       "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 7.8,
-      "rel_styrke": 17.4,
-      "rsi": 68.0,
-      "kurs": 193.2,
+      "score": 4,
+      "mom": 7.1,
+      "rel_styrke": 17.1,
+      "rsi": 65.0,
+      "kurs": 192.0,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "Wallenius Wilhelmsen",
-      "ticker": "WAWI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 35.2,
-      "rel_styrke": 18.1,
-      "rsi": 61.0,
-      "kurs": 136.3,
-      "pe": 5.8,
-      "pb": 1.94,
-      "yield": 971.0
     },
     {
       "navn": "Frontline",
@@ -2857,13 +2844,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 61.9,
-      "rel_styrke": 17.5,
-      "rsi": 55.0,
-      "kurs": 375.0,
-      "pe": 9.4,
+      "mom": 60.8,
+      "rel_styrke": 17.1,
+      "rsi": 54.0,
+      "kurs": 372.4,
+      "pe": 9.3,
       "pb": 3.0,
       "yield": 1516.0
+    },
+    {
+      "navn": "SpareBank 1 Nord-Norge",
+      "ticker": "NONG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 9.3,
+      "rel_styrke": 4.5,
+      "rsi": 57.0,
+      "kurs": 152.92,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -3164,7 +3165,7 @@
     },
     {
       "dato": "2026-06-26",
-      "verdi": 543.0
+      "verdi": 391.0
     }
   ]
 }

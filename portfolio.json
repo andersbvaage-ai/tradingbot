@@ -34,8 +34,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-06-30"
+      "utenfor_topp_streak": 0
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -2552,7 +2551,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-30 08:31:03.901372",
+  "sist_analysert": "2026-06-30 13:03:28.684156",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2853,7 +2852,7 @@
     },
     {
       "dato": "2026-06-30",
-      "total_verdi": 87631.0
+      "total_verdi": 87598.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2866,10 +2865,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 7.3,
-      "rel_styrke": 18.8,
-      "rsi": 67.0,
-      "kurs": 193.6,
+      "mom": 7.8,
+      "rel_styrke": 19.2,
+      "rsi": 69.0,
+      "kurs": 194.4,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Veidekke",
+      "ticker": "VEI.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 15.7,
+      "rel_styrke": 10.2,
+      "rsi": 70.0,
+      "kurs": 189.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2880,27 +2893,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 9.1,
-      "rel_styrke": 6.3,
+      "mom": 8.9,
+      "rel_styrke": 6.1,
       "rsi": 58.0,
-      "kurs": 153.2,
+      "kurs": 153.0,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "AKVA Group",
-      "ticker": "AKVA.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 39.7,
-      "rel_styrke": 20.7,
-      "rsi": 52.0,
-      "kurs": 127.5,
-      "pe": 23.4,
-      "pb": 3.35,
-      "yield": 150.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3209,7 +3208,7 @@
     },
     {
       "dato": "2026-06-30",
-      "verdi": 487.0
+      "verdi": 455.0
     }
   ]
 }

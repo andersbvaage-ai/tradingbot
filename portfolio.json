@@ -34,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-06-29"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-06-30"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-06-29"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-06-30"
     },
     "FRO.OL": {
       "navn": "Frontline",
@@ -86,7 +86,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-06-30"
     }
   },
   "ventende_handler": [],
@@ -2550,7 +2552,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-06-29 09:26:28.302970",
+  "sist_analysert": "2026-06-30 08:31:03.901372",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2848,6 +2850,10 @@
     {
       "dato": "2026-06-29",
       "total_verdi": 87735.0
+    },
+    {
+      "dato": "2026-06-30",
+      "total_verdi": 87631.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2860,27 +2866,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 9.6,
-      "rel_styrke": 17.6,
-      "rsi": 69.0,
-      "kurs": 194.2,
+      "mom": 7.3,
+      "rel_styrke": 18.8,
+      "rsi": 67.0,
+      "kurs": 193.6,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 57.5,
-      "rel_styrke": 7.7,
-      "rsi": 48.0,
-      "kurs": 358.0,
-      "pe": 9.0,
-      "pb": 2.8,
-      "yield": 1646.0
     },
     {
       "navn": "SpareBank 1 Nord-Norge",
@@ -2888,10 +2880,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 10.1,
-      "rel_styrke": 5.2,
-      "rsi": 56.0,
-      "kurs": 152.62,
+      "mom": 9.1,
+      "rel_styrke": 6.3,
+      "rsi": 58.0,
+      "kurs": 153.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2902,13 +2894,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 50.0,
-      "rel_styrke": 27.8,
-      "rsi": 63.0,
-      "kurs": 133.0,
-      "pe": 24.5,
-      "pb": 3.5,
-      "yield": 148.0
+      "mom": 39.7,
+      "rel_styrke": 20.7,
+      "rsi": 52.0,
+      "kurs": 127.5,
+      "pe": 23.4,
+      "pb": 3.35,
+      "yield": 150.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -2924,8 +2916,8 @@
     "BORR.OL": 6.1,
     "GSF.OL": 2.81,
     "HEX.OL": 4.1,
-    "2020.OL": 4.93,
-    "NAS.OL": 2.2,
+    "2020.OL": 5,
+    "NAS.OL": 2.31,
     "BAKKA.OL": 2.6,
     "LINK.OL": 10.5,
     "KID.OL": 3.83
@@ -3214,6 +3206,10 @@
     {
       "dato": "2026-06-29",
       "verdi": 591.0
+    },
+    {
+      "dato": "2026-06-30",
+      "verdi": 487.0
     }
   ]
 }

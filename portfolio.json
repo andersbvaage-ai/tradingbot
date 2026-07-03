@@ -25,7 +25,7 @@
       "antall": 47,
       "snittpris": 184.1999969482422,
       "kj\u00f8psdato": "2026-06-17",
-      "h\u00f8yeste_kurs": 193.39999389648438,
+      "h\u00f8yeste_kurs": 193.60000610351562,
       "stop_loss_pct": 0.0872,
       "signaler": {
         "ensemble": 3,
@@ -35,7 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-03"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -95,7 +96,7 @@
       "antall": 46,
       "snittpris": 79.19999694824219,
       "kj\u00f8psdato": "2026-07-01",
-      "h\u00f8yeste_kurs": 83.9000015258789,
+      "h\u00f8yeste_kurs": 84.30000305175781,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -105,7 +106,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-03"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -2625,7 +2627,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-03 08:09:39.161868",
+  "sist_analysert": "2026-07-03 12:52:03.996382",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2938,7 +2940,7 @@
     },
     {
       "dato": "2026-07-03",
-      "total_verdi": 88207.0
+      "total_verdi": 88453.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2946,60 +2948,32 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 16.1,
-      "rel_styrke": 13.9,
-      "rsi": 70.0,
-      "kurs": 191.6,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Wilh. Wilhelmsen A",
-      "ticker": "WWI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 27.0,
-      "rel_styrke": 8.3,
-      "rsi": 56.0,
-      "kurs": 719.0,
-      "pe": 4.8,
-      "pb": 0.95,
-      "yield": 392.0
-    },
-    {
       "navn": "SpareBank 1 Nord-Norge",
       "ticker": "NONG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 8.4,
-      "rel_styrke": 5.0,
+      "mom": 8.3,
+      "rel_styrke": 4.6,
       "rsi": 62.0,
-      "kurs": 154.92,
+      "kurs": 154.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Pexip",
-      "ticker": "PEXIP.OL",
+      "navn": "AKVA Group",
+      "ticker": "AKVA.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 13.5,
-      "rel_styrke": 52.3,
-      "rsi": 69.0,
-      "kurs": 83.1,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "score": 4,
+      "mom": 44.4,
+      "rel_styrke": 25.9,
+      "rsi": 51.0,
+      "kurs": 127.5,
+      "pe": 23.4,
+      "pb": 3.35,
+      "yield": 156.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3318,7 +3292,7 @@
     },
     {
       "dato": "2026-07-03",
-      "verdi": 1121.0
+      "verdi": 1367.0
     }
   ]
 }

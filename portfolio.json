@@ -7,7 +7,7 @@
       "antall": 43,
       "snittpris": 188.1999969482422,
       "kj\u00f8psdato": "2026-06-15",
-      "h\u00f8yeste_kurs": 198.39999389648438,
+      "h\u00f8yeste_kurs": 198.60000610351562,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -59,7 +59,7 @@
       "antall": 26,
       "snittpris": 142.1999969482422,
       "kj\u00f8psdato": "2026-06-26",
-      "h\u00f8yeste_kurs": 147.39999389648438,
+      "h\u00f8yeste_kurs": 148.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -77,7 +77,7 @@
       "antall": 10,
       "snittpris": 358.0,
       "kj\u00f8psdato": "2026-06-29",
-      "h\u00f8yeste_kurs": 364.20001220703125,
+      "h\u00f8yeste_kurs": 364.6000061035156,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,

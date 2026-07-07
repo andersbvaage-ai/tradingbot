@@ -1,5 +1,5 @@
 {
-  "kasse": 55039.0,
+  "kasse": 50124.0,
   "start_kapital": 100000,
   "posisjoner": {
     "VEI.OL": {
@@ -17,8 +17,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-07"
+      "utenfor_topp_streak": 0
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -90,23 +89,21 @@
       "utenfor_topp_streak": 2,
       "utenfor_topp_sist_dato": "2026-07-07"
     },
-    "AUTO.OL": {
-      "navn": "AutoStore",
-      "antall": 269,
-      "snittpris": 12.680000305175781,
-      "kj\u00f8psdato": "2026-07-02",
-      "h\u00f8yeste_kurs": 12.680000305175781,
-      "stop_loss_pct": 0.1,
+    "AFG.OL": {
+      "navn": "AF Gruppen",
+      "antall": 41,
+      "snittpris": 197.39999389648438,
+      "kj\u00f8psdato": "2026-07-07",
+      "h\u00f8yeste_kurs": 197.39999389648438,
+      "stop_loss_pct": 0.0974,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
         "insider": false,
-        "short_score": -0.4,
+        "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-07-07"
+      }
     }
   },
   "ventende_handler": [],
@@ -2628,9 +2625,50 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-07-07 13:11:38.337080",
+      "handling": "SELG",
+      "ticker": "AUTO.OL",
+      "navn": "AutoStore",
+      "antall": 269,
+      "kurs": 12.029999732971191,
+      "bel\u00f8p": 3236.0,
+      "kurtasje": 29,
+      "begrunnelse": "Ensemble snudd (0/3 \u2014 Trend, MACD og Momentum alle negative)",
+      "snittpris": 12.680000305175781,
+      "avkastning_pct": -5.13,
+      "holdingstid": 5,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-07-07 13:11:38.684933",
+      "handling": "KJ\u00d8P",
+      "ticker": "AFG.OL",
+      "navn": "AF Gruppen",
+      "antall": 41,
+      "kurs": 197.39999389648438,
+      "bel\u00f8p": 8093.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 9.8% \u00b7 rel.styrke 23.1% \u00b7 RSI 70 \u00b7 P/E 19 \u00b7 P/B 6.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-07 08:24:14.288134",
+  "sist_analysert": "2026-07-07 13:11:38.685104",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2951,7 +2989,7 @@
     },
     {
       "dato": "2026-07-07",
-      "total_verdi": 88503.0
+      "total_verdi": 88318.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -2964,10 +3002,38 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 53.7,
-      "rel_styrke": 27.5,
-      "rsi": 58.0,
-      "kurs": 150.0,
+      "mom": 56.3,
+      "rel_styrke": 29.0,
+      "rsi": 57.0,
+      "kurs": 149.6,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "AF Gruppen",
+      "ticker": "AFG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 9.8,
+      "rel_styrke": 23.1,
+      "rsi": 70.0,
+      "kurs": 197.4,
+      "pe": 18.8,
+      "pb": 6.37,
+      "yield": 329.0
+    },
+    {
+      "navn": "Veidekke",
+      "ticker": "VEI.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 15.6,
+      "rel_styrke": 12.2,
+      "rsi": 62.0,
+      "kurs": 190.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -2978,41 +3044,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 24.6,
-      "rel_styrke": 6.2,
+      "mom": 25.3,
+      "rel_styrke": 5.4,
       "rsi": 54.0,
       "kurs": 714.0,
       "pe": 4.7,
       "pb": 0.95,
-      "yield": 391.0
-    },
-    {
-      "navn": "Wilh. Wilhelmsen B",
-      "ticker": "WWIB.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 21.3,
-      "rel_styrke": 8.1,
-      "rsi": 59.0,
-      "kurs": 642.0,
-      "pe": 4.3,
-      "pb": 0.85,
-      "yield": 312.0
-    },
-    {
-      "navn": "SpareBank 1 Nord-Norge",
-      "ticker": "NONG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 9.0,
-      "rel_styrke": 5.4,
-      "rsi": 66.0,
-      "kurs": 156.66,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "yield": 393.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3339,7 +3377,7 @@
     },
     {
       "dato": "2026-07-07",
-      "verdi": 1034.0
+      "verdi": 1081.0
     }
   ]
 }

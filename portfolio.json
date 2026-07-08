@@ -68,8 +68,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-07-07"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-07-08"
     },
     "PEXIP.OL": {
       "navn": "Pexip",
@@ -86,8 +86,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-07-07"
+      "utenfor_topp_streak": 0
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -103,7 +102,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -2668,7 +2668,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-07 13:11:38.685104",
+  "sist_analysert": "2026-07-08 07:29:53.856571",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -2990,6 +2990,10 @@
     {
       "dato": "2026-07-07",
       "total_verdi": 88318.0
+    },
+    {
+      "dato": "2026-07-08",
+      "total_verdi": 88129.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3002,10 +3006,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 56.3,
-      "rel_styrke": 29.0,
-      "rsi": 57.0,
-      "kurs": 149.6,
+      "mom": 55.7,
+      "rel_styrke": 29.4,
+      "rsi": 56.0,
+      "kurs": 149.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3015,14 +3019,14 @@
       "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 9.8,
-      "rel_styrke": 23.1,
-      "rsi": 70.0,
-      "kurs": 197.4,
-      "pe": 18.8,
-      "pb": 6.37,
-      "yield": 329.0
+      "score": 4,
+      "mom": 8.9,
+      "rel_styrke": 23.0,
+      "rsi": 65.0,
+      "kurs": 195.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Veidekke",
@@ -3030,10 +3034,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 15.6,
-      "rel_styrke": 12.2,
-      "rsi": 62.0,
-      "kurs": 190.4,
+      "mom": 14.5,
+      "rel_styrke": 12.0,
+      "rsi": 57.0,
+      "kurs": 188.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3044,10 +3048,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 25.3,
-      "rel_styrke": 5.4,
-      "rsi": 54.0,
-      "kurs": 714.0,
+      "mom": 25.8,
+      "rel_styrke": 6.6,
+      "rsi": 55.0,
+      "kurs": 717.0,
       "pe": 4.7,
       "pb": 0.95,
       "yield": 393.0
@@ -3063,7 +3067,7 @@
     "AUTO.OL": 2.2,
     "BORR.OL": 6.08,
     "GSF.OL": 2.31,
-    "HEX.OL": 4.03,
+    "HEX.OL": 3.46,
     "2020.OL": 5.18,
     "NAS.OL": 2.47,
     "BAKKA.OL": 3.43,
@@ -3378,6 +3382,10 @@
     {
       "dato": "2026-07-07",
       "verdi": 1081.0
+    },
+    {
+      "dato": "2026-07-08",
+      "verdi": 892.0
     }
   ]
 }

@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-09"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -2706,7 +2707,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-09 08:28:05.496099",
+  "sist_analysert": "2026-07-09 13:42:48.449381",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3035,7 +3036,7 @@
     },
     {
       "dato": "2026-07-09",
-      "total_verdi": 88741.0
+      "total_verdi": 88475.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3048,10 +3049,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 82.7,
-      "rel_styrke": 25.0,
-      "rsi": 61.0,
-      "kurs": 46.24,
+      "mom": 75.1,
+      "rel_styrke": 27.2,
+      "rsi": 59.0,
+      "kurs": 45.98,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3062,24 +3063,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 56.8,
-      "rel_styrke": 26.9,
-      "rsi": 59.0,
-      "kurs": 151.8,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 16.4,
-      "rel_styrke": 11.6,
-      "rsi": 65.0,
-      "kurs": 192.6,
+      "mom": 50.6,
+      "rel_styrke": 27.0,
+      "rsi": 56.0,
+      "kurs": 149.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3090,13 +3077,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 24.9,
-      "rel_styrke": 3.1,
-      "rsi": 55.0,
-      "kurs": 717.0,
+      "mom": 23.8,
+      "rel_styrke": 0.8,
+      "rsi": 52.0,
+      "kurs": 712.0,
       "pe": 4.7,
       "pb": 0.95,
-      "yield": 393.0
+      "yield": 388.0
+    },
+    {
+      "navn": "Wilh. Wilhelmsen B",
+      "ticker": "WWIB.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 21.3,
+      "rel_styrke": 3.5,
+      "rsi": 59.0,
+      "kurs": 647.0,
+      "pe": 4.3,
+      "pb": 0.86,
+      "yield": 305.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3107,14 +3108,14 @@
   "short_interest": {
     "NOD.OL": 2.65,
     "AUTO.OL": 2.2,
-    "BORR.OL": 6.74,
+    "BORR.OL": 6.79,
     "GSF.OL": 2.31,
     "HEX.OL": 3.41,
     "2020.OL": 5.13,
-    "NAS.OL": 2.47,
+    "NAS.OL": 3.07,
     "BAKKA.OL": 3.43,
     "LINK.OL": 8.93,
-    "KID.OL": 3.83
+    "KID.OL": 3.82
   },
   "urealisert_historikk": [
     {
@@ -3431,7 +3432,7 @@
     },
     {
       "dato": "2026-07-09",
-      "verdi": 1533.0
+      "verdi": 1267.0
     }
   ]
 }

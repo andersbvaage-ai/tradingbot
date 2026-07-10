@@ -17,8 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-09"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-07-10"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -35,8 +35,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-09"
+      "utenfor_topp_streak": 0
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -70,8 +69,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-07-09"
+      "utenfor_topp_streak": 9,
+      "utenfor_topp_sist_dato": "2026-07-10"
     },
     "PEXIP.OL": {
       "navn": "Pexip",
@@ -105,8 +104,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-09"
+      "utenfor_topp_streak": 0
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -2707,7 +2705,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-09 13:42:48.449381",
+  "sist_analysert": "2026-07-10 08:23:44.168234",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3037,6 +3035,10 @@
     {
       "dato": "2026-07-09",
       "total_verdi": 88475.0
+    },
+    {
+      "dato": "2026-07-10",
+      "total_verdi": 88077.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3049,10 +3051,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 75.1,
-      "rel_styrke": 27.2,
+      "mom": 81.5,
+      "rel_styrke": 24.9,
       "rsi": 59.0,
-      "kurs": 45.98,
+      "kurs": 45.94,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3063,41 +3065,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 50.6,
+      "mom": 42.8,
       "rel_styrke": 27.0,
-      "rsi": 56.0,
-      "kurs": 149.6,
+      "rsi": 52.0,
+      "kurs": 146.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Wilh. Wilhelmsen A",
-      "ticker": "WWI.OL",
+      "navn": "AF Gruppen",
+      "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 23.8,
-      "rel_styrke": 0.8,
-      "rsi": 52.0,
-      "kurs": 712.0,
-      "pe": 4.7,
-      "pb": 0.95,
-      "yield": 388.0
+      "score": 3,
+      "mom": 10.3,
+      "rel_styrke": 23.6,
+      "rsi": 68.0,
+      "kurs": 198.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
-      "navn": "Wilh. Wilhelmsen B",
-      "ticker": "WWIB.OL",
+      "navn": "Aker",
+      "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 21.3,
-      "rel_styrke": 3.5,
-      "rsi": 59.0,
-      "kurs": 647.0,
-      "pe": 4.3,
-      "pb": 0.86,
-      "yield": 305.0
+      "mom": 64.3,
+      "rel_styrke": 25.0,
+      "rsi": 57.0,
+      "kurs": 1220.0,
+      "pe": 22.4,
+      "pb": 1.94,
+      "yield": 673.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3433,6 +3435,10 @@
     {
       "dato": "2026-07-09",
       "verdi": 1267.0
+    },
+    {
+      "dato": "2026-07-10",
+      "verdi": 870.0
     }
   ]
 }

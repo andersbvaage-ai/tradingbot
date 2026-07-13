@@ -1,25 +1,7 @@
 {
-  "kasse": 45471.0,
+  "kasse": 47070.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "VEI.OL": {
-      "navn": "Veidekke",
-      "antall": 47,
-      "snittpris": 184.1999969482422,
-      "kj\u00f8psdato": "2026-06-17",
-      "h\u00f8yeste_kurs": 193.8000030517578,
-      "stop_loss_pct": 0.0872,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-07-10"
-    },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
       "antall": 62,
@@ -42,7 +24,7 @@
       "antall": 26,
       "snittpris": 142.1999969482422,
       "kj\u00f8psdato": "2026-06-26",
-      "h\u00f8yeste_kurs": 151.8000030517578,
+      "h\u00f8yeste_kurs": 152.8000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -52,15 +34,14 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-10"
+      "utenfor_topp_streak": 0
     },
     "FRO.OL": {
       "navn": "Frontline",
       "antall": 10,
       "snittpris": 358.0,
       "kj\u00f8psdato": "2026-06-29",
-      "h\u00f8yeste_kurs": 371.70001220703125,
+      "h\u00f8yeste_kurs": 371.79998779296875,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -70,8 +51,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-07-10"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-07-13"
     },
     "PEXIP.OL": {
       "navn": "Pexip",
@@ -88,8 +69,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-10"
+      "utenfor_topp_streak": 0
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -106,7 +86,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-13"
     },
     "AKSO.OL": {
       "navn": "Aker Solutions",
@@ -124,6 +105,38 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "AKER.OL": {
+      "navn": "Aker",
+      "antall": 3,
+      "snittpris": 1246.0,
+      "kj\u00f8psdato": "2026-07-13",
+      "h\u00f8yeste_kurs": 1246.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
+    },
+    "PRS.OL": {
+      "navn": "Prosafe",
+      "antall": 798,
+      "snittpris": 4.335000038146973,
+      "kj\u00f8psdato": "2026-07-13",
+      "h\u00f8yeste_kurs": 4.335000038146973,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -2705,9 +2718,69 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-07-13 08:17:43.612996",
+      "handling": "SELG",
+      "ticker": "VEI.OL",
+      "navn": "Veidekke",
+      "antall": 47,
+      "kurs": 189.0,
+      "bel\u00f8p": 8883.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 184.1999969482422,
+      "avkastning_pct": 2.61,
+      "holdingstid": 26,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-07-13 08:17:44.041399",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 3,
+      "kurs": 1246.0,
+      "bel\u00f8p": 3738.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 67.8% \u00b7 rel.styrke 25.7% \u00b7 RSI 61 \u00b7 P/E 23 \u00b7 P/B 2.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-07-13 08:17:44.041520",
+      "handling": "KJ\u00d8P",
+      "ticker": "PRS.OL",
+      "navn": "Prosafe",
+      "antall": 798,
+      "kurs": 4.335000038146973,
+      "bel\u00f8p": 3459.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 24.9% \u00b7 rel.styrke 30.8% \u00b7 RSI 53 \u00b7 P/E 0 \u00b7 P/B 1.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-10 13:03:52.294213",
+  "sist_analysert": "2026-07-13 08:17:44.041558",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3041,6 +3114,10 @@
     {
       "dato": "2026-07-10",
       "total_verdi": 88203.0
+    },
+    {
+      "dato": "2026-07-13",
+      "total_verdi": 88147.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3053,24 +3130,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 82.3,
-      "rel_styrke": 25.5,
-      "rsi": 60.0,
-      "kurs": 46.12,
+      "mom": 78.9,
+      "rel_styrke": 24.9,
+      "rsi": 58.0,
+      "kurs": 45.94,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "AF Gruppen",
-      "ticker": "AFG.OL",
+      "navn": "CMB.TECH",
+      "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 10.6,
-      "rel_styrke": 23.9,
-      "rsi": 69.0,
-      "kurs": 199.2,
+      "score": 4,
+      "mom": 36.0,
+      "rel_styrke": 34.8,
+      "rsi": 59.0,
+      "kurs": 152.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3081,27 +3158,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 64.5,
-      "rel_styrke": 25.3,
-      "rsi": 57.0,
-      "kurs": 1222.0,
-      "pe": 22.5,
-      "pb": 1.94,
+      "mom": 67.8,
+      "rel_styrke": 25.7,
+      "rsi": 61.0,
+      "kurs": 1246.0,
+      "pe": 22.9,
+      "pb": 1.98,
       "yield": 671.0
     },
     {
-      "navn": "Wilh. Wilhelmsen A",
-      "ticker": "WWI.OL",
+      "navn": "Prosafe",
+      "ticker": "PRS.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 20.3,
-      "rel_styrke": 2.2,
-      "rsi": 50.0,
-      "kurs": 707.0,
-      "pe": 4.7,
-      "pb": 0.94,
-      "yield": 394.0
+      "mom": 24.9,
+      "rel_styrke": 30.8,
+      "rsi": 53.0,
+      "kurs": 4.34,
+      "pe": 0.3,
+      "pb": 1.09,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -3115,10 +3192,10 @@
     "BORR.OL": 6.79,
     "GSF.OL": 2.31,
     "HEX.OL": 3.41,
-    "2020.OL": 5.13,
-    "NAS.OL": 3.07,
+    "2020.OL": 5.74,
+    "NAS.OL": 3.18,
     "BAKKA.OL": 3.43,
-    "LINK.OL": 8.93,
+    "LINK.OL": 9.43,
     "KID.OL": 3.82
   },
   "urealisert_historikk": [
@@ -3441,6 +3518,10 @@
     {
       "dato": "2026-07-10",
       "verdi": 995.0
+    },
+    {
+      "dato": "2026-07-13",
+      "verdi": 800.0
     }
   ]
 }

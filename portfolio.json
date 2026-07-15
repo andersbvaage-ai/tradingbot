@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-15"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -86,7 +87,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-15"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -120,8 +122,7 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-15"
+      "utenfor_topp_streak": 0
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
@@ -2823,7 +2824,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-15 07:15:22.520325",
+  "sist_analysert": "2026-07-15 12:09:32.316939",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3168,7 +3169,7 @@
     },
     {
       "dato": "2026-07-15",
-      "total_verdi": 87981.0
+      "total_verdi": 87798.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3176,29 +3177,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker Solutions",
-      "ticker": "AKSO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 78.3,
-      "rel_styrke": 23.6,
-      "rsi": 57.0,
-      "kurs": 45.8,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "CMB.TECH",
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.4,
-      "rel_styrke": 32.4,
+      "mom": 38.2,
+      "rel_styrke": 27.2,
       "rsi": 57.0,
-      "kurs": 151.0,
+      "kurs": 152.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3209,10 +3196,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 69.9,
-      "rel_styrke": 26.4,
-      "rsi": 64.0,
-      "kurs": 1262.0,
+      "mom": 66.9,
+      "rel_styrke": 28.0,
+      "rsi": 63.0,
+      "kurs": 1264.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3223,10 +3210,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.6,
-      "rel_styrke": 10.7,
-      "rsi": 58.0,
-      "kurs": 137.6,
+      "mom": 34.8,
+      "rel_styrke": 16.9,
+      "rsi": 61.0,
+      "kurs": 140.7,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3582,7 +3569,7 @@
     },
     {
       "dato": "2026-07-15",
-      "verdi": 606.0
+      "verdi": 422.0
     }
   ]
 }

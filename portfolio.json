@@ -1,5 +1,5 @@
 {
-  "kasse": 46931.0,
+  "kasse": 51059.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -17,8 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-15"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-07-16"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -69,26 +69,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-07-15"
-    },
-    "AKSO.OL": {
-      "navn": "Aker Solutions",
-      "antall": 100,
-      "snittpris": 46.2400016784668,
-      "kj\u00f8psdato": "2026-07-08",
-      "h\u00f8yeste_kurs": 46.31999969482422,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-07-15"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-07-16"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -2822,9 +2804,31 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-07-16 07:22:51.283570",
+      "handling": "SELG",
+      "ticker": "AKSO.OL",
+      "navn": "Aker Solutions",
+      "antall": 100,
+      "kurs": 41.56999969482422,
+      "bel\u00f8p": 4157.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.3% fra topp 46.32 kr \u00b7 kj\u00f8pspris 46.24 kr)",
+      "snittpris": 46.2400016784668,
+      "avkastning_pct": -10.1,
+      "holdingstid": 8,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-15 12:09:32.316939",
+  "sist_analysert": "2026-07-16 07:22:52.852225",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3170,6 +3174,10 @@
     {
       "dato": "2026-07-15",
       "total_verdi": 87798.0
+    },
+    {
+      "dato": "2026-07-16",
+      "total_verdi": 87387.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3182,10 +3190,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 38.2,
-      "rel_styrke": 27.2,
-      "rsi": 57.0,
-      "kurs": 152.2,
+      "mom": 36.3,
+      "rel_styrke": 25.8,
+      "rsi": 55.0,
+      "kurs": 150.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3196,10 +3204,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 66.9,
-      "rel_styrke": 28.0,
-      "rsi": 63.0,
-      "kurs": 1264.0,
+      "mom": 63.2,
+      "rel_styrke": 25.6,
+      "rsi": 57.0,
+      "kurs": 1236.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3210,10 +3218,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.8,
-      "rel_styrke": 16.9,
-      "rsi": 61.0,
-      "kurs": 140.7,
+      "mom": 33.6,
+      "rel_styrke": 16.2,
+      "rsi": 60.0,
+      "kurs": 139.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3232,10 +3240,11 @@
     "BORR.OL": 6.88,
     "GSF.OL": 2.31,
     "HEX.OL": 3.92,
-    "2020.OL": 5,
-    "NAS.OL": 3.45,
+    "2020.OL": 4.81,
+    "NAS.OL": 3.36,
     "BAKKA.OL": 3.43,
-    "LINK.OL": 9.32,
+    "LINK.OL": 9.24,
+    "NORBT.OL": 2.05,
     "KID.OL": 3.82
   },
   "urealisert_historikk": [
@@ -3570,6 +3579,10 @@
     {
       "dato": "2026-07-15",
       "verdi": 422.0
+    },
+    {
+      "dato": "2026-07-16",
+      "verdi": 508.0
     }
   ]
 }

@@ -34,7 +34,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-17"
     },
     "PEXIP.OL": {
       "navn": "Pexip",
@@ -2828,7 +2829,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-17 07:17:50.212182",
+  "sist_analysert": "2026-07-17 12:02:47.959882",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3181,7 +3182,7 @@
     },
     {
       "dato": "2026-07-17",
-      "total_verdi": 87135.0
+      "total_verdi": 87284.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3189,29 +3190,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "CMB.TECH",
-      "ticker": "CMBTO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 28.7,
-      "rel_styrke": 22.9,
-      "rsi": 52.0,
-      "kurs": 148.2,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "Aker",
       "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 48.1,
-      "rel_styrke": 17.9,
-      "rsi": 43.0,
-      "kurs": 1156.0,
+      "mom": 52.5,
+      "rel_styrke": 17.4,
+      "rsi": 50.0,
+      "kurs": 1198.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3222,10 +3209,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 30.6,
-      "rel_styrke": 17.1,
-      "rsi": 57.0,
-      "kurs": 138.0,
+      "mom": 31.8,
+      "rel_styrke": 16.2,
+      "rsi": 58.0,
+      "kurs": 138.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Prosafe",
+      "ticker": "PRS.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 29.6,
+      "rel_styrke": 35.9,
+      "rsi": 59.0,
+      "kurs": 4.51,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3591,7 +3592,7 @@
     },
     {
       "dato": "2026-07-17",
-      "verdi": 256.0
+      "verdi": 404.0
     }
   ]
 }

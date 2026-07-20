@@ -2834,7 +2834,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-07-20 08:06:28.228344",
+  "sist_analysert": "2026-07-20 13:01:01.942199",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3191,7 +3191,7 @@
     },
     {
       "dato": "2026-07-20",
-      "total_verdi": 86990.0
+      "total_verdi": 87046.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3204,10 +3204,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 55.9,
-      "rel_styrke": 23.3,
-      "rsi": 54.0,
-      "kurs": 1228.0,
+      "mom": 57.2,
+      "rel_styrke": 24.5,
+      "rsi": 55.0,
+      "kurs": 1238.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3218,10 +3218,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.7,
-      "rel_styrke": 14.7,
+      "mom": 34.4,
+      "rel_styrke": 14.6,
       "rsi": 54.0,
-      "kurs": 136.6,
+      "kurs": 136.3,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3232,10 +3232,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.5,
-      "rel_styrke": 34.7,
-      "rsi": 57.0,
-      "kurs": 4.49,
+      "mom": 33.4,
+      "rel_styrke": 36.8,
+      "rsi": 60.0,
+      "kurs": 4.55,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3605,7 +3605,7 @@
     },
     {
       "dato": "2026-07-20",
-      "verdi": 80.0
+      "verdi": 136.0
     }
   ]
 }

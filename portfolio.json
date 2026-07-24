@@ -1,5 +1,5 @@
 {
-  "kasse": 70922.0,
+  "kasse": 65085.0,
   "start_kapital": 100000,
   "posisjoner": {
     "AKER.OL": {
@@ -69,6 +69,22 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "AKBM.OL": {
+      "navn": "Aker BioMarine",
+      "antall": 55,
+      "snittpris": 105.5999984741211,
+      "kj\u00f8psdato": "2026-07-24",
+      "h\u00f8yeste_kurs": 105.5999984741211,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -2880,9 +2896,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-07-24 12:11:43.855102",
+      "handling": "KJ\u00d8P",
+      "ticker": "AKBM.OL",
+      "navn": "Aker BioMarine",
+      "antall": 55,
+      "kurs": 105.5999984741211,
+      "bel\u00f8p": 5808.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 8.4% \u00b7 rel.styrke 1.1% \u00b7 RSI 61 \u00b7 P/E 24 \u00b7 P/B 6.7",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-24 07:31:40.392080",
+  "sist_analysert": "2026-07-24 12:11:43.855172",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3255,7 +3290,7 @@
     },
     {
       "dato": "2026-07-24",
-      "total_verdi": 87506.0
+      "total_verdi": 87689.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3268,10 +3303,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 55.7,
-      "rel_styrke": 22.3,
+      "mom": 53.3,
+      "rel_styrke": 20.7,
       "rsi": 55.0,
-      "kurs": 1240.0,
+      "kurs": 1246.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3281,27 +3316,27 @@
       "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 40.2,
-      "rel_styrke": 26.2,
+      "score": 3,
+      "mom": 42.4,
+      "rel_styrke": 25.3,
       "rsi": 65.0,
-      "kurs": 144.0,
+      "kurs": 144.9,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Prosafe",
-      "ticker": "PRS.OL",
+      "navn": "Aker BioMarine",
+      "ticker": "AKBM.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 42.4,
-      "rel_styrke": 40.0,
-      "rsi": 62.0,
-      "kurs": 4.68,
-      "pe": null,
-      "pb": null,
+      "mom": 8.4,
+      "rel_styrke": 1.1,
+      "rsi": 61.0,
+      "kurs": 105.6,
+      "pe": 24.3,
+      "pb": 6.68,
       "yield": null
     }
   ],
@@ -3685,7 +3720,7 @@
     },
     {
       "dato": "2026-07-24",
-      "verdi": 464.0
+      "verdi": 676.0
     }
   ]
 }

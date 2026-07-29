@@ -1,5 +1,5 @@
 {
-  "kasse": 60597.0,
+  "kasse": 64909.0,
   "start_kapital": 100000,
   "posisjoner": {
     "AKER.OL": {
@@ -17,25 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
-    },
-    "PRS.OL": {
-      "navn": "Prosafe",
-      "antall": 798,
-      "snittpris": 4.335000038146973,
-      "kj\u00f8psdato": "2026-07-13",
-      "h\u00f8yeste_kurs": 5.510000228881836,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-07-28"
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-29"
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
@@ -102,7 +85,9 @@
         "short_score": -0.4,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-07-29"
     }
   },
   "ventende_handler": [],
@@ -2952,9 +2937,31 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-07-29 07:43:57.812350",
+      "handling": "SELG",
+      "ticker": "PRS.OL",
+      "navn": "Prosafe",
+      "antall": 798,
+      "kurs": 5.440000057220459,
+      "bel\u00f8p": 4341.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 4.335000038146973,
+      "avkastning_pct": 25.49,
+      "holdingstid": 16,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-28 07:39:52.715127",
+  "sist_analysert": "2026-07-29 07:43:58.043823",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3336,6 +3343,10 @@
     {
       "dato": "2026-07-28",
       "total_verdi": 87796.0
+    },
+    {
+      "dato": "2026-07-29",
+      "total_verdi": 87747.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3343,29 +3354,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Aker",
-      "ticker": "AKER.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 48.4,
-      "rel_styrke": 17.4,
-      "rsi": 50.0,
-      "kurs": 1216.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
       "navn": "Wallenius Wilhelmsen",
       "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 41.3,
-      "rel_styrke": 23.8,
-      "rsi": 63.0,
-      "kurs": 144.0,
+      "mom": 42.4,
+      "rel_styrke": 26.1,
+      "rsi": 65.0,
+      "kurs": 146.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3376,26 +3373,40 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 7.7,
-      "rel_styrke": 3.4,
-      "rsi": 59.0,
-      "kurs": 104.8,
+      "mom": 6.2,
+      "rel_styrke": 4.1,
+      "rsi": 58.0,
+      "kurs": 104.6,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "Hexagon Composites",
-      "ticker": "HEX.OL",
+      "navn": "Frontline",
+      "ticker": "FRO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 33.7,
-      "rel_styrke": 2.5,
-      "rsi": 69.0,
-      "kurs": 11.12,
-      "pe": 29.3,
-      "pb": 1.06,
+      "score": 4,
+      "mom": 47.3,
+      "rel_styrke": 16.3,
+      "rsi": 55.0,
+      "kurs": 377.0,
+      "pe": 9.7,
+      "pb": 3.08,
+      "yield": 1624.0
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 49.7,
+      "rel_styrke": 21.0,
+      "rsi": 58.0,
+      "kurs": 207.2,
+      "pe": null,
+      "pb": null,
       "yield": null
     }
   ],
@@ -3413,10 +3424,10 @@
     "BORR.OL": 6.72,
     "GSF.OL": 2.17,
     "HEX.OL": 2.82,
-    "2020.OL": 4.26,
-    "NAS.OL": 3.82,
+    "2020.OL": 4.01,
+    "NAS.OL": 2.98,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.96,
+    "LINK.OL": 8.36,
     "NORBT.OL": 2.2,
     "KID.OL": 3.82
   },
@@ -3788,6 +3799,10 @@
     {
       "dato": "2026-07-28",
       "verdi": 812.0
+    },
+    {
+      "dato": "2026-07-29",
+      "verdi": -90.0
     }
   ]
 }

@@ -1,25 +1,7 @@
 {
-  "kasse": 64909.0,
+  "kasse": 68480.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "AKER.OL": {
-      "navn": "Aker",
-      "antall": 3,
-      "snittpris": 1246.0,
-      "kj\u00f8psdato": "2026-07-13",
-      "h\u00f8yeste_kurs": 1282.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-07-30"
-    },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
       "antall": 27,
@@ -42,7 +24,7 @@
       "antall": 25,
       "snittpris": 207.0,
       "kj\u00f8psdato": "2026-07-23",
-      "h\u00f8yeste_kurs": 212.60000610351562,
+      "h\u00f8yeste_kurs": 213.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -2958,9 +2940,31 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-07-31 07:50:35.181170",
+      "handling": "SELG",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 3,
+      "kurs": 1200.0,
+      "bel\u00f8p": 3600.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 1246.0,
+      "avkastning_pct": -3.69,
+      "holdingstid": 18,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-07-30 12:22:35.017075",
+  "sist_analysert": "2026-07-31 07:50:35.441553",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3350,6 +3354,10 @@
     {
       "dato": "2026-07-30",
       "total_verdi": 87867.0
+    },
+    {
+      "dato": "2026-07-31",
+      "total_verdi": 88011.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3357,13 +3365,27 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "CMB.TECH",
+      "ticker": "CMBTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 30.5,
+      "rel_styrke": 24.7,
+      "rsi": 58.0,
+      "kurs": 154.2,
+      "pe": 9.2,
+      "pb": 1.58,
+      "yield": 573.0
+    },
+    {
       "navn": "Wallenius Wilhelmsen",
       "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
       "mom": 38.4,
-      "rel_styrke": 24.5,
+      "rel_styrke": 25.0,
       "rsi": 67.0,
       "kurs": 147.9,
       "pe": null,
@@ -3376,10 +3398,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 5.6,
-      "rel_styrke": 5.3,
-      "rsi": 58.0,
-      "kurs": 104.4,
+      "mom": 5.2,
+      "rel_styrke": 5.5,
+      "rsi": 56.0,
+      "kurs": 104.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3389,28 +3411,14 @@
       "ticker": "HEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 35.1,
-      "rel_styrke": 2.1,
-      "rsi": 65.0,
-      "kurs": 10.98,
+      "score": 3,
+      "mom": 37.6,
+      "rel_styrke": 4.6,
+      "rsi": 68.0,
+      "kurs": 11.19,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 43.0,
-      "rel_styrke": 10.5,
-      "rsi": 52.0,
-      "kurs": 370.4,
-      "pe": 9.4,
-      "pb": 3.0,
-      "yield": 1617.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3418,17 +3426,16 @@
     "Shipping": 1
   },
   "insider_kj\u00f8p": [
-    "NAS.OL",
-    "ODF.OL"
+    "NAS.OL"
   ],
   "short_interest": {
     "NOD.OL": 2.68,
     "AUTO.OL": 2.2,
     "BORR.OL": 6.81,
     "GSF.OL": 2.17,
-    "HEX.OL": 2.7,
-    "2020.OL": 3.94,
-    "NAS.OL": 2.98,
+    "HEX.OL": 3.21,
+    "2020.OL": 3.47,
+    "NAS.OL": 2.36,
     "BAKKA.OL": 2.98,
     "LINK.OL": 7.75,
     "NORBT.OL": 2.2,
@@ -3810,6 +3817,10 @@
     {
       "dato": "2026-07-30",
       "verdi": 31.0
+    },
+    {
+      "dato": "2026-07-31",
+      "verdi": 341.0
     }
   ]
 }

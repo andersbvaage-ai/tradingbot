@@ -58,7 +58,7 @@
       "antall": 401,
       "snittpris": 11.119999885559082,
       "kj\u00f8psdato": "2026-07-28",
-      "h\u00f8yeste_kurs": 11.449999809265137,
+      "h\u00f8yeste_kurs": 11.75,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -68,15 +68,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-03"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-04"
     },
     "AKER.OL": {
       "navn": "Aker",
       "antall": 3,
       "snittpris": 1296.0,
       "kj\u00f8psdato": "2026-08-03",
-      "h\u00f8yeste_kurs": 1296.0,
+      "h\u00f8yeste_kurs": 1312.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -85,7 +85,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -3000,7 +3001,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-03 13:33:02.905748",
+  "sist_analysert": "2026-08-04 07:40:35.018509",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3398,6 +3399,10 @@
     {
       "dato": "2026-08-03",
       "total_verdi": 88083.0
+    },
+    {
+      "dato": "2026-08-04",
+      "total_verdi": 88531.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3410,12 +3415,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 28.3,
-      "rel_styrke": 17.5,
+      "mom": 28.6,
+      "rel_styrke": 17.1,
       "rsi": 60.0,
-      "kurs": 155.6,
-      "pe": 9.3,
-      "pb": 1.62,
+      "kurs": 156.0,
+      "pe": 9.4,
+      "pb": 1.63,
       "yield": 556.0
     },
     {
@@ -3424,24 +3429,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 49.5,
-      "rel_styrke": 17.7,
-      "rsi": 61.0,
-      "kurs": 1296.0,
-      "pe": 3.4,
-      "pb": 1.43,
-      "yield": 644.0
+      "mom": 51.3,
+      "rel_styrke": 18.5,
+      "rsi": 63.0,
+      "kurs": 1312.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Wallenius Wilhelmsen",
       "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 36.5,
-      "rel_styrke": 25.2,
-      "rsi": 65.0,
-      "kurs": 147.0,
+      "score": 4,
+      "mom": 36.0,
+      "rel_styrke": 24.1,
+      "rsi": 64.0,
+      "kurs": 146.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3452,10 +3457,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 12.7,
-      "rel_styrke": 9.5,
-      "rsi": 65.0,
-      "kurs": 109.0,
+      "mom": 13.8,
+      "rel_styrke": 9.9,
+      "rsi": 68.0,
+      "kurs": 110.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3463,7 +3468,7 @@
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
-    "Shipping": 1
+    "Shipping": -1
   },
   "insider_kj\u00f8p": [
     "NAS.OL"
@@ -3865,6 +3870,10 @@
     {
       "dato": "2026-08-03",
       "verdi": 442.0
+    },
+    {
+      "dato": "2026-08-04",
+      "verdi": 891.0
     }
   ]
 }

@@ -58,7 +58,7 @@
       "antall": 401,
       "snittpris": 11.119999885559082,
       "kj\u00f8psdato": "2026-07-28",
-      "h\u00f8yeste_kurs": 12.369999885559082,
+      "h\u00f8yeste_kurs": 12.5600004196167,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -68,8 +68,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-04"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-05"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -3001,7 +3001,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-04 12:53:18.299626",
+  "sist_analysert": "2026-08-05 07:39:25.398052",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3403,6 +3403,10 @@
     {
       "dato": "2026-08-04",
       "total_verdi": 88844.0
+    },
+    {
+      "dato": "2026-08-05",
+      "total_verdi": 88670.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3415,13 +3419,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 29.4,
-      "rel_styrke": 18.1,
-      "rsi": 61.0,
-      "kurs": 157.0,
+      "mom": 27.3,
+      "rel_styrke": 15.0,
+      "rsi": 58.0,
+      "kurs": 154.4,
       "pe": 9.4,
-      "pb": 1.63,
-      "yield": 556.0
+      "pb": 1.6,
+      "yield": 552.0
     },
     {
       "navn": "Aker",
@@ -3430,8 +3434,8 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 52.2,
-      "rel_styrke": 19.4,
-      "rsi": 64.0,
+      "rel_styrke": 18.3,
+      "rsi": 63.0,
       "kurs": 1320.0,
       "pe": null,
       "pb": null,
@@ -3443,10 +3447,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 36.3,
-      "rel_styrke": 24.6,
-      "rsi": 65.0,
-      "kurs": 146.8,
+      "mom": 33.5,
+      "rel_styrke": 20.9,
+      "rsi": 58.0,
+      "kurs": 143.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3457,10 +3461,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 14.2,
-      "rel_styrke": 10.5,
+      "mom": 13.8,
+      "rel_styrke": 8.9,
       "rsi": 69.0,
-      "kurs": 110.4,
+      "kurs": 110.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3470,21 +3474,19 @@
     "Energi": 1,
     "Shipping": 1
   },
-  "insider_kj\u00f8p": [
-    "NAS.OL"
-  ],
+  "insider_kj\u00f8p": [],
   "short_interest": {
     "NOD.OL": 2.68,
     "AUTO.OL": 2.2,
     "BORR.OL": 6.81,
     "GSF.OL": 2.17,
-    "HEX.OL": 3.14,
-    "2020.OL": 2.47,
+    "HEX.OL": 3.13,
+    "2020.OL": 2.88,
     "NAS.OL": 2.36,
     "BAKKA.OL": 2.98,
     "LINK.OL": 7.17,
     "NORBT.OL": 2.2,
-    "KID.OL": 3.71
+    "KID.OL": 3.68
   },
   "urealisert_historikk": [
     {
@@ -3874,6 +3876,10 @@
     {
       "dato": "2026-08-04",
       "verdi": 1203.0
+    },
+    {
+      "dato": "2026-08-05",
+      "verdi": 1029.0
     }
   ]
 }

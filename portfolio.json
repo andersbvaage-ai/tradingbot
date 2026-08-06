@@ -3004,7 +3004,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-06 07:40:20.887752",
+  "sist_analysert": "2026-08-06 12:50:08.534633",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3413,7 +3413,7 @@
     },
     {
       "dato": "2026-08-06",
-      "total_verdi": 88851.0
+      "total_verdi": 88859.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3426,13 +3426,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 22.5,
-      "rel_styrke": 7.3,
-      "rsi": 56.0,
-      "kurs": 153.0,
-      "pe": 9.3,
-      "pb": 1.58,
-      "yield": 554.0
+      "mom": 22.7,
+      "rel_styrke": 7.7,
+      "rsi": 54.0,
+      "kurs": 152.0,
+      "pe": 9.2,
+      "pb": 1.57,
+      "yield": 557.0
     },
     {
       "navn": "Aker",
@@ -3440,9 +3440,9 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 52.9,
-      "rel_styrke": 15.0,
-      "rsi": 64.0,
+      "mom": 52.6,
+      "rel_styrke": 20.2,
+      "rsi": 63.0,
       "kurs": 1320.0,
       "pe": null,
       "pb": null,
@@ -3454,13 +3454,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 62.7,
-      "rel_styrke": 27.2,
+      "mom": 61.9,
+      "rel_styrke": 29.9,
       "rsi": 56.0,
       "kurs": 163.3,
       "pe": 7.1,
       "pb": 2.55,
-      "yield": 1098.0
+      "yield": 1106.0
     },
     {
       "navn": "Wilh. Wilhelmsen A",
@@ -3469,12 +3469,12 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 14.0,
-      "rel_styrke": 10.5,
-      "rsi": 59.0,
+      "rel_styrke": 13.5,
+      "rsi": 57.0,
       "kurs": 758.0,
       "pe": 5.3,
       "pb": 0.99,
-      "yield": 366.0
+      "yield": 363.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3890,7 +3890,7 @@
     },
     {
       "dato": "2026-08-06",
-      "verdi": 1211.0
+      "verdi": 1219.0
     }
   ]
 }

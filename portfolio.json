@@ -17,8 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-06"
     },
     "BWLPG.OL": {
       "navn": "BW LPG",
@@ -35,8 +35,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-06"
     },
     "AKBM.OL": {
       "navn": "Aker BioMarine",
@@ -53,15 +53,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-05"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-06"
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
       "antall": 401,
       "snittpris": 11.119999885559082,
       "kj\u00f8psdato": "2026-07-28",
-      "h\u00f8yeste_kurs": 12.5600004196167,
+      "h\u00f8yeste_kurs": 13.369999885559082,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -71,8 +71,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-05"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-08-06"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -3004,7 +3004,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-05 12:46:56.355587",
+  "sist_analysert": "2026-08-06 07:40:20.887752",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3410,6 +3410,10 @@
     {
       "dato": "2026-08-05",
       "total_verdi": 88819.0
+    },
+    {
+      "dato": "2026-08-06",
+      "total_verdi": 88851.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3422,24 +3426,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 26.4,
-      "rel_styrke": 11.5,
-      "rsi": 61.0,
-      "kurs": 156.6,
-      "pe": 9.5,
-      "pb": 1.62,
-      "yield": 552.0
+      "mom": 22.5,
+      "rel_styrke": 7.3,
+      "rsi": 56.0,
+      "kurs": 153.0,
+      "pe": 9.3,
+      "pb": 1.58,
+      "yield": 554.0
     },
     {
       "navn": "Aker",
       "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 54.9,
-      "rel_styrke": 22.5,
-      "rsi": 66.0,
-      "kurs": 1340.0,
+      "score": 4,
+      "mom": 52.9,
+      "rel_styrke": 15.0,
+      "rsi": 64.0,
+      "kurs": 1320.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3450,13 +3454,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 63.9,
-      "rel_styrke": 32.0,
-      "rsi": 59.0,
-      "kurs": 165.3,
-      "pe": 7.2,
-      "pb": 2.57,
-      "yield": 1078.0
+      "mom": 62.7,
+      "rel_styrke": 27.2,
+      "rsi": 56.0,
+      "kurs": 163.3,
+      "pe": 7.1,
+      "pb": 2.55,
+      "yield": 1098.0
     },
     {
       "navn": "Wilh. Wilhelmsen A",
@@ -3464,13 +3468,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 15.3,
-      "rel_styrke": 15.4,
-      "rsi": 64.0,
-      "kurs": 767.0,
-      "pe": 5.4,
+      "mom": 14.0,
+      "rel_styrke": 10.5,
+      "rsi": 59.0,
+      "kurs": 758.0,
+      "pe": 5.3,
       "pb": 0.99,
-      "yield": 364.0
+      "yield": 366.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3484,12 +3488,12 @@
     "BORR.OL": 6.81,
     "GSF.OL": 2.17,
     "HEX.OL": 3.13,
-    "2020.OL": 2.88,
-    "NAS.OL": 2.36,
+    "2020.OL": 2.91,
+    "NAS.OL": 2.23,
     "BAKKA.OL": 2.98,
     "LINK.OL": 7.17,
-    "NORBT.OL": 2.2,
-    "KID.OL": 3.68
+    "NORBT.OL": 2.19,
+    "KID.OL": 3.59
   },
   "urealisert_historikk": [
     {
@@ -3883,6 +3887,10 @@
     {
       "dato": "2026-08-05",
       "verdi": 1179.0
+    },
+    {
+      "dato": "2026-08-06",
+      "verdi": 1211.0
     }
   ]
 }

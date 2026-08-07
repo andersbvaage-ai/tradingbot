@@ -1,43 +1,7 @@
 {
-  "kasse": 64563.0,
+  "kasse": 63401.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "WAWI.OL": {
-      "navn": "Wallenius Wilhelmsen",
-      "antall": 27,
-      "snittpris": 138.8000030517578,
-      "kj\u00f8psdato": "2026-07-14",
-      "h\u00f8yeste_kurs": 148.60000610351562,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-06"
-    },
-    "BWLPG.OL": {
-      "navn": "BW LPG",
-      "antall": 25,
-      "snittpris": 207.0,
-      "kj\u00f8psdato": "2026-07-23",
-      "h\u00f8yeste_kurs": 217.1999969482422,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-06"
-    },
     "AKBM.OL": {
       "navn": "Aker BioMarine",
       "antall": 55,
@@ -53,15 +17,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-06"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-07"
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
       "antall": 401,
       "snittpris": 11.119999885559082,
       "kj\u00f8psdato": "2026-07-28",
-      "h\u00f8yeste_kurs": 13.5,
+      "h\u00f8yeste_kurs": 13.989999771118164,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -71,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-08-06"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-08-07"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -90,6 +54,38 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "CMBTO.OL": {
+      "navn": "CMB.TECH",
+      "antall": 33,
+      "snittpris": 153.8000030517578,
+      "kj\u00f8psdato": "2026-08-07",
+      "h\u00f8yeste_kurs": 153.8000030517578,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    "HAUTO.OL": {
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 30,
+      "snittpris": 166.3000030517578,
+      "kj\u00f8psdato": "2026-08-07",
+      "h\u00f8yeste_kurs": 166.3000030517578,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -3002,9 +2998,91 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-08-07 07:00:35.662353",
+      "handling": "SELG",
+      "ticker": "WAWI.OL",
+      "navn": "Wallenius Wilhelmsen",
+      "antall": 27,
+      "kurs": 142.6999969482422,
+      "bel\u00f8p": 3853.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 138.8000030517578,
+      "avkastning_pct": 2.81,
+      "holdingstid": 24,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-07 07:00:35.662471",
+      "handling": "SELG",
+      "ticker": "BWLPG.OL",
+      "navn": "BW LPG",
+      "antall": 25,
+      "kurs": 206.60000610351562,
+      "bel\u00f8p": 5165.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 207.0,
+      "avkastning_pct": -0.19,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-07 07:00:36.238914",
+      "handling": "KJ\u00d8P",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 33,
+      "kurs": 153.8000030517578,
+      "bel\u00f8p": 5075.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 24.1% \u00b7 rel.styrke 8.8% \u00b7 RSI 57 \u00b7 P/E 9 \u00b7 P/B 1.6",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-07 07:00:36.239018",
+      "handling": "KJ\u00d8P",
+      "ticker": "HAUTO.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 30,
+      "kurs": 166.3000030517578,
+      "bel\u00f8p": 4989.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 64.9% \u00b7 rel.styrke 32.1% \u00b7 RSI 61 \u00b7 P/E 7 \u00b7 P/B 2.6",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-08-06 12:50:08.534633",
+  "sist_analysert": "2026-08-07 07:00:36.239124",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3414,6 +3492,10 @@
     {
       "dato": "2026-08-06",
       "total_verdi": 88859.0
+    },
+    {
+      "dato": "2026-08-07",
+      "total_verdi": 89195.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3426,12 +3508,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 22.7,
-      "rel_styrke": 7.7,
-      "rsi": 54.0,
-      "kurs": 152.0,
-      "pe": 9.2,
-      "pb": 1.57,
+      "mom": 24.1,
+      "rel_styrke": 8.8,
+      "rsi": 57.0,
+      "kurs": 153.8,
+      "pe": 9.5,
+      "pb": 1.63,
       "yield": 557.0
     },
     {
@@ -3440,10 +3522,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 52.6,
-      "rel_styrke": 20.2,
-      "rsi": 63.0,
-      "kurs": 1320.0,
+      "mom": 53.0,
+      "rel_styrke": 20.3,
+      "rsi": 64.0,
+      "kurs": 1324.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3454,12 +3536,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 61.9,
-      "rel_styrke": 29.9,
-      "rsi": 56.0,
-      "kurs": 163.3,
-      "pe": 7.1,
-      "pb": 2.55,
+      "mom": 64.9,
+      "rel_styrke": 32.1,
+      "rsi": 61.0,
+      "kurs": 166.3,
+      "pe": 7.2,
+      "pb": 2.59,
       "yield": 1106.0
     },
     {
@@ -3467,13 +3549,13 @@
       "ticker": "WWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 14.0,
-      "rel_styrke": 13.5,
-      "rsi": 57.0,
-      "kurs": 758.0,
+      "score": 3,
+      "mom": 15.9,
+      "rel_styrke": 15.3,
+      "rsi": 65.0,
+      "kurs": 771.0,
       "pe": 5.3,
-      "pb": 0.99,
+      "pb": 1.0,
       "yield": 363.0
     }
   ],
@@ -3481,17 +3563,19 @@
     "Energi": 1,
     "Shipping": 1
   },
-  "insider_kj\u00f8p": [],
+  "insider_kj\u00f8p": [
+    "MPCES.OL"
+  ],
   "short_interest": {
-    "NOD.OL": 2.68,
+    "NOD.OL": 3.4,
     "AUTO.OL": 2.2,
     "BORR.OL": 6.81,
     "GSF.OL": 2.17,
     "HEX.OL": 3.13,
-    "2020.OL": 2.91,
+    "2020.OL": 2.27,
     "NAS.OL": 2.23,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.17,
+    "LINK.OL": 7.57,
     "NORBT.OL": 2.19,
     "KID.OL": 3.59
   },
@@ -3891,6 +3975,10 @@
     {
       "dato": "2026-08-06",
       "verdi": 1219.0
+    },
+    {
+      "dato": "2026-08-07",
+      "verdi": 1574.0
     }
   ]
 }

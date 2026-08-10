@@ -7,7 +7,7 @@
       "antall": 55,
       "snittpris": 105.5999984741211,
       "kj\u00f8psdato": "2026-07-24",
-      "h\u00f8yeste_kurs": 115.5999984741211,
+      "h\u00f8yeste_kurs": 116.80000305175781,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-10"
     },
     "HEX.OL": {
       "navn": "Hexagon Composites",
@@ -34,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-08-07"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-08-10"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -102,7 +103,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -3118,7 +3120,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-07 11:37:21.526741",
+  "sist_analysert": "2026-08-10 11:41:49.881977",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -3532,6 +3534,10 @@
     {
       "dato": "2026-08-07",
       "total_verdi": 89548.0
+    },
+    {
+      "dato": "2026-08-10",
+      "total_verdi": 89693.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3544,10 +3550,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 33.9,
-      "rel_styrke": 13.0,
-      "rsi": 63.0,
-      "kurs": 158.2,
+      "mom": 31.7,
+      "rel_styrke": 11.7,
+      "rsi": 59.0,
+      "kurs": 156.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3558,24 +3564,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 53.8,
-      "rel_styrke": 18.2,
-      "rsi": 66.0,
-      "kurs": 1350.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Aker BioMarine",
-      "ticker": "AKBM.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 23.9,
-      "rel_styrke": 7.1,
-      "rsi": 69.0,
-      "kurs": 113.4,
+      "mom": 57.4,
+      "rel_styrke": 18.1,
+      "rsi": 65.0,
+      "kurs": 1360.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3586,12 +3578,26 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 71.4,
-      "rel_styrke": 68.1,
-      "rsi": 70.0,
-      "kurs": 5.99,
-      "pe": 0.4,
-      "pb": 1.57,
+      "mom": 68.1,
+      "rel_styrke": 64.2,
+      "rsi": 67.0,
+      "kurs": 5.85,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "H\u00f6egh Autoliners",
+      "ticker": "HAUTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 73.1,
+      "rel_styrke": 27.6,
+      "rsi": 66.0,
+      "kurs": 173.5,
+      "pe": null,
+      "pb": null,
       "yield": null
     }
   ],
@@ -3603,17 +3609,17 @@
     "MPCES.OL"
   ],
   "short_interest": {
-    "NOD.OL": 3.4,
+    "NOD.OL": 3.35,
     "AUTO.OL": 2.2,
-    "BORR.OL": 6.81,
+    "BORR.OL": 6.91,
     "GSF.OL": 2.17,
-    "HEX.OL": 3.13,
+    "HEX.OL": 2.97,
     "2020.OL": 2.27,
-    "NAS.OL": 2.23,
+    "NAS.OL": 2.21,
     "BAKKA.OL": 2.98,
     "LINK.OL": 7.57,
     "NORBT.OL": 2.19,
-    "KID.OL": 3.59
+    "KID.OL": 3.48
   },
   "urealisert_historikk": [
     {
@@ -4015,6 +4021,10 @@
     {
       "dato": "2026-08-07",
       "verdi": 1957.0
+    },
+    {
+      "dato": "2026-08-10",
+      "verdi": 2101.0
     }
   ]
 }

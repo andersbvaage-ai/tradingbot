@@ -1,5 +1,5 @@
 {
-  "kasse": 43257.0,
+  "kasse": 35816.0,
   "start_kapital": 100000,
   "posisjoner": {
     "AKBM.OL": {
@@ -87,8 +87,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-11"
+      "utenfor_topp_streak": 0
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -121,7 +120,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-11"
     },
     "IDEX.OL": {
       "navn": "IDEX Biometrics",
@@ -129,6 +130,24 @@
       "snittpris": 8.020000457763672,
       "kj\u00f8psdato": "2026-08-11",
       "h\u00f8yeste_kurs": 8.199999809265137,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-11"
+    },
+    "AUSS.OL": {
+      "navn": "Austevoll Seafood",
+      "antall": 85,
+      "snittpris": 87.19999694824219,
+      "kj\u00f8psdato": "2026-08-11",
+      "h\u00f8yeste_kurs": 87.19999694824219,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -3189,9 +3208,28 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-08-11 11:36:48.750089",
+      "handling": "KJ\u00d8P",
+      "ticker": "AUSS.OL",
+      "navn": "Austevoll Seafood",
+      "antall": 85,
+      "kurs": 87.19999694824219,
+      "bel\u00f8p": 7412.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 0.1% \u00b7 rel.styrke 1.3% \u00b7 RSI 62 \u00b7 P/E 19 \u00b7 P/B 1.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-08-11 07:00:33.571909",
+  "sist_analysert": "2026-08-11 11:36:48.750214",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -3612,7 +3650,7 @@
     },
     {
       "dato": "2026-08-11",
-      "total_verdi": 89613.0
+      "total_verdi": 89836.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3625,10 +3663,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.1,
-      "rel_styrke": 10.3,
-      "rsi": 57.0,
-      "kurs": 154.8,
+      "mom": 32.1,
+      "rel_styrke": 11.0,
+      "rsi": 60.0,
+      "kurs": 157.6,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3639,10 +3677,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 56.7,
-      "rel_styrke": 20.3,
-      "rsi": 68.0,
-      "kurs": 1376.0,
+      "mom": 60.6,
+      "rel_styrke": 16.9,
+      "rsi": 69.0,
+      "kurs": 1388.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3653,41 +3691,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 69.1,
-      "rel_styrke": 65.7,
-      "rsi": 69.0,
-      "kurs": 5.91,
+      "mom": 70.4,
+      "rel_styrke": 67.4,
+      "rsi": 68.0,
+      "kurs": 5.98,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "SpareBank 1 Nord-Norge",
-      "ticker": "NONG.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "ticker": "HAUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 14.3,
-      "rel_styrke": 5.8,
-      "rsi": 60.0,
-      "kurs": 159.78,
-      "pe": 10.6,
-      "pb": 0.88,
-      "yield": 532.0
+      "score": 3,
+      "mom": 74.2,
+      "rel_styrke": 25.2,
+      "rsi": 68.0,
+      "kurs": 175.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
-      "navn": "IDEX Biometrics",
-      "ticker": "IDEX.OL",
+      "navn": "Austevoll Seafood",
+      "ticker": "AUSS.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 37.1,
-      "rel_styrke": 3.5,
-      "rsi": 47.0,
-      "kurs": 8.02,
-      "pe": null,
-      "pb": -89.35,
-      "yield": null
+      "mom": 0.1,
+      "rel_styrke": 1.3,
+      "rsi": 62.0,
+      "kurs": 87.2,
+      "pe": 18.9,
+      "pb": 1.08,
+      "yield": 759.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -4115,7 +4153,7 @@
     },
     {
       "dato": "2026-08-11",
-      "verdi": 2080.0
+      "verdi": 2331.0
     }
   ]
 }

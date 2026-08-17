@@ -7,7 +7,7 @@
       "antall": 3,
       "snittpris": 1296.0,
       "kj\u00f8psdato": "2026-08-03",
-      "h\u00f8yeste_kurs": 1440.0,
+      "h\u00f8yeste_kurs": 1454.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -17,15 +17,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
       "antall": 33,
       "snittpris": 153.8000030517578,
       "kj\u00f8psdato": "2026-08-07",
-      "h\u00f8yeste_kurs": 162.39999389648438,
+      "h\u00f8yeste_kurs": 164.39999389648438,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -42,7 +42,7 @@
       "antall": 30,
       "snittpris": 166.3000030517578,
       "kj\u00f8psdato": "2026-08-07",
-      "h\u00f8yeste_kurs": 189.60000610351562,
+      "h\u00f8yeste_kurs": 192.3000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -52,8 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -70,15 +70,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
       "antall": 73,
       "snittpris": 159.77999877929688,
       "kj\u00f8psdato": "2026-08-11",
-      "h\u00f8yeste_kurs": 168.0,
+      "h\u00f8yeste_kurs": 170.10000610351562,
       "stop_loss_pct": 0.0656,
       "signaler": {
         "ensemble": 3,
@@ -88,7 +88,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "IDEX.OL": {
       "navn": "IDEX Biometrics",
@@ -105,8 +106,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 0
     },
     "AUSS.OL": {
       "navn": "Austevoll Seafood",
@@ -123,8 +123,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "LINK.OL": {
       "navn": "Link Mobility",
@@ -141,15 +141,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
       "antall": 29,
       "snittpris": 153.60000610351562,
       "kj\u00f8psdato": "2026-08-12",
-      "h\u00f8yeste_kurs": 161.8000030517578,
+      "h\u00f8yeste_kurs": 164.6999969482422,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -159,8 +159,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "BAKKA.OL": {
       "navn": "Bakkafrost",
@@ -177,8 +177,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 0
     },
     "BWE.OL": {
       "navn": "BW Energy",
@@ -195,15 +194,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-17"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
       "antall": 29,
       "snittpris": 203.39999389648438,
       "kj\u00f8psdato": "2026-08-13",
-      "h\u00f8yeste_kurs": 203.9499969482422,
+      "h\u00f8yeste_kurs": 207.0,
       "stop_loss_pct": 0.0877,
       "signaler": {
         "ensemble": 3,
@@ -229,7 +228,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -3460,8 +3460,8 @@
       }
     }
   ],
-  "sist_analysert": "2026-08-14 11:36:49.576382",
-  "regime": "Bull",
+  "sist_analysert": "2026-08-17 11:16:09.400865",
+  "regime": "Sideways",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
@@ -3894,6 +3894,10 @@
     {
       "dato": "2026-08-14",
       "total_verdi": 91121.0
+    },
+    {
+      "dato": "2026-08-17",
+      "total_verdi": 91863.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3901,15 +3905,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "Subsea 7",
+      "ticker": "SUBC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 44.1,
+      "rel_styrke": 1.4,
+      "rsi": 61.0,
+      "kurs": 346.0,
+      "pe": 17.7,
+      "pb": 2.29,
+      "yield": 565.0
+    },
+    {
       "navn": "CMB.TECH",
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 34.9,
-      "rel_styrke": 11.9,
-      "rsi": 64.0,
-      "kurs": 161.0,
+      "score": 3,
+      "mom": 34.6,
+      "rel_styrke": 15.2,
+      "rsi": 68.0,
+      "kurs": 164.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3920,55 +3938,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 37.6,
-      "rel_styrke": 6.2,
-      "rsi": 56.0,
-      "kurs": 384.5,
-      "pe": 10.0,
-      "pb": 3.17,
-      "yield": 1544.0
-    },
-    {
-      "navn": "Solstad Offshore",
-      "ticker": "SOFF.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 43.9,
-      "rel_styrke": 5.4,
-      "rsi": 65.0,
-      "kurs": 70.5,
-      "pe": 4.2,
-      "pb": 1.29,
-      "yield": 414.0
-    },
-    {
-      "navn": "Wilh. Wilhelmsen A",
-      "ticker": "WWI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 19.7,
-      "rel_styrke": 3.9,
-      "rsi": 64.0,
-      "kurs": 788.0,
-      "pe": 6.6,
-      "pb": 1.03,
-      "yield": 350.0
-    },
-    {
-      "navn": "SpareBank 1 SMN",
-      "ticker": "MING.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 8.8,
-      "rel_styrke": 3.7,
-      "rsi": 63.0,
-      "kurs": 203.45,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 40.9,
+      "rel_styrke": 11.3,
+      "rsi": 60.0,
+      "kurs": 393.9,
+      "pe": 10.2,
+      "pb": 3.24,
+      "yield": 1556.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -3983,12 +3959,10 @@
   "short_interest": {
     "NOD.OL": 3.2,
     "AUTO.OL": 2.2,
-    "BORR.OL": 6.91,
+    "BORR.OL": 7.04,
     "GSF.OL": 2.17,
-    "2020.OL": 2.06,
-    "NAS.OL": 2.02,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.07,
+    "LINK.OL": 7.18,
     "KID.OL": 3.48
   },
   "urealisert_historikk": [
@@ -4411,6 +4385,10 @@
     {
       "dato": "2026-08-14",
       "verdi": 2026.0
+    },
+    {
+      "dato": "2026-08-17",
+      "verdi": 2768.0
     }
   ]
 }

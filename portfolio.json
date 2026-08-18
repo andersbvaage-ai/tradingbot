@@ -1,25 +1,7 @@
 {
-  "kasse": 22819.0,
+  "kasse": 27164.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "AKER.OL": {
-      "navn": "Aker",
-      "antall": 3,
-      "snittpris": 1296.0,
-      "kj\u00f8psdato": "2026-08-03",
-      "h\u00f8yeste_kurs": 1458.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-17"
-    },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
       "antall": 33,
@@ -52,8 +34,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-08-18"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -70,8 +52,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 0
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -88,8 +69,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 0
     },
     "IDEX.OL": {
       "navn": "IDEX Biometrics",
@@ -123,8 +103,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-18"
     },
     "LINK.OL": {
       "navn": "Link Mobility",
@@ -141,15 +121,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-08-18"
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
       "antall": 29,
       "snittpris": 153.60000610351562,
       "kj\u00f8psdato": "2026-08-12",
-      "h\u00f8yeste_kurs": 166.39999389648438,
+      "h\u00f8yeste_kurs": 166.60000610351562,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -159,8 +139,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-08-18"
     },
     "BAKKA.OL": {
       "navn": "Bakkafrost",
@@ -194,8 +174,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-17"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-08-18"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -229,7 +209,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-18"
     }
   },
   "ventende_handler": [],
@@ -3458,10 +3439,32 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-08-18 07:01:18.285014",
+      "handling": "SELG",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 3,
+      "kurs": 1458.0,
+      "bel\u00f8p": 4374.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 4 dager p\u00e5 rad",
+      "snittpris": 1296.0,
+      "avkastning_pct": 12.5,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-08-17 11:16:09.400865",
-  "regime": "Sideways",
+  "sist_analysert": "2026-08-18 07:01:19.351132",
+  "regime": "Bull",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
@@ -3898,6 +3901,10 @@
     {
       "dato": "2026-08-17",
       "total_verdi": 91863.0
+    },
+    {
+      "dato": "2026-08-18",
+      "total_verdi": 91791.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -3910,12 +3917,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 44.1,
-      "rel_styrke": 1.4,
+      "mom": 43.3,
+      "rel_styrke": 0.3,
       "rsi": 61.0,
-      "kurs": 346.0,
-      "pe": 17.7,
-      "pb": 2.29,
+      "kurs": 345.2,
+      "pe": 17.8,
+      "pb": 2.3,
       "yield": 565.0
     },
     {
@@ -3924,10 +3931,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 34.6,
-      "rel_styrke": 15.2,
-      "rsi": 68.0,
-      "kurs": 164.4,
+      "mom": 36.0,
+      "rel_styrke": 13.9,
+      "rsi": 66.0,
+      "kurs": 162.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Prosafe",
+      "ticker": "PRS.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 67.9,
+      "rel_styrke": 33.2,
+      "rsi": 70.0,
+      "kurs": 6.01,
       "pe": null,
       "pb": null,
       "yield": null
@@ -3938,18 +3959,32 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 40.9,
-      "rel_styrke": 11.3,
-      "rsi": 60.0,
-      "kurs": 393.9,
-      "pe": 10.2,
-      "pb": 3.24,
+      "mom": 40.8,
+      "rel_styrke": 9.5,
+      "rsi": 57.0,
+      "kurs": 386.5,
+      "pe": 10.3,
+      "pb": 3.27,
       "yield": 1556.0
+    },
+    {
+      "navn": "SpareBank 1 SMN",
+      "ticker": "MING.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 7.7,
+      "rel_styrke": 4.7,
+      "rsi": 61.0,
+      "kurs": 202.05,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
-    "Shipping": 1
+    "Shipping": -1
   },
   "insider_kj\u00f8p": [
     "BORR.OL",
@@ -3960,9 +3995,10 @@
     "NOD.OL": 3.2,
     "AUTO.OL": 2.2,
     "BORR.OL": 7.04,
-    "GSF.OL": 2.17,
+    "GSF.OL": 2.26,
+    "NAS.OL": 2.39,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.18,
+    "LINK.OL": 7.08,
     "KID.OL": 3.48
   },
   "urealisert_historikk": [
@@ -4389,6 +4425,10 @@
     {
       "dato": "2026-08-17",
       "verdi": 2768.0
+    },
+    {
+      "dato": "2026-08-18",
+      "verdi": 2239.0
     }
   ]
 }

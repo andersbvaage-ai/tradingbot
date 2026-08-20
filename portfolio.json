@@ -1,5 +1,5 @@
 {
-  "kasse": 25701.0,
+  "kasse": 30853.0,
   "start_kapital": 100000,
   "posisjoner": {
     "CMBTO.OL": {
@@ -18,24 +18,6 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
-    },
-    "HAUTO.OL": {
-      "navn": "H\u00f6egh Autoliners",
-      "antall": 30,
-      "snittpris": 166.3000030517578,
-      "kj\u00f8psdato": "2026-08-07",
-      "h\u00f8yeste_kurs": 195.8000030517578,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-08-20"
     },
     "PRS.OL": {
       "navn": "Prosafe",
@@ -219,7 +201,7 @@
       "antall": 1,
       "snittpris": 1434.0,
       "kj\u00f8psdato": "2026-08-20",
-      "h\u00f8yeste_kurs": 1434.0,
+      "h\u00f8yeste_kurs": 1438.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -3496,6 +3478,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-20 07:30:58.871355",
+      "handling": "SELG",
+      "ticker": "HAUTO.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 30,
+      "kurs": 172.6999969482422,
+      "bel\u00f8p": 5181.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-11.8% fra topp 195.80 kr \u00b7 kj\u00f8pspris 166.30 kr)",
+      "snittpris": 166.3000030517578,
+      "avkastning_pct": 3.85,
+      "holdingstid": 13,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       }
     }

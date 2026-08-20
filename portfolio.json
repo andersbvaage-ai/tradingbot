@@ -1,5 +1,5 @@
 {
-  "kasse": 30853.0,
+  "kasse": 34682.0,
   "start_kapital": 100000,
   "posisjoner": {
     "CMBTO.OL": {
@@ -53,24 +53,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-20"
-    },
-    "IDEX.OL": {
-      "navn": "IDEX Biometrics",
-      "antall": 505,
-      "snittpris": 8.020000457763672,
-      "kj\u00f8psdato": "2026-08-11",
-      "h\u00f8yeste_kurs": 8.680000305175781,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 3,
       "utenfor_topp_sist_dato": "2026-08-20"
     },
     "AUSS.OL": {
@@ -201,7 +183,7 @@
       "antall": 1,
       "snittpris": 1434.0,
       "kj\u00f8psdato": "2026-08-20",
-      "h\u00f8yeste_kurs": 1448.0,
+      "h\u00f8yeste_kurs": 1452.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -3501,6 +3483,28 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-20 09:01:09.503872",
+      "handling": "SELG",
+      "ticker": "IDEX.OL",
+      "navn": "IDEX Biometrics",
+      "antall": 505,
+      "kurs": 7.639999866485596,
+      "bel\u00f8p": 3858.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-12.0% fra topp 8.68 kr \u00b7 kj\u00f8pspris 8.02 kr)",
+      "snittpris": 8.020000457763672,
+      "avkastning_pct": -4.74,
+      "holdingstid": 9,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
       }
     }
   ],

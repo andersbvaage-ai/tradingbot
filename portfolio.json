@@ -1,5 +1,5 @@
 {
-  "kasse": 32295.0,
+  "kasse": 29347.0,
   "start_kapital": 100000,
   "posisjoner": {
     "CMBTO.OL": {
@@ -19,24 +19,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "PRS.OL": {
-      "navn": "Prosafe",
-      "antall": 725,
-      "snittpris": 5.989999771118164,
-      "kj\u00f8psdato": "2026-08-07",
-      "h\u00f8yeste_kurs": 6.050000190734863,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-08-21"
-    },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
       "antall": 73,
@@ -52,8 +34,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 0
     },
     "AUSS.OL": {
       "navn": "Austevoll Seafood",
@@ -70,8 +51,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "LINK.OL": {
       "navn": "Link Mobility",
@@ -88,15 +69,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 9,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
       "antall": 29,
       "snittpris": 153.60000610351562,
       "kj\u00f8psdato": "2026-08-12",
-      "h\u00f8yeste_kurs": 168.10000610351562,
+      "h\u00f8yeste_kurs": 170.1999969482422,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -106,7 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "BAKKA.OL": {
       "navn": "Bakkafrost",
@@ -123,8 +105,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 0
     },
     "BWE.OL": {
       "navn": "BW Energy",
@@ -141,8 +122,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -159,8 +140,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 0
     },
     "SOFF.OL": {
       "navn": "Solstad Offshore",
@@ -177,15 +157,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "AKER.OL": {
       "navn": "Aker",
       "antall": 1,
       "snittpris": 1434.0,
       "kj\u00f8psdato": "2026-08-20",
-      "h\u00f8yeste_kurs": 1486.0,
+      "h\u00f8yeste_kurs": 1498.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -195,8 +175,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-21"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-24"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -214,6 +194,38 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "SUBC.OL": {
+      "navn": "Subsea 7",
+      "antall": 10,
+      "snittpris": 342.20001220703125,
+      "kj\u00f8psdato": "2026-08-24",
+      "h\u00f8yeste_kurs": 342.20001220703125,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "ODF.OL": {
+      "navn": "Odfjell",
+      "antall": 28,
+      "snittpris": 121.5999984741211,
+      "kj\u00f8psdato": "2026-08-24",
+      "h\u00f8yeste_kurs": 121.5999984741211,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -3546,10 +3558,70 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-08-24 11:17:51.318496",
+      "handling": "SELG",
+      "ticker": "PRS.OL",
+      "navn": "Prosafe",
+      "antall": 725,
+      "kurs": 5.46999979019165,
+      "bel\u00f8p": 3966.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 5 dager p\u00e5 rad",
+      "snittpris": 5.989999771118164,
+      "avkastning_pct": -8.68,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-08-24 11:17:52.191151",
+      "handling": "KJ\u00d8P",
+      "ticker": "SUBC.OL",
+      "navn": "Subsea 7",
+      "antall": 10,
+      "kurs": 342.20001220703125,
+      "bel\u00f8p": 3422.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 35.4% \u00b7 rel.styrke 11.0% \u00b7 RSI 57 \u00b7 P/E 18 \u00b7 P/B 2.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-08-24 11:17:52.191267",
+      "handling": "KJ\u00d8P",
+      "ticker": "ODF.OL",
+      "navn": "Odfjell",
+      "antall": 28,
+      "kurs": 121.5999984741211,
+      "bel\u00f8p": 3405.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 1.3% \u00b7 rel.styrke 6.1% \u00b7 RSI 68 \u00b7 P/E 6 \u00b7 P/B 1.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-08-21 11:16:59.954806",
-  "regime": "Sideways",
+  "sist_analysert": "2026-08-24 11:17:52.191330",
+  "regime": "Bull",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
@@ -4002,6 +4074,10 @@
     {
       "dato": "2026-08-21",
       "total_verdi": 90207.0
+    },
+    {
+      "dato": "2026-08-24",
+      "total_verdi": 90542.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4014,13 +4090,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 34.9,
-      "rel_styrke": 5.6,
-      "rsi": 54.0,
-      "kurs": 338.8,
-      "pe": 17.4,
-      "pb": 2.27,
-      "yield": 570.0
+      "mom": 35.4,
+      "rel_styrke": 11.0,
+      "rsi": 57.0,
+      "kurs": 342.2,
+      "pe": 17.8,
+      "pb": 2.26,
+      "yield": 577.0
     },
     {
       "navn": "AutoStore",
@@ -4028,10 +4104,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 35.1,
-      "rel_styrke": 16.3,
-      "rsi": 67.0,
-      "kurs": 15.67,
+      "mom": 28.6,
+      "rel_styrke": 13.4,
+      "rsi": 65.0,
+      "kurs": 15.52,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4042,27 +4118,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 31.6,
-      "rel_styrke": 6.8,
-      "rsi": 67.0,
-      "kurs": 167.8,
+      "mom": 29.0,
+      "rel_styrke": 10.8,
+      "rsi": 65.0,
+      "kurs": 168.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "MPC Container Ships",
-      "ticker": "MPCC.OL",
+      "navn": "Odfjell",
+      "ticker": "ODF.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 39.6,
-      "rel_styrke": 15.4,
-      "rsi": 66.0,
-      "kurs": 26.53,
-      "pe": 5.7,
-      "pb": 1.32,
-      "yield": 607.0
+      "mom": 1.3,
+      "rel_styrke": 6.1,
+      "rsi": 68.0,
+      "kurs": 121.6,
+      "pe": 6.2,
+      "pb": 1.04,
+      "yield": 842.0
+    },
+    {
+      "navn": "Okea",
+      "ticker": "OKEA.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 41.0,
+      "rel_styrke": 0.5,
+      "rsi": 63.0,
+      "kurs": 38.7,
+      "pe": 4.4,
+      "pb": 3.95,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -4081,7 +4171,7 @@
     "BORR.OL": 7.14,
     "GSF.OL": 2.26,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.11,
+    "LINK.OL": 7.21,
     "KID.OL": 3.48
   },
   "urealisert_historikk": [
@@ -4524,6 +4614,10 @@
     {
       "dato": "2026-08-21",
       "verdi": 772.0
+    },
+    {
+      "dato": "2026-08-24",
+      "verdi": 1571.0
     }
   ]
 }

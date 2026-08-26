@@ -1,5 +1,5 @@
 {
-  "kasse": 29347.0,
+  "kasse": 36849.0,
   "start_kapital": 100000,
   "posisjoner": {
     "CMBTO.OL": {
@@ -36,24 +36,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "AUSS.OL": {
-      "navn": "Austevoll Seafood",
-      "antall": 85,
-      "snittpris": 87.19999694824219,
-      "kj\u00f8psdato": "2026-08-11",
-      "h\u00f8yeste_kurs": 89.19999694824219,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-08-25"
-    },
     "LINK.OL": {
       "navn": "Link Mobility",
       "antall": 190,
@@ -69,8 +51,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 10,
-      "utenfor_topp_sist_dato": "2026-08-25"
+      "utenfor_topp_streak": 11,
+      "utenfor_topp_sist_dato": "2026-08-26"
     },
     "WAWI.OL": {
       "navn": "Wallenius Wilhelmsen",
@@ -87,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-08-25"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-08-26"
     },
     "BAKKA.OL": {
       "navn": "Bakkafrost",
@@ -105,7 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-08-26"
     },
     "BWE.OL": {
       "navn": "BW Energy",
@@ -122,8 +105,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-08-25"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-08-26"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -157,8 +140,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-08-25"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-08-26"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -175,8 +158,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-08-25"
+      "utenfor_topp_streak": 0
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -3620,9 +3602,31 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-08-26 07:01:31.118951",
+      "handling": "SELG",
+      "ticker": "AUSS.OL",
+      "navn": "Austevoll Seafood",
+      "antall": 85,
+      "kurs": 88.5999984741211,
+      "bel\u00f8p": 7531.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 9 dager p\u00e5 rad",
+      "snittpris": 87.19999694824219,
+      "avkastning_pct": 1.61,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-08-25 11:17:00.727978",
+  "sist_analysert": "2026-08-26 07:01:31.673636",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -4084,6 +4088,10 @@
     {
       "dato": "2026-08-25",
       "total_verdi": 91061.0
+    },
+    {
+      "dato": "2026-08-26",
+      "total_verdi": 90926.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4109,11 +4117,11 @@
       "ticker": "AUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 32.2,
-      "rel_styrke": 16.9,
-      "rsi": 69.0,
-      "kurs": 15.96,
+      "score": 4,
+      "mom": 28.4,
+      "rel_styrke": 13.4,
+      "rsi": 65.0,
+      "kurs": 15.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4124,10 +4132,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 29.9,
-      "rel_styrke": 11.7,
-      "rsi": 67.0,
-      "kurs": 170.0,
+      "mom": 29.2,
+      "rel_styrke": 11.1,
+      "rsi": 66.0,
+      "kurs": 169.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4138,27 +4146,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 0.5,
-      "rel_styrke": 5.3,
-      "rsi": 66.0,
-      "kurs": 120.6,
+      "mom": 1.5,
+      "rel_styrke": 6.4,
+      "rsi": 68.0,
+      "kurs": 121.8,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "DOF Group",
-      "ticker": "DOFG.OL",
+      "navn": "Aker",
+      "ticker": "AKER.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 15.4,
-      "rel_styrke": 9.5,
-      "rsi": 59.0,
-      "kurs": 132.0,
-      "pe": 7.4,
-      "pb": 1.67,
-      "yield": 1057.0
+      "score": 3,
+      "mom": 61.8,
+      "rel_styrke": 12.8,
+      "rsi": 70.0,
+      "kurs": 1468.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     }
   ],
   "r\u00e5vare_trender": {
@@ -4177,8 +4185,8 @@
     "BORR.OL": 7.14,
     "GSF.OL": 2.26,
     "BAKKA.OL": 2.98,
-    "LINK.OL": 7.72,
-    "KID.OL": 3.21
+    "LINK.OL": 7.71,
+    "KID.OL": 3.15
   },
   "urealisert_historikk": [
     {
@@ -4628,6 +4636,10 @@
     {
       "dato": "2026-08-25",
       "verdi": 2090.0
+    },
+    {
+      "dato": "2026-08-26",
+      "verdi": 1865.0
     }
   ]
 }

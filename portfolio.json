@@ -1,5 +1,5 @@
 {
-  "kasse": 27789.0,
+  "kasse": 36436.0,
   "start_kapital": 100000,
   "posisjoner": {
     "CMBTO.OL": {
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "ODF.OL": {
       "navn": "Odfjell",
@@ -34,26 +35,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-14"
-    },
-    "AFG.OL": {
-      "navn": "AF Gruppen",
-      "antall": 47,
-      "snittpris": 198.1999969482422,
-      "kj\u00f8psdato": "2026-08-31",
-      "h\u00f8yeste_kurs": 198.8000030517578,
-      "stop_loss_pct": 0.0799,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 0
     },
     "AKBM.OL": {
       "navn": "Aker BioMarine",
@@ -70,8 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "DOFG.OL": {
       "navn": "DOF Group",
@@ -88,15 +70,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "FRO.OL": {
       "navn": "Frontline",
       "antall": 7,
       "snittpris": 416.0,
       "kj\u00f8psdato": "2026-09-02",
-      "h\u00f8yeste_kurs": 469.20001220703125,
+      "h\u00f8yeste_kurs": 475.70001220703125,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -106,8 +88,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "SPOL.OL": {
       "navn": "SpareBank 1 \u00d8stlandet",
@@ -124,8 +106,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "BONHR.OL": {
       "navn": "Bonheur",
@@ -142,7 +124,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "ODL.OL": {
       "navn": "Odfjell Drilling",
@@ -159,8 +142,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -177,8 +160,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -195,8 +178,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-09-15"
     },
     "VEI.OL": {
       "navn": "Veidekke",
@@ -213,8 +196,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-09-14"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-09-15"
     }
   },
   "ventende_handler": [],
@@ -4039,9 +4022,31 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-09-15 09:48:45.001213",
+      "handling": "SELG",
+      "ticker": "AFG.OL",
+      "navn": "AF Gruppen",
+      "antall": 47,
+      "kurs": 184.60000610351562,
+      "bel\u00f8p": 8676.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 10 dager p\u00e5 rad",
+      "snittpris": 198.1999969482422,
+      "avkastning_pct": -6.86,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-09-14 10:21:55.578958",
+  "sist_analysert": "2026-09-15 09:48:45.878146",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -4551,6 +4556,10 @@
     {
       "dato": "2026-09-14",
       "total_verdi": 89984.0
+    },
+    {
+      "dato": "2026-09-15",
+      "total_verdi": 89628.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4558,15 +4567,15 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "CMB.TECH",
-      "ticker": "CMBTO.OL",
+      "navn": "Odfjell",
+      "ticker": "ODF.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 52.0,
-      "rel_styrke": 19.6,
-      "rsi": 66.0,
-      "kurs": 180.2,
+      "mom": 7.7,
+      "rel_styrke": 9.5,
+      "rsi": 67.0,
+      "kurs": 124.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4577,12 +4586,12 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 43.0,
-      "rel_styrke": 24.9,
-      "rsi": 69.0,
-      "kurs": 176.0,
+      "mom": 43.6,
+      "rel_styrke": 25.6,
+      "rsi": 68.0,
+      "kurs": 175.8,
       "pe": 11.6,
-      "pb": 2.21,
+      "pb": 2.18,
       "yield": 508.0
     },
     {
@@ -4590,13 +4599,13 @@
       "ticker": "OKEA.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 27.2,
-      "rel_styrke": 10.5,
-      "rsi": 67.0,
-      "kurs": 40.9,
+      "score": 4,
+      "mom": 25.8,
+      "rel_styrke": 8.5,
+      "rsi": 60.0,
+      "kurs": 40.2,
       "pe": 4.4,
-      "pb": 4.32,
+      "pb": 4.24,
       "yield": null
     },
     {
@@ -4605,10 +4614,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 13.9,
-      "rel_styrke": 0.2,
-      "rsi": 62.0,
-      "kurs": 57.5,
+      "mom": 5.3,
+      "rel_styrke": 1.6,
+      "rsi": 63.0,
+      "kurs": 57.6,
       "pe": 16.9,
       "pb": 1.4,
       "yield": null
@@ -4618,13 +4627,13 @@
       "ticker": "BWLPG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 64.9,
-      "rel_styrke": 22.9,
+      "score": 4,
+      "mom": 78.1,
+      "rel_styrke": 24.3,
       "rsi": 65.0,
-      "kurs": 233.2,
+      "kurs": 233.1,
       "pe": 8.6,
-      "pb": 2.0,
+      "pb": 1.98,
       "yield": 1066.0
     },
     {
@@ -4632,13 +4641,13 @@
       "ticker": "HAUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 47.6,
-      "rel_styrke": 14.3,
-      "rsi": 65.0,
-      "kurs": 187.4,
-      "pe": 9.2,
-      "pb": 3.06,
+      "score": 4,
+      "mom": 43.4,
+      "rel_styrke": 11.0,
+      "rsi": 58.0,
+      "kurs": 180.3,
+      "pe": 8.8,
+      "pb": 2.94,
       "yield": 176.0
     }
   ],
@@ -5153,6 +5162,10 @@
     {
       "dato": "2026-09-14",
       "verdi": 623.0
+    },
+    {
+      "dato": "2026-09-15",
+      "verdi": 935.0
     }
   ]
 }

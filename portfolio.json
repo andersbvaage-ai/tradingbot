@@ -1,31 +1,13 @@
 {
-  "kasse": 41978.0,
+  "kasse": 38288.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "CMBTO.OL": {
-      "navn": "CMB.TECH",
-      "antall": 33,
-      "snittpris": 153.8000030517578,
-      "kj\u00f8psdato": "2026-08-07",
-      "h\u00f8yeste_kurs": 184.1999969482422,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Sideways"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-09-16"
-    },
     "ODF.OL": {
       "navn": "Odfjell",
       "antall": 28,
       "snittpris": 121.5999984741211,
       "kj\u00f8psdato": "2026-08-24",
-      "h\u00f8yeste_kurs": 128.39999389648438,
+      "h\u00f8yeste_kurs": 132.39999389648438,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -35,26 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-16"
-    },
-    "FRO.OL": {
-      "navn": "Frontline",
-      "antall": 7,
-      "snittpris": 416.0,
-      "kj\u00f8psdato": "2026-09-02",
-      "h\u00f8yeste_kurs": 499.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "SPOL.OL": {
       "navn": "SpareBank 1 \u00d8stlandet",
@@ -71,8 +35,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "BONHR.OL": {
       "navn": "Bonheur",
@@ -89,15 +53,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "ODL.OL": {
       "navn": "Odfjell Drilling",
       "antall": 53,
       "snittpris": 96.0999984741211,
       "kj\u00f8psdato": "2026-09-08",
-      "h\u00f8yeste_kurs": 105.80000305175781,
+      "h\u00f8yeste_kurs": 106.19999694824219,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -107,15 +71,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
       "antall": 28,
       "snittpris": 214.0500030517578,
       "kj\u00f8psdato": "2026-09-08",
-      "h\u00f8yeste_kurs": 215.60000610351562,
+      "h\u00f8yeste_kurs": 216.75,
       "stop_loss_pct": 0.0885,
       "signaler": {
         "ensemble": 3,
@@ -125,8 +89,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -143,15 +107,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "VEI.OL": {
       "navn": "Veidekke",
       "antall": 30,
       "snittpris": 209.0,
       "kj\u00f8psdato": "2026-09-10",
-      "h\u00f8yeste_kurs": 210.5,
+      "h\u00f8yeste_kurs": 214.5,
       "stop_loss_pct": 0.0933,
       "signaler": {
         "ensemble": 3,
@@ -161,8 +125,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-09-16"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-09-17"
     },
     "TGS.OL": {
       "navn": "TGS",
@@ -177,6 +141,56 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-09-17"
+    },
+    "MPCC.OL": {
+      "navn": "MPC Container Ships",
+      "antall": 201,
+      "snittpris": 28.450000762939453,
+      "kj\u00f8psdato": "2026-09-17",
+      "h\u00f8yeste_kurs": 28.450000762939453,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "HAUTO.OL": {
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 21,
+      "snittpris": 186.5,
+      "kj\u00f8psdato": "2026-09-17",
+      "h\u00f8yeste_kurs": 186.5,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    "HELG.OL": {
+      "navn": "Helgeland Sparebank",
+      "antall": 20,
+      "snittpris": 179.97999572753906,
+      "kj\u00f8psdato": "2026-09-17",
+      "h\u00f8yeste_kurs": 179.97999572753906,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -4088,9 +4102,110 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-09-17 09:51:52.768882",
+      "handling": "SELG",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 33,
+      "kurs": 190.1999969482422,
+      "bel\u00f8p": 6277.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 153.8000030517578,
+      "avkastning_pct": 23.67,
+      "holdingstid": 41,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-09-17 09:51:52.769087",
+      "handling": "SELG",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 7,
+      "kurs": 487.5,
+      "bel\u00f8p": 3412.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 4 dager p\u00e5 rad",
+      "snittpris": 416.0,
+      "avkastning_pct": 17.19,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-09-17 09:51:54.121217",
+      "handling": "KJ\u00d8P",
+      "ticker": "MPCC.OL",
+      "navn": "MPC Container Ships",
+      "antall": 201,
+      "kurs": 28.450000762939453,
+      "bel\u00f8p": 5718.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 30.0% \u00b7 rel.styrke 5.6% \u00b7 RSI 68 \u00b7 P/E 6 \u00b7 P/B 1.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-09-17 09:51:54.121413",
+      "handling": "KJ\u00d8P",
+      "ticker": "HAUTO.OL",
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 21,
+      "kurs": 186.5,
+      "bel\u00f8p": 3916.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 56.7% \u00b7 rel.styrke 16.9% \u00b7 RSI 64 \u00b7 P/E 9 \u00b7 P/B 3.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-09-17 09:51:54.121510",
+      "handling": "KJ\u00d8P",
+      "ticker": "HELG.OL",
+      "navn": "Helgeland Sparebank",
+      "antall": 20,
+      "kurs": 179.97999572753906,
+      "bel\u00f8p": 3600.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 11.2% \u00b7 rel.styrke 3.7% \u00b7 RSI 65 \u00b7 P/E 13 \u00b7 P/B 1.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-09-16 09:43:32.261783",
+  "sist_analysert": "2026-09-17 09:51:54.121553",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -4608,6 +4723,10 @@
     {
       "dato": "2026-09-16",
       "total_verdi": 90887.0
+    },
+    {
+      "dato": "2026-09-17",
+      "total_verdi": 91625.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4615,60 +4734,46 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "TGS",
-      "ticker": "TGS.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 29.6,
-      "rel_styrke": 0.9,
-      "rsi": 63.0,
-      "kurs": 146.7,
-      "pe": 32.4,
-      "pb": 1.59,
-      "yield": 433.0
-    },
-    {
       "navn": "MPC Container Ships",
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 30.0,
+      "rel_styrke": 5.6,
+      "rsi": 68.0,
+      "kurs": 28.45,
+      "pe": 6.5,
+      "pb": 1.36,
+      "yield": 631.0
+    },
+    {
+      "navn": "DNO",
+      "ticker": "DNO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 12.8,
+      "rel_styrke": 4.0,
+      "rsi": 69.0,
+      "kurs": 19.43,
+      "pe": 26.3,
+      "pb": 2.09,
+      "yield": 769.0
+    },
+    {
+      "navn": "BW Energy",
+      "ticker": "BWE.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.6,
-      "rel_styrke": 4.3,
-      "rsi": 63.0,
-      "kurs": 27.75,
-      "pe": 6.4,
-      "pb": 1.32,
-      "yield": 630.0
-    },
-    {
-      "navn": "Okea",
-      "ticker": "OKEA.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 29.1,
-      "rel_styrke": 19.4,
-      "rsi": 66.0,
-      "kurs": 41.75,
-      "pe": 4.5,
-      "pb": 4.41,
+      "mom": 3.2,
+      "rel_styrke": 2.5,
+      "rsi": 61.0,
+      "kurs": 57.8,
+      "pe": 16.8,
+      "pb": 1.41,
       "yield": null
-    },
-    {
-      "navn": "BW LPG",
-      "ticker": "BWLPG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 88.9,
-      "rel_styrke": 30.4,
-      "rsi": 67.0,
-      "kurs": 237.8,
-      "pe": 8.7,
-      "pb": 2.02,
-      "yield": 1074.0
     },
     {
       "navn": "H\u00f6egh Autoliners",
@@ -4676,27 +4781,41 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 53.8,
-      "rel_styrke": 17.1,
-      "rsi": 61.0,
-      "kurs": 183.2,
-      "pe": 8.9,
-      "pb": 2.99,
+      "mom": 56.7,
+      "rel_styrke": 16.9,
+      "rsi": 64.0,
+      "kurs": 186.5,
+      "pe": 9.0,
+      "pb": 3.04,
       "yield": 172.0
     },
     {
-      "navn": "Stolt-Nielsen",
-      "ticker": "SNI.OL",
+      "navn": "Solstad Offshore",
+      "ticker": "SOFF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 29.1,
+      "rel_styrke": 12.6,
+      "rsi": 61.0,
+      "kurs": 71.0,
+      "pe": 4.3,
+      "pb": 1.32,
+      "yield": 415.0
+    },
+    {
+      "navn": "Helgeland Sparebank",
+      "ticker": "HELG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 11.9,
-      "rel_styrke": 9.4,
-      "rsi": 68.0,
-      "kurs": 349.5,
-      "pe": 8.9,
-      "pb": 0.79,
-      "yield": 530.0
+      "mom": 11.2,
+      "rel_styrke": 3.7,
+      "rsi": 65.0,
+      "kurs": 179.98,
+      "pe": 13.3,
+      "pb": 0.97,
+      "yield": 451.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -4704,12 +4823,13 @@
     "Shipping": 1
   },
   "insider_kj\u00f8p": [
+    "BORR.OL",
     "PEXIP.OL"
   ],
   "short_interest": {
     "NOD.OL": 3.13,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7,
+    "BORR.OL": 7.08,
     "BAKKA.OL": 2.99,
     "LINK.OL": 6.94,
     "KID.OL": 3.25
@@ -5218,6 +5338,10 @@
     {
       "dato": "2026-09-16",
       "verdi": 2090.0
+    },
+    {
+      "dato": "2026-09-17",
+      "verdi": 1271.0
     }
   ]
 }

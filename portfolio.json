@@ -34,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-09-21"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-09-22"
     },
     "AKER.OL": {
       "navn": "Aker",
@@ -52,15 +52,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-09-21"
+      "utenfor_topp_streak": 9,
+      "utenfor_topp_sist_dato": "2026-09-22"
     },
     "VEI.OL": {
       "navn": "Veidekke",
       "antall": 30,
       "snittpris": 209.0,
       "kj\u00f8psdato": "2026-09-10",
-      "h\u00f8yeste_kurs": 215.5,
+      "h\u00f8yeste_kurs": 216.0,
       "stop_loss_pct": 0.0933,
       "signaler": {
         "ensemble": 3,
@@ -70,8 +70,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-09-21"
+      "utenfor_topp_streak": 0
     },
     "TGS.OL": {
       "navn": "TGS",
@@ -88,8 +87,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-21"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-09-22"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -140,8 +139,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-09-21"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-09-22"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -174,7 +173,9 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-09-22"
     }
   },
   "ventende_handler": [],
@@ -4291,7 +4292,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-09-21 10:26:33.139083",
+  "sist_analysert": "2026-09-22 09:40:01.817191",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -4821,6 +4822,10 @@
     {
       "dato": "2026-09-21",
       "total_verdi": 91195.0
+    },
+    {
+      "dato": "2026-09-22",
+      "total_verdi": 90593.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4832,11 +4837,11 @@
       "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 57.1,
-      "rel_styrke": 13.9,
-      "rsi": 68.0,
-      "kurs": 189.6,
+      "score": 4,
+      "mom": 57.5,
+      "rel_styrke": 15.9,
+      "rsi": 61.0,
+      "kurs": 185.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4846,11 +4851,11 @@
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 22.0,
-      "rel_styrke": 0.1,
-      "rsi": 65.0,
-      "kurs": 28.2,
+      "score": 3,
+      "mom": 32.7,
+      "rel_styrke": 5.3,
+      "rsi": 69.0,
+      "kurs": 28.42,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4860,39 +4865,39 @@
       "ticker": "WAWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 42.6,
-      "rel_styrke": 23.3,
-      "rsi": 70.0,
-      "kurs": 179.2,
+      "score": 4,
+      "mom": 50.1,
+      "rel_styrke": 22.7,
+      "rsi": 65.0,
+      "kurs": 178.1,
       "pe": 11.5,
-      "pb": 2.23,
+      "pb": 2.2,
       "yield": 483.0
     },
     {
-      "navn": "DNO",
-      "ticker": "DNO.OL",
+      "navn": "Veidekke",
+      "ticker": "VEI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 6.9,
-      "rel_styrke": 4.2,
-      "rsi": 66.0,
-      "kurs": 19.35,
-      "pe": 25.8,
-      "pb": 2.06,
-      "yield": 765.0
+      "mom": 22.1,
+      "rel_styrke": 4.3,
+      "rsi": 69.0,
+      "kurs": 216.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Odfjell Drilling",
       "ticker": "ODL.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 9.5,
-      "rel_styrke": 13.8,
-      "rsi": 70.0,
-      "kurs": 104.0,
+      "score": 4,
+      "mom": 10.2,
+      "rel_styrke": 12.7,
+      "rsi": 61.0,
+      "kurs": 101.4,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4902,14 +4907,14 @@
       "ticker": "FRO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 55.5,
-      "rel_styrke": 7.4,
-      "rsi": 68.0,
-      "kurs": 481.2,
-      "pe": 7.7,
-      "pb": 3.69,
-      "yield": 2027.0
+      "score": 4,
+      "mom": 51.4,
+      "rel_styrke": 8.4,
+      "rsi": 59.0,
+      "kurs": 465.0,
+      "pe": 7.4,
+      "pb": 3.56,
+      "yield": 1999.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -4925,6 +4930,7 @@
     "BORR.OL": 6.99,
     "BAKKA.OL": 2.99,
     "LINK.OL": 7.02,
+    "NORBT.OL": 2.03,
     "KID.OL": 3.25
   },
   "urealisert_historikk": [
@@ -5443,6 +5449,10 @@
     {
       "dato": "2026-09-21",
       "verdi": 507.0
+    },
+    {
+      "dato": "2026-09-22",
+      "verdi": -95.0
     }
   ]
 }

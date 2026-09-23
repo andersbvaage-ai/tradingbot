@@ -1,5 +1,5 @@
 {
-  "kasse": 46925.0,
+  "kasse": 49816.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ODL.OL": {
@@ -18,24 +18,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "AKER.OL": {
-      "navn": "Aker",
-      "antall": 2,
-      "snittpris": 1576.0,
-      "kj\u00f8psdato": "2026-09-09",
-      "h\u00f8yeste_kurs": 1626.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 10,
-      "utenfor_topp_sist_dato": "2026-09-23"
     },
     "VEI.OL": {
       "navn": "Veidekke",
@@ -4287,6 +4269,28 @@
       "snittpris": 214.0500030517578,
       "avkastning_pct": 0.77,
       "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-09-23 10:17:23.088823",
+      "handling": "SELG",
+      "ticker": "AKER.OL",
+      "navn": "Aker",
+      "antall": 2,
+      "kurs": 1460.0,
+      "bel\u00f8p": 2920.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.2% fra topp 1626.00 kr \u00b7 kj\u00f8pspris 1576.00 kr)",
+      "snittpris": 1576.0,
+      "avkastning_pct": -7.36,
+      "holdingstid": 14,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

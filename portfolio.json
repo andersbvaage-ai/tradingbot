@@ -1,5 +1,5 @@
 {
-  "kasse": 40914.0,
+  "kasse": 46925.0,
   "start_kapital": 100000,
   "posisjoner": {
     "ODL.OL": {
@@ -19,24 +19,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "MING.OL": {
-      "navn": "SpareBank 1 SMN",
-      "antall": 28,
-      "snittpris": 214.0500030517578,
-      "kj\u00f8psdato": "2026-09-08",
-      "h\u00f8yeste_kurs": 219.64999389648438,
-      "stop_loss_pct": 0.0885,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-09-22"
-    },
     "AKER.OL": {
       "navn": "Aker",
       "antall": 2,
@@ -52,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-09-22"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-09-23"
     },
     "VEI.OL": {
       "navn": "Veidekke",
@@ -70,7 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-09-23"
     },
     "TGS.OL": {
       "navn": "TGS",
@@ -87,8 +70,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-09-22"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-09-23"
     },
     "MPCC.OL": {
       "navn": "MPC Container Ships",
@@ -139,8 +122,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-09-22"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-09-23"
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -174,8 +157,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-09-22"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-09-23"
     }
   },
   "ventende_handler": [],
@@ -4290,9 +4273,31 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-09-23 09:47:18.740456",
+      "handling": "SELG",
+      "ticker": "MING.OL",
+      "navn": "SpareBank 1 SMN",
+      "antall": 28,
+      "kurs": 215.6999969482422,
+      "bel\u00f8p": 6040.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 8 dager p\u00e5 rad",
+      "snittpris": 214.0500030517578,
+      "avkastning_pct": 0.77,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-09-22 09:40:01.817191",
+  "sist_analysert": "2026-09-23 09:47:19.641704",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -4826,6 +4831,10 @@
     {
       "dato": "2026-09-22",
       "total_verdi": 90593.0
+    },
+    {
+      "dato": "2026-09-23",
+      "total_verdi": 90042.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -4838,10 +4847,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 57.5,
-      "rel_styrke": 15.9,
-      "rsi": 61.0,
-      "kurs": 185.4,
+      "mom": 54.4,
+      "rel_styrke": 14.1,
+      "rsi": 56.0,
+      "kurs": 181.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -4851,14 +4860,28 @@
       "ticker": "MPCC.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 32.7,
-      "rel_styrke": 5.3,
-      "rsi": 69.0,
-      "kurs": 28.42,
+      "score": 4,
+      "mom": 29.6,
+      "rel_styrke": 3.2,
+      "rsi": 60.0,
+      "kurs": 27.76,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Odfjell",
+      "ticker": "ODF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 11.0,
+      "rel_styrke": 10.3,
+      "rsi": 62.0,
+      "kurs": 127.8,
+      "pe": 6.5,
+      "pb": 1.05,
+      "yield": 729.0
     },
     {
       "navn": "Wallenius Wilhelmsen",
@@ -4866,27 +4889,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 50.1,
-      "rel_styrke": 22.7,
-      "rsi": 65.0,
-      "kurs": 178.1,
-      "pe": 11.5,
-      "pb": 2.2,
+      "mom": 48.5,
+      "rel_styrke": 22.0,
+      "rsi": 61.0,
+      "kurs": 176.2,
+      "pe": 11.3,
+      "pb": 2.16,
       "yield": 483.0
-    },
-    {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 22.1,
-      "rel_styrke": 4.3,
-      "rsi": 69.0,
-      "kurs": 216.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
     },
     {
       "navn": "Odfjell Drilling",
@@ -4895,7 +4904,7 @@
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
       "mom": 10.2,
-      "rel_styrke": 12.7,
+      "rel_styrke": 13.4,
       "rsi": 61.0,
       "kurs": 101.4,
       "pe": null,
@@ -4908,18 +4917,18 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 51.4,
-      "rel_styrke": 8.4,
-      "rsi": 59.0,
-      "kurs": 465.0,
-      "pe": 7.4,
-      "pb": 3.56,
+      "mom": 48.8,
+      "rel_styrke": 7.0,
+      "rsi": 56.0,
+      "kurs": 457.0,
+      "pe": 7.3,
+      "pb": 3.5,
       "yield": 1999.0
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
-    "Shipping": 1
+    "Shipping": -1
   },
   "insider_kj\u00f8p": [
     "BORR.OL"
@@ -5453,6 +5462,10 @@
     {
       "dato": "2026-09-22",
       "verdi": -95.0
+    },
+    {
+      "dato": "2026-09-23",
+      "verdi": -664.0
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "kasse": 42564.0,
+  "kasse": 41445.0,
   "start_kapital": 100000,
   "posisjoner": {
     "MPCC.OL": {
@@ -7,25 +7,7 @@
       "antall": 201,
       "snittpris": 28.450000762939453,
       "kj\u00f8psdato": "2026-09-17",
-      "h\u00f8yeste_kurs": 29.1200008392334,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-02"
-    },
-    "HAUTO.OL": {
-      "navn": "H\u00f6egh Autoliners",
-      "antall": 21,
-      "snittpris": 186.5,
-      "kj\u00f8psdato": "2026-09-17",
-      "h\u00f8yeste_kurs": 191.89999389648438,
+      "h\u00f8yeste_kurs": 29.3700008392334,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -37,12 +19,12 @@
       },
       "utenfor_topp_streak": 0
     },
-    "CMBTO.OL": {
-      "navn": "CMB.TECH",
-      "antall": 29,
-      "snittpris": 190.39999389648438,
-      "kj\u00f8psdato": "2026-09-18",
-      "h\u00f8yeste_kurs": 191.39999389648438,
+    "HAUTO.OL": {
+      "navn": "H\u00f6egh Autoliners",
+      "antall": 21,
+      "snittpris": 186.5,
+      "kj\u00f8psdato": "2026-09-17",
+      "h\u00f8yeste_kurs": 192.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -52,8 +34,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-10-02"
+      "utenfor_topp_streak": 0
     },
     "DNO.OL": {
       "navn": "DNO",
@@ -70,8 +51,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-10-02"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-10-05"
     },
     "SOFF.OL": {
       "navn": "Solstad Offshore",
@@ -88,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-10-02"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-10-05"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -106,8 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-02"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-10-05"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -124,8 +105,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-02"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-10-05"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -142,14 +123,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-10-05"
     },
     "MEDI.OL": {
       "navn": "Medistim",
       "antall": 20,
       "snittpris": 252.0,
       "kj\u00f8psdato": "2026-10-01",
-      "h\u00f8yeste_kurs": 253.0,
+      "h\u00f8yeste_kurs": 262.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -160,6 +142,22 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
+    },
+    "SNI.OL": {
+      "navn": "Stolt-Nielsen",
+      "antall": 18,
+      "snittpris": 371.5,
+      "kj\u00f8psdato": "2026-10-05",
+      "h\u00f8yeste_kurs": 371.5,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   },
   "ventende_handler": [],
@@ -4501,9 +4499,50 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-10-05 12:05:11.928943",
+      "handling": "SELG",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 29,
+      "kurs": 194.0,
+      "bel\u00f8p": 5626.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 8 dager p\u00e5 rad",
+      "snittpris": 190.39999389648438,
+      "avkastning_pct": 1.89,
+      "holdingstid": 17,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-05 12:05:12.367147",
+      "handling": "KJ\u00d8P",
+      "ticker": "SNI.OL",
+      "navn": "Stolt-Nielsen",
+      "antall": 18,
+      "kurs": 371.5,
+      "bel\u00f8p": 6687.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 10.3% \u00b7 rel.styrke 16.2% \u00b7 RSI 65 \u00b7 P/E 8 \u00b7 P/B 0.8",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-10-02 10:55:03.151861",
+  "sist_analysert": "2026-10-05 12:05:12.367261",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5069,6 +5108,10 @@
     {
       "dato": "2026-10-02",
       "total_verdi": 89626.0
+    },
+    {
+      "dato": "2026-10-05",
+      "total_verdi": 90163.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5076,15 +5119,29 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "MPC Container Ships",
+      "ticker": "MPCC.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 33.1,
+      "rel_styrke": 12.2,
+      "rsi": 69.0,
+      "kurs": 29.37,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
       "navn": "H\u00f6egh Autoliners",
       "ticker": "HAUTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 40.3,
-      "rel_styrke": 23.2,
-      "rsi": 66.0,
-      "kurs": 190.1,
+      "mom": 42.2,
+      "rel_styrke": 21.6,
+      "rsi": 68.0,
+      "kurs": 192.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5095,38 +5152,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 11.0,
-      "rel_styrke": 21.5,
-      "rsi": 63.0,
-      "kurs": 368.0,
-      "pe": 9.1,
+      "mom": 10.3,
+      "rel_styrke": 16.2,
+      "rsi": 65.0,
+      "kurs": 371.5,
+      "pe": 8.3,
       "pb": 0.84,
-      "yield": 511.0
-    },
-    {
-      "navn": "Arendals Fossekompani",
-      "ticker": "AFK.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 18.0,
-      "rel_styrke": 1.1,
-      "rsi": 52.0,
-      "kurs": 187.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "yield": 506.0
     },
     {
       "navn": "Medistim",
       "ticker": "MEDI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 21.6,
-      "rel_styrke": 1.2,
-      "rsi": 55.0,
-      "kurs": 251.0,
+      "score": 3,
+      "mom": 28.1,
+      "rel_styrke": 9.0,
+      "rsi": 66.0,
+      "kurs": 262.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5143,11 +5186,11 @@
     "NORDH.OL"
   ],
   "short_interest": {
-    "NOD.OL": 3.11,
+    "NOD.OL": 2.59,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7.48,
+    "BORR.OL": 7.27,
     "BAKKA.OL": 2.99,
-    "LINK.OL": 7.93,
+    "LINK.OL": 7.44,
     "NORBT.OL": 2.03,
     "KID.OL": 3.36
   },
@@ -5703,6 +5746,10 @@
     {
       "dato": "2026-10-02",
       "verdi": -592.0
+    },
+    {
+      "dato": "2026-10-05",
+      "verdi": -102.0
     }
   ]
 }

@@ -1,25 +1,7 @@
 {
-  "kasse": 43377.0,
+  "kasse": 34536.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "MPCC.OL": {
-      "navn": "MPC Container Ships",
-      "antall": 201,
-      "snittpris": 28.450000762939453,
-      "kj\u00f8psdato": "2026-09-17",
-      "h\u00f8yeste_kurs": 29.559999465942383,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-07"
-    },
     "HAUTO.OL": {
       "navn": "H\u00f6egh Autoliners",
       "antall": 21,
@@ -35,8 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "SOFF.OL": {
       "navn": "Solstad Offshore",
@@ -53,8 +35,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -71,8 +53,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -89,8 +71,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -107,8 +89,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "MEDI.OL": {
       "navn": "Medistim",
@@ -142,8 +124,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-07"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-10-08"
     },
     "KIT.OL": {
       "navn": "Kitron",
@@ -152,6 +134,40 @@
       "kj\u00f8psdato": "2026-10-07",
       "h\u00f8yeste_kurs": 103.9000015258789,
       "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-10-08"
+    },
+    "CMBTO.OL": {
+      "navn": "CMB.TECH",
+      "antall": 32,
+      "snittpris": 194.60000610351562,
+      "kj\u00f8psdato": "2026-10-08",
+      "h\u00f8yeste_kurs": 194.60000610351562,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    "AURG.OL": {
+      "navn": "Aurskog Sparebank",
+      "antall": 31,
+      "snittpris": 267.5,
+      "kj\u00f8psdato": "2026-10-08",
+      "h\u00f8yeste_kurs": 267.5,
+      "stop_loss_pct": 0.0501,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
@@ -4583,9 +4599,69 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-10-08 11:49:21.427409",
+      "handling": "SELG",
+      "ticker": "MPCC.OL",
+      "navn": "MPC Container Ships",
+      "antall": 201,
+      "kurs": 28.68000030517578,
+      "bel\u00f8p": 5765.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 28.450000762939453,
+      "avkastning_pct": 0.81,
+      "holdingstid": 21,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-08 11:49:23.075441",
+      "handling": "KJ\u00d8P",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 32,
+      "kurs": 194.60000610351562,
+      "bel\u00f8p": 6227.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 65.3% \u00b7 rel.styrke 24.1% \u00b7 RSI 68 \u00b7 P/E 7 \u00b7 P/B 1.9",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-08 11:49:23.075581",
+      "handling": "KJ\u00d8P",
+      "ticker": "AURG.OL",
+      "navn": "Aurskog Sparebank",
+      "antall": 31,
+      "kurs": 267.5,
+      "bel\u00f8p": 8292.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 2.9% \u00b7 rel.styrke 1.3% \u00b7 RSI 68 \u00b7 P/E 14 \u00b7 P/B 0.5",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-10-07 11:34:30.567519",
+  "sist_analysert": "2026-10-08 11:49:23.075616",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5163,6 +5239,10 @@
     {
       "dato": "2026-10-07",
       "total_verdi": 88887.0
+    },
+    {
+      "dato": "2026-10-08",
+      "total_verdi": 88880.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5170,32 +5250,46 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Kitron",
-      "ticker": "KIT.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 1.2,
-      "rel_styrke": 6.9,
-      "rsi": 63.0,
-      "kurs": 103.7,
-      "pe": 28.2,
-      "pb": 5.81,
-      "yield": 66.0
-    },
-    {
-      "navn": "Frontline",
-      "ticker": "FRO.OL",
+      "navn": "CMB.TECH",
+      "ticker": "CMBTO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 49.1,
-      "rel_styrke": 33.5,
+      "mom": 65.3,
+      "rel_styrke": 24.1,
       "rsi": 68.0,
-      "kurs": 507.6,
-      "pe": 7.7,
-      "pb": 3.72,
-      "yield": 1985.0
+      "kurs": 194.6,
+      "pe": 6.7,
+      "pb": 1.89,
+      "yield": 420.0
+    },
+    {
+      "navn": "BW LPG",
+      "ticker": "BWLPG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 53.1,
+      "rel_styrke": 25.5,
+      "rsi": 65.0,
+      "kurs": 246.6,
+      "pe": 8.5,
+      "pb": 2.03,
+      "yield": 1004.0
+    },
+    {
+      "navn": "Aurskog Sparebank",
+      "ticker": "AURG.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 2.9,
+      "rel_styrke": 1.3,
+      "rsi": 68.0,
+      "kurs": 267.5,
+      "pe": 14.4,
+      "pb": 0.53,
+      "yield": 646.0
     },
     {
       "navn": "Medistim",
@@ -5203,9 +5297,9 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 21.7,
-      "rel_styrke": 12.3,
-      "rsi": 69.0,
+      "mom": 20.2,
+      "rel_styrke": 13.7,
+      "rsi": 68.0,
       "kurs": 269.0,
       "pe": null,
       "pb": null,
@@ -5214,7 +5308,7 @@
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
-    "Shipping": 1
+    "Shipping": -1
   },
   "insider_kj\u00f8p": [
     "AKER.OL",
@@ -5223,12 +5317,12 @@
     "NORDH.OL"
   ],
   "short_interest": {
-    "NOD.OL": 2.59,
+    "NOD.OL": 2.6,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7.92,
+    "BORR.OL": 7.76,
     "BAKKA.OL": 2.99,
     "LINK.OL": 7.55,
-    "NORBT.OL": 2.16,
+    "NORBT.OL": 2.66,
     "KID.OL": 3.36
   },
   "urealisert_historikk": [
@@ -5795,6 +5889,10 @@
     {
       "dato": "2026-10-07",
       "verdi": -1178.0
+    },
+    {
+      "dato": "2026-10-08",
+      "verdi": -1145.0
     }
   ]
 }

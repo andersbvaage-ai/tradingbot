@@ -17,8 +17,7 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 0
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -35,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-10-12"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
@@ -53,8 +52,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-10-12"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -71,8 +70,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-10-12"
     },
     "MEDI.OL": {
       "navn": "Medistim",
@@ -89,8 +88,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-10-12"
     },
     "SNI.OL": {
       "navn": "Stolt-Nielsen",
@@ -107,15 +106,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-10-12"
     },
     "KIT.OL": {
       "navn": "Kitron",
       "antall": 44,
       "snittpris": 103.69999694824219,
       "kj\u00f8psdato": "2026-10-07",
-      "h\u00f8yeste_kurs": 104.69999694824219,
+      "h\u00f8yeste_kurs": 105.4000015258789,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -125,8 +124,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 0
     },
     "CMBTO.OL": {
       "navn": "CMB.TECH",
@@ -143,15 +141,14 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-09"
+      "utenfor_topp_streak": 0
     },
     "AURG.OL": {
       "navn": "Aurskog Sparebank",
       "antall": 31,
       "snittpris": 267.5,
       "kj\u00f8psdato": "2026-10-08",
-      "h\u00f8yeste_kurs": 267.5,
+      "h\u00f8yeste_kurs": 267.8999938964844,
       "stop_loss_pct": 0.0501,
       "signaler": {
         "ensemble": 3,
@@ -168,7 +165,7 @@
       "antall": 16,
       "snittpris": 249.39999389648438,
       "kj\u00f8psdato": "2026-10-09",
-      "h\u00f8yeste_kurs": 250.0,
+      "h\u00f8yeste_kurs": 252.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -177,7 +174,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "NORDH.OL": {
       "navn": "Nordic Halibut",
@@ -193,7 +191,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -4739,7 +4738,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-10-09 11:41:55.607323",
+  "sist_analysert": "2026-10-12 12:49:18.466639",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5325,6 +5324,10 @@
     {
       "dato": "2026-10-09",
       "total_verdi": 89457.0
+    },
+    {
+      "dato": "2026-10-12",
+      "total_verdi": 89756.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5332,45 +5335,73 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "CMB.TECH",
+      "ticker": "CMBTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 60.7,
+      "rel_styrke": 25.9,
+      "rsi": 69.0,
+      "kurs": 197.8,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Kitron",
+      "ticker": "KIT.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 7.5,
+      "rel_styrke": 17.9,
+      "rsi": 67.0,
+      "kurs": 105.4,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
       "navn": "BW LPG",
       "ticker": "BWLPG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 51.1,
-      "rel_styrke": 21.8,
-      "rsi": 68.0,
-      "kurs": 249.4,
-      "pe": 8.6,
-      "pb": 2.05,
-      "yield": 1005.0
+      "mom": 55.2,
+      "rel_styrke": 25.0,
+      "rsi": 70.0,
+      "kurs": 252.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Solstad Offshore",
+      "ticker": "SOFF.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 11.8,
+      "rel_styrke": 2.8,
+      "rsi": 60.0,
+      "kurs": 73.2,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Aurskog Sparebank",
       "ticker": "AURG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 2.7,
-      "rel_styrke": 1.3,
-      "rsi": 67.0,
-      "kurs": 267.0,
+      "score": 4,
+      "mom": 3.0,
+      "rel_styrke": 0.1,
+      "rsi": 64.0,
+      "kurs": 267.9,
       "pe": null,
       "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Nordic Halibut",
-      "ticker": "NORDH.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 3.8,
-      "rel_styrke": 18.7,
-      "rsi": 65.0,
-      "kurs": 27.4,
-      "pe": 42.6,
-      "pb": 3.64,
       "yield": null
     }
   ],
@@ -5385,13 +5416,14 @@
     "NORDH.OL"
   ],
   "short_interest": {
-    "NOD.OL": 2.6,
+    "NOD.OL": 3.1,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7.69,
+    "TGS.OL": 2.03,
+    "BORR.OL": 7.28,
     "BAKKA.OL": 2.99,
     "LINK.OL": 7.53,
     "NORBT.OL": 2.66,
-    "KID.OL": 3.36
+    "KID.OL": 3.19
   },
   "urealisert_historikk": [
     {
@@ -5965,6 +5997,10 @@
     {
       "dato": "2026-10-09",
       "verdi": -430.0
+    },
+    {
+      "dato": "2026-10-12",
+      "verdi": -132.0
     }
   ]
 }

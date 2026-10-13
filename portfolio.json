@@ -1,5 +1,5 @@
 {
-  "kasse": 34078.0,
+  "kasse": 35754.0,
   "start_kapital": 100000,
   "posisjoner": {
     "SOFF.OL": {
@@ -18,24 +18,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "ZAP.OL": {
-      "navn": "Zaptec",
-      "antall": 29,
-      "snittpris": 62.099998474121094,
-      "kj\u00f8psdato": "2026-09-30",
-      "h\u00f8yeste_kurs": 65.69999694824219,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-10-13"
     },
     "AFK.OL": {
       "navn": "Arendals Fossekompani",
@@ -183,7 +165,7 @@
       "antall": 271,
       "snittpris": 20.059999465942383,
       "kj\u00f8psdato": "2026-10-13",
-      "h\u00f8yeste_kurs": 20.059999465942383,
+      "h\u00f8yeste_kurs": 20.1200008392334,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -4775,6 +4757,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-13 12:59:54.344838",
+      "handling": "SELG",
+      "ticker": "ZAP.OL",
+      "navn": "Zaptec",
+      "antall": 29,
+      "kurs": 58.79999923706055,
+      "bel\u00f8p": 1705.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.5% fra topp 65.70 kr \u00b7 kj\u00f8pspris 62.10 kr)",
+      "snittpris": 62.099998474121094,
+      "avkastning_pct": -5.31,
+      "holdingstid": 13,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }

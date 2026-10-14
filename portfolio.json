@@ -1,5 +1,5 @@
 {
-  "kasse": 30595.0,
+  "kasse": 36358.0,
   "start_kapital": 100000,
   "posisjoner": {
     "SOFF.OL": {
@@ -72,23 +72,6 @@
       },
       "utenfor_topp_streak": 1,
       "utenfor_topp_sist_dato": "2026-10-14"
-    },
-    "CMBTO.OL": {
-      "navn": "CMB.TECH",
-      "antall": 32,
-      "snittpris": 194.60000610351562,
-      "kj\u00f8psdato": "2026-10-08",
-      "h\u00f8yeste_kurs": 201.5,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
     },
     "AURG.OL": {
       "navn": "Aurskog Sparebank",
@@ -4855,6 +4838,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-14 14:27:30.836575",
+      "handling": "SELG",
+      "ticker": "CMBTO.OL",
+      "navn": "CMB.TECH",
+      "antall": 32,
+      "kurs": 181.0,
+      "bel\u00f8p": 5792.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.2% fra topp 201.50 kr \u00b7 kj\u00f8pspris 194.60 kr)",
+      "snittpris": 194.60000610351562,
+      "avkastning_pct": -6.99,
+      "holdingstid": 6,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }

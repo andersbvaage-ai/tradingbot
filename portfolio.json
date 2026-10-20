@@ -1,5 +1,5 @@
 {
-  "kasse": 35888.0,
+  "kasse": 40024.0,
   "start_kapital": 100000,
   "posisjoner": {
     "SOFF.OL": {
@@ -35,24 +35,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 0
-    },
-    "KIT.OL": {
-      "navn": "Kitron",
-      "antall": 44,
-      "snittpris": 103.69999694824219,
-      "kj\u00f8psdato": "2026-10-07",
-      "h\u00f8yeste_kurs": 105.4000015258789,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-10-20"
     },
     "AURG.OL": {
       "navn": "Aurskog Sparebank",
@@ -112,7 +94,7 @@
       "antall": 271,
       "snittpris": 20.059999465942383,
       "kj\u00f8psdato": "2026-10-13",
-      "h\u00f8yeste_kurs": 22.559999465942383,
+      "h\u00f8yeste_kurs": 22.760000228881836,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -4933,6 +4915,28 @@
       "bel\u00f8p": 3516.0,
       "kurtasje": 29,
       "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 4.3% \u00b7 rel.styrke 9.4% \u00b7 RSI 57 \u00b7 P/E 13 \u00b7 P/B 0.9",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-20 10:20:24.329297",
+      "handling": "SELG",
+      "ticker": "KIT.OL",
+      "navn": "Kitron",
+      "antall": 44,
+      "kurs": 94.6500015258789,
+      "bel\u00f8p": 4165.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.2% fra topp 105.40 kr \u00b7 kj\u00f8pspris 103.70 kr)",
+      "snittpris": 103.69999694824219,
+      "avkastning_pct": -8.73,
+      "holdingstid": 13,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

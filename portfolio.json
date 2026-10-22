@@ -1,5 +1,5 @@
 {
-  "kasse": 40024.0,
+  "kasse": 43630.0,
   "start_kapital": 100000,
   "posisjoner": {
     "SOFF.OL": {
@@ -53,24 +53,6 @@
         "regime": "Bull"
       },
       "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-10-22"
-    },
-    "BWLPG.OL": {
-      "navn": "BW LPG",
-      "antall": 16,
-      "snittpris": 249.39999389648438,
-      "kj\u00f8psdato": "2026-10-09",
-      "h\u00f8yeste_kurs": 253.1999969482422,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 6,
       "utenfor_topp_sist_dato": "2026-10-22"
     },
     "NORDH.OL": {
@@ -4947,6 +4929,28 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-22 13:52:44.495039",
+      "handling": "SELG",
+      "ticker": "BWLPG.OL",
+      "navn": "BW LPG",
+      "antall": 16,
+      "kurs": 227.1999969482422,
+      "bel\u00f8p": 3635.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.3% fra topp 253.20 kr \u00b7 kj\u00f8pspris 249.40 kr)",
+      "snittpris": 249.39999389648438,
+      "avkastning_pct": -8.9,
+      "holdingstid": 13,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }

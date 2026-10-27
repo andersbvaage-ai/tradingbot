@@ -1,31 +1,13 @@
 {
-  "kasse": 40315.0,
+  "kasse": 44375.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "MEDI.OL": {
-      "navn": "Medistim",
-      "antall": 20,
-      "snittpris": 252.0,
-      "kj\u00f8psdato": "2026-10-01",
-      "h\u00f8yeste_kurs": 315.0,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-26"
-    },
     "DNO.OL": {
       "navn": "DNO",
       "antall": 271,
       "snittpris": 20.059999465942383,
       "kj\u00f8psdato": "2026-10-13",
-      "h\u00f8yeste_kurs": 23.81999969482422,
+      "h\u00f8yeste_kurs": 23.920000076293945,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -35,8 +17,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-10-26"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-10-27"
     },
     "NONG.OL": {
       "navn": "SpareBank 1 Nord-Norge",
@@ -70,8 +52,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-10-26"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-10-27"
     },
     "HELG.OL": {
       "navn": "Helgeland Sparebank",
@@ -88,15 +70,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-10-26"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-10-27"
     },
     "ODL.OL": {
       "navn": "Odfjell Drilling",
       "antall": 73,
       "snittpris": 105.0,
       "kj\u00f8psdato": "2026-10-23",
-      "h\u00f8yeste_kurs": 109.0,
+      "h\u00f8yeste_kurs": 109.4000015258789,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -122,14 +104,15 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
       "antall": 39,
       "snittpris": 216.14999389648438,
       "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 216.6999969482422,
+      "h\u00f8yeste_kurs": 217.89999389648438,
       "stop_loss_pct": 0.099,
       "signaler": {
         "ensemble": 3,
@@ -137,6 +120,23 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "2020.OL": {
+      "navn": "2020 Bulkers",
+      "antall": 192,
+      "snittpris": 10.220000267028809,
+      "kj\u00f8psdato": "2026-10-27",
+      "h\u00f8yeste_kurs": 10.220000267028809,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }
@@ -5076,9 +5076,50 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-10-27 10:14:31.507123",
+      "handling": "SELG",
+      "ticker": "MEDI.OL",
+      "navn": "Medistim",
+      "antall": 20,
+      "kurs": 304.0,
+      "bel\u00f8p": 6080.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 252.0,
+      "avkastning_pct": 20.63,
+      "holdingstid": 26,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-27 10:14:32.072751",
+      "handling": "KJ\u00d8P",
+      "ticker": "2020.OL",
+      "navn": "2020 Bulkers",
+      "antall": 192,
+      "kurs": 10.220000267028809,
+      "bel\u00f8p": 1962.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 136.4% \u00b7 rel.styrke 197.1% \u00b7 RSI 67 \u00b7 P/E 0 \u00b7 P/B 4.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-10-26 10:47:52.166338",
+  "sist_analysert": "2026-10-27 10:14:32.072851",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5708,6 +5749,10 @@
     {
       "dato": "2026-10-26",
       "total_verdi": 88559.0
+    },
+    {
+      "dato": "2026-10-27",
+      "total_verdi": 88807.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5720,10 +5765,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 16.0,
-      "rel_styrke": 18.2,
-      "rsi": 64.0,
-      "kurs": 108.8,
+      "mom": 16.8,
+      "rel_styrke": 17.9,
+      "rsi": 65.0,
+      "kurs": 109.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5734,13 +5779,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 1.7,
-      "rel_styrke": 8.0,
-      "rsi": 57.0,
-      "kurs": 17.6,
-      "pe": 22.9,
-      "pb": 0.77,
-      "yield": 112.0
+      "mom": 2.3,
+      "rel_styrke": 4.3,
+      "rsi": 58.0,
+      "kurs": 17.75,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "2020 Bulkers",
+      "ticker": "2020.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 136.4,
+      "rel_styrke": 197.1,
+      "rsi": 67.0,
+      "kurs": 10.22,
+      "pe": 0.1,
+      "pb": 4.15,
+      "yield": 11375.0
     },
     {
       "navn": "SpareBank 1 SMN",
@@ -5748,13 +5807,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 4.1,
-      "rel_styrke": 6.6,
-      "rsi": 55.0,
-      "kurs": 216.15,
-      "pe": 11.7,
-      "pb": 1.1,
-      "yield": 635.0
+      "mom": 5.2,
+      "rel_styrke": 5.3,
+      "rsi": 58.0,
+      "kurs": 217.9,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "SpareBank 1 Nord-Norge",
@@ -5762,10 +5821,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 11.4,
-      "rel_styrke": 8.9,
-      "rsi": 58.0,
-      "kurs": 176.42,
+      "mom": 12.7,
+      "rel_styrke": 7.3,
+      "rsi": 59.0,
+      "kurs": 177.18,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5779,7 +5838,7 @@
     "BORR.OL"
   ],
   "short_interest": {
-    "SCATC.OL": 2.62,
+    "SCATC.OL": 2.91,
     "NOD.OL": 2.59,
     "AUTO.OL": 2.1,
     "TGS.OL": 2,
@@ -6405,6 +6464,10 @@
     {
       "dato": "2026-10-26",
       "verdi": 2139.0
+    },
+    {
+      "dato": "2026-10-27",
+      "verdi": 1405.0
     }
   ]
 }

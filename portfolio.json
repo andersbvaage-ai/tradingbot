@@ -1,5 +1,5 @@
 {
-  "kasse": 44025.0,
+  "kasse": 46569.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -95,7 +95,7 @@
       "antall": 39,
       "snittpris": 216.14999389648438,
       "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 222.60000610351562,
+      "h\u00f8yeste_kurs": 222.75,
       "stop_loss_pct": 0.099,
       "signaler": {
         "ensemble": 3,
@@ -107,30 +107,12 @@
       },
       "utenfor_topp_streak": 0
     },
-    "2020.OL": {
-      "navn": "2020 Bulkers",
-      "antall": 192,
-      "snittpris": 10.220000267028809,
-      "kj\u00f8psdato": "2026-10-27",
-      "h\u00f8yeste_kurs": 16.360000610351562,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-28"
-    },
     "KID.OL": {
       "navn": "Kid",
       "antall": 49,
       "snittpris": 138.60000610351562,
       "kj\u00f8psdato": "2026-10-28",
-      "h\u00f8yeste_kurs": 138.8000030517578,
+      "h\u00f8yeste_kurs": 139.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -5157,6 +5139,28 @@
         "insider": false,
         "short_score": -0.4,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-28 14:32:20.535082",
+      "handling": "SELG",
+      "ticker": "2020.OL",
+      "navn": "2020 Bulkers",
+      "antall": 192,
+      "kurs": 13.399999618530273,
+      "bel\u00f8p": 2573.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-18.1% fra topp 16.36 kr \u00b7 kj\u00f8pspris 10.22 kr)",
+      "snittpris": 10.220000267028809,
+      "avkastning_pct": 31.12,
+      "holdingstid": 1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
         "regime": "Bull"
       }
     }

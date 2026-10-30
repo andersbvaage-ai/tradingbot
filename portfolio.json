@@ -1,5 +1,5 @@
 {
-  "kasse": 40339.0,
+  "kasse": 39725.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -19,24 +19,6 @@
       },
       "utenfor_topp_streak": 0
     },
-    "FRO.OL": {
-      "navn": "Frontline",
-      "antall": 6,
-      "snittpris": 515.7999877929688,
-      "kj\u00f8psdato": "2026-10-15",
-      "h\u00f8yeste_kurs": 525.4000244140625,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 10,
-      "utenfor_topp_sist_dato": "2026-10-29"
-    },
     "HELG.OL": {
       "navn": "Helgeland Sparebank",
       "antall": 20,
@@ -52,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 7,
-      "utenfor_topp_sist_dato": "2026-10-29"
+      "utenfor_topp_streak": 8,
+      "utenfor_topp_sist_dato": "2026-10-30"
     },
     "ODL.OL": {
       "navn": "Odfjell Drilling",
@@ -87,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-10-29"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-10-30"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -122,8 +104,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-10-29"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-10-30"
     },
     "DOFG.OL": {
       "navn": "DOF Group",
@@ -138,6 +120,23 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "ZAP.OL": {
+      "navn": "Zaptec",
+      "antall": 60,
+      "snittpris": 61.400001525878906,
+      "kj\u00f8psdato": "2026-10-30",
+      "h\u00f8yeste_kurs": 61.400001525878906,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
     }
@@ -5200,9 +5199,50 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-10-30 11:12:29.127668",
+      "handling": "SELG",
+      "ticker": "FRO.OL",
+      "navn": "Frontline",
+      "antall": 6,
+      "kurs": 521.4000244140625,
+      "bel\u00f8p": 3128.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 11 dager p\u00e5 rad",
+      "snittpris": 515.7999877929688,
+      "avkastning_pct": 1.09,
+      "holdingstid": 15,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-10-30 11:12:29.464559",
+      "handling": "KJ\u00d8P",
+      "ticker": "ZAP.OL",
+      "navn": "Zaptec",
+      "antall": 60,
+      "kurs": 61.400001525878906,
+      "bel\u00f8p": 3684.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 75.4% \u00b7 rel.styrke 26.0% \u00b7 RSI 57 \u00b7 P/E 49 \u00b7 P/B 8.3",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-10-29 11:19:56.492736",
+  "sist_analysert": "2026-10-30 11:12:29.464647",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5844,6 +5884,10 @@
     {
       "dato": "2026-10-29",
       "total_verdi": 89261.0
+    },
+    {
+      "dato": "2026-10-30",
+      "total_verdi": 88954.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5855,11 +5899,11 @@
       "ticker": "ODL.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 17.0,
-      "rel_styrke": 18.0,
-      "rsi": 66.0,
-      "kurs": 110.2,
+      "score": 4,
+      "mom": 13.8,
+      "rel_styrke": 16.2,
+      "rsi": 62.0,
+      "kurs": 108.8,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5870,13 +5914,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 4.9,
-      "rel_styrke": 6.8,
-      "rsi": 58.0,
-      "kurs": 134.8,
-      "pe": 7.2,
-      "pb": 1.69,
-      "yield": 1035.0
+      "mom": 1.7,
+      "rel_styrke": 3.1,
+      "rsi": 51.0,
+      "kurs": 131.7,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "SpareBank 1 SMN",
@@ -5884,10 +5928,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 6.9,
-      "rel_styrke": 5.0,
-      "rsi": 56.0,
-      "kurs": 218.45,
+      "mom": 7.2,
+      "rel_styrke": 3.1,
+      "rsi": 53.0,
+      "kurs": 217.05,
       "pe": null,
       "pb": null,
       "yield": null
@@ -5898,13 +5942,27 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 15.7,
-      "rel_styrke": 6.1,
-      "rsi": 60.0,
-      "kurs": 178.1,
+      "mom": 17.6,
+      "rel_styrke": 6.2,
+      "rsi": 63.0,
+      "kurs": 179.56,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Zaptec",
+      "ticker": "ZAP.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 75.4,
+      "rel_styrke": 26.0,
+      "rsi": 57.0,
+      "kurs": 61.4,
+      "pe": 48.7,
+      "pb": 8.33,
+      "yield": 641.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -5916,11 +5974,12 @@
   ],
   "short_interest": {
     "SCATC.OL": 3.45,
-    "NOD.OL": 2.62,
+    "NOD.OL": 3.12,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7.96,
+    "BORR.OL": 7.85,
+    "NAS.OL": 2.06,
     "BAKKA.OL": 2.99,
-    "LINK.OL": 7.23,
+    "LINK.OL": 7.13,
     "NORBT.OL": 2.14,
     "KID.OL": 2.01
   },
@@ -6552,6 +6611,10 @@
     {
       "dato": "2026-10-29",
       "verdi": 301.0
+    },
+    {
+      "dato": "2026-10-30",
+      "verdi": 20.0
     }
   ]
 }

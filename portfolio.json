@@ -1,5 +1,5 @@
 {
-  "kasse": 27769.0,
+  "kasse": 29425.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -34,8 +34,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-11-02"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-11-03"
     },
     "ODL.OL": {
       "navn": "Odfjell Drilling",
@@ -52,7 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-03"
     },
     "EIOF.OL": {
       "navn": "Eidesvik Offshore",
@@ -69,8 +70,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 4,
-      "utenfor_topp_sist_dato": "2026-11-02"
+      "utenfor_topp_streak": 5,
+      "utenfor_topp_sist_dato": "2026-11-03"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -87,7 +88,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-03"
     },
     "KID.OL": {
       "navn": "Kid",
@@ -104,32 +106,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 3,
-      "utenfor_topp_sist_dato": "2026-11-02"
-    },
-    "DOFG.OL": {
-      "navn": "DOF Group",
-      "antall": 46,
-      "snittpris": 134.8000030517578,
-      "kj\u00f8psdato": "2026-10-29",
-      "h\u00f8yeste_kurs": 134.8000030517578,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.5,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 4,
+      "utenfor_topp_sist_dato": "2026-11-03"
     },
     "ZAP.OL": {
       "navn": "Zaptec",
       "antall": 60,
       "snittpris": 61.400001525878906,
       "kj\u00f8psdato": "2026-10-30",
-      "h\u00f8yeste_kurs": 61.599998474121094,
+      "h\u00f8yeste_kurs": 62.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -146,7 +131,7 @@
       "antall": 35,
       "snittpris": 195.60000610351562,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 195.60000610351562,
+      "h\u00f8yeste_kurs": 197.60000610351562,
       "stop_loss_pct": 0.0973,
       "signaler": {
         "ensemble": 3,
@@ -155,14 +140,15 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     },
     "VEI.OL": {
       "navn": "Veidekke",
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 211.0,
+      "h\u00f8yeste_kurs": 213.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -170,6 +156,23 @@
         "insider": false,
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "DNO.OL": {
+      "navn": "DNO",
+      "antall": 182,
+      "snittpris": 23.15999984741211,
+      "kj\u00f8psdato": "2026-11-03",
+      "h\u00f8yeste_kurs": 23.15999984741211,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       }
     }
@@ -5311,9 +5314,50 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-11-03 12:39:14.615994",
+      "handling": "SELG",
+      "ticker": "DOFG.OL",
+      "navn": "DOF Group",
+      "antall": 46,
+      "kurs": 128.89999389648438,
+      "bel\u00f8p": 5929.0,
+      "kurtasje": 29,
+      "begrunnelse": "Ensemble snudd (0/3 \u2014 Trend, MACD og Momentum alle negative)",
+      "snittpris": 134.8000030517578,
+      "avkastning_pct": -4.38,
+      "holdingstid": 5,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-11-03 12:39:15.241825",
+      "handling": "KJ\u00d8P",
+      "ticker": "DNO.OL",
+      "navn": "DNO",
+      "antall": 182,
+      "kurs": 23.15999984741211,
+      "bel\u00f8p": 4215.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 30.0% \u00b7 rel.styrke 36.6% \u00b7 RSI 63 \u00b7 P/E 15 \u00b7 P/B 2.4",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.5,
+        "regime": "Bull"
+      }
     }
   ],
-  "sist_analysert": "2026-11-02 13:10:01.852691",
+  "sist_analysert": "2026-11-03 12:39:15.241882",
   "regime": "Bull",
   "verdi_historikk": [
     {
@@ -5963,6 +6007,10 @@
     {
       "dato": "2026-11-02",
       "total_verdi": 88831.0
+    },
+    {
+      "dato": "2026-11-03",
+      "total_verdi": 88374.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -5975,13 +6023,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 14.7,
-      "rel_styrke": 0.6,
-      "rsi": 58.0,
-      "kurs": 195.6,
-      "pe": 17.8,
-      "pb": 7.18,
-      "yield": 333.0
+      "mom": 16.0,
+      "rel_styrke": 1.8,
+      "rsi": 61.0,
+      "kurs": 197.6,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Veidekke",
@@ -5989,52 +6037,38 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 19.6,
-      "rel_styrke": 6.3,
-      "rsi": 54.0,
-      "kurs": 210.5,
-      "pe": 16.9,
-      "pb": 11.03,
-      "yield": 536.0
-    },
-    {
-      "navn": "Odfjell Drilling",
-      "ticker": "ODL.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 16.3,
-      "rel_styrke": 20.6,
-      "rsi": 66.0,
-      "kurs": 111.2,
+      "mom": 17.9,
+      "rel_styrke": 8.7,
+      "rsi": 58.0,
+      "kurs": 213.0,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "DOF Group",
-      "ticker": "DOFG.OL",
+      "navn": "DNO",
+      "ticker": "DNO.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 0.4,
-      "rel_styrke": 1.8,
-      "rsi": 49.0,
-      "kurs": 130.6,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 30.0,
+      "rel_styrke": 36.6,
+      "rsi": 63.0,
+      "kurs": 23.16,
+      "pe": 14.9,
+      "pb": 2.36,
+      "yield": 631.0
     },
     {
-      "navn": "SpareBank 1 SMN",
-      "ticker": "MING.OL",
+      "navn": "SpareBank 1 Nord-Norge",
+      "ticker": "NONG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 5.0,
-      "rel_styrke": 1.2,
-      "rsi": 48.0,
-      "kurs": 213.7,
+      "mom": 19.0,
+      "rel_styrke": 6.5,
+      "rsi": 57.0,
+      "kurs": 178.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6047,17 +6081,7 @@
   "insider_kj\u00f8p": [
     "BORR.OL"
   ],
-  "short_interest": {
-    "SCATC.OL": 2.91,
-    "NOD.OL": 2.82,
-    "AUTO.OL": 2.1,
-    "BORR.OL": 7.39,
-    "NAS.OL": 2.06,
-    "BAKKA.OL": 2.99,
-    "LINK.OL": 6.54,
-    "NORBT.OL": 2.14,
-    "KID.OL": 2.01
-  },
+  "short_interest": {},
   "urealisert_historikk": [
     {
       "dato": "2026-03-23",
@@ -6694,6 +6718,10 @@
     {
       "dato": "2026-11-02",
       "verdi": -46.0
+    },
+    {
+      "dato": "2026-11-03",
+      "verdi": -173.0
     }
   ]
 }

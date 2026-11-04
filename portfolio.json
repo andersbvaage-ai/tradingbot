@@ -1,5 +1,5 @@
 {
-  "kasse": 29360.0,
+  "kasse": 32661.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -7,7 +7,7 @@
       "antall": 29,
       "snittpris": 177.3800048828125,
       "kj\u00f8psdato": "2026-10-14",
-      "h\u00f8yeste_kurs": 181.0,
+      "h\u00f8yeste_kurs": 181.8000030517578,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -91,29 +91,12 @@
       "utenfor_topp_streak": 5,
       "utenfor_topp_sist_dato": "2026-11-04"
     },
-    "ZAP.OL": {
-      "navn": "Zaptec",
-      "antall": 60,
-      "snittpris": 61.400001525878906,
-      "kj\u00f8psdato": "2026-10-30",
-      "h\u00f8yeste_kurs": 62.79999923706055,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 0
-    },
     "AFG.OL": {
       "navn": "AF Gruppen",
       "antall": 35,
       "snittpris": 195.60000610351562,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 198.0,
+      "h\u00f8yeste_kurs": 198.60000610351562,
       "stop_loss_pct": 0.0973,
       "signaler": {
         "ensemble": 3,
@@ -5388,6 +5371,28 @@
       "bel\u00f8p": 3507.0,
       "kurtasje": 29,
       "begrunnelse": "[Bull] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 10.4% \u00b7 rel.styrke 7.8% \u00b7 RSI 67 \u00b7 P/E 16 \u00b7 P/B 6.5",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-11-04 14:18:38.675262",
+      "handling": "SELG",
+      "ticker": "ZAP.OL",
+      "navn": "Zaptec",
+      "antall": 60,
+      "kurs": 55.5,
+      "bel\u00f8p": 3330.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-11.6% fra topp 62.80 kr \u00b7 kj\u00f8pspris 61.40 kr)",
+      "snittpris": 61.400001525878906,
+      "avkastning_pct": -9.61,
+      "holdingstid": 5,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

@@ -7,7 +7,7 @@
       "antall": 29,
       "snittpris": 177.3800048828125,
       "kj\u00f8psdato": "2026-10-14",
-      "h\u00f8yeste_kurs": 181.8000030517578,
+      "h\u00f8yeste_kurs": 183.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -34,8 +34,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-04"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-05"
     },
     "EIOF.OL": {
       "navn": "Eidesvik Offshore",
@@ -52,8 +52,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 6,
-      "utenfor_topp_sist_dato": "2026-11-04"
+      "utenfor_topp_streak": 7,
+      "utenfor_topp_sist_dato": "2026-11-05"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -70,15 +70,14 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-04"
+      "utenfor_topp_streak": 0
     },
     "KID.OL": {
       "navn": "Kid",
       "antall": 49,
       "snittpris": 138.60000610351562,
       "kj\u00f8psdato": "2026-10-28",
-      "h\u00f8yeste_kurs": 139.0,
+      "h\u00f8yeste_kurs": 145.39999389648438,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -88,8 +87,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-11-04"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-11-05"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -113,7 +112,7 @@
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 214.5,
+      "h\u00f8yeste_kurs": 215.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -140,8 +139,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-04"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-05"
     },
     "SATS.OL": {
       "navn": "SATS",
@@ -157,7 +156,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -5403,8 +5403,8 @@
       }
     }
   ],
-  "sist_analysert": "2026-11-04 12:48:28.004988",
-  "regime": "Bull",
+  "sist_analysert": "2026-11-05 12:58:16.595191",
+  "regime": "Sideways",
   "verdi_historikk": [
     {
       "dato": "2026-03-18",
@@ -6061,6 +6061,10 @@
     {
       "dato": "2026-11-04",
       "total_verdi": 88214.0
+    },
+    {
+      "dato": "2026-11-05",
+      "total_verdi": 88192.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6073,10 +6077,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 18.0,
-      "rel_styrke": 2.0,
-      "rsi": 62.0,
-      "kurs": 198.0,
+      "mom": 18.5,
+      "rel_styrke": 4.5,
+      "rsi": 60.0,
+      "kurs": 197.2,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6087,72 +6091,42 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 20.5,
-      "rel_styrke": 9.8,
-      "rsi": 60.0,
-      "kurs": 214.5,
+      "mom": 24.1,
+      "rel_styrke": 13.7,
+      "rsi": 61.0,
+      "kurs": 215.5,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "SpareBank 1 Nord-Norge",
-      "ticker": "NONG.OL",
+      "navn": "Bonheur",
+      "ticker": "BONHR.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 23.3,
-      "rel_styrke": 9.2,
-      "rsi": 62.0,
-      "kurs": 180.76,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "Zaptec",
-      "ticker": "ZAP.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 43.0,
-      "rel_styrke": 20.7,
-      "rsi": 47.0,
-      "kurs": 58.1,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "SATS",
-      "ticker": "SATS.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 10.4,
-      "rel_styrke": 7.8,
-      "rsi": 67.0,
-      "kurs": 45.55,
-      "pe": 16.2,
-      "pb": 6.46,
-      "yield": 322.0
+      "mom": 3.5,
+      "rel_styrke": 7.2,
+      "rsi": 54.0,
+      "kurs": 261.5,
+      "pe": 10.6,
+      "pb": 1.2,
+      "yield": 277.0
     }
   ],
   "r\u00e5vare_trender": {
     "Energi": 1,
     "Shipping": -1
   },
-  "insider_kj\u00f8p": [
-    "BORR.OL"
-  ],
+  "insider_kj\u00f8p": [],
   "short_interest": {
     "SCATC.OL": 3.15,
     "NOD.OL": 2.82,
     "AUTO.OL": 2.1,
-    "BORR.OL": 7.39,
+    "BORR.OL": 7.42,
     "NAS.OL": 2.06,
     "BAKKA.OL": 2.99,
-    "LINK.OL": 6.54,
+    "LINK.OL": 6.51,
     "KID.OL": 2.01
   },
   "urealisert_historikk": [
@@ -6799,6 +6773,10 @@
     {
       "dato": "2026-11-04",
       "verdi": -260.0
+    },
+    {
+      "dato": "2026-11-05",
+      "verdi": 101.0
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "kasse": 45169.0,
+  "kasse": 41728.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -24,7 +24,7 @@
       "antall": 39,
       "snittpris": 216.14999389648438,
       "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 222.75,
+      "h\u00f8yeste_kurs": 222.8000030517578,
       "stop_loss_pct": 0.099,
       "signaler": {
         "ensemble": 3,
@@ -51,15 +51,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 8,
-      "utenfor_topp_sist_dato": "2026-11-09"
+      "utenfor_topp_streak": 9,
+      "utenfor_topp_sist_dato": "2026-11-10"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
       "antall": 35,
       "snittpris": 195.60000610351562,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 198.60000610351562,
+      "h\u00f8yeste_kurs": 200.0,
       "stop_loss_pct": 0.0973,
       "signaler": {
         "ensemble": 3,
@@ -76,7 +76,7 @@
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 219.5,
+      "h\u00f8yeste_kurs": 221.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -110,7 +110,7 @@
       "antall": 22,
       "snittpris": 262.0,
       "kj\u00f8psdato": "2026-11-06",
-      "h\u00f8yeste_kurs": 265.5,
+      "h\u00f8yeste_kurs": 272.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -121,6 +121,22 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "WWIB.OL": {
+      "navn": "Wilh. Wilhelmsen B",
+      "antall": 4,
+      "snittpris": 853.0,
+      "kj\u00f8psdato": "2026-11-10",
+      "h\u00f8yeste_kurs": 853.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -5449,9 +5465,28 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-11-10 13:17:32.780922",
+      "handling": "KJ\u00d8P",
+      "ticker": "WWIB.OL",
+      "navn": "Wilh. Wilhelmsen B",
+      "antall": 4,
+      "kurs": 853.0,
+      "bel\u00f8p": 3412.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 31.0% \u00b7 rel.styrke 14.4% \u00b7 RSI 59 \u00b7 P/E 7 \u00b7 P/B 1.0",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-11-09 13:40:01.038389",
+  "sist_analysert": "2026-11-10 13:17:32.781016",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6121,6 +6156,10 @@
     {
       "dato": "2026-11-09",
       "total_verdi": 87925.0
+    },
+    {
+      "dato": "2026-11-10",
+      "total_verdi": 88271.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6133,10 +6172,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 12.3,
-      "rel_styrke": 5.5,
-      "rsi": 61.0,
-      "kurs": 198.0,
+      "mom": 11.5,
+      "rel_styrke": 5.4,
+      "rsi": 64.0,
+      "kurs": 200.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6146,14 +6185,28 @@
       "ticker": "VEI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 26.9,
-      "rel_styrke": 17.1,
-      "rsi": 65.0,
-      "kurs": 219.0,
+      "score": 3,
+      "mom": 26.6,
+      "rel_styrke": 16.7,
+      "rsi": 67.0,
+      "kurs": 221.0,
       "pe": null,
       "pb": null,
       "yield": null
+    },
+    {
+      "navn": "Wilh. Wilhelmsen B",
+      "ticker": "WWIB.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 31.0,
+      "rel_styrke": 14.4,
+      "rsi": 59.0,
+      "kurs": 853.0,
+      "pe": 6.8,
+      "pb": 0.99,
+      "yield": 236.0
     },
     {
       "navn": "Bonheur",
@@ -6161,31 +6214,17 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 6.1,
-      "rel_styrke": 11.9,
-      "rsi": 58.0,
-      "kurs": 265.5,
-      "pe": null,
-      "pb": null,
-      "yield": null
-    },
-    {
-      "navn": "SpareBank 1 SMN",
-      "ticker": "MING.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 17.9,
-      "rel_styrke": 13.3,
-      "rsi": 58.0,
-      "kurs": 220.55,
+      "mom": 7.6,
+      "rel_styrke": 13.8,
+      "rsi": 64.0,
+      "kurs": 272.0,
       "pe": null,
       "pb": null,
       "yield": null
     }
   ],
   "r\u00e5vare_trender": {
-    "Energi": 1,
+    "Energi": -1,
     "Shipping": -1
   },
   "insider_kj\u00f8p": [
@@ -6196,6 +6235,7 @@
     "SCATC.OL": 3.69,
     "NOD.OL": 3.36,
     "AUTO.OL": 2.1,
+    "TGS.OL": 2.48,
     "BORR.OL": 7.47,
     "NAS.OL": 2.56,
     "BAKKA.OL": 2.99,
@@ -6858,6 +6898,10 @@
     {
       "dato": "2026-11-09",
       "verdi": 1222.0
+    },
+    {
+      "dato": "2026-11-10",
+      "verdi": 1596.0
     }
   ]
 }

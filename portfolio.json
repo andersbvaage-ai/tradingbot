@@ -51,15 +51,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 9,
-      "utenfor_topp_sist_dato": "2026-11-10"
+      "utenfor_topp_streak": 10,
+      "utenfor_topp_sist_dato": "2026-11-11"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
       "antall": 35,
       "snittpris": 195.60000610351562,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 200.5,
+      "h\u00f8yeste_kurs": 203.0,
       "stop_loss_pct": 0.0973,
       "signaler": {
         "ensemble": 3,
@@ -76,7 +76,7 @@
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 221.5,
+      "h\u00f8yeste_kurs": 222.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -110,7 +110,7 @@
       "antall": 22,
       "snittpris": 262.0,
       "kj\u00f8psdato": "2026-11-06",
-      "h\u00f8yeste_kurs": 274.0,
+      "h\u00f8yeste_kurs": 279.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -136,7 +136,8 @@
         "short_score": 0.0,
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
-      }
+      },
+      "utenfor_topp_streak": 0
     }
   },
   "ventende_handler": [],
@@ -5486,7 +5487,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-11-10 13:17:32.781016",
+  "sist_analysert": "2026-11-11 12:28:20.263358",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6160,6 +6161,10 @@
     {
       "dato": "2026-11-10",
       "total_verdi": 88271.0
+    },
+    {
+      "dato": "2026-11-11",
+      "total_verdi": 88409.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6171,11 +6176,11 @@
       "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
+      "score": 3,
       "mom": 11.5,
-      "rel_styrke": 5.4,
-      "rsi": 64.0,
-      "kurs": 200.0,
+      "rel_styrke": 4.2,
+      "rsi": 69.0,
+      "kurs": 203.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6186,10 +6191,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 26.6,
-      "rel_styrke": 16.7,
-      "rsi": 67.0,
-      "kurs": 221.0,
+      "mom": 27.4,
+      "rel_styrke": 11.0,
+      "rsi": 69.0,
+      "kurs": 222.5,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6200,24 +6205,24 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.0,
-      "rel_styrke": 14.4,
-      "rsi": 59.0,
-      "kurs": 853.0,
-      "pe": 6.8,
-      "pb": 0.99,
-      "yield": 236.0
+      "mom": 28.9,
+      "rel_styrke": 13.1,
+      "rsi": 57.0,
+      "kurs": 851.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
     },
     {
       "navn": "Bonheur",
       "ticker": "BONHR.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 7.6,
-      "rel_styrke": 13.8,
-      "rsi": 64.0,
-      "kurs": 272.0,
+      "score": 3,
+      "mom": 10.2,
+      "rel_styrke": 16.3,
+      "rsi": 69.0,
+      "kurs": 279.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6232,14 +6237,14 @@
     "PEXIP.OL"
   ],
   "short_interest": {
-    "SCATC.OL": 3.69,
+    "SCATC.OL": 3.77,
     "NOD.OL": 3.36,
     "AUTO.OL": 2.1,
     "TGS.OL": 2.48,
-    "BORR.OL": 7.47,
-    "NAS.OL": 2.56,
+    "BORR.OL": 7.46,
+    "NAS.OL": 2.93,
     "BAKKA.OL": 2.99,
-    "LINK.OL": 5.81,
+    "LINK.OL": 5.24,
     "KID.OL": 2.01
   },
   "urealisert_historikk": [
@@ -6902,6 +6907,10 @@
     {
       "dato": "2026-11-10",
       "verdi": 1596.0
+    },
+    {
+      "dato": "2026-11-11",
+      "verdi": 1734.0
     }
   ]
 }

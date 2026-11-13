@@ -7,7 +7,7 @@
       "antall": 29,
       "snittpris": 177.3800048828125,
       "kj\u00f8psdato": "2026-10-14",
-      "h\u00f8yeste_kurs": 184.8000030517578,
+      "h\u00f8yeste_kurs": 185.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -24,7 +24,7 @@
       "antall": 39,
       "snittpris": 216.14999389648438,
       "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 222.85000610351562,
+      "h\u00f8yeste_kurs": 223.5500030517578,
       "stop_loss_pct": 0.099,
       "signaler": {
         "ensemble": 3,
@@ -41,7 +41,7 @@
       "antall": 35,
       "snittpris": 195.60000610351562,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 205.5,
+      "h\u00f8yeste_kurs": 206.5,
       "stop_loss_pct": 0.0973,
       "signaler": {
         "ensemble": 3,
@@ -51,15 +51,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-12"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-13"
     },
     "VEI.OL": {
       "navn": "Veidekke",
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 227.5,
+      "h\u00f8yeste_kurs": 233.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-12"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-13"
     },
     "SATS.OL": {
       "navn": "SATS",
@@ -87,15 +87,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-12"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-13"
     },
     "BONHR.OL": {
       "navn": "Bonheur",
       "antall": 22,
       "snittpris": 262.0,
       "kj\u00f8psdato": "2026-11-06",
-      "h\u00f8yeste_kurs": 285.0,
+      "h\u00f8yeste_kurs": 292.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -105,15 +105,15 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-12"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-13"
     },
     "WWIB.OL": {
       "navn": "Wilh. Wilhelmsen B",
       "antall": 4,
       "snittpris": 853.0,
       "kj\u00f8psdato": "2026-11-10",
-      "h\u00f8yeste_kurs": 857.0,
+      "h\u00f8yeste_kurs": 872.0,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -5495,7 +5495,7 @@
       }
     }
   ],
-  "sist_analysert": "2026-11-12 13:33:38.442934",
+  "sist_analysert": "2026-11-13 12:53:44.606427",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6177,6 +6177,10 @@
     {
       "dato": "2026-11-12",
       "total_verdi": 88735.0
+    },
+    {
+      "dato": "2026-11-13",
+      "total_verdi": 89262.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6189,10 +6193,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 28.5,
-      "rel_styrke": 11.2,
-      "rsi": 55.0,
-      "kurs": 844.0,
+      "mom": 31.9,
+      "rel_styrke": 17.2,
+      "rsi": 62.0,
+      "kurs": 872.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6203,10 +6207,10 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 16.8,
-      "rel_styrke": 6.1,
-      "rsi": 60.0,
-      "kurs": 222.2,
+      "mom": 17.9,
+      "rel_styrke": 8.5,
+      "rsi": 62.0,
+      "kurs": 223.55,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6217,27 +6221,13 @@
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 26.1,
-      "rel_styrke": 7.5,
+      "mom": 25.3,
+      "rel_styrke": 8.3,
       "rsi": 67.0,
-      "kurs": 184.8,
+      "kurs": 185.0,
       "pe": null,
       "pb": null,
       "yield": null
-    },
-    {
-      "navn": "SpareBank 1 \u00d8stlandet",
-      "ticker": "SPOL.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 9.5,
-      "rel_styrke": 7.9,
-      "rsi": 65.0,
-      "kurs": 210.6,
-      "pe": 12.5,
-      "pb": 1.11,
-      "yield": 605.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -6250,11 +6240,11 @@
     "PEXIP.OL"
   ],
   "short_interest": {
-    "SCATC.OL": 3.89,
+    "SCATC.OL": 3.96,
     "NOD.OL": 3.36,
     "AUTO.OL": 2.1,
     "TGS.OL": 2.48,
-    "BORR.OL": 7.51,
+    "BORR.OL": 7.6,
     "NAS.OL": 2.95,
     "BAKKA.OL": 2.99,
     "LINK.OL": 5.24,
@@ -6928,6 +6918,10 @@
     {
       "dato": "2026-11-12",
       "verdi": 1590.0
+    },
+    {
+      "dato": "2026-11-13",
+      "verdi": 2117.0
     }
   ]
 }

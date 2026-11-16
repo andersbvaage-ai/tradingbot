@@ -1,5 +1,5 @@
 {
-  "kasse": 40974.0,
+  "kasse": 42222.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -131,22 +131,6 @@
       "snittpris": 17.350000381469727,
       "kj\u00f8psdato": "2026-11-16",
       "h\u00f8yeste_kurs": 17.350000381469727,
-      "stop_loss_pct": 0.1,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": -0.5,
-        "regime": "Sideways"
-      }
-    },
-    "2020.OL": {
-      "navn": "2020 Bulkers",
-      "antall": 112,
-      "snittpris": 12.800000190734863,
-      "kj\u00f8psdato": "2026-11-16",
-      "h\u00f8yeste_kurs": 12.800000190734863,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -5555,6 +5539,28 @@
       "bel\u00f8p": 1434.0,
       "kurtasje": 29,
       "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 170.6% \u00b7 rel.styrke 187.5% \u00b7 RSI 69 \u00b7 P/E 0 \u00b7 P/B 5.2",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-11-16 15:24:23.631685",
+      "handling": "SELG",
+      "ticker": "2020.OL",
+      "navn": "2020 Bulkers",
+      "antall": 112,
+      "kurs": 11.399999618530273,
+      "bel\u00f8p": 1277.0,
+      "kurtasje": 29,
+      "begrunnelse": "Trailing stop-loss utl\u00f8st (-10.9% fra topp 12.80 kr \u00b7 kj\u00f8pspris 12.80 kr)",
+      "snittpris": 12.800000190734863,
+      "avkastning_pct": -10.94,
+      "holdingstid": 0,
       "signaler": {
         "ensemble": 3,
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",

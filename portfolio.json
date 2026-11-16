@@ -1,5 +1,5 @@
 {
-  "kasse": 48990.0,
+  "kasse": 40974.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -24,7 +24,7 @@
       "antall": 39,
       "snittpris": 216.14999389648438,
       "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 224.1999969482422,
+      "h\u00f8yeste_kurs": 224.6999969482422,
       "stop_loss_pct": 0.099,
       "signaler": {
         "ensemble": 3,
@@ -51,15 +51,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-13"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-16"
     },
     "VEI.OL": {
       "navn": "Veidekke",
       "antall": 24,
       "snittpris": 210.5,
       "kj\u00f8psdato": "2026-11-02",
-      "h\u00f8yeste_kurs": 233.0,
+      "h\u00f8yeste_kurs": 233.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -69,15 +69,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-13"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-16"
     },
     "SATS.OL": {
       "navn": "SATS",
       "antall": 77,
       "snittpris": 45.54999923706055,
       "kj\u00f8psdato": "2026-11-04",
-      "h\u00f8yeste_kurs": 45.849998474121094,
+      "h\u00f8yeste_kurs": 46.20000076293945,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -87,15 +87,15 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-13"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-16"
     },
     "BONHR.OL": {
       "navn": "Bonheur",
       "antall": 22,
       "snittpris": 262.0,
       "kj\u00f8psdato": "2026-11-06",
-      "h\u00f8yeste_kurs": 294.5,
+      "h\u00f8yeste_kurs": 295.5,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -105,8 +105,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-13"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-16"
     },
     "WWIB.OL": {
       "navn": "Wilh. Wilhelmsen B",
@@ -124,6 +124,38 @@
         "regime": "Sideways"
       },
       "utenfor_topp_streak": 0
+    },
+    "EIOF.OL": {
+      "navn": "Eidesvik Offshore",
+      "antall": 376,
+      "snittpris": 17.350000381469727,
+      "kj\u00f8psdato": "2026-11-16",
+      "h\u00f8yeste_kurs": 17.350000381469727,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
+    },
+    "2020.OL": {
+      "navn": "2020 Bulkers",
+      "antall": 112,
+      "snittpris": 12.800000190734863,
+      "kj\u00f8psdato": "2026-11-16",
+      "h\u00f8yeste_kurs": 12.800000190734863,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   },
   "ventende_handler": [],
@@ -5493,9 +5525,47 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       }
+    },
+    {
+      "dato": "2026-11-16 13:24:10.992843",
+      "handling": "KJ\u00d8P",
+      "ticker": "EIOF.OL",
+      "navn": "Eidesvik Offshore",
+      "antall": 376,
+      "kurs": 17.350000381469727,
+      "bel\u00f8p": 6524.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 2.4% \u00b7 rel.styrke 0.0% \u00b7 RSI 51 \u00b7 P/E 23 \u00b7 P/B 0.8",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
+    },
+    {
+      "dato": "2026-11-16 13:24:10.993015",
+      "handling": "KJ\u00d8P",
+      "ticker": "2020.OL",
+      "navn": "2020 Bulkers",
+      "antall": 112,
+      "kurs": 12.800000190734863,
+      "bel\u00f8p": 1434.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 170.6% \u00b7 rel.styrke 187.5% \u00b7 RSI 69 \u00b7 P/E 0 \u00b7 P/B 5.2",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": -0.5,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-11-13 12:53:44.606427",
+  "sist_analysert": "2026-11-16 13:24:10.993062",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6181,6 +6251,10 @@
     {
       "dato": "2026-11-13",
       "total_verdi": 89262.0
+    },
+    {
+      "dato": "2026-11-16",
+      "total_verdi": 89387.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6188,46 +6262,46 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Wilh. Wilhelmsen B",
-      "ticker": "WWIB.OL",
+      "navn": "Eidesvik Offshore",
+      "ticker": "EIOF.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 31.9,
-      "rel_styrke": 17.2,
-      "rsi": 62.0,
-      "kurs": 872.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 2.4,
+      "rel_styrke": 0.0,
+      "rsi": 51.0,
+      "kurs": 17.35,
+      "pe": 22.5,
+      "pb": 0.79,
+      "yield": 112.0
     },
     {
-      "navn": "SpareBank 1 SMN",
-      "ticker": "MING.OL",
+      "navn": "Solstad Offshore",
+      "ticker": "SOFF.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 17.9,
-      "rel_styrke": 8.5,
-      "rsi": 62.0,
-      "kurs": 223.55,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 15.0,
+      "rel_styrke": 0.9,
+      "rsi": 48.0,
+      "kurs": 68.1,
+      "pe": 3.9,
+      "pb": 1.43,
+      "yield": 821.0
     },
     {
-      "navn": "SpareBank 1 Nord-Norge",
-      "ticker": "NONG.OL",
+      "navn": "2020 Bulkers",
+      "ticker": "2020.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 3,
-      "mom": 25.3,
-      "rel_styrke": 8.3,
-      "rsi": 67.0,
-      "kurs": 185.0,
-      "pe": null,
-      "pb": null,
-      "yield": null
+      "mom": 170.6,
+      "rel_styrke": 187.5,
+      "rsi": 69.0,
+      "kurs": 12.8,
+      "pe": 0.1,
+      "pb": 5.24,
+      "yield": 10845.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -6244,11 +6318,11 @@
     "NOD.OL": 3.36,
     "AUTO.OL": 2.1,
     "TGS.OL": 2.48,
-    "BORR.OL": 7.6,
+    "BORR.OL": 7.75,
     "NAS.OL": 2.95,
     "BAKKA.OL": 2.99,
     "LINK.OL": 5.24,
-    "KID.OL": 2.01
+    "KID.OL": 2
   },
   "urealisert_historikk": [
     {
@@ -6922,6 +6996,10 @@
     {
       "dato": "2026-11-13",
       "verdi": 2117.0
+    },
+    {
+      "dato": "2026-11-16",
+      "verdi": 2300.0
     }
   ]
 }

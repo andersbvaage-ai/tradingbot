@@ -1,5 +1,5 @@
 {
-  "kasse": 42693.0,
+  "kasse": 39681.0,
   "start_kapital": 100000,
   "posisjoner": {
     "NONG.OL": {
@@ -17,7 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-19"
     },
     "MING.OL": {
       "navn": "SpareBank 1 SMN",
@@ -51,8 +52,7 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-11-18"
+      "utenfor_topp_streak": 0
     },
     "BONHR.OL": {
       "navn": "Bonheur",
@@ -69,8 +69,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-11-18"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-11-19"
     },
     "WWIB.OL": {
       "navn": "Wilh. Wilhelmsen B",
@@ -87,8 +87,7 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-18"
+      "utenfor_topp_streak": 0
     },
     "EIOF.OL": {
       "navn": "Eidesvik Offshore",
@@ -105,8 +104,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-18"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-19"
     },
     "WWI.OL": {
       "navn": "Wilh. Wilhelmsen A",
@@ -123,8 +122,7 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-18"
+      "utenfor_topp_streak": 0
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -138,6 +136,23 @@
         "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
         "insider": false,
         "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      },
+      "utenfor_topp_streak": 0
+    },
+    "AUTO.OL": {
+      "navn": "AutoStore",
+      "antall": 191,
+      "snittpris": 15.619999885559082,
+      "kj\u00f8psdato": "2026-11-19",
+      "h\u00f8yeste_kurs": 15.619999885559082,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
@@ -5652,9 +5667,28 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-11-19 14:09:39.116273",
+      "handling": "KJ\u00d8P",
+      "ticker": "AUTO.OL",
+      "navn": "AutoStore",
+      "antall": 191,
+      "kurs": 15.619999885559082,
+      "bel\u00f8p": 2983.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 18.4% \u00b7 rel.styrke 1.4% \u00b7 RSI 54 \u00b7 P/E 33 \u00b7 P/B 3.7",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": -0.4,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-11-18 13:41:56.216095",
+  "sist_analysert": "2026-11-19 14:09:39.116360",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6352,6 +6386,10 @@
     {
       "dato": "2026-11-18",
       "total_verdi": 89086.0
+    },
+    {
+      "dato": "2026-11-19",
+      "total_verdi": 88651.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6359,43 +6397,57 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
+      "navn": "AutoStore",
+      "ticker": "AUTO.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 4,
+      "mom": 18.4,
+      "rel_styrke": 1.4,
+      "rsi": 54.0,
+      "kurs": 15.62,
+      "pe": 32.5,
+      "pb": 3.66,
+      "yield": null
+    },
+    {
       "navn": "AF Gruppen",
       "ticker": "AFG.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 3,
-      "mom": 8.9,
-      "rel_styrke": 7.6,
-      "rsi": 67.0,
-      "kurs": 200.5,
-      "pe": 16.7,
-      "pb": 6.75,
-      "yield": 321.0
-    },
-    {
-      "navn": "SpareBank 1 SMN",
-      "ticker": "MING.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 17.1,
-      "rel_styrke": 8.8,
-      "rsi": 57.0,
-      "kurs": 222.2,
+      "mom": 8.0,
+      "rel_styrke": 6.1,
+      "rsi": 59.0,
+      "kurs": 197.6,
       "pe": null,
       "pb": null,
       "yield": null
     },
     {
-      "navn": "SpareBank 1 Nord-Norge",
-      "ticker": "NONG.OL",
+      "navn": "Wilh. Wilhelmsen A",
+      "ticker": "WWI.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
       "score": 4,
-      "mom": 24.2,
-      "rel_styrke": 10.9,
-      "rsi": 61.0,
-      "kurs": 183.62,
+      "mom": 36.4,
+      "rel_styrke": 17.4,
+      "rsi": 63.0,
+      "kurs": 939.0,
+      "pe": null,
+      "pb": null,
+      "yield": null
+    },
+    {
+      "navn": "Wilh. Wilhelmsen B",
+      "ticker": "WWIB.OL",
+      "ensemble": 3,
+      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+      "score": 3,
+      "mom": 42.2,
+      "rel_styrke": 19.7,
+      "rsi": 68.0,
+      "kurs": 901.0,
       "pe": null,
       "pb": null,
       "yield": null
@@ -6415,7 +6467,7 @@
     "NOD.OL": 3.36,
     "AUTO.OL": 2.1,
     "TGS.OL": 2.48,
-    "BORR.OL": 7.76,
+    "BORR.OL": 7.69,
     "NAS.OL": 2.95,
     "BAKKA.OL": 2.99,
     "LINK.OL": 5.23
@@ -7104,6 +7156,10 @@
     {
       "dato": "2026-11-18",
       "verdi": 1453.0
+    },
+    {
+      "dato": "2026-11-19",
+      "verdi": 1047.0
     }
   ]
 }

@@ -1,25 +1,7 @@
 {
-  "kasse": 35031.0,
+  "kasse": 40558.0,
   "start_kapital": 100000,
   "posisjoner": {
-    "MING.OL": {
-      "navn": "SpareBank 1 SMN",
-      "antall": 39,
-      "snittpris": 216.14999389648438,
-      "kj\u00f8psdato": "2026-10-26",
-      "h\u00f8yeste_kurs": 225.0500030517578,
-      "stop_loss_pct": 0.099,
-      "signaler": {
-        "ensemble": 3,
-        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-        "insider": false,
-        "short_score": 0.0,
-        "r\u00e5vare_score": 0.0,
-        "regime": "Bull"
-      },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-25"
-    },
     "SATS.OL": {
       "navn": "SATS",
       "antall": 77,
@@ -35,8 +17,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Bull"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "BONHR.OL": {
       "navn": "Bonheur",
@@ -53,8 +35,8 @@
         "r\u00e5vare_score": 0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "WWIB.OL": {
       "navn": "Wilh. Wilhelmsen B",
@@ -71,14 +53,15 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "EIOF.OL": {
       "navn": "Eidesvik Offshore",
       "antall": 376,
       "snittpris": 17.350000381469727,
       "kj\u00f8psdato": "2026-11-16",
-      "h\u00f8yeste_kurs": 17.350000381469727,
+      "h\u00f8yeste_kurs": 17.75,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -88,8 +71,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 5,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 6,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "WWI.OL": {
       "navn": "Wilh. Wilhelmsen A",
@@ -106,8 +89,8 @@
         "r\u00e5vare_score": -0.5,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 1,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 2,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "AFG.OL": {
       "navn": "AF Gruppen",
@@ -124,8 +107,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "AUTO.OL": {
       "navn": "AutoStore",
@@ -142,8 +125,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 2,
-      "utenfor_topp_sist_dato": "2026-11-25"
+      "utenfor_topp_streak": 3,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "VEI.OL": {
       "navn": "Veidekke",
@@ -160,7 +143,8 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       },
-      "utenfor_topp_streak": 0
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-26"
     },
     "HELG.OL": {
       "navn": "Helgeland Sparebank",
@@ -168,6 +152,24 @@
       "snittpris": 178.0,
       "kj\u00f8psdato": "2026-11-25",
       "h\u00f8yeste_kurs": 178.0,
+      "stop_loss_pct": 0.1,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      },
+      "utenfor_topp_streak": 1,
+      "utenfor_topp_sist_dato": "2026-11-26"
+    },
+    "IDEX.OL": {
+      "navn": "IDEX Biometrics",
+      "antall": 288,
+      "snittpris": 10.300000190734863,
+      "kj\u00f8psdato": "2026-11-26",
+      "h\u00f8yeste_kurs": 10.300000190734863,
       "stop_loss_pct": 0.1,
       "signaler": {
         "ensemble": 3,
@@ -5767,9 +5769,50 @@
         "r\u00e5vare_score": 0.0,
         "regime": "Sideways"
       }
+    },
+    {
+      "dato": "2026-11-26 14:46:36.725163",
+      "handling": "SELG",
+      "ticker": "MING.OL",
+      "navn": "SpareBank 1 SMN",
+      "antall": 39,
+      "kurs": 219.25,
+      "bel\u00f8p": 8551.0,
+      "kurtasje": 29,
+      "begrunnelse": "Utenfor topp-kandidater 3 dager p\u00e5 rad",
+      "snittpris": 216.14999389648438,
+      "avkastning_pct": 1.43,
+      "holdingstid": 31,
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Bull"
+      }
+    },
+    {
+      "dato": "2026-11-26 14:46:38.004863",
+      "handling": "KJ\u00d8P",
+      "ticker": "IDEX.OL",
+      "navn": "IDEX Biometrics",
+      "antall": 288,
+      "kurs": 10.300000190734863,
+      "bel\u00f8p": 2966.0,
+      "kurtasje": 29,
+      "begrunnelse": "[Sideways] Ensemble 3/3 (Trend \u00b7 MACD \u00b7 Mom) \u00b7 mom 9.8% \u00b7 rel.styrke 34.4% \u00b7 RSI 67 \u00b7 P/E \u2013 \u00b7 P/B 13.1",
+      "signaler": {
+        "ensemble": 3,
+        "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
+        "insider": false,
+        "short_score": 0.0,
+        "r\u00e5vare_score": 0.0,
+        "regime": "Sideways"
+      }
     }
   ],
-  "sist_analysert": "2026-11-25 15:20:03.928984",
+  "sist_analysert": "2026-11-26 14:46:38.005018",
   "regime": "Sideways",
   "verdi_historikk": [
     {
@@ -6479,6 +6522,10 @@
     {
       "dato": "2026-11-25",
       "total_verdi": 87395.0
+    },
+    {
+      "dato": "2026-11-26",
+      "total_verdi": 87710.0
     }
   ],
   "stop_loss_pct": 0.07,
@@ -6486,46 +6533,32 @@
   "kurtasje_ratio_maks": 0.02,
   "topp_kandidater": [
     {
-      "navn": "Veidekke",
-      "ticker": "VEI.OL",
+      "navn": "IDEX Biometrics",
+      "ticker": "IDEX.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 28.7,
-      "rel_styrke": 12.2,
-      "rsi": 60.0,
-      "kurs": 228.0,
+      "score": 3,
+      "mom": 9.8,
+      "rel_styrke": 34.4,
+      "rsi": 67.0,
+      "kurs": 10.3,
       "pe": null,
-      "pb": null,
+      "pb": 13.07,
       "yield": null
     },
     {
-      "navn": "Wilh. Wilhelmsen B",
-      "ticker": "WWIB.OL",
+      "navn": "Saga Pure",
+      "ticker": "SAGA.OL",
       "ensemble": 3,
       "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 38.1,
-      "rel_styrke": 18.4,
-      "rsi": 53.0,
-      "kurs": 860.0,
+      "score": 3,
+      "mom": 14.5,
+      "rel_styrke": 11.8,
+      "rsi": 70.0,
+      "kurs": 1.66,
       "pe": null,
-      "pb": null,
+      "pb": 0.98,
       "yield": null
-    },
-    {
-      "navn": "Helgeland Sparebank",
-      "ticker": "HELG.OL",
-      "ensemble": 3,
-      "ensemble_tekst": "Trend \u00b7 MACD \u00b7 Mom",
-      "score": 4,
-      "mom": 9.2,
-      "rel_styrke": 5.2,
-      "rsi": 52.0,
-      "kurs": 178.0,
-      "pe": 14.3,
-      "pb": 0.94,
-      "yield": 426.0
     }
   ],
   "r\u00e5vare_trender": {
@@ -6540,8 +6573,8 @@
     "PEXIP.OL"
   ],
   "short_interest": {
-    "SCATC.OL": 4.91,
-    "NOD.OL": 4,
+    "SCATC.OL": 5.06,
+    "NOD.OL": 4.1,
     "AUTO.OL": 2.06,
     "TGS.OL": 2.48,
     "BORR.OL": 7.91,
@@ -7245,6 +7278,10 @@
     {
       "dato": "2026-11-25",
       "verdi": -201.0
+    },
+    {
+      "dato": "2026-11-26",
+      "verdi": 51.0
     }
   ]
 }
